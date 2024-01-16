@@ -7,6 +7,7 @@ jacoco = "0.8.11"
 spring-boot = "3.2.1"
 checkstyle = "10.12.7"
 liquibase = "4.25.1"
+jmolecules = "2023.0.0"
 
 [plugins]
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
@@ -14,6 +15,11 @@ spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
 [libraries]
 liquibase-core = { name = "liquibase-core", group = "org.liquibase", version.ref = "liquibase" }
 spring-boot-starter-test = { name = "spring-boot-starter-test", group = "org.springframework.boot" }
+jmolecules-bom = { name = "jmolecules-bom", group = "org.jmolecules", version.ref = "jmolecules" }
+jmolecules-ddd = { name = "jmolecules-ddd", group = "org.jmolecules" }
+jmolecules-events = { name = "jmolecules-events", group = "org.jmolecules" }
+jmolecules-cqrs-architecture = { name = "jmolecules-cqrs-architecture", group = "org.jmolecules" }
+jmolecules-hexagonal-architecture = { name = "jmolecules-hexagonal-architecture", group = "org.jmolecules" }
 reflections = { name = "reflections", group = "org.reflections", version.ref = "reflections" }
 junit-platform-suite = { name = "junit-platform-suite", group = "org.junit.platform" }
 spring-boot-dependencies = { name = "spring-boot-dependencies", group = "org.springframework.boot", version.ref = "spring-boot" }

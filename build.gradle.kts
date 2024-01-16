@@ -52,6 +52,7 @@ ext {
 
 dependencies {
   implementation(platform(libs.spring.boot.dependencies))
+  implementation(platform(libs.jmolecules.bom))
   implementation(libs.spring.boot.starter)
   implementation(libs.spring.boot.configuration.processor)
   implementation(libs.commons.lang3)
@@ -63,6 +64,10 @@ dependencies {
   implementation(libs.liquibase.core)
   implementation(libs.spring.boot.starter.validation)
   implementation(libs.spring.boot.starter.web)
+  implementation(libs.jmolecules.ddd)
+  implementation(libs.jmolecules.events)
+  implementation(libs.jmolecules.cqrs.architecture)
+  implementation(libs.jmolecules.hexagonal.architecture)
   // jhipster-needle-gradle-dependencies
   testImplementation(libs.spring.boot.starter.test)
   testImplementation(libs.postgresql)
