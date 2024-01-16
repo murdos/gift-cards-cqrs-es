@@ -1,5 +1,7 @@
 # Gift Cards
 
+Pet project to play with CQRS and Event Sourcing.
+
 ## Prerequisites
 
 ### Node.js and NPM
