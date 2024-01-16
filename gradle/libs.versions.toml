@@ -5,6 +5,7 @@ bundles = {}
 	jacoco = "0.8.11"
 	assertj = "3.25.1"
 	mockito = "5.9.0"
+	checkstyle = "10.12.7"
 	junit-jupiter = "5.10.1"
 [libraries]
 	[libraries.junit-params]

@@ -1,6 +1,7 @@
 plugins {
   java
   jacoco
+  checkstyle
   // jhipster-needle-gradle-plugins
 }
 
@@ -12,6 +13,19 @@ java {
 
 jacoco {
   toolVersion = libs.versions.jacoco.get()
+}
+
+
+checkstyle {
+  configFile = rootProject.file("checkstyle.xml")
+  toolVersion = libs.versions.checkstyle.get()
+}
+
+// Workaround for https://github.com/gradle/gradle/issues/27035
+configurations.checkstyle {
+  resolutionStrategy.capabilitiesResolution.withCapability("com.google.collections:google-collections") {
+    select("com.google.guava:guava:0")
+  }
 }
 
 // jhipster-needle-gradle-plugins-configurations
