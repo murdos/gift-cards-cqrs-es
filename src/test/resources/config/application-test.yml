@@ -1,6 +1,13 @@
 spring:
   main:
     banner-mode: 'off'
+  datasource:
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+    username: giftCards
+    hikari:
+      maximum-pool-size: 2
+    url: jdbc:tc:postgresql:16.1:///giftCards?TC_TMPFS=/testtmpfs:rw
+    password: ''
 logging:
   config: classpath:logback.xml
   level:

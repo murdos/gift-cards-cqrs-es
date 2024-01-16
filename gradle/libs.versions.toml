@@ -1,6 +1,7 @@
 bundles = {}
 
 [versions]
+	testcontainers = "1.17.6"
 	jacoco = "0.8.11"
 	assertj = "3.25.1"
 	spring-boot = "3.2.1"
@@ -14,12 +15,21 @@ bundles = {}
 		[plugins.spring-boot.version]
 			ref = "spring-boot"
 [libraries]
+	[libraries.hikariCP]
+		name = "HikariCP"
+		group = "com.zaxxer"
 	[libraries.spring-boot-starter]
 		name = "spring-boot-starter"
+		group = "org.springframework.boot"
+	[libraries.spring-boot-starter-data-jpa]
+		name = "spring-boot-starter-data-jpa"
 		group = "org.springframework.boot"
 	[libraries.spring-boot-starter-test]
 		name = "spring-boot-starter-test"
 		group = "org.springframework.boot"
+	[libraries.postgresql]
+		name = "postgresql"
+		group = "org.postgresql"
 	[libraries.spring-boot-dependencies]
 		name = "spring-boot-dependencies"
 		group = "org.springframework.boot"
@@ -32,3 +42,6 @@ bundles = {}
 	[libraries.commons-lang3]
 		name = "commons-lang3"
 		group = "org.apache.commons"
+	[libraries.hibernate-core]
+		name = "hibernate-core"
+		group = "org.hibernate.orm"

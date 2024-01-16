@@ -10,6 +10,13 @@
   <logger name="ch.qos.logback" level="WARN" />
   <logger name="com.sun" level="WARN" />
   <logger name="org.springframework" level="WARN" />
+  <logger name="org.hibernate.validator" level="WARN" />
+  <logger name="org.hibernate.orm" level="WARN" />
+  <logger name="org.hibernate.ejb.HibernatePersistence" level="OFF" />
+  <logger name="com.github.dockerjava" level="WARN" />
+  <logger name="org.testcontainers" level="WARN" />
+  <logger name="org.postgresql" level="WARN" />
+  <logger name="org.jboss.logging" level="WARN" />
   <!-- jhipster-needle-logback-add-log -->
 
   <root level="${log.level}">

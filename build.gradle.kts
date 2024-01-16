@@ -55,8 +55,13 @@ dependencies {
   implementation(libs.spring.boot.starter)
   implementation(libs.spring.boot.configuration.processor)
   implementation(libs.commons.lang3)
+  implementation(libs.spring.boot.starter.data.jpa)
+  implementation(libs.hikariCP)
+  implementation(libs.hibernate.core)
+  runtimeOnly(libs.postgresql)
   // jhipster-needle-gradle-dependencies
   testImplementation(libs.spring.boot.starter.test)
+  testImplementation(libs.postgresql)
 
   // jhipster-needle-gradle-test-dependencies
 }
