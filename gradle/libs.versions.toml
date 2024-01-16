@@ -1,0 +1,33 @@
+plugins = {}
+bundles = {}
+
+[versions]
+	jacoco = "0.8.11"
+	assertj = "3.25.1"
+	mockito = "5.9.0"
+	junit-jupiter = "5.10.1"
+[libraries]
+	[libraries.junit-params]
+		name = "junit-jupiter-params"
+		group = "org.junit.jupiter"
+
+		[libraries.junit-params.version]
+			ref = "junit-jupiter"
+	[libraries.assertj]
+		name = "assertj-core"
+		group = "org.assertj"
+
+		[libraries.assertj.version]
+			ref = "assertj"
+	[libraries.junit-engine]
+		name = "junit-jupiter-engine"
+		group = "org.junit.jupiter"
+
+		[libraries.junit-engine.version]
+			ref = "junit-jupiter"
+	[libraries.mockito]
+		name = "mockito-junit-jupiter"
+		group = "org.mockito"
+
+		[libraries.mockito.version]
+			ref = "mockito"
