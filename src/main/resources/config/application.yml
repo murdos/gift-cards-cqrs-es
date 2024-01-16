@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: GiftCards
+  threads:
+    virtual:
+      enabled: true
+logging:
+  level:
+    net:
+      murdos:
+        giftcards: INFO

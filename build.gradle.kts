@@ -2,6 +2,7 @@ plugins {
   java
   jacoco
   checkstyle
+  alias(libs.plugins.spring.boot)
   // jhipster-needle-gradle-plugins
 }
 
@@ -28,6 +29,13 @@ configurations.checkstyle {
   }
 }
 
+
+defaultTasks "bootRun"
+
+springBoot {
+  mainClass = "net.murdos.giftcards.GiftCardsApp"
+}
+
 // jhipster-needle-gradle-plugins-configurations
 
 repositories {
@@ -43,11 +51,13 @@ ext {
 }
 
 dependencies {
+  implementation(platform(libs.spring.boot.dependencies))
+  implementation(libs.spring.boot.starter)
+  implementation(libs.spring.boot.configuration.processor)
+  implementation(libs.commons.lang3)
   // jhipster-needle-gradle-dependencies
-  testImplementation(libs.junit.engine)
-  testImplementation(libs.junit.params)
-  testImplementation(libs.assertj)
-  testImplementation(libs.mockito)
+  testImplementation(libs.spring.boot.starter.test)
+
   // jhipster-needle-gradle-test-dependencies
 }
 

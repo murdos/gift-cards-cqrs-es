@@ -1,0 +1,9 @@
+spring:
+  main:
+    banner-mode: 'off'
+logging:
+  config: classpath:logback.xml
+  level:
+    net:
+      murdos:
+        giftcards: 'OFF'

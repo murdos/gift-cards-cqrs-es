@@ -59,5 +59,17 @@
       "indentSize" : 2,
       "configurationFormat" : "yaml"
     }
+  }, {
+    "module" : "spring-boot",
+    "date" : "2024-01-16T05:08:26.926872236Z",
+    "properties" : {
+      "packageName" : "net.murdos.giftcards",
+      "projectName" : "Gift Cards",
+      "baseName" : "giftCards",
+      "serverPort" : 8080,
+      "endOfLine" : "lf",
+      "indentSize" : 2,
+      "configurationFormat" : "yaml"
+    }
   } ]
 }
