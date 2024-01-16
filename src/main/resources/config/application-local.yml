@@ -3,3 +3,9 @@ logging:
     net:
       murdos:
         giftcards: DEBUG
+spring:
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true

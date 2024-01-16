@@ -30,6 +30,9 @@ bundles = {}
 	[libraries.postgresql]
 		name = "postgresql"
 		group = "org.postgresql"
+	[libraries.spring-boot-devtools]
+		name = "spring-boot-devtools"
+		group = "org.springframework.boot"
 	[libraries.spring-boot-dependencies]
 		name = "spring-boot-dependencies"
 		group = "org.springframework.boot"

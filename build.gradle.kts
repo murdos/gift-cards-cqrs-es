@@ -59,6 +59,7 @@ dependencies {
   implementation(libs.hikariCP)
   implementation(libs.hibernate.core)
   runtimeOnly(libs.postgresql)
+  runtimeOnly(libs.spring.boot.devtools)
   // jhipster-needle-gradle-dependencies
   testImplementation(libs.spring.boot.starter.test)
   testImplementation(libs.postgresql)
