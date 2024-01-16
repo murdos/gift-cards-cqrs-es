@@ -1,0 +1,13 @@
+{
+  "name": "gift-cards",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Gift Cards",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=20.10.0"
+  },
+  "cacheDirectories": [
+    "node_modules"
+  ]
+}
