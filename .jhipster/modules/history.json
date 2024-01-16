@@ -47,5 +47,17 @@
       "indentSize" : 2,
       "configurationFormat" : "yaml"
     }
+  }, {
+    "module" : "java-base",
+    "date" : "2024-01-16T05:08:26.871117381Z",
+    "properties" : {
+      "packageName" : "net.murdos.giftcards",
+      "projectName" : "Gift Cards",
+      "baseName" : "giftCards",
+      "serverPort" : 8080,
+      "endOfLine" : "lf",
+      "indentSize" : 2,
+      "configurationFormat" : "yaml"
+    }
   } ]
 }
