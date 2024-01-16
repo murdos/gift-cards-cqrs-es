@@ -4,6 +4,7 @@ bundles = {}
 	archunit-junit5 = "1.2.1"
 	testcontainers = "1.17.6"
 	reflections = "0.10.2"
+	cucumber = "7.15.0"
 	jacoco = "0.8.11"
 	assertj = "3.25.1"
 	spring-boot = "3.2.1"
@@ -33,12 +34,21 @@ bundles = {}
 
 		[libraries.reflections.version]
 			ref = "reflections"
+	[libraries.junit-platform-suite]
+		name = "junit-platform-suite"
+		group = "org.junit.platform"
 	[libraries.spring-boot-dependencies]
 		name = "spring-boot-dependencies"
 		group = "org.springframework.boot"
 
 		[libraries.spring-boot-dependencies.version]
 			ref = "spring-boot"
+	[libraries.cucumber-junit-platform-engine]
+		name = "cucumber-junit-platform-engine"
+		group = "io.cucumber"
+
+		[libraries.cucumber-junit-platform-engine.version]
+			ref = "cucumber"
 	[libraries.archunit-junit5-api]
 		name = "archunit-junit5-api"
 		group = "com.tngtech.archunit"
@@ -75,6 +85,18 @@ bundles = {}
 	[libraries.spring-boot-configuration-processor]
 		name = "spring-boot-configuration-processor"
 		group = "org.springframework.boot"
+	[libraries.cucumber-java]
+		name = "cucumber-java"
+		group = "io.cucumber"
+
+		[libraries.cucumber-java.version]
+			ref = "cucumber"
 	[libraries.commons-lang3]
 		name = "commons-lang3"
 		group = "org.apache.commons"
+	[libraries.cucumber-spring]
+		name = "cucumber-spring"
+		group = "io.cucumber"
+
+		[libraries.cucumber-spring.version]
+			ref = "cucumber"
