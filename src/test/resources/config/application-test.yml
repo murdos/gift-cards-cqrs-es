@@ -14,3 +14,5 @@ logging:
     net:
       murdos:
         giftcards: 'OFF'
+server:
+  port: 0

@@ -36,6 +36,7 @@
   <logger name="liquibase" level="WARN" />
   <logger name="LiquibaseSchemaResolver" level="INFO" />
   <logger name="com.zaxxer.hikari" level="WARN" />
+  <logger name="org.springframework.web" level="ERROR" />
   <!-- jhipster-needle-logback-add-log -->
 
   <root level="${log.level}">

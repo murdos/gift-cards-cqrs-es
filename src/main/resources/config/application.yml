@@ -49,3 +49,5 @@ logging:
     net:
       murdos:
         giftcards: INFO
+server:
+  port: 8080
