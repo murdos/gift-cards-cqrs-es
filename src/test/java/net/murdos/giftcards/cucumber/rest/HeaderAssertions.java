@@ -31,6 +31,6 @@ class HeaderAssertions {
   }
 
   private String displayValues(List<String> values) {
-    return values.stream().collect(Collectors.joining(", "));
+    return String.join(", ", values);
   }
 }

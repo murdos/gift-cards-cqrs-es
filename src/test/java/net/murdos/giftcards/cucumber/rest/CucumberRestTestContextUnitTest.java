@@ -16,7 +16,7 @@ import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpResponse;
 
 @UnitTest
-class CucumberTestContextUnitTest {
+class CucumberRestTestContextUnitTest {
 
   @Test
   void shouldGetQueryInformation() {
@@ -33,7 +33,7 @@ class CucumberTestContextUnitTest {
 
     CucumberRestTestContext.reset();
 
-    assertThatThrownBy(() -> CucumberRestTestContext.getResponse()).isExactlyInstanceOf(AssertionError.class).hasMessageContaining("empty");
+    assertThatThrownBy(CucumberRestTestContext::getResponse).isExactlyInstanceOf(AssertionError.class).hasMessageContaining("empty");
   }
 
   @Test
@@ -128,7 +128,7 @@ class CucumberTestContextUnitTest {
 
     CucumberRestTestContext.addResponse(request, mockedResponse("response"), execution, body);
 
-    assertThatThrownBy(() -> CucumberRestTestContext.retry()).isExactlyInstanceOf(AssertionError.class).hasMessageContaining("retrying");
+    assertThatThrownBy(CucumberRestTestContext::retry).isExactlyInstanceOf(AssertionError.class).hasMessageContaining("retrying");
   }
 
   private void addQuery(String response) {
