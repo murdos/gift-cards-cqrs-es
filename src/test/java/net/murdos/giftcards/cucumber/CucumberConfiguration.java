@@ -4,6 +4,10 @@ import io.cucumber.java.Before;
 import io.cucumber.spring.CucumberContextConfiguration;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import net.murdos.giftcards.GiftCardsApp;
+import net.murdos.giftcards.cucumber.CucumberConfiguration.CucumberRestTemplateConfiguration;
+import net.murdos.giftcards.cucumber.rest.CucumberRestTemplate;
+import net.murdos.giftcards.cucumber.rest.CucumberRestTestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -16,12 +20,8 @@ import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.test.context.ActiveProfiles;
-import net.murdos.giftcards.GiftCardsApp;
-import net.murdos.giftcards.cucumber.CucumberConfiguration.CucumberRestTemplateConfiguration;
-import net.murdos.giftcards.cucumber.rest.CucumberRestTemplate;
-import net.murdos.giftcards.cucumber.rest.CucumberRestTestContext;
+import org.springframework.web.client.RestTemplate;
 
 @ActiveProfiles("test")
 @CucumberContextConfiguration

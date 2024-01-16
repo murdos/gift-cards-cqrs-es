@@ -4,13 +4,13 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import net.murdos.giftcards.shared.error.domain.Assert;
+import net.murdos.giftcards.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
-import net.murdos.giftcards.shared.generation.domain.ExcludeFromGeneratedCodeCoverage;
-import net.murdos.giftcards.shared.error.domain.Assert;
 
 final class ApplicationStartupTraces {
 

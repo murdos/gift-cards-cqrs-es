@@ -8,12 +8,12 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import net.murdos.giftcards.UnitTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpResponse;
-import net.murdos.giftcards.UnitTest;
 
 @UnitTest
 class CucumberTestContextUnitTest {

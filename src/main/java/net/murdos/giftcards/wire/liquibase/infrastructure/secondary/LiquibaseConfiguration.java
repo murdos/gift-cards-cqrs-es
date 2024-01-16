@@ -26,6 +26,7 @@ class LiquibaseConfiguration {
 
   @Value("${application.liquibase.async:false}")
   private boolean async;
+
   @Value("${spring.liquibase.change-log}")
   private String changeLogClassPath;
 

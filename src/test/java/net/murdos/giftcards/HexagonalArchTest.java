@@ -98,36 +98,37 @@ class HexagonalArchTest {
             .resideInAnyPackage(otherBusinessContextsDomains(context))
             .because("Contexts can only depend on classes in the same context or shared kernels")
             .check(classes);
-      });
+        });
     }
 
     @Test
     void shouldBeAnHexagonalArchitecture() {
       Stream
         .concat(businessContexts.stream(), sharedKernels.stream())
-        .forEach(context -> Architectures
-          .layeredArchitecture()
-          .consideringOnlyDependenciesInAnyPackage(context + "..")
-          .withOptionalLayers(true)
-          .layer("domain models")
-          .definedBy(context + ".domain..")
-          .layer("domain services")
-          .definedBy(context + ".domain..")
-          .layer("application services")
-          .definedBy(context + ".application..")
-          .layer("primary adapters")
-          .definedBy(context + ".infrastructure.primary..")
-          .layer("secondary adapters")
-          .definedBy(context + ".infrastructure.secondary..")
-          .whereLayer("application services")
-          .mayOnlyBeAccessedByLayers("primary adapters")
-          .whereLayer("primary adapters")
-          .mayNotBeAccessedByAnyLayer()
-          .whereLayer("secondary adapters")
-          .mayNotBeAccessedByAnyLayer()
-          .because("Each bounded context should implement an hexagonal architecture")
-          .check(classes)
-      );
+        .forEach(context ->
+          Architectures
+            .layeredArchitecture()
+            .consideringOnlyDependenciesInAnyPackage(context + "..")
+            .withOptionalLayers(true)
+            .layer("domain models")
+            .definedBy(context + ".domain..")
+            .layer("domain services")
+            .definedBy(context + ".domain..")
+            .layer("application services")
+            .definedBy(context + ".application..")
+            .layer("primary adapters")
+            .definedBy(context + ".infrastructure.primary..")
+            .layer("secondary adapters")
+            .definedBy(context + ".infrastructure.secondary..")
+            .whereLayer("application services")
+            .mayOnlyBeAccessedByLayers("primary adapters")
+            .whereLayer("primary adapters")
+            .mayNotBeAccessedByAnyLayer()
+            .whereLayer("secondary adapters")
+            .mayNotBeAccessedByAnyLayer()
+            .because("Each bounded context should implement an hexagonal architecture")
+            .check(classes)
+        );
     }
 
     @Test

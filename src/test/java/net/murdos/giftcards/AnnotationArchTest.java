@@ -25,6 +25,7 @@ class AnnotationArchTest {
         .and(not(equivalentTo(ComponentTest.class))))
       )
     );
+
   //@formatter:on
 
   @Test

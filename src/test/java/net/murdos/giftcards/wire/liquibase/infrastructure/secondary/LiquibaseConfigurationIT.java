@@ -3,11 +3,11 @@ package net.murdos.giftcards.wire.liquibase.infrastructure.secondary;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import liquibase.integration.spring.SpringLiquibase;
+import net.murdos.giftcards.IntegrationTest;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import net.murdos.giftcards.IntegrationTest;
 
 @IntegrationTest
 class LiquibaseConfigurationIT {

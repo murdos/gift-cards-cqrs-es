@@ -2,8 +2,8 @@ package net.murdos.giftcards.shared.error.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import net.murdos.giftcards.UnitTest;
 import java.time.Instant;
+import net.murdos.giftcards.UnitTest;
 import org.junit.jupiter.api.Test;
 
 @UnitTest

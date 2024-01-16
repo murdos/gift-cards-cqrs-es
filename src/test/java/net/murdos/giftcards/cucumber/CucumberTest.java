@@ -2,10 +2,10 @@ package net.murdos.giftcards.cucumber;
 
 import static io.cucumber.junit.platform.engine.Constants.*;
 
+import net.murdos.giftcards.ComponentTest;
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.IncludeEngines;
 import org.junit.platform.suite.api.Suite;
-import net.murdos.giftcards.ComponentTest;
 
 @Suite(failIfNoTests = false)
 @ComponentTest

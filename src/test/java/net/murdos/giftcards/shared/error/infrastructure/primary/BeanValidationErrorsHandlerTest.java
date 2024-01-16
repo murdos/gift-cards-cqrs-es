@@ -6,15 +6,15 @@ import ch.qos.logback.classic.Level;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validation;
 import jakarta.validation.constraints.NotNull;
+import net.murdos.giftcards.Logs;
+import net.murdos.giftcards.LogsSpy;
+import net.murdos.giftcards.LogsSpyExtension;
+import net.murdos.giftcards.UnitTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.core.MethodParameter;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import net.murdos.giftcards.Logs;
-import net.murdos.giftcards.LogsSpy;
-import net.murdos.giftcards.LogsSpyExtension;
-import net.murdos.giftcards.UnitTest;
 
 @UnitTest
 @ExtendWith(LogsSpyExtension.class)

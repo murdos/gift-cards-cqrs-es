@@ -4,12 +4,6 @@
   "private": true,
   "description": "Gift Cards",
   "license": "UNLICENSED",
-  "engines": {
-    "node": ">=20.10.0"
-  },
-  "cacheDirectories": [
-    "node_modules"
-  ],
   "scripts": {
     "prepare": "husky install",
     "prettier:check": "prettier --check '{,src/**/}*.{md,json,yml,html,js,ts,tsx,css,scss,vue,java,xml,feature}'",
@@ -23,5 +17,11 @@
     "prettier-plugin-gherkin": "2.2.1",
     "prettier-plugin-java": "2.5.0",
     "prettier-plugin-packagejson": "2.4.9"
-  }
+  },
+  "engines": {
+    "node": ">=20.10.0"
+  },
+  "cacheDirectories": [
+    "node_modules"
+  ]
 }

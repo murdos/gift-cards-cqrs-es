@@ -2,13 +2,13 @@ package net.murdos.giftcards.shared.error.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import net.murdos.giftcards.UnitTest;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import net.murdos.giftcards.UnitTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
