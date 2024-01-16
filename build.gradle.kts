@@ -63,6 +63,7 @@ dependencies {
   // jhipster-needle-gradle-dependencies
   testImplementation(libs.spring.boot.starter.test)
   testImplementation(libs.postgresql)
+  testImplementation(libs.archunit.junit5.api)
 
   // jhipster-needle-gradle-test-dependencies
 }
