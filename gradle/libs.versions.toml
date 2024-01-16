@@ -9,6 +9,7 @@ bundles = {}
 	mockito = "5.9.0"
 	checkstyle = "10.12.7"
 	junit-jupiter = "5.10.1"
+	liquibase = "4.25.1"
 [plugins]
 	[plugins.spring-boot]
 		id = "org.springframework.boot"
@@ -16,6 +17,33 @@ bundles = {}
 		[plugins.spring-boot.version]
 			ref = "spring-boot"
 [libraries]
+	[libraries.liquibase-core]
+		name = "liquibase-core"
+		group = "org.liquibase"
+
+		[libraries.liquibase-core.version]
+			ref = "liquibase"
+	[libraries.spring-boot-starter-test]
+		name = "spring-boot-starter-test"
+		group = "org.springframework.boot"
+	[libraries.spring-boot-dependencies]
+		name = "spring-boot-dependencies"
+		group = "org.springframework.boot"
+
+		[libraries.spring-boot-dependencies.version]
+			ref = "spring-boot"
+	[libraries.archunit-junit5-api]
+		name = "archunit-junit5-api"
+		group = "com.tngtech.archunit"
+
+		[libraries.archunit-junit5-api.version]
+			ref = "archunit-junit5"
+	[libraries.h2]
+		name = "h2"
+		group = "com.h2database"
+	[libraries.hibernate-core]
+		name = "hibernate-core"
+		group = "org.hibernate.orm"
 	[libraries.hikariCP]
 		name = "HikariCP"
 		group = "com.zaxxer"
@@ -25,33 +53,15 @@ bundles = {}
 	[libraries.spring-boot-starter-data-jpa]
 		name = "spring-boot-starter-data-jpa"
 		group = "org.springframework.boot"
-	[libraries.spring-boot-starter-test]
-		name = "spring-boot-starter-test"
-		group = "org.springframework.boot"
 	[libraries.postgresql]
 		name = "postgresql"
 		group = "org.postgresql"
 	[libraries.spring-boot-devtools]
 		name = "spring-boot-devtools"
 		group = "org.springframework.boot"
-	[libraries.spring-boot-dependencies]
-		name = "spring-boot-dependencies"
-		group = "org.springframework.boot"
-
-		[libraries.spring-boot-dependencies.version]
-			ref = "spring-boot"
 	[libraries.spring-boot-configuration-processor]
 		name = "spring-boot-configuration-processor"
 		group = "org.springframework.boot"
-	[libraries.archunit-junit5-api]
-		name = "archunit-junit5-api"
-		group = "com.tngtech.archunit"
-
-		[libraries.archunit-junit5-api.version]
-			ref = "archunit-junit5"
 	[libraries.commons-lang3]
 		name = "commons-lang3"
 		group = "org.apache.commons"
-	[libraries.hibernate-core]
-		name = "hibernate-core"
-		group = "org.hibernate.orm"

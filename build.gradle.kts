@@ -60,10 +60,12 @@ dependencies {
   implementation(libs.hibernate.core)
   runtimeOnly(libs.postgresql)
   runtimeOnly(libs.spring.boot.devtools)
+  implementation(libs.liquibase.core)
   // jhipster-needle-gradle-dependencies
   testImplementation(libs.spring.boot.starter.test)
   testImplementation(libs.postgresql)
   testImplementation(libs.archunit.junit5.api)
+  testImplementation(libs.h2)
 
   // jhipster-needle-gradle-test-dependencies
 }
