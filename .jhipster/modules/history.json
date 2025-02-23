@@ -29,5 +29,15 @@
       "endOfLine" : "lf",
       "indentSize" : 2
     }
+  }, {
+    "module" : "java-base",
+    "date" : "2025-02-23T13:55:16.506731029Z",
+    "properties" : {
+      "packageName" : "io.craft.giftcard",
+      "projectName" : "Gift Card CQRS-ES",
+      "baseName" : "giftcard",
+      "endOfLine" : "lf",
+      "indentSize" : 2
+    }
   } ]
 }
