@@ -1,7 +1,9 @@
 package io.craft.giftcard.giftcard.domain;
 
 import io.craft.giftcard.shared.error.domain.Assert;
+import org.jmolecules.ddd.annotation.ValueObject;
 
+@ValueObject
 public record SequenceId(int value) {
   public static final SequenceId INITIAL = new SequenceId(0);
 
