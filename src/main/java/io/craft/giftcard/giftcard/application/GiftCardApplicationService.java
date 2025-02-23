@@ -2,6 +2,7 @@ package io.craft.giftcard.giftcard.application;
 
 import io.craft.giftcard.giftcard.domain.*;
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
+import io.craft.giftcard.giftcard.domain.commands.Payment;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +29,15 @@ public class GiftCardApplicationService {
 
   public GiftCardView findBy(Barcode barcode) {
     return viewRepository.get(barcode);
+  }
+
+  public void pay(Barcode barcode, Payment payment) {
+    var event = eventStore.findByBarcode(barcode).pay(payment);
+    eventStore.save(event);
+
+    GiftCardHistory history = eventStore.getHistory(barcode);
+
+    GiftCardView view = GiftCardView.from(history);
+    viewRepository.save(view);
   }
 }

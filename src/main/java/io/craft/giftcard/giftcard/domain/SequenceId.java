@@ -10,4 +10,8 @@ public record SequenceId(int value) {
   public SequenceId {
     Assert.field("value", value).positive();
   }
+
+  public SequenceId next() {
+    return new SequenceId(value + 10);
+  }
 }

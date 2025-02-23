@@ -1,7 +1,6 @@
 package io.craft.giftcard.giftcard.infrastructure.secondary;
 
 import io.craft.giftcard.giftcard.domain.Barcode;
-import io.craft.giftcard.giftcard.domain.GiftCard;
 import io.craft.giftcard.giftcard.domain.GiftCardEventStore;
 import io.craft.giftcard.giftcard.domain.GiftCardHistory;
 import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
@@ -20,11 +19,6 @@ public class InMemoryGiftCardEventStore implements GiftCardEventStore {
   private final Map<Barcode, List<GiftCardEvent>> histories = new HashMap<>();
 
   @Override
-  public GiftCard findByBarcode(Barcode barcode) {
-    return null;
-  }
-
-  @Override
   public void save(GiftCardEvent event) {
     histories.computeIfAbsent(event.barcode(), key -> new ArrayList<>()).add(event);
   }
@@ -33,6 +27,8 @@ public class InMemoryGiftCardEventStore implements GiftCardEventStore {
   public GiftCardHistory getHistory(Barcode barcode) {
     var events = histories.get(barcode);
 
-    return new GiftCardHistory((GiftCardCreated) events.getFirst());
+    var followingEvents = events.stream().skip(1).toList();
+
+    return new GiftCardHistory((GiftCardCreated) events.getFirst(), followingEvents);
   }
 }

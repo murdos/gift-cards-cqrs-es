@@ -5,7 +5,9 @@ import org.jmolecules.architecture.hexagonal.Port;
 
 @Port
 public interface GiftCardEventStore {
-  GiftCard findByBarcode(Barcode barcode);
+  default GiftCard findByBarcode(Barcode barcode) {
+    return new GiftCard(getHistory(barcode));
+  }
 
   void save(GiftCardEvent event);
 

@@ -6,6 +6,7 @@ import io.craft.giftcard.giftcard.application.GiftCardApplicationService;
 import io.craft.giftcard.giftcard.domain.Amount;
 import io.craft.giftcard.giftcard.domain.Barcode;
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
+import io.craft.giftcard.giftcard.domain.commands.Payment;
 import io.craft.giftcard.giftcard.infrastructure.secondary.InMemoryGiftCardEventStore;
 import io.craft.giftcard.giftcard.infrastructure.secondary.InMemoryGiftCardViewRepository;
 import io.cucumber.java.en.Then;
@@ -33,6 +34,11 @@ public class GiftCardSteps {
   public void giftCardShouldHaveARemainingAmountOf(String barcode, double expectedAmount) {
     var giftCardView = giftCardApplicationService.findBy(new Barcode(barcode));
 
-    assertThat(giftCardView.remaingAmount().value()).isEqualTo(new BigDecimal(expectedAmount));
+    assertThat(giftCardView.remaingAmount().value()).isEqualByComparingTo(new BigDecimal(expectedAmount));
+  }
+
+  @When("I pay with the gift card {string} an amount of {double}")
+  public void iPayWithTheGiftCardAnAmountOf(String barcode, double paidAmount) {
+    giftCardApplicationService.pay(new Barcode(barcode), new Payment(new Amount(paidAmount)));
   }
 }
