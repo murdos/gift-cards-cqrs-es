@@ -58,7 +58,21 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.reflections</groupId>
+      <artifactId>reflections</artifactId>
+      <version>${reflections.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -78,6 +92,7 @@
     <failsafe-plugin.version>3.5.2</failsafe-plugin.version>
     <jmolecules-bom.version>2023.2.1</jmolecules-bom.version>
     <spring-boot.version>3.4.2</spring-boot.version>
+    <reflections.version>0.10.2</reflections.version>
   </properties>
 
   <build>

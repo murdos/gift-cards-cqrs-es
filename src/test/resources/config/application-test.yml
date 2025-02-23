@@ -7,3 +7,5 @@ logging:
 spring:
   main:
     banner-mode: 'off'
+server:
+  port: 0

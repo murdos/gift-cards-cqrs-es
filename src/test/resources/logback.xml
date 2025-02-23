@@ -9,5 +9,6 @@
   <logger name="ch.qos.logback" level="WARN" />
   <logger name="com.sun" level="WARN" />
   <logger name="org.springframework" level="WARN" />
+  <logger name="org.springframework.web" level="ERROR" />
   <!-- jhipster-needle-logback-add-log -->
 </configuration>

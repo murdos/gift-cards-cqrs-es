@@ -6,3 +6,7 @@ logging:
 spring:
   application:
     name: Giftcard
+  jackson:
+    default-property-inclusion: non_absent
+server:
+  port: 8080
