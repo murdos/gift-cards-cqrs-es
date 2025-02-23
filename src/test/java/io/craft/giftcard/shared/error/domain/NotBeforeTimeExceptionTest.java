@@ -2,9 +2,9 @@ package io.craft.giftcard.shared.error.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import io.craft.giftcard.UnitTest;
 import java.time.Instant;
 import org.junit.jupiter.api.Test;
-import io.craft.giftcard.UnitTest;
 
 @UnitTest
 class NotBeforeTimeExceptionTest {

@@ -2,10 +2,10 @@ package io.craft.giftcard.cucumber;
 
 import static io.cucumber.junit.platform.engine.Constants.*;
 
+import io.craft.giftcard.ComponentTest;
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.IncludeEngines;
 import org.junit.platform.suite.api.Suite;
-import io.craft.giftcard.ComponentTest;
 
 @Suite(failIfNoTests = false)
 @ComponentTest

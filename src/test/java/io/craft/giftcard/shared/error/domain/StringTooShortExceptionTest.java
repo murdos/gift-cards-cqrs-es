@@ -2,8 +2,8 @@ package io.craft.giftcard.shared.error.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import org.junit.jupiter.api.Test;
 import io.craft.giftcard.UnitTest;
+import org.junit.jupiter.api.Test;
 
 @UnitTest
 class StringTooShortExceptionTest {

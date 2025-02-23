@@ -1,5 +1,9 @@
 package io.craft.giftcard.cucumber;
 
+import io.craft.giftcard.GiftcardApp;
+import io.craft.giftcard.cucumber.CucumberConfiguration.CucumberRestTemplateConfiguration;
+import io.craft.giftcard.cucumber.rest.CucumberRestTemplate;
+import io.craft.giftcard.cucumber.rest.CucumberRestTestContext;
 import io.cucumber.java.Before;
 import io.cucumber.spring.CucumberContextConfiguration;
 import java.nio.charset.StandardCharsets;
@@ -17,17 +21,10 @@ import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.client.RestTemplate;
-import io.craft.giftcard.GiftcardApp;
-import io.craft.giftcard.cucumber.CucumberConfiguration.CucumberRestTemplateConfiguration;
-import io.craft.giftcard.cucumber.rest.CucumberRestTemplate;
-import io.craft.giftcard.cucumber.rest.CucumberRestTestContext;
 
 @ActiveProfiles("test")
 @CucumberContextConfiguration
-@SpringBootTest(
-  classes = { GiftcardApp.class, CucumberRestTemplateConfiguration.class },
-  webEnvironment = WebEnvironment.RANDOM_PORT
-)
+@SpringBootTest(classes = { GiftcardApp.class, CucumberRestTemplateConfiguration.class }, webEnvironment = WebEnvironment.RANDOM_PORT)
 public class CucumberConfiguration {
 
   private final TestRestTemplate rest;

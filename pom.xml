@@ -1,5 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.mycompany.myapp</groupId>
@@ -106,9 +110,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <maven.version>3.6.3</maven.version>
-    
-    
-    
+
     <maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
     <compiler-plugin.version>3.13.0</compiler-plugin.version>
     <surefire-plugin.version>3.5.2</surefire-plugin.version>

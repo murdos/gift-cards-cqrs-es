@@ -7,8 +7,8 @@ import org.jmolecules.ddd.annotation.AggregateRoot;
 
 @AggregateRoot
 public class GiftCard {
+
   public static GiftCardEvent create(GiftCardCreation giftCardCreation) {
     return new GiftCardCreated(giftCardCreation.barcode(), giftCardCreation.amount(), SequenceId.INITIAL);
   }
 }
-

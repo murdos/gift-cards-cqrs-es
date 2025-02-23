@@ -3,6 +3,10 @@ package io.craft.giftcard.shared.error.infrastructure.primary;
 import static org.mockito.Mockito.*;
 
 import ch.qos.logback.classic.Level;
+import io.craft.giftcard.Logs;
+import io.craft.giftcard.LogsSpy;
+import io.craft.giftcard.LogsSpyExtension;
+import io.craft.giftcard.UnitTest;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validation;
 import jakarta.validation.constraints.NotNull;
@@ -11,10 +15,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.core.MethodParameter;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import io.craft.giftcard.Logs;
-import io.craft.giftcard.LogsSpy;
-import io.craft.giftcard.LogsSpyExtension;
-import io.craft.giftcard.UnitTest;
 
 @UnitTest
 @ExtendWith(LogsSpyExtension.class)

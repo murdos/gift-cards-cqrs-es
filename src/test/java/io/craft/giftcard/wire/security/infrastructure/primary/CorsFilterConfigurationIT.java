@@ -2,11 +2,11 @@ package io.craft.giftcard.wire.security.infrastructure.primary;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import io.craft.giftcard.IntegrationTest;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.filter.CorsFilter;
-import io.craft.giftcard.IntegrationTest;
 
 @IntegrationTest
 class CorsFilterConfigurationIT {

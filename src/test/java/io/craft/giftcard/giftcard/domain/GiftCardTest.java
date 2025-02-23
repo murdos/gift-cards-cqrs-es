@@ -1,13 +1,12 @@
 package io.craft.giftcard.giftcard.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import io.craft.giftcard.giftcard.domain.commands.GiftCardCreation;
 import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
-import org.junit.jupiter.api.Test;
-
 import java.math.BigDecimal;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 class GiftCardTest {
 

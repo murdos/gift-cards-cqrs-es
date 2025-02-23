@@ -17,11 +17,11 @@ You'll then have to define the glue code:
 ```java
 import static io.craft.giftcard.cucumber.rest.CucumberRestAssertions.*;
 
+import io.craft.giftcard.cucumber.CucumberRestTemplate;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import io.craft.giftcard.cucumber.CucumberRestTemplate;
 
 public class SimpleSteps {
 
@@ -35,13 +35,7 @@ public class SimpleSteps {
 
   @Then("I get simple response with name {string} and age {int}")
   public void shouldGetResponse(String name, int age) {
-    assertThatLastResponse()
-      .hasOkStatus()
-      .hasElement("$.name")
-      .withValue(name)
-      .and()
-      .hasElement("$.age")
-      .withValue(age);
+    assertThatLastResponse().hasOkStatus().hasElement("$.name").withValue(name).and().hasElement("$.age").withValue(age);
   }
 }
 
