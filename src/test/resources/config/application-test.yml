@@ -1,0 +1,9 @@
+logging:
+  config: classpath:logback.xml
+  level:
+    io:
+      craft:
+        giftcard: 'OFF'
+spring:
+  main:
+    banner-mode: 'off'

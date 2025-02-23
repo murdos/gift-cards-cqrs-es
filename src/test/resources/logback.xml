@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration>
+<configuration scan="true">
+  <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+  <include resource="org/springframework/boot/logging/logback/base.xml" />
+
+  <logger name="io.craft.giftcard" level="OFF" />
+
+  <logger name="ch.qos.logback" level="WARN" />
+  <logger name="com.sun" level="WARN" />
+  <logger name="org.springframework" level="WARN" />
+  <!-- jhipster-needle-logback-add-log -->
+</configuration>

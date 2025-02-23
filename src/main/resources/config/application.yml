@@ -1,0 +1,8 @@
+logging:
+  level:
+    io:
+      craft:
+        giftcard: INFO
+spring:
+  application:
+    name: Giftcard

@@ -49,5 +49,17 @@
       "endOfLine" : "lf",
       "indentSize" : 2
     }
+  }, {
+    "module" : "spring-boot",
+    "date" : "2025-02-23T15:07:04.662044258Z",
+    "properties" : {
+      "packageName" : "io.craft.giftcard",
+      "projectName" : "Gift Card CQRS-ES",
+      "baseName" : "giftcard",
+      "endOfLine" : "lf",
+      "indentSize" : 2,
+      "serverPort" : 8080,
+      "springConfigurationFormat" : "yaml"
+    }
   } ]
 }
