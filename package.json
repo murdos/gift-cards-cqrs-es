@@ -1,0 +1,17 @@
+{
+  "name": "jhipster-sample-application",
+  "version": "0.0.0",
+  "private": true,
+  "description": "JHipster Sample Application",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "9.1.7",
+    "lint-staged": "15.4.3"
+  }
+}
