@@ -6,8 +6,8 @@ import io.craft.giftcard.shared.error.domain.Assert;
 import org.jmolecules.architecture.cqrs.Command;
 
 @Command
-public record GiftCardCreation(Barcode barcode, Amount amount) {
-  public GiftCardCreation {
+public record GiftCardDeclaration(Barcode barcode, Amount amount) {
+  public GiftCardDeclaration {
     Assert.notNull("barcode", barcode);
     Assert.notNull("amount", amount);
   }
