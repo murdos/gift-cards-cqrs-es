@@ -13,6 +13,10 @@ public class GiftCard {
 
   private final DecisionProjection decisionProjection;
 
+  protected Barcode barcode() {
+    return decisionProjection.barcode;
+  }
+
   public GiftCard(GiftCardHistory history) {
     decisionProjection = DecisionProjection.from(history);
   }
@@ -22,8 +26,9 @@ public class GiftCard {
   }
 
   public GiftCardEvent pay(Payment payment) {
-    // Amount currentAmount = decisionProjection.amount;
-    // assert(currentAmount.subtract(payment.amount()) > 0;
+    if (decisionProjection.remainingAmount.isLessThan(payment.amount())) {
+      throw new InsufficientRemainingAmountException(barcode());
+    }
     return new PaidAmount(decisionProjection.barcode, decisionProjection.nextSequenceId(), payment.amount());
   }
 

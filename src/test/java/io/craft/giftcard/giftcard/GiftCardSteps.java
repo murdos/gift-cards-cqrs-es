@@ -39,6 +39,6 @@ public class GiftCardSteps {
 
   @When("I pay with the gift card {string} an amount of {double}")
   public void iPayWithTheGiftCardAnAmountOf(String barcode, double paidAmount) {
-    giftCardApplicationService.pay(new Barcode(barcode), new Payment(new Amount(paidAmount)));
+    giftCardApplicationService.pay(new Barcode(barcode), new Payment(new Amount(BigDecimal.valueOf(paidAmount))));
   }
 }

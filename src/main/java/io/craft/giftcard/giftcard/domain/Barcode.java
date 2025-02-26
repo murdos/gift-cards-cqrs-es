@@ -8,4 +8,9 @@ public record Barcode(String value) {
   public Barcode {
     Assert.notBlank("value", value);
   }
+
+  @Override
+  public String toString() {
+    return value;
+  }
 }
