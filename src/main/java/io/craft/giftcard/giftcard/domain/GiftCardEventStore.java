@@ -1,6 +1,7 @@
 package io.craft.giftcard.giftcard.domain;
 
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
+import java.util.List;
 import org.jmolecules.architecture.hexagonal.Port;
 
 @Port
@@ -10,6 +11,8 @@ public interface GiftCardEventStore {
   }
 
   void save(GiftCardEvent event);
+
+  void save(List<GiftCardEvent> events);
 
   GiftCardHistory getHistory(Barcode barcode);
 }

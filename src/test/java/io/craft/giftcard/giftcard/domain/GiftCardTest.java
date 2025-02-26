@@ -5,10 +5,12 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
 import io.craft.giftcard.giftcard.domain.commands.Payment;
+import io.craft.giftcard.giftcard.domain.events.GifCardExhausted;
 import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
 import io.craft.giftcard.giftcard.domain.events.PaidAmount;
 import java.math.BigDecimal;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class GiftCardTest {
@@ -34,13 +36,15 @@ class GiftCardTest {
     var giftcard = new GiftCard(history);
 
     Amount amountToPay = new Amount(new BigDecimal(50));
-    GiftCardEvent event = giftcard.pay(new Payment(amountToPay));
+    List<GiftCardEvent> events = giftcard.pay(new Payment(amountToPay));
 
-    assertThat(event).isInstanceOfSatisfying(PaidAmount.class, paidAmount -> {
-      assertThat(paidAmount.sequenceId()).isGreaterThan(history.lastSequenceId());
-      assertThat(paidAmount.amount()).isEqualTo(amountToPay);
-      assertThat(paidAmount.barcode()).isEqualTo(giftcard.barcode());
-    });
+    assertThat(events)
+      .singleElement()
+      .isInstanceOfSatisfying(PaidAmount.class, paidAmount -> {
+        assertThat(paidAmount.sequenceId()).isGreaterThan(history.lastSequenceId());
+        assertThat(paidAmount.amount()).isEqualTo(amountToPay);
+        assertThat(paidAmount.barcode()).isEqualTo(giftcard.barcode());
+      });
   }
 
   @Test
@@ -52,6 +56,17 @@ class GiftCardTest {
     Throwable exception = catchThrowable(() -> giftcard.pay(new Payment(amountToPay)));
 
     assertThat(exception).isInstanceOf(InsufficientRemainingAmountException.class);
+  }
+
+  @Test
+  void shouldExhaustAGiftcardWhenRemainingAmountIsZero() {
+    GiftCardHistory history = givenGiftCardHistory(100);
+    var giftcard = new GiftCard(history);
+
+    Amount amountToPay = new Amount(new BigDecimal(100));
+    List<GiftCardEvent> events = giftcard.pay(new Payment(amountToPay));
+
+    assertThat(events).extracting(GiftCardEvent::getClass).containsExactly(PaidAmount.class, GifCardExhausted.class);
   }
 
   private static GiftCardHistory givenGiftCardHistory(double initialAmount) {

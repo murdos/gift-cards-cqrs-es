@@ -38,8 +38,8 @@ public class GiftCardApplicationService {
   }
 
   public void pay(Barcode barcode, Payment payment) {
-    var event = eventStore.findByBarcode(barcode).pay(payment);
-    eventStore.save(event);
+    var events = eventStore.findByBarcode(barcode).pay(payment);
+    eventStore.save(events);
 
     GiftCardHistory history = eventStore.getHistory(barcode);
 

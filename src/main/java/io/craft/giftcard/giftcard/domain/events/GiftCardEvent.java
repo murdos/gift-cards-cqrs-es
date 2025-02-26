@@ -5,7 +5,7 @@ import io.craft.giftcard.giftcard.domain.SequenceId;
 import org.jmolecules.event.annotation.DomainEvent;
 
 @DomainEvent
-public sealed interface GiftCardEvent permits GiftCardCreated, PaidAmount {
+public sealed interface GiftCardEvent permits GiftCardCreated, PaidAmount, GifCardExhausted {
   SequenceId sequenceId();
 
   Barcode barcode();

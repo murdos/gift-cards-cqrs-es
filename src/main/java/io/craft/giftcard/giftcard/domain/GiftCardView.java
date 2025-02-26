@@ -1,5 +1,6 @@
 package io.craft.giftcard.giftcard.domain;
 
+import io.craft.giftcard.giftcard.domain.events.GifCardExhausted;
 import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
 import io.craft.giftcard.giftcard.domain.events.PaidAmount;
@@ -21,6 +22,7 @@ public record GiftCardView(Barcode barcode, Amount remaingAmount) {
     return switch (giftCardEvent) {
       case PaidAmount paidAmount -> new GiftCardView(giftCardView.barcode(), giftCardView.remaingAmount().subtract(paidAmount.amount()));
       case GiftCardCreated giftCardCreated -> giftCardView;
+      case GifCardExhausted gifCardExhausted -> giftCardView;
     };
   }
 }

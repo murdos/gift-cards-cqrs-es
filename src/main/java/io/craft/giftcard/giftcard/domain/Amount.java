@@ -6,6 +6,8 @@ import org.jmolecules.ddd.annotation.ValueObject;
 
 @ValueObject
 public record Amount(BigDecimal value) implements Comparable<Amount> {
+  public static final Amount ZERO = new Amount(BigDecimal.ZERO);
+
   public Amount {
     Assert.field("value", value).positive();
   }

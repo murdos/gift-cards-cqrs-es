@@ -32,6 +32,11 @@ public class InMemoryGiftCardEventStore implements GiftCardEventStore {
   }
 
   @Override
+  public void save(List<GiftCardEvent> events) {
+    events.forEach(this::save);
+  }
+
+  @Override
   public GiftCardHistory getHistory(Barcode barcode) {
     var events = histories.get(barcode);
 

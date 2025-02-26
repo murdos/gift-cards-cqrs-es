@@ -2,6 +2,7 @@ package io.craft.giftcard.giftcard.domain;
 
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
 import io.craft.giftcard.giftcard.domain.commands.Payment;
+import io.craft.giftcard.giftcard.domain.events.GifCardExhausted;
 import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
 import io.craft.giftcard.giftcard.domain.events.PaidAmount;
@@ -25,11 +26,17 @@ public class GiftCard {
     return new GiftCardCreated(giftCardDeclaration.barcode(), giftCardDeclaration.amount(), SequenceId.INITIAL);
   }
 
-  public GiftCardEvent pay(Payment payment) {
+  public List<GiftCardEvent> pay(Payment payment) {
     if (decisionProjection.remainingAmount.isLessThan(payment.amount())) {
       throw new InsufficientRemainingAmountException(barcode());
     }
-    return new PaidAmount(decisionProjection.barcode, decisionProjection.nextSequenceId(), payment.amount());
+    PaidAmount paidAmount = new PaidAmount(decisionProjection.barcode, decisionProjection.nextSequenceId(), payment.amount());
+
+    if (decisionProjection.remainingAmount.equals(payment.amount())) {
+      return List.of(paidAmount, new GifCardExhausted(decisionProjection.barcode, decisionProjection.nextSequenceId()));
+    }
+
+    return List.of(paidAmount);
   }
 
   private record DecisionProjection(Barcode barcode, Amount remainingAmount, SequenceId currentSequenceId) {
@@ -58,6 +65,11 @@ public class GiftCard {
           paidAmount.sequenceId()
         );
         case GiftCardCreated giftCardCreated -> decisionProjection;
+        case GifCardExhausted gifCardExhausted -> new DecisionProjection(
+          decisionProjection.barcode(),
+          decisionProjection.remainingAmount(),
+          gifCardExhausted.sequenceId()
+        );
       };
     }
   }
