@@ -14,17 +14,13 @@ public record GiftCardView(Barcode barcode, Amount remaingAmount) {
 
     return followingEvents
       .stream()
-      .reduce(
-        new GiftCardView(firstEvent.barcode(), firstEvent.amount()),
-        (giftCardView, giftCardEvent) ->
-          switch (giftCardEvent) {
-            case PaidAmount paidAmount -> new GiftCardView(
-              giftCardView.barcode(),
-              giftCardView.remaingAmount().subtract(paidAmount.amount())
-            );
-            default -> giftCardView;
-          },
-        (giftCardView1, giftCardView2) -> giftCardView2
-      );
+      .reduce(new GiftCardView(firstEvent.barcode(), firstEvent.amount()), GiftCardView::reducer, new DummyCombiner<>());
+  }
+
+  private static GiftCardView reducer(GiftCardView giftCardView, GiftCardEvent giftCardEvent) {
+    return switch (giftCardEvent) {
+      case PaidAmount paidAmount -> new GiftCardView(giftCardView.barcode(), giftCardView.remaingAmount().subtract(paidAmount.amount()));
+      case GiftCardCreated giftCardCreated -> giftCardView;
+    };
   }
 }

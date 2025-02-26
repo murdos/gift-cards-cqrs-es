@@ -3,6 +3,7 @@ package io.craft.giftcard.giftcard.infrastructure.secondary;
 import io.craft.giftcard.giftcard.domain.Barcode;
 import io.craft.giftcard.giftcard.domain.GiftCardEventStore;
 import io.craft.giftcard.giftcard.domain.GiftCardHistory;
+import io.craft.giftcard.giftcard.domain.SequenceId;
 import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
 import java.util.ArrayList;
@@ -17,10 +18,17 @@ import org.springframework.stereotype.Component;
 public class InMemoryGiftCardEventStore implements GiftCardEventStore {
 
   private final Map<Barcode, List<GiftCardEvent>> histories = new HashMap<>();
+  private final Map<Barcode, List<SequenceId>> existingSequenceIds = new HashMap<>();
 
   @Override
   public void save(GiftCardEvent event) {
     histories.computeIfAbsent(event.barcode(), key -> new ArrayList<>()).add(event);
+
+    List<SequenceId> sequenceIds = existingSequenceIds.computeIfAbsent(event.barcode(), key -> new ArrayList<>());
+    if (sequenceIds.contains(event.sequenceId())) {
+      throw new IllegalArgumentException("SequenceId already exists");
+    }
+    sequenceIds.add(event.sequenceId());
   }
 
   @Override
