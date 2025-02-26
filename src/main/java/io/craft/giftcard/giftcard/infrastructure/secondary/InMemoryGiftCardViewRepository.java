@@ -5,6 +5,7 @@ import io.craft.giftcard.giftcard.domain.GiftCardView;
 import io.craft.giftcard.giftcard.domain.GiftCardViewRepository;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import org.jmolecules.architecture.hexagonal.Adapter;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +21,7 @@ public class InMemoryGiftCardViewRepository implements GiftCardViewRepository {
   }
 
   @Override
-  public GiftCardView get(Barcode barcode) {
-    return views.get(barcode);
+  public Optional<GiftCardView> get(Barcode barcode) {
+    return Optional.ofNullable(views.get(barcode));
   }
 }

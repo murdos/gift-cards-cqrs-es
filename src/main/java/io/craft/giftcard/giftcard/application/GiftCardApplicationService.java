@@ -18,6 +18,12 @@ public class GiftCardApplicationService {
   }
 
   public void declare(GiftCardDeclaration giftCardDeclaration) {
+    viewRepository
+      .get(giftCardDeclaration.barcode())
+      .ifPresent(event -> {
+        throw new BarcodeAlreadyUsedException(giftCardDeclaration.barcode());
+      });
+
     GiftCardEvent event = GiftCard.declare(giftCardDeclaration);
     eventStore.save(event);
 
@@ -28,7 +34,7 @@ public class GiftCardApplicationService {
   }
 
   public GiftCardView findBy(Barcode barcode) {
-    return viewRepository.get(barcode);
+    return viewRepository.get(barcode).orElseThrow(() -> new GiftCardNotFoundException(barcode));
   }
 
   public void pay(Barcode barcode, Payment payment) {
