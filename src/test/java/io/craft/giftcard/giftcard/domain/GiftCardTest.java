@@ -3,6 +3,7 @@ package io.craft.giftcard.giftcard.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
+import io.craft.giftcard.UnitTest;
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
 import io.craft.giftcard.giftcard.domain.commands.Payment;
 import io.craft.giftcard.giftcard.domain.events.GifCardExhausted;
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
+@UnitTest
 class GiftCardTest {
 
   @Test

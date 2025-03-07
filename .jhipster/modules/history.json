@@ -145,6 +145,19 @@
         "serverPort": 8080,
         "springConfigurationFormat": "yaml"
       }
+    },
+    {
+      "module": "java-archunit",
+      "date": "2025-03-07T13:13:59.677886489Z",
+      "properties": {
+        "packageName": "io.craft.giftcard",
+        "projectName": "Gift Card CQRS-ES",
+        "baseName": "giftcard",
+        "endOfLine": "lf",
+        "indentSize": 2,
+        "serverPort": 8080,
+        "springConfigurationFormat": "yaml"
+      }
     }
   ]
 }

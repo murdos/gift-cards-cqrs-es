@@ -3,6 +3,7 @@ package io.craft.giftcard.giftcard.application;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
+import io.craft.giftcard.UnitTest;
 import io.craft.giftcard.giftcard.domain.BarcodeAlreadyUsedException;
 import io.craft.giftcard.giftcard.domain.GiftCardFixtures;
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
@@ -10,6 +11,7 @@ import io.craft.giftcard.giftcard.infrastructure.secondary.InMemoryGiftCardEvent
 import io.craft.giftcard.giftcard.infrastructure.secondary.InMemoryGiftCardViewRepository;
 import org.junit.jupiter.api.Test;
 
+@UnitTest
 class GiftCardApplicationServiceTest {
 
   private GiftCardApplicationService giftCardApplicationService = new GiftCardApplicationService(

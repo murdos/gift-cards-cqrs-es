@@ -102,6 +102,12 @@
       <artifactId>junit-platform-suite</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.tngtech.archunit</groupId>
+      <artifactId>archunit-junit5-api</artifactId>
+      <version>${archunit-junit5.version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <properties>
@@ -119,6 +125,7 @@
     <spring-boot.version>3.4.2</spring-boot.version>
     <reflections.version>0.10.2</reflections.version>
     <cucumber.version>7.21.1</cucumber.version>
+    <archunit-junit5.version>1.4.0</archunit-junit5.version>
   </properties>
 
   <build>
