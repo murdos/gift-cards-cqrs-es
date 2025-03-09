@@ -3,6 +3,7 @@ package io.craft.giftcard.giftcard.domain;
 import io.craft.giftcard.giftcard.domain.events.GifCardExhausted;
 import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
+import io.craft.giftcard.giftcard.domain.events.GiftCardHistory;
 import io.craft.giftcard.giftcard.domain.events.PaidAmount;
 import java.util.List;
 import org.jmolecules.architecture.cqrs.QueryModel;
