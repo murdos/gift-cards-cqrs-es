@@ -2,10 +2,10 @@ package io.craft.giftcard.giftcard.infrastructure.secondary;
 
 import io.craft.giftcard.giftcard.domain.Barcode;
 import io.craft.giftcard.giftcard.domain.GiftCardEventStore;
-import io.craft.giftcard.giftcard.domain.GiftCardHistory;
 import io.craft.giftcard.giftcard.domain.SequenceId;
 import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
+import io.craft.giftcard.giftcard.domain.events.GiftCardHistory;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
