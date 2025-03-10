@@ -1,0 +1,70 @@
+[transition="slide-in fade-out"]
+=== Listes à puce
+
+[.same]
+--
+* Staffing Matching Squad
+* Hate acronyms
+* Love CQRS
+--
+
+[.notes]
+--
+moi moi moi moi moi moi moi moi moi
+--
+
+
+[transition="fade"]
+=== Liste à puce "fixée" pour changer un point sans que ça décale tout avec une transition
+
+[.same]
+--
+* Staffing Matching Squad
+* Hate (unexplained) acronyms
+* Love Command Query Responsibility Segregation
+--
+
+
+[transition="fade-in slide-out"]
+=== Liste à puce "fixée" pour ajouter un point sans que ça décale tout avec une transition
+
+[.same]
+--
+* Staffing Matching Squad
+* Hate (unexplained) acronyms
+* Love Command Query Responsibility Segregation
+* Love Event Sourcing
+--
+
+== List à puce qui apparait au clic
+
+[%steps]
+* step1
+* step2
+* step1
+* d, la réponse d
+
+
+[%notitle]
+=== Image sans titre sur la page
+
+image::yercin.jpg[]
+
+=== Un peu de code ?
+
+[source, kotlin, highlight=1]
+val seed = 123456871628
+val random = Random(seed)
+random.nextInt(from = 0, upTo = 10) // output : 4
+random.nextInt(from = 0, upTo = 10) // output : 1
+
+
+=== Un peu de code avec des transitions
+
+[source, kotlin, highlight="..|1|2,4"]
+----
+val seed = 123456871628
+val random = Random(seed)
+random.nextInt(from = 0, upTo = 10) // output : 4
+random.nextInt(from = 0, upTo = 10) // output : 1
+----
