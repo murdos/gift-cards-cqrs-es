@@ -1,7 +1,6 @@
-package io.craft.giftcard.giftcard.domain;
+package io.craft.giftcard.giftcard.domain.events;
 
-import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
-import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
+import io.craft.giftcard.giftcard.domain.SequenceId;
 import java.util.List;
 import java.util.stream.Stream;
 import org.jmolecules.ddd.annotation.ValueObject;

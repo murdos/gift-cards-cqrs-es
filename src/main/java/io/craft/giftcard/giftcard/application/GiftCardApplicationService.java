@@ -4,6 +4,7 @@ import io.craft.giftcard.giftcard.domain.*;
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
 import io.craft.giftcard.giftcard.domain.commands.Payment;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
+import io.craft.giftcard.giftcard.domain.events.GiftCardHistory;
 import org.springframework.stereotype.Service;
 
 @Service
