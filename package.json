@@ -4,20 +4,41 @@
   "private": true,
   "description": "JHipster Sample Application",
   "license": "UNLICENSED",
+  "type": "module",
   "scripts": {
+    "lint": "eslint .",
+    "test": "npm run watch:test",
+    "test:coverage": "vitest run --coverage",
+    "watch": "npm-run-all --parallel watch:*",
+    "watch:tsc": "tsc --noEmit --watch",
+    "watch:test": "vitest --",
     "prepare": "husky",
     "prettier:check": "prettier --check .",
     "prettier:format": "prettier --write ."
   },
   "devDependencies": {
+    "@eslint/js": "9.22.0",
     "@prettier/plugin-xml": "3.4.1",
+    "@tsconfig/recommended": "1.0.8",
+    "@typescript-eslint/eslint-plugin": "8.26.0",
+    "@typescript-eslint/parser": "8.26.0",
+    "@vitest/coverage-istanbul": "3.0.8",
+    "eslint": "9.22.0",
+    "eslint-config-prettier": "10.1.1",
+    "globals": "16.0.0",
     "husky": "9.1.7",
     "lint-staged": "15.4.3",
+    "npm-run-all2": "7.0.2",
     "prettier": "3.5.0",
     "prettier-plugin-gherkin": "3.1.1",
     "prettier-plugin-java": "2.6.7",
     "prettier-plugin-organize-imports": "4.1.0",
-    "prettier-plugin-packagejson": "2.5.8"
+    "prettier-plugin-packagejson": "2.5.8",
+    "typescript": "5.8.2",
+    "typescript-eslint": "8.26.0",
+    "vite-tsconfig-paths": "5.1.4",
+    "vitest": "3.0.8",
+    "vitest-sonar-reporter": "2.0.0"
   },
   "engines": {
     "node": ">=22"
