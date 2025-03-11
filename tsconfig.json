@@ -1,7 +1,9 @@
 {
-  "extends": "@tsconfig/recommended/tsconfig.json",
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
   "compilerOptions": {
-    "types": ["vitest/globals"],
+    "allowJs": true,
+    "sourceMap": true,
+    "types": ["vite/client", "vitest/globals"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/main/webapp/app/*"]
