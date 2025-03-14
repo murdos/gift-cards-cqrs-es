@@ -184,6 +184,19 @@
         "serverPort": 8080,
         "springConfigurationFormat": "yaml"
       }
+    },
+    {
+      "module": "springdoc-mvc-openapi",
+      "date": "2025-03-14T07:49:43.472404Z",
+      "properties": {
+        "endOfLine": "lf",
+        "springConfigurationFormat": "yaml",
+        "packageName": "io.craft.giftcard",
+        "projectName": "Gift Card CQRS-ES",
+        "indentSize": 2,
+        "serverPort": 8080,
+        "baseName": "giftcard"
+      }
     }
   ]
 }

@@ -10,3 +10,9 @@ spring:
     default-property-inclusion: non_absent
 server:
   port: 8080
+springdoc:
+  enable-native-support: true
+  swagger-ui:
+    operationsSorter: alpha
+    tagsSorter: alpha
+    tryItOutEnabled: true
