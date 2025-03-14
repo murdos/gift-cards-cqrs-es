@@ -3,3 +3,10 @@ logging:
     io:
       craft:
         giftcard: DEBUG
+application:
+  cors:
+    allowed-origins:
+      - 'http://localhost:9000'
+    allowed-methods: '*'
+    allowed-headers: '*'
+    allow-credentials: true
