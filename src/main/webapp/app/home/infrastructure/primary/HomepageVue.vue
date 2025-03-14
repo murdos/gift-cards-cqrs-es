@@ -11,6 +11,7 @@
       <a href="https://v3.vuejs.org/" target="_blank" rel="noopener">Vue 3 Documentation</a>
     </p>
 
+    <gift-card-list />
     <p>
       Edit
       <code>src/main/webapp/app/home/infrastructure/primary/HomepageVue.vue</code> to test hot module replacement.
@@ -19,8 +20,11 @@
 </template>
 
 <script lang="ts">
+import GiftCardList from '@/home/domain/GiftCardList.vue';
+
 export default {
   name: 'HomepageVue',
+  components: { GiftCardList },
   data: () => {
     return {
       appName: 'Dummy',
