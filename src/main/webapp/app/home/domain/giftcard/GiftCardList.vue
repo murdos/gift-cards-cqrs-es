@@ -7,7 +7,7 @@
       <li v-for="giftCard in giftCards" :key="giftCard.barcode.value" class="gift-card">
         <div class="gift-card-header">
           <div class="gift-card-logo">
-            <img src="./../../../content/images/JHipster-Lite-neon-green.png" alt="Gift Card Logo" />
+            <img src="../../../../content/images/JHipster-Lite-neon-green.png" alt="Gift Card Logo" />
           </div>
           <div class="gift-card-header-content">
             <div class="gift-card-header-content-amount">
@@ -31,7 +31,8 @@
 </template>
 
 <script lang="ts">
-import { AxiosHttp } from '@/shared/http/infrastructure/secondary/AxiosHttp';
+import { AxiosGiftCardRepository } from '@/home/infrastructure/secondary/AxiosGiftCardRepository.ts';
+import { AxiosHttp } from '@/shared/http/infrastructure/secondary/AxiosHttp.ts';
 import VisualBarcode from '@/shared/http/infrastructure/secondary/VisualBarcode.vue';
 import axios from 'axios';
 import { defineComponent, onMounted, ref } from 'vue';
@@ -50,13 +51,12 @@ export default defineComponent({
     const error = ref<string | null>(null);
 
     const fetchGiftCards = async () => {
-      const axiosHttp = new AxiosHttp(axios);
+      const giftCardRepository = new AxiosGiftCardRepository(new AxiosHttp(axios));
       console.log('Fetching gift cards...');
       loading.value = true;
       error.value = null;
       try {
-        const response = await axiosHttp.get<GiftCard[]>('/api/gift-cards');
-        giftCards.value = response.data;
+        giftCards.value = await giftCardRepository.findAll();
       } catch (err: any) {
         error.value = err.message || 'An error occurred';
       } finally {
