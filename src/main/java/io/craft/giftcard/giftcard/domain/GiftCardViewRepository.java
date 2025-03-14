@@ -1,5 +1,6 @@
 package io.craft.giftcard.giftcard.domain;
 
+import java.util.List;
 import java.util.Optional;
 import org.jmolecules.architecture.hexagonal.Port;
 
@@ -8,4 +9,6 @@ public interface GiftCardViewRepository {
   void save(GiftCardView view);
 
   Optional<GiftCardView> get(Barcode barcode);
+
+  List<GiftCardView> findAll();
 }
