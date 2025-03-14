@@ -45,7 +45,7 @@
 </template>
 
 <script lang="ts">
-import GiftCardList from '@/home/domain/GiftCardList.vue';
+import GiftCardList from '@/home/domain/giftcard/GiftCardList.vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
