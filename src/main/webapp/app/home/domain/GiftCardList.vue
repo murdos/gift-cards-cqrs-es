@@ -7,17 +7,20 @@
       <li v-for="giftCard in giftCards" :key="giftCard.barcode.value" class="gift-card">
         <div class="gift-card-header">
           <div class="gift-card-logo">
-            <!-- Replace with your actual logo -->
             <img src="./../../../content/images/JHipster-Lite-neon-green.png" alt="Gift Card Logo" />
           </div>
-          <div class="gift-card-barcode">Code-barres: {{ giftCard.barcode.value }}</div>
+          <div class="gift-card-header-content">
+            <div class="gift-card-header-content-amount">
+              {{ giftCard.remaingAmount.value }}
+              <span class="currency">€</span>
+            </div>
+            <div class="gift-card-description">Montant restant</div>
+          </div>
         </div>
         <div class="gift-card-body">
-          <div class="gift-card-amount">
-            <span class="currency">€</span>
-            {{ giftCard.remaingAmount.value }}
+          <div class="gift-card-barcode-container">
+            <visual-barcode :barcode-value="giftCard.barcode.value" />
           </div>
-          <div class="gift-card-description">Montant restant</div>
         </div>
         <div class="gift-card-footer">
           <button class="gift-card-button">Voir les détails</button>
@@ -29,6 +32,7 @@
 
 <script lang="ts">
 import { AxiosHttp } from '@/shared/http/infrastructure/secondary/AxiosHttp';
+import VisualBarcode from '@/shared/http/infrastructure/secondary/VisualBarcode.vue';
 import axios from 'axios';
 import { defineComponent, onMounted, ref } from 'vue';
 
@@ -39,6 +43,7 @@ interface GiftCard {
 
 export default defineComponent({
   name: 'GiftCardList',
+  components: { VisualBarcode },
   setup() {
     const giftCards = ref<GiftCard[]>([]);
     const loading = ref(false);
@@ -114,8 +119,27 @@ export default defineComponent({
   object-fit: contain;
 }
 
-.gift-card-barcode {
-  font-size: 0.9em;
+.gift-card-header-content {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+}
+
+.gift-card-header-content-amount {
+  font-size: 2em;
+  font-weight: bold;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.currency {
+  font-size: 0.8em;
+  margin-left: 5px;
+}
+
+.gift-card-description {
+  font-size: 0.8em;
   color: #666;
 }
 
@@ -127,22 +151,9 @@ export default defineComponent({
   align-items: center;
 }
 
-.gift-card-amount {
-  font-size: 2em;
-  font-weight: bold;
-  color: #333;
-  display: flex;
-  align-items: center;
-}
-
-.currency {
-  font-size: 0.8em;
-  margin-right: 5px;
-}
-
-.gift-card-description {
-  font-size: 0.8em;
-  color: #666;
+.gift-card-barcode-container {
+  height: 150px;
+  width: 100%;
 }
 
 .gift-card-footer {
