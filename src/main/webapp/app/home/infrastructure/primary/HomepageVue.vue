@@ -29,12 +29,18 @@
             <p>Une interface simple et intuitive.</p>
           </div>
         </section>
-
+        <section class="gift-card-creation-section">
+          <button class="primary-button" @click="openGiftCardCreationModal">Déclarer une carte cadeau</button>
+        </section>
         <section class="gift-card-list-section">
           <GiftCardList />
         </section>
       </div>
     </main>
+
+    <GiftCardModal :is-open="isGiftCardDeclarationModalOpen" title="Déclarer une carte cadeau" @close="closeGiftCardDeclarationModal">
+      <GiftCardDeclaration @gift-card-declared="closeGiftCardDeclarationModal" />
+    </GiftCardModal>
 
     <footer class="homepage-footer">
       <div class="container">
@@ -46,14 +52,30 @@
 
 <script lang="ts">
 import GiftCardList from '@/giftcard/infrastructure/primary/GiftCardList.vue';
-import { defineComponent } from 'vue';
+import GiftCardModal from '@/shared/modal/infrastructure/primary/Modal.vue';
+import { defineComponent, ref } from 'vue';
+import GiftCardDeclaration from '../../../giftcard/infrastructure/primary/GiftCardDeclaration.vue';
 
 export default defineComponent({
   name: 'HomepageVue',
-  components: { GiftCardList },
-  data() {
+  components: { GiftCardList, GiftCardDeclaration: GiftCardDeclaration, GiftCardModal },
+  setup() {
+    const currentYear = ref(new Date().getFullYear());
+    const isGiftCardDeclarationModalOpen = ref(false);
+
+    const openGiftCardCreationModal = () => {
+      isGiftCardDeclarationModalOpen.value = true;
+    };
+
+    const closeGiftCardDeclarationModal = () => {
+      isGiftCardDeclarationModalOpen.value = false;
+    };
+
     return {
-      currentYear: new Date().getFullYear(),
+      currentYear,
+      isGiftCardDeclarationModalOpen,
+      openGiftCardCreationModal,
+      closeGiftCardDeclarationModal,
     };
   },
 });
@@ -141,5 +163,26 @@ export default defineComponent({
   padding: 20px 0;
   text-align: center;
   border-top: 1px solid #ddd;
+}
+
+.primary-button {
+  background-color: #007bff; /* Blue */
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.primary-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.primary-button:active {
+  background-color: #004080; /* Even darker blue on click */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 </style>
