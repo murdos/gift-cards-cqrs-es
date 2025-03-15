@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts">
-import { AxiosGiftCardRepository } from '@/giftcard/infrastructure/secondary/AxiosGiftCardRepository.ts';
+import { AxiosGiftCardQueryRepository } from '@/giftcard/infrastructure/secondary/AxiosGiftCardQueryRepository.ts';
 import VisualBarcode from '@/shared/barcode/infrastructure/primary/VisualBarcode.vue';
 import { AxiosHttp } from '@/shared/http/infrastructure/secondary/AxiosHttp.ts';
 import axios from 'axios';
@@ -51,7 +51,7 @@ export default defineComponent({
     const error = ref<string | null>(null);
 
     const fetchGiftCards = async () => {
-      const giftCardRepository = new AxiosGiftCardRepository(new AxiosHttp(axios));
+      const giftCardRepository = new AxiosGiftCardQueryRepository(new AxiosHttp(axios));
       console.log('Fetching gift cards...');
       loading.value = true;
       error.value = null;
