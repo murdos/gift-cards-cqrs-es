@@ -1,4 +1,5 @@
 import js from '@eslint/js';
+import prettier from 'eslint-config-prettier/flat';
 import vue from 'eslint-plugin-vue';
 import globals from 'globals';
 import typescript from 'typescript-eslint';
@@ -37,4 +38,5 @@ export default typescript.config(
       quotes: ['error', 'single', { avoidEscape: true }],
     },
   },
+  prettier,
 );
