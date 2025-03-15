@@ -197,6 +197,19 @@
         "serverPort": 8080,
         "baseName": "giftcard"
       }
+    },
+    {
+      "module": "spring-boot-local-profile",
+      "date": "2025-03-15T14:09:52.476710603Z",
+      "properties": {
+        "packageName": "io.craft.giftcard",
+        "projectName": "Gift Card CQRS-ES",
+        "baseName": "giftcard",
+        "endOfLine": "lf",
+        "indentSize": 2,
+        "serverPort": 8080,
+        "springConfigurationFormat": "yaml"
+      }
     }
   ]
 }

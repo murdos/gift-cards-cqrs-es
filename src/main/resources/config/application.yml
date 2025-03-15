@@ -8,6 +8,8 @@ spring:
     name: Giftcard
   jackson:
     default-property-inclusion: non_absent
+  profiles:
+    active: '@spring.profiles.active@'
 server:
   port: 8080
 springdoc:
