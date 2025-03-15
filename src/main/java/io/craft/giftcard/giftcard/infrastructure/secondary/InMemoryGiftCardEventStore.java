@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Adapter
 @Component
-public class InMemoryGiftCardEventStore implements GiftCardEventStore {
+public class InMemoryGiftCardEventStore implements GiftCardEventStore, InMemorySecondaryAdapter {
 
   private final Map<Barcode, List<GiftCardEvent>> histories = new HashMap<>();
   private final Map<Barcode, List<SequenceId>> existingSequenceIds = new HashMap<>();
@@ -43,5 +43,11 @@ public class InMemoryGiftCardEventStore implements GiftCardEventStore {
     var followingEvents = events.stream().skip(1).toList();
 
     return new GiftCardHistory((GiftCardCreated) events.getFirst(), followingEvents);
+  }
+
+  @Override
+  public void reset() {
+    histories.clear();
+    existingSequenceIds.clear();
   }
 }
