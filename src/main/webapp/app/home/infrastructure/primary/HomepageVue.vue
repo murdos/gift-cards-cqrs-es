@@ -33,13 +33,13 @@
           <button class="primary-button" @click="openGiftCardCreationModal">Déclarer une carte cadeau</button>
         </section>
         <section class="gift-card-list-section">
-          <GiftCardList />
+          <GiftCardList ref="giftCardListRef" />
         </section>
       </div>
     </main>
 
     <GiftCardModal :is-open="isGiftCardDeclarationModalOpen" title="Déclarer une carte cadeau" @close="closeGiftCardDeclarationModal">
-      <GiftCardDeclaration @gift-card-declared="closeGiftCardDeclarationModal" />
+      <GiftCardDeclaration @gift-card-declared="handleGiftCardDeclared" />
     </GiftCardModal>
 
     <footer class="homepage-footer">
@@ -52,7 +52,7 @@
 
 <script lang="ts">
 import GiftCardList from '@/giftcard/infrastructure/primary/GiftCardList.vue';
-import GiftCardModal from '@/shared/modal/infrastructure/primary/Modal.vue';
+import GiftCardModal from '@/shared/modal/infrastructure/primary/GiftCardModal.vue';
 import { defineComponent, ref } from 'vue';
 import GiftCardDeclaration from '../../../giftcard/infrastructure/primary/GiftCardDeclaration.vue';
 
@@ -63,6 +63,9 @@ export default defineComponent({
     const currentYear = ref(new Date().getFullYear());
     const isGiftCardDeclarationModalOpen = ref(false);
 
+    // store the instance of gifcardList to be able to call `refresh` on it
+    const giftCardListRef = ref<InstanceType<typeof GiftCardList> | null>(null);
+
     const openGiftCardCreationModal = () => {
       isGiftCardDeclarationModalOpen.value = true;
     };
@@ -71,11 +74,24 @@ export default defineComponent({
       isGiftCardDeclarationModalOpen.value = false;
     };
 
+    const handleGiftCardDeclared = () => {
+      closeGiftCardDeclarationModal();
+      refreshGiftCardList();
+    };
+
+    const refreshGiftCardList = () => {
+      if (giftCardListRef.value) {
+        giftCardListRef.value.refresh();
+      }
+    };
+
     return {
       currentYear,
       isGiftCardDeclarationModalOpen,
       openGiftCardCreationModal,
       closeGiftCardDeclarationModal,
+      handleGiftCardDeclared,
+      giftCardListRef,
     };
   },
 });

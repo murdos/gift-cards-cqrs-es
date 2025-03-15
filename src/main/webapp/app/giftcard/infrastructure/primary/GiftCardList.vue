@@ -64,12 +64,17 @@ export default defineComponent({
       }
     };
 
+    const refresh = () => {
+      fetchGiftCards();
+    };
+
     onMounted(fetchGiftCards);
 
     return {
       giftCards,
       loading,
       error,
+      refresh,
     };
   },
 });
