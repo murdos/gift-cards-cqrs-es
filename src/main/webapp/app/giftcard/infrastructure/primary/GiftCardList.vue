@@ -31,9 +31,9 @@
 </template>
 
 <script lang="ts">
-import { AxiosGiftCardRepository } from '@/home/infrastructure/secondary/AxiosGiftCardRepository.ts';
+import { AxiosGiftCardRepository } from '@/giftcard/infrastructure/secondary/AxiosGiftCardRepository.ts';
+import VisualBarcode from '@/shared/barcode/infrastructure/primary/VisualBarcode.vue';
 import { AxiosHttp } from '@/shared/http/infrastructure/secondary/AxiosHttp.ts';
-import VisualBarcode from '@/shared/http/infrastructure/secondary/VisualBarcode.vue';
 import axios from 'axios';
 import { defineComponent, onMounted, ref } from 'vue';
 
