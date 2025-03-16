@@ -13,6 +13,7 @@ import io.craft.giftcard.giftcard.domain.events.GiftCardHistory;
 import io.craft.giftcard.giftcard.domain.events.PaidAmount;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -70,6 +71,8 @@ class GiftCardTest {
     List<GiftCardEvent> events = giftcard.pay(new Payment(amountToPay));
 
     assertThat(events).extracting(GiftCardEvent::getClass).containsExactly(PaidAmount.class, GifCardExhausted.class);
+    var setOfSequenceIds = events.stream().map(event -> event.sequenceId()).collect(Collectors.toSet());
+    assertThat(setOfSequenceIds).hasSize(2);
   }
 
   private static GiftCardHistory givenGiftCardHistory(double initialAmount) {

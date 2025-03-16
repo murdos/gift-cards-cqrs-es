@@ -31,10 +31,11 @@ public class GiftCard {
     if (decisionProjection.remainingAmount.isLessThan(payment.amount())) {
       throw new InsufficientRemainingAmountException(barcode());
     }
-    PaidAmount paidAmount = new PaidAmount(decisionProjection.barcode, decisionProjection.nextSequenceId(), payment.amount());
+    SequenceId sequenceId = decisionProjection.nextSequenceId();
+    PaidAmount paidAmount = new PaidAmount(decisionProjection.barcode, sequenceId, payment.amount());
 
     if (decisionProjection.remainingAmount.equals(payment.amount())) {
-      return List.of(paidAmount, new GifCardExhausted(decisionProjection.barcode, decisionProjection.nextSequenceId()));
+      return List.of(paidAmount, new GifCardExhausted(decisionProjection.barcode, sequenceId.next()));
     }
 
     return List.of(paidAmount);
