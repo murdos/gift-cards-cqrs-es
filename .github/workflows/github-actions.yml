@@ -20,11 +20,13 @@ jobs:
       - name: 'Setup: environment'
         id: setup
         uses: ./.github/actions/setup
-      - name: 'Test: run tests'
+      - name: 'Test: lint'
         run: |
           pnpm install
           pnpm prettier:check
           pnpm lint
+      - name: 'Test: build and test'
+        run: |
           pnpm build
           pnpm test
           mvn clean verify
