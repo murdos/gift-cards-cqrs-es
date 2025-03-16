@@ -19,28 +19,65 @@
     </div>
     <div class="gift-card-footer">
       <button class="gift-card-button">Voir les détails</button>
+      <button class="gift-card-button" @click="openModal">Payer</button>
     </div>
+    <GiftCardModal v-model:is-open="isModalOpen" title="Payer" @close="closeModal">
+      <GiftCardPayment :default-amount="giftCard.remaingAmount.value" @submit="submitPayment" />
+    </GiftCardModal>
   </div>
 </template>
 
 <script lang="ts">
 import type { GiftCard } from '@/giftcard/domain/GiftCard';
+import GiftCardPayment from '@/giftcard/infrastructure/primary/GiftCardPayment.vue';
+import { AxiosGiftCardCommandRepository } from '@/giftcard/infrastructure/secondary/AxiosGiftCardCommandRepository';
 import VisualBarcode from '@/shared/barcode/infrastructure/primary/VisualBarcode.vue';
-import { defineComponent } from 'vue';
+import { AxiosHttp } from '@/shared/http/infrastructure/secondary/AxiosHttp';
+import GiftCardModal from '@/shared/modal/infrastructure/primary/GiftCardModal.vue';
+import axios from 'axios';
+import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
   name: 'OneGiftCard',
-  components: { VisualBarcode },
+  components: { GiftCardPayment, VisualBarcode, GiftCardModal },
   props: {
     giftCard: {
       type: Object as () => GiftCard,
       required: true,
     },
   },
+  setup(props) {
+    const isModalOpen = ref(false);
+
+    const openModal = () => {
+      isModalOpen.value = true;
+    };
+
+    const closeModal = () => {
+      isModalOpen.value = false;
+    };
+
+    const submitPayment = async (paymentAmount: number) => {
+      const giftCardCommandRepository = new AxiosGiftCardCommandRepository(new AxiosHttp(axios));
+      const payment = { amount: paymentAmount };
+      try {
+        await giftCardCommandRepository.pay(props.giftCard.barcode.value, payment);
+        console.log('Payment successful!');
+        closeModal();
+        // Add logic to refresh the gift card data or show a success message
+      } catch (error) {
+        console.error('Payment failed:', error);
+        // Add logic to show an error message
+      }
+    };
+
+    return { isModalOpen, openModal, closeModal, submitPayment };
+  },
 });
 </script>
 
 <style scoped>
+/* ... (Your existing styles) ... */
 .gift-card {
   background-color: #f8f8f8;
   border: 1px solid #ddd;
@@ -120,6 +157,7 @@ export default defineComponent({
   padding: 8px 15px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-left: 10px;
 }
 
 .gift-card-button:hover {
