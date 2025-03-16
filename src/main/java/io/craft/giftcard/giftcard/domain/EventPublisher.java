@@ -7,4 +7,6 @@ import org.jmolecules.event.annotation.DomainEventPublisher;
 public interface EventPublisher<T> {
   @DomainEventPublisher
   void publish(T event);
+
+  void register(EventHandler<T> eventHandler);
 }

@@ -11,6 +11,7 @@ import io.craft.giftcard.giftcard.domain.GiftCardViewRepository;
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
 import io.craft.giftcard.giftcard.domain.commands.Payment;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
+import io.craft.giftcard.giftcard.domain.view.GiftCardViewUpdater;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -28,6 +29,8 @@ public class GiftCardApplicationService {
     this.eventStore = eventStore;
     this.viewRepository = viewRepository;
     this.eventPublisher = eventPublisher;
+
+    this.eventPublisher.register(new GiftCardViewUpdater(eventStore, viewRepository));
   }
 
   public void declare(GiftCardDeclaration giftCardDeclaration) {
