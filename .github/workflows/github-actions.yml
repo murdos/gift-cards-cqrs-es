@@ -20,13 +20,6 @@ jobs:
       - name: 'Setup: environment'
         id: setup
         uses: ./.github/actions/setup
-      - name: 'Init: cache local Maven repository'
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
       - name: 'Test: run tests'
         run: |
           pnpm install
