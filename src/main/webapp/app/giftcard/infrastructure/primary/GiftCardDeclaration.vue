@@ -4,7 +4,7 @@
     <form @submit.prevent="createGiftCard">
       <div class="form-group">
         <label for="barcode">Code-barres:</label>
-        <input id="barcode" v-model="barcode" type="text" required />
+        <input id="barcode" v-model="barcode" v-focus type="text" required />
       </div>
       <div class="form-group">
         <label for="amount">Montant:</label>
@@ -27,12 +27,16 @@
 <script lang="ts">
 import type { GiftCardDeclaration } from '@/giftcard/domain/GiftCardDeclaration';
 import { AxiosGiftCardCommandRepository } from '@/giftcard/infrastructure/secondary/AxiosGiftCardCommandRepository.ts';
+import { focus } from '@/shared/directive/focus';
 import { AxiosHttp } from '@/shared/http/infrastructure/secondary/AxiosHttp.ts';
 import axios from 'axios';
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
   name: 'GiftCardDeclaration',
+  directives: {
+    focus,
+  },
   emits: ['giftCardDeclared'],
   setup(props, { emit }) {
     const barcode = ref('');
