@@ -46,7 +46,8 @@ export default defineComponent({
       required: true,
     },
   },
-  setup(props) {
+  emits: ['giftCardUpdated'],
+  setup(props, { emit }) {
     const isModalOpen = ref(false);
 
     const openModal = () => {
@@ -64,7 +65,7 @@ export default defineComponent({
         await giftCardCommandRepository.pay(props.giftCard.barcode.value, payment);
         console.log('Payment successful!');
         closeModal();
-        // Add logic to refresh the gift card data or show a success message
+        emit('giftCardUpdated');
       } catch (error) {
         console.error('Payment failed:', error);
         // Add logic to show an error message

@@ -5,7 +5,7 @@
     <div v-else-if="error" class="error">Erreur: {{ error }}</div>
     <ul v-else class="gift-cards">
       <li v-for="giftCard in giftCards" :key="giftCard.barcode.value">
-        <OneGiftCard :gift-card="giftCard" />
+        <OneGiftCard :gift-card="giftCard" @gift-card-updated="refresh" />
       </li>
     </ul>
   </div>
