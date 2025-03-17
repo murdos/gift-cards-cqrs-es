@@ -1,5 +1,5 @@
-import type { GiftCard } from '@/home/domain/giftcard/GiftCard.ts';
-import type { GiftCardRepository } from '@/home/domain/giftcard/GiftCardRepository.ts';
+import type { GiftCard } from '@/giftcard/domain/GiftCard.ts';
+import type { GiftCardRepository } from '@/giftcard/domain/GiftCardRepository.ts';
 import type { AxiosHttp } from '@/shared/http/infrastructure/secondary/AxiosHttp.ts';
 
 export class AxiosGiftCardRepository implements GiftCardRepository {

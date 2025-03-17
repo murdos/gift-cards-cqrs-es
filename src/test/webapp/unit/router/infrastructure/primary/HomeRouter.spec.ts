@@ -29,7 +29,7 @@ describe('Router', () => {
 
       const wrapper = wrap();
 
-      expect(wrapper.html()).toContain('Vue 3 + TypeScript + Vite');
+      expect(wrapper.html()).toContain('Mes Cartes Cadeaux');
     });
   });
 });

@@ -1,0 +1,32 @@
+name: build
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  #--------------------------------------------------
+  # Build and Tests the project on Linux
+  #--------------------------------------------------
+  tests:
+    name: tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: 'Setup: checkout project'
+        uses: actions/checkout@v4
+      - name: 'Setup: environment'
+        id: setup
+        uses: ./.github/actions/setup
+      - name: 'Test: lint'
+        run: |
+          pnpm install
+          pnpm prettier:check
+          pnpm lint
+      - name: 'Test: build and test'
+        run: |
+          pnpm build
+          pnpm test
+          mvn clean verify

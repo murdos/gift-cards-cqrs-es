@@ -1,0 +1,33 @@
+name: 'Setup'
+description: 'Setup environment with Java 21, Node 20'
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Setup: pnpm'
+      uses: pnpm/action-setup@v4
+      with:
+        version: 10
+    - name: 'Setup: Node.js'
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22
+        cache: pnpm
+    - name: 'Setup: update NPM'
+      shell: bash
+      run: npm install -g pnpm
+    - name: 'Setup: Java'
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: 21
+        cache: maven
+    - name: 'Disable maven interactive mode'
+      shell: bash
+      run: |
+        sed -i 's/<servers>/<interactiveMode>false\<\/interactiveMode>\n  <servers>/g' ~/.m2/settings.xml
+    - name: 'Setup: check tools'
+      shell: bash
+      run: |
+        node -v
+        pnpm -v
+        java -version
