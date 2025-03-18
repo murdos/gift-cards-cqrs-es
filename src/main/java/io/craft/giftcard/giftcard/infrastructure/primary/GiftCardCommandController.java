@@ -5,7 +5,6 @@ import io.craft.giftcard.giftcard.domain.Amount;
 import io.craft.giftcard.giftcard.domain.Barcode;
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
 import io.craft.giftcard.giftcard.domain.commands.Payment;
-import io.craft.giftcard.shared.error.domain.Assert;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -32,25 +31,26 @@ class GiftCardCommandController {
   }
 
   @PostMapping
-  public ResponseEntity<Void> declare(@Valid @RequestBody GiftCardDeclarationDTO giftCardDeclarationDTO) {
-    Assert.notNull("giftCardDeclarationDTO", giftCardDeclarationDTO);
-    GiftCardDeclaration command = new GiftCardDeclaration(
-      new Barcode(giftCardDeclarationDTO.barcode()),
-      new Amount(BigDecimal.valueOf(giftCardDeclarationDTO.amount()))
-    );
-    giftCardApplicationService.declare(command);
+  ResponseEntity<Void> declare(@Valid @NotNull @RequestBody GiftCardDeclarationDTO giftCardDeclarationDTO) {
+    giftCardApplicationService.declare(giftCardDeclarationDTO.toDomain());
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
   @PostMapping("/{barcode}/pay")
-  public ResponseEntity<Void> pay(@PathVariable String barcode, @Valid @RequestBody PaymentDTO paymentDTO) {
-    Assert.notNull("paymentDTO", paymentDTO);
-    Payment command = new Payment(new Amount(BigDecimal.valueOf(paymentDTO.amount())));
-    giftCardApplicationService.pay(new Barcode(barcode), command);
+  public ResponseEntity<Void> pay(@PathVariable String barcode, @Valid @NotNull @RequestBody PaymentDTO paymentDTO) {
+    giftCardApplicationService.pay(new Barcode(barcode), paymentDTO.toDomain());
     return ResponseEntity.status(HttpStatus.OK).build();
   }
 }
 
-record GiftCardDeclarationDTO(@NotBlank String barcode, @NotNull @Positive Integer amount) {}
+record GiftCardDeclarationDTO(@NotBlank String barcode, @NotNull @Positive Integer amount) {
+  public GiftCardDeclaration toDomain() {
+    return new GiftCardDeclaration(new Barcode(barcode), new Amount(BigDecimal.valueOf(amount)));
+  }
+}
 
-record PaymentDTO(@NotNull @Positive Integer amount) {}
+record PaymentDTO(@NotNull @Positive Integer amount) {
+  public Payment toDomain() {
+    return new Payment(new Amount(BigDecimal.valueOf(amount)));
+  }
+}
