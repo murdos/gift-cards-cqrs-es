@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/gift-cards")
-public class GiftCardCommandController {
+class GiftCardCommandController {
 
   private final GiftCardApplicationService giftCardApplicationService;
 
