@@ -1,7 +1,8 @@
 package io.craft.giftcard;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import jakarta.validation.Valid;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -70,8 +71,12 @@ class BeanValidationTest {
           assertThat(parameter.getAnnotations())
             .as(errorMessage(method, parameter))
             .extracting(Annotation::annotationType)
-            .anyMatch(Validated.class::equals)
+            .anyMatch(validOrValidatedAnnotation())
         );
+  }
+
+  private static Predicate<Class<? extends Annotation>> validOrValidatedAnnotation() {
+    return annotation -> Validated.class.equals(annotation) || Valid.class.equals(annotation);
   }
 
   private String errorMessage(Method method, Parameter parameter) {
