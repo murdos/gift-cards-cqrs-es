@@ -9,14 +9,16 @@ import io.craft.giftcard.giftcard.domain.GiftCardFixtures;
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
 import io.craft.giftcard.giftcard.infrastructure.secondary.InMemoryGiftCardEventStore;
 import io.craft.giftcard.giftcard.infrastructure.secondary.InMemoryGiftCardViewRepository;
+import io.craft.giftcard.giftcard.infrastructure.secondary.SimpleEventPublisher;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
 class GiftCardApplicationServiceTest {
 
-  private GiftCardApplicationService giftCardApplicationService = new GiftCardApplicationService(
+  private final GiftCardApplicationService giftCardApplicationService = new GiftCardApplicationService(
     new InMemoryGiftCardEventStore(),
-    new InMemoryGiftCardViewRepository()
+    new InMemoryGiftCardViewRepository(),
+    new SimpleEventPublisher()
   );
 
   @Test
