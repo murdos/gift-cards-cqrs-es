@@ -10,6 +10,7 @@ import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
 import io.craft.giftcard.giftcard.infrastructure.secondary.InMemoryGiftCardCurrentStateRepository;
 import io.craft.giftcard.giftcard.infrastructure.secondary.InMemoryGiftCardEventStore;
 import io.craft.giftcard.giftcard.infrastructure.secondary.SimpleEventPublisher;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -18,7 +19,8 @@ class GiftCardApplicationServiceTest {
   private final GiftCardApplicationService giftCardApplicationService = new GiftCardApplicationService(
     new InMemoryGiftCardEventStore(),
     new InMemoryGiftCardCurrentStateRepository(),
-    new SimpleEventPublisher()
+    new SimpleEventPublisher(),
+    List.of()
   );
 
   @Test

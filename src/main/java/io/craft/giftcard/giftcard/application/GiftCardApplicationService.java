@@ -2,6 +2,7 @@ package io.craft.giftcard.giftcard.application;
 
 import io.craft.giftcard.giftcard.domain.Barcode;
 import io.craft.giftcard.giftcard.domain.BarcodeAlreadyUsedException;
+import io.craft.giftcard.giftcard.domain.EventHandler;
 import io.craft.giftcard.giftcard.domain.EventPublisher;
 import io.craft.giftcard.giftcard.domain.GiftCard;
 import io.craft.giftcard.giftcard.domain.GiftCardEventStore;
@@ -12,6 +13,9 @@ import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
 import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentState;
 import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentStateRepository;
 import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentStateUpdater;
+import io.craft.giftcard.giftcard.domain.view.GiftCardViewUpdater;
+import java.util.Collection;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,13 +28,17 @@ public class GiftCardApplicationService {
   public GiftCardApplicationService(
     GiftCardEventStore eventStore,
     GiftCardCurrentStateRepository viewRepository,
-    EventPublisher<GiftCardEvent> eventPublisher
+    EventPublisher<GiftCardEvent> eventPublisher,
+    @Autowired(required = false) Collection<EventHandler<GiftCardEvent>> eventHandlersFromInfrastructure
   ) {
     this.eventStore = eventStore;
     this.viewRepository = viewRepository;
     this.eventPublisher = eventPublisher;
 
     this.eventPublisher.register(new GiftCardCurrentStateUpdater(eventStore, viewRepository));
+    if (eventHandlersFromInfrastructure != null) {
+      eventHandlersFromInfrastructure.forEach(this.eventPublisher::register);
+    }
   }
 
   public void declare(GiftCardDeclaration giftCardDeclaration) {
