@@ -6,11 +6,10 @@
 >
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.mycompany.myapp</groupId>
-  <artifactId>jhipster-sample-application</artifactId>
+  <groupId>io.craft</groupId>
+  <artifactId>giftcard-cqrs-es</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>jhipsterSampleApplication</name>
-  <description>JHipster Sample Application</description>
+  <description>A sample application written using CQRS and EvenSourcing patterns</description>
   <packaging>jar</packaging>
   <dependencyManagement>
     <dependencies>
