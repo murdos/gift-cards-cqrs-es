@@ -1,19 +1,17 @@
-package io.craft.giftcard.giftcard.domain.view;
+package io.craft.giftcard.giftcard.domain.projections;
 
 import io.craft.giftcard.giftcard.domain.EventHandler;
 import io.craft.giftcard.giftcard.domain.GiftCardEventStore;
-import io.craft.giftcard.giftcard.domain.GiftCardView;
-import io.craft.giftcard.giftcard.domain.GiftCardViewRepository;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
 import io.craft.giftcard.giftcard.domain.events.GiftCardHistory;
 import org.jmolecules.event.annotation.DomainEventHandler;
 
-public class GiftCardViewUpdater implements EventHandler<GiftCardEvent> {
+public class GiftCardCurrentStateUpdater implements EventHandler<GiftCardEvent> {
 
   private final GiftCardEventStore eventStore;
-  private final GiftCardViewRepository viewRepository;
+  private final GiftCardCurrentStateRepository viewRepository;
 
-  public GiftCardViewUpdater(GiftCardEventStore eventStore, GiftCardViewRepository viewRepository) {
+  public GiftCardCurrentStateUpdater(GiftCardEventStore eventStore, GiftCardCurrentStateRepository viewRepository) {
     this.eventStore = eventStore;
     this.viewRepository = viewRepository;
   }
@@ -23,6 +21,6 @@ public class GiftCardViewUpdater implements EventHandler<GiftCardEvent> {
   public void handle(GiftCardEvent event) {
     GiftCardHistory history = eventStore.getHistory(event.barcode());
 
-    viewRepository.save(GiftCardView.from(history));
+    viewRepository.save(GiftCardCurrentState.from(history));
   }
 }

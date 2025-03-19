@@ -1,8 +1,8 @@
 package io.craft.giftcard.giftcard.infrastructure.primary;
 
 import io.craft.giftcard.giftcard.domain.Barcode;
-import io.craft.giftcard.giftcard.domain.GiftCardView;
-import io.craft.giftcard.giftcard.domain.GiftCardViewRepository;
+import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentState;
+import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentStateRepository;
 import java.util.Collection;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -16,19 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/gift-cards")
 class GiftCardQueryController {
 
-  private final GiftCardViewRepository giftCardViewRepository;
+  private final GiftCardCurrentStateRepository giftCardCurrentStateRepository;
 
-  public GiftCardQueryController(GiftCardViewRepository giftCardViewRepository) {
-    this.giftCardViewRepository = giftCardViewRepository;
+  public GiftCardQueryController(GiftCardCurrentStateRepository giftCardCurrentStateRepository) {
+    this.giftCardCurrentStateRepository = giftCardCurrentStateRepository;
   }
 
   @GetMapping
-  public Collection<GiftCardView> getAllGiftCards() {
-    return giftCardViewRepository.findAll();
+  public Collection<GiftCardCurrentState> getAllGiftCards() {
+    return giftCardCurrentStateRepository.findAll();
   }
 
   @GetMapping("/{barcode}")
-  public ResponseEntity<GiftCardView> getGiftCardByBarcode(@PathVariable String barcode) {
-    return giftCardViewRepository.get(new Barcode(barcode)).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+  public ResponseEntity<GiftCardCurrentState> getGiftCardByBarcode(@PathVariable String barcode) {
+    return giftCardCurrentStateRepository.get(new Barcode(barcode)).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
   }
 }
