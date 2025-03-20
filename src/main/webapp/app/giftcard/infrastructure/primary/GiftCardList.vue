@@ -1,13 +1,13 @@
 <template>
   <div class="gift-card-list">
     <h2>Mes Cartes Cadeaux</h2>
-    <div v-if="loading" class="loading">Chargement...</div>
-    <div v-else-if="error" class="error">Erreur: {{ error }}</div>
-    <ul v-else class="gift-cards">
+    <ul v-if="giftCards.length > 0 && !error" class="gift-cards">
       <li v-for="giftCard in giftCards" :key="giftCard.barcode.value">
         <OneGiftCard :gift-card="giftCard" @gift-card-updated="refresh" />
       </li>
     </ul>
+    <div v-if="loading" class="loading">Chargement...</div>
+    <div v-else-if="error" class="error">Erreur: {{ error }}</div>
   </div>
 </template>
 

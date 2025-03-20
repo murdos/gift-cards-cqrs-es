@@ -64,7 +64,7 @@ export default defineComponent({
     const isGiftCardDeclarationModalOpen = ref(false);
 
     // store the instance of gifcardList to be able to call `refresh` on it
-    const giftCardListRef = ref<InstanceType<typeof GiftCardList> | null>(null);
+    const giftCardListRef = ref<InstanceType<typeof GiftCardList>>();
 
     const openGiftCardCreationModal = () => {
       isGiftCardDeclarationModalOpen.value = true;
