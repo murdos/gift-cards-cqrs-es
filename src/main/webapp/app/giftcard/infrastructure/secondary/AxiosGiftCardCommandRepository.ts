@@ -10,6 +10,7 @@ export class AxiosGiftCardCommandRepository implements GiftCardCommandRepository
     await this.axiosHttp.post('/api/gift-cards', {
       barcode: giftCardDeclaration.barcode.value,
       amount: giftCardDeclaration.amount.value,
+      shoppingStore: giftCardDeclaration.shoppingStore.value,
     });
   }
 
