@@ -12,6 +12,8 @@ import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
 import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentState;
 import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentStateRepository;
 import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentStateUpdater;
+import io.craft.giftcard.giftcard.domain.projections.GiftCardMessageSender;
+import io.craft.giftcard.giftcard.domain.projections.MessageSenderEventHandler;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,13 +26,15 @@ public class GiftCardApplicationService {
   public GiftCardApplicationService(
     GiftCardEventStore eventStore,
     GiftCardCurrentStateRepository viewRepository,
-    EventPublisher<GiftCardEvent> eventPublisher
+    EventPublisher<GiftCardEvent> eventPublisher,
+    GiftCardMessageSender giftCardMessageSender
   ) {
     this.eventStore = eventStore;
     this.viewRepository = viewRepository;
     this.eventPublisher = eventPublisher;
 
     this.eventPublisher.register(new GiftCardCurrentStateUpdater(eventStore, viewRepository));
+    this.eventPublisher.register(new MessageSenderEventHandler(giftCardMessageSender));
   }
 
   public void declare(GiftCardDeclaration giftCardDeclaration) {

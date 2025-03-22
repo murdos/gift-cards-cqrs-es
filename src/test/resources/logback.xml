@@ -4,7 +4,7 @@
   <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
   <include resource="org/springframework/boot/logging/logback/base.xml" />
 
-  <logger name="io.craft.giftcard" level="OFF" />
+  <logger name="io.craft.giftcard" level="INFO" />
 
   <logger name="ch.qos.logback" level="WARN" />
   <logger name="com.sun" level="WARN" />
