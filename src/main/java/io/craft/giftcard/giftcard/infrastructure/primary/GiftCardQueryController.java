@@ -1,5 +1,6 @@
 package io.craft.giftcard.giftcard.infrastructure.primary;
 
+import io.craft.giftcard.giftcard.domain.Amount;
 import io.craft.giftcard.giftcard.domain.Barcode;
 import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentState;
 import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentStateRepository;
@@ -23,12 +24,38 @@ class GiftCardQueryController {
   }
 
   @GetMapping
-  public Collection<GiftCardCurrentState> getAllGiftCards() {
-    return giftCardCurrentStateRepository.findAll();
+  public Collection<GiftCardCurrentStateDto> getAllGiftCards() {
+    return giftCardCurrentStateRepository
+      .findAll()
+      .stream()
+      .map(giftCardCurrentState -> GiftCardCurrentStateDto.fromDomain(giftCardCurrentState))
+      .toList();
   }
 
   @GetMapping("/{barcode}")
-  public ResponseEntity<GiftCardCurrentState> getGiftCardByBarcode(@PathVariable String barcode) {
-    return giftCardCurrentStateRepository.get(new Barcode(barcode)).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+  public ResponseEntity<GiftCardCurrentStateDto> getGiftCardByBarcode(@PathVariable String barcode) {
+    return giftCardCurrentStateRepository
+      .get(new Barcode(barcode))
+      .map(GiftCardCurrentStateDto::fromDomain)
+      .map(ResponseEntity::ok)
+      .orElse(ResponseEntity.notFound().build());
+  }
+
+  public record GiftCardCurrentStateDto(Barcode barcode, Amount remainingAmount, ShoppingStoreDto shoppingStore) {
+    public static GiftCardCurrentStateDto fromDomain(GiftCardCurrentState giftCardCurrentState) {
+      return new GiftCardCurrentStateDto(
+        giftCardCurrentState.barcode(),
+        giftCardCurrentState.remainingAmount(),
+        new ShoppingStoreDto(QueryShoppingStore.valueOf(giftCardCurrentState.shoppingStore().name()))
+      );
+    }
+  }
+
+  public record ShoppingStoreDto(QueryShoppingStore value) {}
+
+  public enum QueryShoppingStore {
+    POISSONNERIE_ORDRALPHABETIX,
+    FORGE_CETAUTOMATIX,
+    RESTAURANT_PANORAMIX,
   }
 }

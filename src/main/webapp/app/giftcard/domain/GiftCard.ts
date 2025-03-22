@@ -1,4 +1,5 @@
 export interface GiftCard {
   barcode: { value: string };
-  remaingAmount: { value: number };
+  remainingAmount: { value: number };
+  shoppingStore: { value: string };
 }

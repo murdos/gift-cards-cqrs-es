@@ -7,6 +7,12 @@
         <input id="barcode" v-model="barcode" v-focus type="text" required />
       </div>
       <div class="form-group">
+        <label for="shoppingStore">Magasin:</label>
+        <select id="shoppingStore" v-model="shoppingStore">
+          <option v-for="store in shoppingStores()" :key="store.id" :value="store">{{ store.name }}</option>
+        </select>
+      </div>
+      <div class="form-group">
         <label for="amount">Montant:</label>
         <input id="amount" v-model="amount" type="number" required min="1" />
       </div>
@@ -26,6 +32,7 @@
 
 <script lang="ts">
 import type { GiftCardDeclaration } from '@/giftcard/domain/GiftCardDeclaration';
+import { shoppingStores } from '@/giftcard/domain/ShoppingStore.ts';
 import { AxiosGiftCardCommandRepository } from '@/giftcard/infrastructure/secondary/AxiosGiftCardCommandRepository.ts';
 import { focus } from '@/shared/directive/focus';
 import { AxiosHttp } from '@/shared/http/infrastructure/secondary/AxiosHttp.ts';
@@ -41,6 +48,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const barcode = ref('');
     const amount = ref(0);
+    const shoppingStore = ref(shoppingStores[0]);
     const successMessage = ref('');
     const errorMessage = ref('');
     const isSubmitting = ref(false);
@@ -55,6 +63,7 @@ export default defineComponent({
         const giftCardDeclaration: GiftCardDeclaration = {
           barcode: { value: barcode.value },
           amount: { value: amount.value },
+          shoppingStore: { value: shoppingStore.value.id },
         };
         await giftCardCommandRepository.declare(giftCardDeclaration);
         successMessage.value = 'Carte cadeau déclarée avec succès!';
@@ -75,11 +84,17 @@ export default defineComponent({
     return {
       barcode,
       amount,
+      shoppingStore,
       successMessage,
       errorMessage,
       createGiftCard,
       isSubmitting,
     };
+  },
+  methods: {
+    shoppingStores() {
+      return shoppingStores;
+    },
   },
 });
 </script>

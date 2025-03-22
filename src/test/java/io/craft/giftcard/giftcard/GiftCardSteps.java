@@ -33,7 +33,7 @@ public class GiftCardSteps {
   public void giftCardShouldHaveARemainingAmountOf(String barcode, double expectedAmount) {
     var giftCardView = giftCardApplicationService.findBy(new Barcode(barcode));
 
-    assertThat(giftCardView.remaingAmount().value()).isEqualByComparingTo(new BigDecimal(expectedAmount));
+    assertThat(giftCardView.remainingAmount().value()).isEqualByComparingTo(new BigDecimal(expectedAmount));
   }
 
   @When("I pay with the gift card {string} an amount of {double}")

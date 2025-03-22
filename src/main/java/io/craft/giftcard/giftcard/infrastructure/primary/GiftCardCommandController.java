@@ -44,9 +44,9 @@ class GiftCardCommandController {
   }
 }
 
-record GiftCardDeclarationDTO(@NotBlank String barcode, @NotNull @Positive Integer amount) {
+record GiftCardDeclarationDTO(@NotBlank String barcode, @NotNull @Positive Integer amount, @NotNull String shoppingStore) {
   public GiftCardDeclaration toDomain() {
-    return new GiftCardDeclaration(new Barcode(barcode), new Amount(BigDecimal.valueOf(amount)), ShoppingStore.RESTAURANT_PANORAMIX);
+    return new GiftCardDeclaration(new Barcode(barcode), new Amount(BigDecimal.valueOf(amount)), ShoppingStore.valueOf(shoppingStore));
   }
 }
 

@@ -2,11 +2,11 @@
   <div class="gift-card">
     <div class="gift-card-header">
       <div class="gift-card-logo">
-        <img src="../../../../content/images/JHipster-Lite-neon-green.png" alt="Gift Card Logo" />
+        <img :src="`../../../../content/images/${giftCard.shoppingStore.value}.png`" alt="Gift Card Logo" />
       </div>
       <div class="gift-card-header-content">
         <div class="gift-card-header-content-amount">
-          {{ giftCard.remaingAmount.value }}
+          {{ giftCard.remainingAmount.value }}
           <span class="currency">€</span>
         </div>
         <div class="gift-card-description">Montant restant</div>
@@ -22,7 +22,7 @@
       <button class="gift-card-button" @click="openModal">Payer</button>
     </div>
     <GiftCardModal v-model:is-open="isModalOpen" title="Payer" @close="closeModal">
-      <GiftCardPayment :default-amount="giftCard.remaingAmount.value" @submit="submitPayment" />
+      <GiftCardPayment :default-amount="giftCard.remainingAmount.value" @submit="submitPayment" />
     </GiftCardModal>
   </div>
 </template>

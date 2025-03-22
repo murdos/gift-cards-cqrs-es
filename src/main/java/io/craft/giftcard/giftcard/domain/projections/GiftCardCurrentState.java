@@ -13,7 +13,7 @@ import java.util.List;
 import org.jmolecules.architecture.cqrs.QueryModel;
 
 @QueryModel
-public record GiftCardCurrentState(Barcode barcode, Amount remaingAmount, ShoppingStore shoppingStore) {
+public record GiftCardCurrentState(Barcode barcode, Amount remainingAmount, ShoppingStore shoppingStore) {
   public static GiftCardCurrentState from(GiftCardHistory history) {
     GiftCardCreated firstEvent = history.start();
     List<GiftCardEvent> followingEvents = history.followingEvents();
@@ -31,7 +31,7 @@ public record GiftCardCurrentState(Barcode barcode, Amount remaingAmount, Shoppi
     return switch (giftCardEvent) {
       case PaidAmount paidAmount -> new GiftCardCurrentState(
         giftCardCurrentState.barcode(),
-        giftCardCurrentState.remaingAmount().subtract(paidAmount.amount()),
+        giftCardCurrentState.remainingAmount().subtract(paidAmount.amount()),
         giftCardCurrentState.shoppingStore()
       );
       case GiftCardCreated giftCardCreated -> giftCardCurrentState;
