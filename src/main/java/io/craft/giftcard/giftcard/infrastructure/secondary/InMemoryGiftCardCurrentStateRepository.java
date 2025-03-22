@@ -1,8 +1,8 @@
 package io.craft.giftcard.giftcard.infrastructure.secondary;
 
 import io.craft.giftcard.giftcard.domain.Barcode;
-import io.craft.giftcard.giftcard.domain.GiftCardView;
-import io.craft.giftcard.giftcard.domain.GiftCardViewRepository;
+import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentState;
+import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentStateRepository;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,22 +12,22 @@ import org.springframework.stereotype.Component;
 
 @Adapter
 @Component
-public class InMemoryGiftCardViewRepository implements GiftCardViewRepository, InMemorySecondaryAdapter {
+public class InMemoryGiftCardCurrentStateRepository implements GiftCardCurrentStateRepository, InMemorySecondaryAdapter {
 
-  private final Map<Barcode, GiftCardView> views = new HashMap<>();
+  private final Map<Barcode, GiftCardCurrentState> views = new HashMap<>();
 
   @Override
-  public void save(GiftCardView view) {
+  public void save(GiftCardCurrentState view) {
     views.put(view.barcode(), view);
   }
 
   @Override
-  public Optional<GiftCardView> get(Barcode barcode) {
+  public Optional<GiftCardCurrentState> get(Barcode barcode) {
     return Optional.ofNullable(views.get(barcode));
   }
 
   @Override
-  public List<GiftCardView> findAll() {
+  public List<GiftCardCurrentState> findAll() {
     return views.values().stream().toList();
   }
 

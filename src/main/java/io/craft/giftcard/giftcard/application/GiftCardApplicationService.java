@@ -6,31 +6,31 @@ import io.craft.giftcard.giftcard.domain.EventPublisher;
 import io.craft.giftcard.giftcard.domain.GiftCard;
 import io.craft.giftcard.giftcard.domain.GiftCardEventStore;
 import io.craft.giftcard.giftcard.domain.GiftCardNotFoundException;
-import io.craft.giftcard.giftcard.domain.GiftCardView;
-import io.craft.giftcard.giftcard.domain.GiftCardViewRepository;
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
 import io.craft.giftcard.giftcard.domain.commands.Payment;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
-import io.craft.giftcard.giftcard.domain.view.GiftCardViewUpdater;
+import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentState;
+import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentStateRepository;
+import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentStateUpdater;
 import org.springframework.stereotype.Service;
 
 @Service
 public class GiftCardApplicationService {
 
   private final GiftCardEventStore eventStore;
-  private final GiftCardViewRepository viewRepository;
+  private final GiftCardCurrentStateRepository viewRepository;
   private final EventPublisher<GiftCardEvent> eventPublisher;
 
   public GiftCardApplicationService(
     GiftCardEventStore eventStore,
-    GiftCardViewRepository viewRepository,
+    GiftCardCurrentStateRepository viewRepository,
     EventPublisher<GiftCardEvent> eventPublisher
   ) {
     this.eventStore = eventStore;
     this.viewRepository = viewRepository;
     this.eventPublisher = eventPublisher;
 
-    this.eventPublisher.register(new GiftCardViewUpdater(eventStore, viewRepository));
+    this.eventPublisher.register(new GiftCardCurrentStateUpdater(eventStore, viewRepository));
   }
 
   public void declare(GiftCardDeclaration giftCardDeclaration) {
@@ -45,7 +45,7 @@ public class GiftCardApplicationService {
     eventPublisher.publish(event);
   }
 
-  public GiftCardView findBy(Barcode barcode) {
+  public GiftCardCurrentState findBy(Barcode barcode) {
     return viewRepository.get(barcode).orElseThrow(() -> new GiftCardNotFoundException(barcode));
   }
 
