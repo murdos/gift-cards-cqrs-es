@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import io.craft.giftcard.giftcard.application.GiftCardApplicationService;
 import io.craft.giftcard.giftcard.domain.Amount;
 import io.craft.giftcard.giftcard.domain.Barcode;
+import io.craft.giftcard.giftcard.domain.ShoppingStore;
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
 import io.craft.giftcard.giftcard.domain.commands.Payment;
 import io.cucumber.java.en.Then;
@@ -22,7 +23,8 @@ public class GiftCardSteps {
   public void declareANewGiftCard(Map<String, String> giftCardInfos) {
     var giftCardDeclaration = new GiftCardDeclaration(
       new Barcode(giftCardInfos.get("barcode")),
-      new Amount(new BigDecimal(giftCardInfos.get("amount")))
+      new Amount(new BigDecimal(giftCardInfos.get("amount"))),
+      ShoppingStore.RESTAURANT_PANORAMIX
     );
     giftCardApplicationService.declare(giftCardDeclaration);
   }
