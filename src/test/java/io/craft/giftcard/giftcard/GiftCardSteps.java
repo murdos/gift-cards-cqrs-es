@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import io.craft.giftcard.giftcard.application.GiftCardApplicationService;
 import io.craft.giftcard.giftcard.domain.Amount;
 import io.craft.giftcard.giftcard.domain.Barcode;
+import io.craft.giftcard.giftcard.domain.CardReload;
 import io.craft.giftcard.giftcard.domain.ShoppingStore;
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
 import io.craft.giftcard.giftcard.domain.commands.Payment;
@@ -39,5 +40,10 @@ public class GiftCardSteps {
   @When("I pay with the gift card {string} an amount of {double}")
   public void iPayWithTheGiftCardAnAmountOf(String barcode, double paidAmount) {
     giftCardApplicationService.pay(new Barcode(barcode), new Payment(new Amount(BigDecimal.valueOf(paidAmount))));
+  }
+
+  @When("I reload the gift card {string} with an amount of {double}")
+  public void iReloadTheGiftCardWithAnAmountOf(String barcode, double amount) {
+    giftCardApplicationService.reload(new Barcode(barcode), new CardReload(new Amount(BigDecimal.valueOf(amount))));
   }
 }

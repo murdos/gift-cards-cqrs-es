@@ -4,6 +4,7 @@ import io.craft.giftcard.giftcard.domain.Amount;
 import io.craft.giftcard.giftcard.domain.Barcode;
 import io.craft.giftcard.giftcard.domain.DummyCombiner;
 import io.craft.giftcard.giftcard.domain.ShoppingStore;
+import io.craft.giftcard.giftcard.domain.events.CardReloaded;
 import io.craft.giftcard.giftcard.domain.events.GifCardExhausted;
 import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
@@ -36,6 +37,11 @@ public record GiftCardCurrentState(Barcode barcode, Amount remainingAmount, Shop
       );
       case GiftCardCreated giftCardCreated -> giftCardCurrentState;
       case GifCardExhausted gifCardExhausted -> giftCardCurrentState;
+      case CardReloaded cardReloaded -> new GiftCardCurrentState(
+        giftCardCurrentState.barcode(),
+        giftCardCurrentState.remainingAmount().add(cardReloaded.amount()),
+        giftCardCurrentState.shoppingStore()
+      );
     };
   }
 }

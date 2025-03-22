@@ -20,3 +20,10 @@ Feature: Use gift card
     And I pay with the gift card "1234567890" an amount of 40.0
     When I pay with the gift card "1234567890" an amount of 25.0
     Then the gift card "1234567890" should have a remaining amount of 35.0
+
+  Scenario: Reload a gift card
+    Given I declare a new gift card
+      | barcode | 1234567890 |
+      | amount  | 100        |
+    When I reload the gift card "1234567890" with an amount of 40.0
+    Then the gift card "1234567890" should have a remaining amount of 140.0

@@ -2,6 +2,7 @@ package io.craft.giftcard.giftcard.application;
 
 import io.craft.giftcard.giftcard.domain.Barcode;
 import io.craft.giftcard.giftcard.domain.BarcodeAlreadyUsedException;
+import io.craft.giftcard.giftcard.domain.CardReload;
 import io.craft.giftcard.giftcard.domain.EventPublisher;
 import io.craft.giftcard.giftcard.domain.GiftCard;
 import io.craft.giftcard.giftcard.domain.GiftCardEventStore;
@@ -45,6 +46,7 @@ public class GiftCardApplicationService {
       });
 
     GiftCardEvent event = GiftCard.declare(giftCardDeclaration);
+
     eventStore.save(event);
     eventPublisher.publish(event);
   }
@@ -54,7 +56,19 @@ public class GiftCardApplicationService {
   }
 
   public void pay(Barcode barcode, Payment payment) {
-    var events = eventStore.findByBarcode(barcode).pay(payment);
+    GiftCard giftCard = eventStore.findByBarcode(barcode);
+
+    var events = giftCard.pay(payment);
+
+    eventStore.save(events);
+    events.forEach(eventPublisher::publish);
+  }
+
+  public void reload(Barcode barcode, CardReload cardReload) {
+    GiftCard giftCard = eventStore.findByBarcode(barcode);
+
+    var events = giftCard.reload(cardReload);
+
     eventStore.save(events);
     events.forEach(eventPublisher::publish);
   }

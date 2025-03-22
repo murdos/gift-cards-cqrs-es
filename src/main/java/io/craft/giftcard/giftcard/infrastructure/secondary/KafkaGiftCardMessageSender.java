@@ -3,6 +3,7 @@ package io.craft.giftcard.giftcard.infrastructure.secondary;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.craft.giftcard.giftcard.domain.events.CardReloaded;
 import io.craft.giftcard.giftcard.domain.events.GifCardExhausted;
 import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
@@ -32,11 +33,15 @@ public class KafkaGiftCardMessageSender implements GiftCardMessageSender {
 
   @Override
   public void send(GiftCardEvent event) {
+    if (event instanceof CardReloaded) {
+      return;
+    }
     JSonGiftCardEvent jsonEvent =
       switch (event) {
         case GiftCardCreated giftCardCreated -> JSonGiftCardCreated.from(giftCardCreated);
         case GifCardExhausted gifCardExhausted -> JSonGifCardExhausted.from(gifCardExhausted);
         case PaidAmount paidAmount -> JSonPaidAmount.from(paidAmount);
+        case CardReloaded cardReloaded -> throw new IllegalArgumentException("CardReloaded event should not be sent to Kafka");
       };
 
     try {

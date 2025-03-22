@@ -24,4 +24,8 @@ public record Amount(BigDecimal value) implements Comparable<Amount> {
   public boolean isLessThan(Amount otherAmount) {
     return value.compareTo(otherAmount.value) < 0;
   }
+
+  public Amount add(Amount otherAmount) {
+    return new Amount(this.value.add(otherAmount.value));
+  }
 }

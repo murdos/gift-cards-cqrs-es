@@ -2,6 +2,7 @@ package io.craft.giftcard.giftcard.domain;
 
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
 import io.craft.giftcard.giftcard.domain.commands.Payment;
+import io.craft.giftcard.giftcard.domain.events.CardReloaded;
 import io.craft.giftcard.giftcard.domain.events.GifCardExhausted;
 import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
@@ -46,6 +47,10 @@ public class GiftCard {
     return List.of(paidAmount);
   }
 
+  public List<GiftCardEvent> reload(CardReload cardReload) {
+    return List.of(new CardReloaded(decisionProjection.barcode, decisionProjection.nextSequenceId(), cardReload.amount()));
+  }
+
   private record DecisionProjection(Barcode barcode, Amount remainingAmount, SequenceId currentSequenceId) {
     public static DecisionProjection from(GiftCardHistory history) {
       GiftCardCreated firstEvent = history.start();
@@ -76,6 +81,11 @@ public class GiftCard {
           decisionProjection.barcode(),
           decisionProjection.remainingAmount(),
           gifCardExhausted.sequenceId()
+        );
+        case CardReloaded cardReloaded -> new DecisionProjection(
+          decisionProjection.barcode(),
+          decisionProjection.remainingAmount().add(cardReloaded.amount()),
+          cardReloaded.sequenceId()
         );
       };
     }
