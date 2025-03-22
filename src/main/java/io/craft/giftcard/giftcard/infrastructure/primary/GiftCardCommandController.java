@@ -3,6 +3,7 @@ package io.craft.giftcard.giftcard.infrastructure.primary;
 import io.craft.giftcard.giftcard.application.GiftCardApplicationService;
 import io.craft.giftcard.giftcard.domain.Amount;
 import io.craft.giftcard.giftcard.domain.Barcode;
+import io.craft.giftcard.giftcard.domain.ShoppingStore;
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
 import io.craft.giftcard.giftcard.domain.commands.Payment;
 import jakarta.validation.Valid;
@@ -45,7 +46,7 @@ class GiftCardCommandController {
 
 record GiftCardDeclarationDTO(@NotBlank String barcode, @NotNull @Positive Integer amount) {
   public GiftCardDeclaration toDomain() {
-    return new GiftCardDeclaration(new Barcode(barcode), new Amount(BigDecimal.valueOf(amount)));
+    return new GiftCardDeclaration(new Barcode(barcode), new Amount(BigDecimal.valueOf(amount)), ShoppingStore.RESTAURANT_PANORAMIX);
   }
 }
 
