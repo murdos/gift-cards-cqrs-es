@@ -3,11 +3,11 @@ package io.craft.giftcard.giftcard.infrastructure.secondary;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.craft.giftcard.giftcard.domain.EventHandler;
 import io.craft.giftcard.giftcard.domain.events.GifCardExhausted;
 import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
 import io.craft.giftcard.giftcard.domain.events.PaidAmount;
+import io.craft.giftcard.giftcard.domain.projections.GiftCardMessageSender;
 import java.io.UncheckedIOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,21 +17,21 @@ import org.springframework.stereotype.Component;
  * Fake event handler that is supposed to send events serialized in JSON to Kafka.
  */
 @Component
-class KafkaJsonEventSender implements EventHandler<GiftCardEvent> {
+public class KafkaGiftCardMessageSender implements GiftCardMessageSender {
 
-  private static final Logger logs = LoggerFactory.getLogger(KafkaJsonEventSender.class);
+  private static final Logger logs = LoggerFactory.getLogger(KafkaGiftCardMessageSender.class);
 
   // Here you should have a KafkaTemplate field
   // ...
 
   private final ObjectMapper jsonMapper;
 
-  KafkaJsonEventSender(ObjectMapper jsonMapper) {
+  public KafkaGiftCardMessageSender(ObjectMapper jsonMapper) {
     this.jsonMapper = jsonMapper;
   }
 
   @Override
-  public void handle(GiftCardEvent event) {
+  public void send(GiftCardEvent event) {
     JSonGiftCardEvent jsonEvent =
       switch (event) {
         case GiftCardCreated giftCardCreated -> JSonGiftCardCreated.from(giftCardCreated);

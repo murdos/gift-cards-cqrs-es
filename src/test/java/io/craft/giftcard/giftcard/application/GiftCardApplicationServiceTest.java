@@ -3,14 +3,15 @@ package io.craft.giftcard.giftcard.application;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.craft.giftcard.UnitTest;
 import io.craft.giftcard.giftcard.domain.BarcodeAlreadyUsedException;
 import io.craft.giftcard.giftcard.domain.GiftCardFixtures;
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
 import io.craft.giftcard.giftcard.infrastructure.secondary.InMemoryGiftCardCurrentStateRepository;
 import io.craft.giftcard.giftcard.infrastructure.secondary.InMemoryGiftCardEventStore;
+import io.craft.giftcard.giftcard.infrastructure.secondary.KafkaGiftCardMessageSender;
 import io.craft.giftcard.giftcard.infrastructure.secondary.SimpleEventPublisher;
-import java.util.List;
 import org.junit.jupiter.api.Test;
 
 @UnitTest
@@ -20,7 +21,7 @@ class GiftCardApplicationServiceTest {
     new InMemoryGiftCardEventStore(),
     new InMemoryGiftCardCurrentStateRepository(),
     new SimpleEventPublisher(),
-    List.of()
+    new KafkaGiftCardMessageSender(new ObjectMapper())
   );
 
   @Test
