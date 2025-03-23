@@ -14,6 +14,7 @@ import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentStateReposit
 import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentStateUpdater;
 import io.craft.giftcard.giftcard.domain.projections.GiftCardMessageSender;
 import io.craft.giftcard.giftcard.domain.projections.MessageSenderEventHandler;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -44,9 +45,9 @@ public class GiftCardApplicationService {
         throw new BarcodeAlreadyUsedException(giftCardDeclaration.barcode());
       });
 
-    GiftCardEvent event = GiftCard.declare(giftCardDeclaration);
-    eventStore.save(event);
-    eventPublisher.publish(event);
+    GiftCardEvent firstEvent = eventStore.init(giftCardDeclaration.barcode(), () -> GiftCard.declare(giftCardDeclaration));
+
+    eventPublisher.publish(firstEvent);
   }
 
   public GiftCardCurrentState findBy(Barcode barcode) {
@@ -54,8 +55,7 @@ public class GiftCardApplicationService {
   }
 
   public void pay(Barcode barcode, Payment payment) {
-    var events = eventStore.findByBarcode(barcode).pay(payment);
-    eventStore.save(events);
+    List<GiftCardEvent> events = eventStore.apply(barcode, giftCard -> giftCard.pay(payment));
     events.forEach(eventPublisher::publish);
   }
 }

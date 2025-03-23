@@ -1,5 +1,6 @@
 package io.craft.giftcard.giftcard.infrastructure.secondary;
 
+import io.craft.giftcard.giftcard.application.StoredEvent;
 import io.craft.giftcard.giftcard.domain.Barcode;
 import io.craft.giftcard.giftcard.domain.GiftCardEventStore;
 import io.craft.giftcard.giftcard.domain.SequenceId;
@@ -20,11 +21,10 @@ public class InMemoryGiftCardEventStore implements GiftCardEventStore, InMemoryS
   private final Map<Barcode, List<GiftCardEvent>> histories = new HashMap<>();
   private final Map<Barcode, List<SequenceId>> existingSequenceIds = new HashMap<>();
 
-  @Override
-  public void save(GiftCardEvent event) {
-    histories.computeIfAbsent(event.barcode(), key -> new ArrayList<>()).add(event);
+  public void save(StoredEvent<GiftCardEvent> event) {
+    histories.computeIfAbsent(event.event().barcode(), key -> new ArrayList<>()).add(event.event());
 
-    List<SequenceId> sequenceIds = existingSequenceIds.computeIfAbsent(event.barcode(), key -> new ArrayList<>());
+    List<SequenceId> sequenceIds = existingSequenceIds.computeIfAbsent(event.event().barcode(), key -> new ArrayList<>());
     if (sequenceIds.contains(event.sequenceId())) {
       throw new IllegalArgumentException("SequenceId already exists");
     }
@@ -32,7 +32,7 @@ public class InMemoryGiftCardEventStore implements GiftCardEventStore, InMemoryS
   }
 
   @Override
-  public void save(List<GiftCardEvent> events) {
+  public void save(List<StoredEvent<GiftCardEvent>> events) {
     events.forEach(this::save);
   }
 
