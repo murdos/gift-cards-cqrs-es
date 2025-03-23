@@ -7,6 +7,7 @@ import io.craft.giftcard.giftcard.domain.GiftCard;
 import io.craft.giftcard.giftcard.domain.GiftCardCommandHandler;
 import io.craft.giftcard.giftcard.domain.GiftCardEventStore;
 import io.craft.giftcard.giftcard.domain.GiftCardNotFoundException;
+import io.craft.giftcard.giftcard.domain.StoredEvent;
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
 import io.craft.giftcard.giftcard.domain.commands.Payment;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
@@ -46,7 +47,7 @@ public class GiftCardApplicationService {
         throw new BarcodeAlreadyUsedException(giftCardDeclaration.barcode());
       });
 
-    GiftCardEvent firstEvent = commandHandler.init(giftCardDeclaration.barcode(), () -> GiftCard.declare(giftCardDeclaration));
+    StoredEvent<GiftCardEvent> firstEvent = commandHandler.init(giftCardDeclaration.barcode(), () -> GiftCard.declare(giftCardDeclaration));
 
     eventPublisher.publish(firstEvent);
   }
@@ -56,7 +57,7 @@ public class GiftCardApplicationService {
   }
 
   public void pay(Barcode barcode, Payment payment) {
-    List<GiftCardEvent> events = commandHandler.apply(barcode, giftCard -> giftCard.pay(payment));
+    List<StoredEvent<GiftCardEvent>> events = commandHandler.apply(barcode, giftCard -> giftCard.pay(payment));
     events.forEach(eventPublisher::publish);
   }
 }

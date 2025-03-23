@@ -1,6 +1,7 @@
 package io.craft.giftcard.giftcard.domain.projections;
 
 import io.craft.giftcard.giftcard.domain.EventHandler;
+import io.craft.giftcard.giftcard.domain.StoredEvent;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
 
 public class MessageSenderEventHandler implements EventHandler<GiftCardEvent> {
@@ -12,7 +13,7 @@ public class MessageSenderEventHandler implements EventHandler<GiftCardEvent> {
   }
 
   @Override
-  public void handle(GiftCardEvent event) {
+  public void handle(StoredEvent<GiftCardEvent> event) {
     messageSender.send(event);
   }
 }

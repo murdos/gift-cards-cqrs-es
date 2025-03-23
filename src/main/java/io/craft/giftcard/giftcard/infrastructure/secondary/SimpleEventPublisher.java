@@ -2,6 +2,7 @@ package io.craft.giftcard.giftcard.infrastructure.secondary;
 
 import io.craft.giftcard.giftcard.domain.EventHandler;
 import io.craft.giftcard.giftcard.domain.EventPublisher;
+import io.craft.giftcard.giftcard.domain.StoredEvent;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ public class SimpleEventPublisher implements EventPublisher<GiftCardEvent> {
   }
 
   @Override
-  public void publish(GiftCardEvent event) {
+  public void publish(StoredEvent<GiftCardEvent> event) {
     eventHandlers.forEach(handler -> handler.handle(event));
   }
 }

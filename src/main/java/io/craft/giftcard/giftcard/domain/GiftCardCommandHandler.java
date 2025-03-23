@@ -17,13 +17,13 @@ public class GiftCardCommandHandler {
     this.eventStore = eventStore;
   }
 
-  public GiftCardEvent init(Barcode barcode, Supplier<GiftCardEvent> initializer) {
+  public StoredEvent<GiftCardEvent> init(Barcode barcode, Supplier<GiftCardEvent> initializer) {
     StoredEvent<GiftCardEvent> firstEvent = new StoredEvent<>(initializer.get(), SequenceId.INITIAL);
     eventStore.save(List.of(firstEvent));
-    return firstEvent.event();
+    return firstEvent;
   }
 
-  public List<GiftCardEvent> apply(Barcode barcode, Function<GiftCard, List<GiftCardEvent>> decide) {
+  public List<StoredEvent<GiftCardEvent>> apply(Barcode barcode, Function<GiftCard, List<GiftCardEvent>> decide) {
     GiftCardHistory history = eventStore.getHistory(barcode);
     StoredHistory storedHistory = new StoredHistory(history);
 
@@ -47,6 +47,6 @@ public class GiftCardCommandHandler {
       );
 
     eventStore.save(newStoreEvents);
-    return newEvents;
+    return newStoreEvents;
   }
 }
