@@ -4,6 +4,7 @@ import io.craft.giftcard.giftcard.domain.Barcode;
 import io.craft.giftcard.giftcard.domain.BarcodeAlreadyUsedException;
 import io.craft.giftcard.giftcard.domain.EventPublisher;
 import io.craft.giftcard.giftcard.domain.GiftCard;
+import io.craft.giftcard.giftcard.domain.GiftCardCommandHandler;
 import io.craft.giftcard.giftcard.domain.GiftCardEventStore;
 import io.craft.giftcard.giftcard.domain.GiftCardNotFoundException;
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
@@ -20,7 +21,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class GiftCardApplicationService {
 
-  private final GiftCardEventStore eventStore;
+  private final GiftCardCommandHandler commandHandler;
   private final GiftCardCurrentStateRepository viewRepository;
   private final EventPublisher<GiftCardEvent> eventPublisher;
 
@@ -30,7 +31,7 @@ public class GiftCardApplicationService {
     EventPublisher<GiftCardEvent> eventPublisher,
     GiftCardMessageSender giftCardMessageSender
   ) {
-    this.eventStore = eventStore;
+    this.commandHandler = new GiftCardCommandHandler(eventStore);
     this.viewRepository = viewRepository;
     this.eventPublisher = eventPublisher;
 
@@ -45,7 +46,7 @@ public class GiftCardApplicationService {
         throw new BarcodeAlreadyUsedException(giftCardDeclaration.barcode());
       });
 
-    GiftCardEvent firstEvent = eventStore.init(giftCardDeclaration.barcode(), () -> GiftCard.declare(giftCardDeclaration));
+    GiftCardEvent firstEvent = commandHandler.init(giftCardDeclaration.barcode(), () -> GiftCard.declare(giftCardDeclaration));
 
     eventPublisher.publish(firstEvent);
   }
@@ -55,7 +56,7 @@ public class GiftCardApplicationService {
   }
 
   public void pay(Barcode barcode, Payment payment) {
-    List<GiftCardEvent> events = eventStore.apply(barcode, giftCard -> giftCard.pay(payment));
+    List<GiftCardEvent> events = commandHandler.apply(barcode, giftCard -> giftCard.pay(payment));
     events.forEach(eventPublisher::publish);
   }
 }

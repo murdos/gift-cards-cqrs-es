@@ -1,8 +1,5 @@
-package io.craft.giftcard.giftcard.application;
+package io.craft.giftcard.giftcard.domain;
 
-import io.craft.giftcard.giftcard.domain.DummyCombiner;
-import io.craft.giftcard.giftcard.domain.GiftCard;
-import io.craft.giftcard.giftcard.domain.SequenceId;
 import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
 import io.craft.giftcard.giftcard.domain.events.GiftCardHistory;

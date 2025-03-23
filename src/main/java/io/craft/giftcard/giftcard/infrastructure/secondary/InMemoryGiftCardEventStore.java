@@ -1,9 +1,9 @@
 package io.craft.giftcard.giftcard.infrastructure.secondary;
 
-import io.craft.giftcard.giftcard.application.StoredEvent;
 import io.craft.giftcard.giftcard.domain.Barcode;
 import io.craft.giftcard.giftcard.domain.GiftCardEventStore;
 import io.craft.giftcard.giftcard.domain.SequenceId;
+import io.craft.giftcard.giftcard.domain.StoredEvent;
 import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
 import io.craft.giftcard.giftcard.domain.events.GiftCardHistory;
