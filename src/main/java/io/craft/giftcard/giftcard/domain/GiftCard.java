@@ -23,59 +23,43 @@ public class GiftCard {
     decisionProjection = DecisionProjection.from(history);
   }
 
-  public static GiftCardEvent declare(GiftCardDeclaration giftCardDeclaration) {
-    return new GiftCardCreated(
-      giftCardDeclaration.barcode(),
-      giftCardDeclaration.amount(),
-      giftCardDeclaration.shoppingStore(),
-      SequenceId.INITIAL
-    );
+  public static GiftCardCreated declare(GiftCardDeclaration giftCardDeclaration) {
+    return new GiftCardCreated(giftCardDeclaration.barcode(), giftCardDeclaration.amount(), giftCardDeclaration.shoppingStore());
   }
 
   public List<GiftCardEvent> pay(Payment payment) {
     if (decisionProjection.remainingAmount.isLessThan(payment.amount())) {
       throw new InsufficientRemainingAmountException(barcode());
     }
-    SequenceId sequenceId = decisionProjection.nextSequenceId();
-    PaidAmount paidAmount = new PaidAmount(decisionProjection.barcode, sequenceId, payment.amount());
+    PaidAmount paidAmount = new PaidAmount(decisionProjection.barcode, payment.amount());
 
     if (decisionProjection.remainingAmount.equals(payment.amount())) {
-      return List.of(paidAmount, new GifCardExhausted(decisionProjection.barcode, sequenceId.next()));
+      return List.of(paidAmount, new GifCardExhausted(decisionProjection.barcode));
     }
 
     return List.of(paidAmount);
   }
 
-  private record DecisionProjection(Barcode barcode, Amount remainingAmount, SequenceId currentSequenceId) {
+  private record DecisionProjection(Barcode barcode, Amount remainingAmount) {
     public static DecisionProjection from(GiftCardHistory history) {
       GiftCardCreated firstEvent = history.start();
       List<GiftCardEvent> followingEvents = history.followingEvents();
 
       return followingEvents
         .stream()
-        .reduce(
-          new DecisionProjection(firstEvent.barcode(), firstEvent.amount(), firstEvent.sequenceId()),
-          DecisionProjection::reducer,
-          new DummyCombiner<>()
-        );
-    }
-
-    public SequenceId nextSequenceId() {
-      return currentSequenceId.next();
+        .reduce(new DecisionProjection(firstEvent.barcode(), firstEvent.amount()), DecisionProjection::reducer, new DummyCombiner<>());
     }
 
     private static DecisionProjection reducer(DecisionProjection decisionProjection, GiftCardEvent giftCardEvent) {
       return switch (giftCardEvent) {
         case PaidAmount paidAmount -> new DecisionProjection(
           decisionProjection.barcode(),
-          decisionProjection.remainingAmount().subtract(paidAmount.amount()),
-          paidAmount.sequenceId()
+          decisionProjection.remainingAmount().subtract(paidAmount.amount())
         );
         case GiftCardCreated giftCardCreated -> decisionProjection;
         case GifCardExhausted gifCardExhausted -> new DecisionProjection(
           decisionProjection.barcode(),
-          decisionProjection.remainingAmount(),
-          gifCardExhausted.sequenceId()
+          decisionProjection.remainingAmount()
         );
       };
     }

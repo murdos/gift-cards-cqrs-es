@@ -1,6 +1,5 @@
 package io.craft.giftcard.giftcard.domain.events;
 
-import io.craft.giftcard.giftcard.domain.SequenceId;
 import java.util.List;
 import java.util.stream.Stream;
 import org.jmolecules.ddd.annotation.ValueObject;
@@ -13,9 +12,5 @@ public record GiftCardHistory(GiftCardCreated start, List<GiftCardEvent> followi
 
   public Stream<GiftCardEvent> historyStream() {
     return Stream.concat(Stream.of(start), followingEvents.stream());
-  }
-
-  public SequenceId lastSequenceId() {
-    return historyStream().map(GiftCardEvent::sequenceId).max(SequenceId::compareTo).orElseThrow();
   }
 }
