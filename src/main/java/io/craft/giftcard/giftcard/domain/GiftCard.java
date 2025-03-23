@@ -60,23 +60,25 @@ public class GiftCard {
         );
     }
 
+    public DecisionProjection withRemainingAmount(Amount remainingAmount) {
+      return new DecisionProjection(barcode, remainingAmount, currentSequenceId);
+    }
+
+    public DecisionProjection withSequenceId(SequenceId sequenceId) {
+      return new DecisionProjection(barcode, remainingAmount, sequenceId);
+    }
+
     public SequenceId nextSequenceId() {
       return currentSequenceId.next();
     }
 
     private static DecisionProjection reducer(DecisionProjection decisionProjection, GiftCardEvent giftCardEvent) {
       return switch (giftCardEvent) {
-        case PaidAmount paidAmount -> new DecisionProjection(
-          decisionProjection.barcode(),
-          decisionProjection.remainingAmount().subtract(paidAmount.amount()),
-          paidAmount.sequenceId()
-        );
-        case GiftCardCreated giftCardCreated -> decisionProjection;
-        case GifCardExhausted gifCardExhausted -> new DecisionProjection(
-          decisionProjection.barcode(),
-          decisionProjection.remainingAmount(),
-          gifCardExhausted.sequenceId()
-        );
+        case GiftCardCreated __ -> decisionProjection;
+        case PaidAmount paidAmount -> decisionProjection
+          .withRemainingAmount(decisionProjection.remainingAmount().subtract(paidAmount.amount()))
+          .withSequenceId(paidAmount.sequenceId());
+        case GifCardExhausted gifCardExhausted -> decisionProjection.withSequenceId(gifCardExhausted.sequenceId());
       };
     }
   }

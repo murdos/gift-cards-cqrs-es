@@ -27,15 +27,17 @@ public record GiftCardCurrentState(Barcode barcode, Amount remainingAmount, Shop
       );
   }
 
+  private GiftCardCurrentState withRemainingAmount(Amount remainingAmount) {
+    return new GiftCardCurrentState(barcode(), remainingAmount, shoppingStore());
+  }
+
   private static GiftCardCurrentState reducer(GiftCardCurrentState giftCardCurrentState, GiftCardEvent giftCardEvent) {
     return switch (giftCardEvent) {
-      case PaidAmount paidAmount -> new GiftCardCurrentState(
-        giftCardCurrentState.barcode(),
-        giftCardCurrentState.remainingAmount().subtract(paidAmount.amount()),
-        giftCardCurrentState.shoppingStore()
+      case PaidAmount paidAmount -> giftCardCurrentState.withRemainingAmount(
+        giftCardCurrentState.remainingAmount().subtract(paidAmount.amount())
       );
-      case GiftCardCreated giftCardCreated -> giftCardCurrentState;
-      case GifCardExhausted gifCardExhausted -> giftCardCurrentState;
+      case GiftCardCreated __ -> giftCardCurrentState;
+      case GifCardExhausted __ -> giftCardCurrentState;
     };
   }
 }
