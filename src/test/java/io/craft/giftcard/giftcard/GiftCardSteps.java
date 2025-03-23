@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.craft.giftcard.giftcard.application.GiftCardApplicationService;
 import io.craft.giftcard.giftcard.domain.Amount;
 import io.craft.giftcard.giftcard.domain.Barcode;
+import io.craft.giftcard.giftcard.domain.BarcodeAlreadyUsedException;
 import io.craft.giftcard.giftcard.domain.ShoppingStore;
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
 import io.craft.giftcard.giftcard.domain.commands.Payment;
@@ -13,11 +14,12 @@ import io.craft.giftcard.giftcard.infrastructure.secondary.InMemoryGiftCardCurre
 import io.craft.giftcard.giftcard.infrastructure.secondary.InMemoryGiftCardEventStore;
 import io.craft.giftcard.giftcard.infrastructure.secondary.KafkaGiftCardMessageSender;
 import io.craft.giftcard.giftcard.infrastructure.secondary.SimpleEventPublisher;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import java.math.BigDecimal;
 import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Optional;
 
 public class GiftCardSteps {
 
@@ -28,6 +30,13 @@ public class GiftCardSteps {
     new KafkaGiftCardMessageSender(new ObjectMapper())
   );
 
+  private Optional<Exception> declarationException;
+
+  @Before
+  public void setUp() {
+    declarationException = Optional.empty();
+  }
+
   @When("I declare a new gift card")
   public void declareANewGiftCard(Map<String, String> giftCardInfos) {
     var giftCardDeclaration = new GiftCardDeclaration(
@@ -35,7 +44,19 @@ public class GiftCardSteps {
       new Amount(new BigDecimal(giftCardInfos.get("amount"))),
       ShoppingStore.RESTAURANT_PANORAMIX
     );
-    giftCardApplicationService.declare(giftCardDeclaration);
+
+    try {
+      giftCardApplicationService.declare(giftCardDeclaration);
+    } catch (Exception exception) {
+      declarationException = Optional.of(exception);
+    }
+  }
+
+  @Then("I should have an error because the gift card already exists")
+  public void shouldHaveAnErrorBecauseTheGiftCardAlreadyExists() {
+    assertThat(declarationException).hasValueSatisfying(exception -> {
+      assertThat(exception).isInstanceOf(BarcodeAlreadyUsedException.class);
+    });
   }
 
   @Then("the gift card {string} should have a remaining amount of {double}")

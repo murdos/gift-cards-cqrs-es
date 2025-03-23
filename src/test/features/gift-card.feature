@@ -6,6 +6,16 @@ Feature: Use gift card
       | amount  | 100        |
     Then the gift card "1234567890" should have a remaining amount of 100.0
 
+  Scenario: Declare an existing gift card
+    Given I declare a new gift card
+      | barcode | 1234567890 |
+      | amount  | 100        |
+    Given I declare a new gift card
+      | barcode | 1234567890 |
+      | amount  | 50         |
+    Then I should have an error because the gift card already exists
+    Then the gift card "1234567890" should have a remaining amount of 100.0
+
   Scenario: Pay with a gift card
     Given I declare a new gift card
       | barcode | 1234567890 |
