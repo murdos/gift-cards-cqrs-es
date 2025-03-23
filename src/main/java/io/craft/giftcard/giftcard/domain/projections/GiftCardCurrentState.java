@@ -4,24 +4,26 @@ import io.craft.giftcard.giftcard.domain.Amount;
 import io.craft.giftcard.giftcard.domain.Barcode;
 import io.craft.giftcard.giftcard.domain.DummyCombiner;
 import io.craft.giftcard.giftcard.domain.ShoppingStore;
+import io.craft.giftcard.giftcard.domain.StoredEvent;
+import io.craft.giftcard.giftcard.domain.StoredHistory;
 import io.craft.giftcard.giftcard.domain.events.GifCardExhausted;
 import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
-import io.craft.giftcard.giftcard.domain.events.GiftCardHistory;
 import io.craft.giftcard.giftcard.domain.events.PaidAmount;
 import java.util.List;
 import org.jmolecules.architecture.cqrs.QueryModel;
 
 @QueryModel
 public record GiftCardCurrentState(Barcode barcode, Amount remainingAmount, ShoppingStore shoppingStore) {
-  public static GiftCardCurrentState from(GiftCardHistory history) {
-    GiftCardCreated firstEvent = history.start();
-    List<GiftCardEvent> followingEvents = history.followingEvents();
+  public static GiftCardCurrentState from(StoredHistory history) {
+    StoredEvent<GiftCardCreated> firstEvent = history.start();
+    List<StoredEvent<GiftCardEvent>> followingEvents = history.followingEvents();
 
     return followingEvents
       .stream()
+      .map(StoredEvent::event)
       .reduce(
-        new GiftCardCurrentState(firstEvent.barcode(), firstEvent.amount(), firstEvent.shoppingStore()),
+        new GiftCardCurrentState(firstEvent.event().barcode(), firstEvent.event().amount(), firstEvent.event().shoppingStore()),
         GiftCardCurrentState::reducer,
         new DummyCombiner<>()
       );

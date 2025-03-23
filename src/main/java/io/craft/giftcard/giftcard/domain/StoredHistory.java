@@ -5,26 +5,12 @@ import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
 import io.craft.giftcard.giftcard.domain.events.GiftCardHistory;
 import java.util.List;
 
-public record StoredHistory(StoredEvent<GiftCardCreated> firstStoredEvent, List<StoredEvent<GiftCardEvent>> remainingStoredEvents) {
-  @Deprecated
-  public StoredHistory(GiftCardHistory history) {
-    this(
-      new StoredEvent(history.start(), history.start().sequenceId()),
-      history
-        .followingEvents()
-        .stream()
-        .map(giftCardEvent -> new StoredEvent<GiftCardEvent>(giftCardEvent, giftCardEvent.sequenceId()))
-        .toList()
-    );
-  }
-
+public record StoredHistory(StoredEvent<GiftCardCreated> start, List<StoredEvent<GiftCardEvent>> followingEvents) {
   public GiftCard toGiftCard() {
-    return new GiftCard(new GiftCardHistory(firstStoredEvent.event(), remainingStoredEvents.stream().map(StoredEvent::event).toList()));
+    return new GiftCard(new GiftCardHistory(start.event(), followingEvents.stream().map(StoredEvent::event).toList()));
   }
 
   public SequenceId getSequenceId() {
-    return remainingStoredEvents
-      .stream()
-      .reduce(firstStoredEvent.sequenceId(), (SequenceId acc, StoredEvent event) -> event.sequenceId(), new DummyCombiner<>());
+    return followingEvents.stream().reduce(start.sequenceId(), (lastSequenceId, event) -> event.sequenceId(), new DummyCombiner<>());
   }
 }
