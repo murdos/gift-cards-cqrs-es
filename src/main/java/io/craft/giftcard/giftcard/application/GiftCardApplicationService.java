@@ -15,6 +15,7 @@ import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentStateUpdater
 import io.craft.giftcard.giftcard.domain.projections.GiftCardMessageSender;
 import io.craft.giftcard.giftcard.domain.projections.MessageSenderEventHandler;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class GiftCardApplicationService {
@@ -37,6 +38,7 @@ public class GiftCardApplicationService {
     this.eventPublisher.register(new MessageSenderEventHandler(giftCardMessageSender));
   }
 
+  @Transactional
   public void declare(GiftCardDeclaration giftCardDeclaration) {
     viewRepository
       .get(giftCardDeclaration.barcode())
@@ -49,10 +51,12 @@ public class GiftCardApplicationService {
     eventPublisher.publish(event);
   }
 
+  @Transactional(readOnly = true)
   public GiftCardCurrentState findBy(Barcode barcode) {
     return viewRepository.get(barcode).orElseThrow(() -> new GiftCardNotFoundException(barcode));
   }
 
+  @Transactional
   public void pay(Barcode barcode, Payment payment) {
     var events = eventStore.findByBarcode(barcode).pay(payment);
     eventStore.save(events);
