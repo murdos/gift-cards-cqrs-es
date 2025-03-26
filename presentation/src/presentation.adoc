@@ -4,6 +4,7 @@
 :highlightjsdir: highlight
 :revealjs_slideNumber: c
 :revealjs_theme: moon
+:revealjs_hash: true
 
 == CQRS/ES : Du concept au code
 
