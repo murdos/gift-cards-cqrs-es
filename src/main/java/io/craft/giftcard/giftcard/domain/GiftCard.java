@@ -7,6 +7,7 @@ import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
 import io.craft.giftcard.giftcard.domain.events.GiftCardHistory;
 import io.craft.giftcard.giftcard.domain.events.PaidAmount;
+import io.craft.giftcard.shared.collection.domain.DummyCombiner;
 import java.util.List;
 import org.jmolecules.ddd.annotation.AggregateRoot;
 

@@ -1,4 +1,4 @@
-package io.craft.giftcard.giftcard.domain;
+package io.craft.giftcard.shared.collection.domain;
 
 import java.util.function.BinaryOperator;
 

@@ -2,13 +2,13 @@ package io.craft.giftcard.giftcard.domain.projections;
 
 import io.craft.giftcard.giftcard.domain.Amount;
 import io.craft.giftcard.giftcard.domain.Barcode;
-import io.craft.giftcard.giftcard.domain.DummyCombiner;
 import io.craft.giftcard.giftcard.domain.ShoppingStore;
 import io.craft.giftcard.giftcard.domain.events.GifCardExhausted;
 import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
 import io.craft.giftcard.giftcard.domain.events.GiftCardHistory;
 import io.craft.giftcard.giftcard.domain.events.PaidAmount;
+import io.craft.giftcard.shared.collection.domain.DummyCombiner;
 import java.util.List;
 import org.jmolecules.architecture.cqrs.QueryModel;
 
