@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 import org.jmolecules.architecture.hexagonal.Adapter;
 import org.springframework.stereotype.Component;
 
@@ -43,6 +44,11 @@ public class InMemoryGiftCardEventStore implements GiftCardEventStore, InMemoryS
     var followingEvents = events.stream().skip(1).toList();
 
     return new GiftCardHistory((GiftCardCreated) events.getFirst(), followingEvents);
+  }
+
+  @Override
+  public Stream<GiftCardEvent> stream() {
+    return histories.values().stream().flatMap(List::stream);
   }
 
   @Override
