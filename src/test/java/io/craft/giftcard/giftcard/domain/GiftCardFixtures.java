@@ -1,6 +1,6 @@
 package io.craft.giftcard.giftcard.domain;
 
-import java.math.BigDecimal;
+import java.time.LocalDate;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 
@@ -11,6 +11,10 @@ public class GiftCardFixtures {
   }
 
   public static Amount amount() {
-    return new Amount(BigDecimal.valueOf(RandomUtils.secure().randomDouble(0, 1000)));
+    return Amount.of(RandomUtils.secure().randomDouble(0, 1000));
+  }
+
+  public static LocalDate paymentDate() {
+    return LocalDate.now().minusDays(RandomUtils.secure().randomInt(1, 10));
   }
 }

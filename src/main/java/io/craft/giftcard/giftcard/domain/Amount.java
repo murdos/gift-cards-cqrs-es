@@ -12,6 +12,10 @@ public record Amount(BigDecimal value) implements Comparable<Amount> {
     Assert.field("value", value).positive();
   }
 
+  public static Amount of(double value) {
+    return new Amount(BigDecimal.valueOf(value));
+  }
+
   public Amount subtract(Amount otherAmount) {
     return new Amount(this.value.subtract(otherAmount.value));
   }

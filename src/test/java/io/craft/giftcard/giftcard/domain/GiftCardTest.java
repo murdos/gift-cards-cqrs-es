@@ -1,5 +1,6 @@
 package io.craft.giftcard.giftcard.domain;
 
+import static io.craft.giftcard.giftcard.domain.GiftCardFixtures.paymentDate;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
@@ -11,7 +12,6 @@ import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
 import io.craft.giftcard.giftcard.domain.events.GiftCardHistory;
 import io.craft.giftcard.giftcard.domain.events.PaidAmount;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
@@ -40,8 +40,8 @@ class GiftCardTest {
     GiftCardHistory history = givenGiftCardHistory(100);
     var giftcard = new GiftCard(history);
 
-    Amount amountToPay = new Amount(new BigDecimal(50));
-    List<GiftCardEvent> events = giftcard.pay(new Payment(amountToPay));
+    Amount amountToPay = Amount.of(50);
+    List<GiftCardEvent> events = giftcard.pay(new Payment(amountToPay, paymentDate()));
 
     assertThat(events)
       .singleElement()
@@ -57,8 +57,8 @@ class GiftCardTest {
     GiftCardHistory history = givenGiftCardHistory(100);
     var giftcard = new GiftCard(history);
 
-    Amount amountToPay = new Amount(new BigDecimal(150));
-    Throwable exception = catchThrowable(() -> giftcard.pay(new Payment(amountToPay)));
+    Amount amountToPay = Amount.of(150);
+    Throwable exception = catchThrowable(() -> giftcard.pay(new Payment(amountToPay, paymentDate())));
 
     assertThat(exception).isInstanceOf(InsufficientRemainingAmountException.class);
   }
@@ -68,17 +68,17 @@ class GiftCardTest {
     GiftCardHistory history = givenGiftCardHistory(100);
     var giftcard = new GiftCard(history);
 
-    Amount amountToPay = new Amount(new BigDecimal(100));
-    List<GiftCardEvent> events = giftcard.pay(new Payment(amountToPay));
+    Amount amountToPay = Amount.of(100);
+    List<GiftCardEvent> events = giftcard.pay(new Payment(amountToPay, paymentDate()));
 
     assertThat(events).extracting(GiftCardEvent::getClass).containsExactly(PaidAmount.class, GifCardExhausted.class);
-    var setOfSequenceIds = events.stream().map(event -> event.sequenceId()).collect(Collectors.toSet());
+    var setOfSequenceIds = events.stream().map(GiftCardEvent::sequenceId).collect(Collectors.toSet());
     assertThat(setOfSequenceIds).hasSize(2);
   }
 
   private static GiftCardHistory givenGiftCardHistory(double initialAmount) {
     Barcode barcode = GiftCardFixtures.barcode();
-    Amount amount = new Amount(new BigDecimal(initialAmount));
+    Amount amount = Amount.of(initialAmount);
     ShoppingStore shoppingStore = ShoppingStore.RESTAURANT_PANORAMIX;
     GiftCardDeclaration giftCardDeclaration = new GiftCardDeclaration(barcode, amount, shoppingStore);
     var giftCardCreated = GiftCard.declare(giftCardDeclaration);

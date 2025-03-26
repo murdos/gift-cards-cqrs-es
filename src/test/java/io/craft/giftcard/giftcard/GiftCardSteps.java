@@ -15,9 +15,11 @@ import io.craft.giftcard.giftcard.infrastructure.secondary.InMemoryGiftCardEvent
 import io.craft.giftcard.giftcard.infrastructure.secondary.KafkaGiftCardMessageSender;
 import io.craft.giftcard.giftcard.infrastructure.secondary.SimpleEventPublisher;
 import io.cucumber.java.Before;
+import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Map;
 import java.util.Optional;
 
@@ -31,6 +33,11 @@ public class GiftCardSteps {
   );
 
   private Optional<Exception> declarationException;
+
+  @ParameterType("\\d{4}-\\d{2}-\\d{2}")
+  public LocalDate localDate(String date) {
+    return LocalDate.parse(date);
+  }
 
   @Before
   public void setUp() {
@@ -66,8 +73,8 @@ public class GiftCardSteps {
     assertThat(giftCardView.remainingAmount().value()).isEqualByComparingTo(new BigDecimal(expectedAmount));
   }
 
-  @When("I pay with the gift card {string} an amount of {double}")
-  public void iPayWithTheGiftCardAnAmountOf(String barcode, double paidAmount) {
-    giftCardApplicationService.pay(new Barcode(barcode), new Payment(new Amount(BigDecimal.valueOf(paidAmount))));
+  @When("I pay with the gift card {string} an amount of {double} on {localDate}")
+  public void iPayWithTheGiftCardAnAmountOf(String barcode, double paidAmount, LocalDate paymentDate) {
+    giftCardApplicationService.pay(new Barcode(barcode), new Payment(Amount.of(paidAmount), paymentDate));
   }
 }

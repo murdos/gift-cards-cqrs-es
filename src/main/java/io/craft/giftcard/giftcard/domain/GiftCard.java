@@ -37,7 +37,7 @@ public class GiftCard {
       throw new InsufficientRemainingAmountException(barcode());
     }
     SequenceId sequenceId = decisionProjection.nextSequenceId();
-    PaidAmount paidAmount = new PaidAmount(decisionProjection.barcode, sequenceId, payment.amount());
+    PaidAmount paidAmount = new PaidAmount(decisionProjection.barcode, sequenceId, payment.amount(), payment.date());
 
     if (decisionProjection.remainingAmount.equals(payment.amount())) {
       return List.of(paidAmount, new GifCardExhausted(decisionProjection.barcode, sequenceId.next()));
