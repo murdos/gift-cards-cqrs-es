@@ -1,0 +1,160 @@
+== Qu'est-ce que l'Event Sourcing ?
+
+
+
+[.notes]
+--
+Tout d'abord un peu de théorie.
+
+
+--
+
+[%notitle]
+=== ES?
+
+that ?
+
+[.notes]
+--
+Pour ceux qui ne connaissent pas l'event sourcing c'est ça
+<montrer une image d'une architecture compliquée pour rien>
+
+Oué bon heu je crois que je vais faire plus simple
+--
+
+=== <todo>
+
+[.notes]
+--
+L'event sourcing, c'est très compliqué à traduire mais le concept est simple :
+la source de nos données sont des événements.
+
+On va prendre un exemple pour expliciter le truc
+
+Imaginons vous avez...au hasard... des cartes cadeaux à gérer
+--
+
+[%notitle]
+=== example statefull
+
+[cols="4*", options="header"]
+|===========================================
+| barcode | shoppingStore | amount | state
+| 1234    | la redoute    | 90 €    | ONGOING
+|===========================================
+
+
+[.notes]
+--
+J'ai ça en base, si je paye 30 avec, j'obtiens ça
+--
+
+[%notitle]
+=== example statefull
+
+[cols="4*", options="header"]
+|===========================================
+| barcode | shoppingStore | amount | state
+| 1234    | la redoute    | 60 €    | ONGOING
+|===========================================
+
+
+[.notes]
+--
+Et si je dépense les 30 € restants
+--
+
+[%notitle]
+=== example statefull
+
+[cols="4*", options="header"]
+|===========================================
+| barcode | shoppingStore | amount | state
+| 1234    | la redoute    | 0 €    | EXHAUSTED
+|===========================================
+
+
+[.notes]
+--
+ma carte cadeaux est vide et donc inutilisable.
+
+ça c'est le fonctionnement classique de nos app,
+on change l'état de notre objet à chaque fois qu'on lui applique un changement
+--
+
+
+
+[%notitle.moresmaller]
+=== example event sourcing
+
+[cols="4*", options="header"]
+|================================================================================================
+| barcode | eventName     | sequenceId | payload
+| 1234    | Created       | 0          | { shoppingStore: "la redoute", initialAmount: "90 €" }
+|================================================================================================
+
+
+[.notes]
+--
+En event sourcing, on ne stocke plus l'état de notre objets, mais les changements qui lui ont été appliqué
+
+Ça se présente un peu différement avec le nom du changement qui a été appliqué. Ici Created.
+
+L'ordre est garantit par le sequenceId et ensuite en payload, au moins pour l'événement d'init, vous trouvez les mêmes
+informations que sur la version "standard", à savoir le magasin et le montant initial.
+
+Et si je paye 30 € avec
+--
+
+[%notitle.moresmaller]
+=== example event sourcing
+
+[cols="4*", options="header"]
+|================================================================================================
+| barcode | eventName       | sequenceId | payload
+| 1234    | Created         | 0          | { shoppingStore: "la redoute", initialAmount: "90 €" }
+| 1234    | PaidAmount      | 1          | { amount: "30 €" }
+|================================================================================================
+
+
+[.notes]
+--
+boum, j'ai un nouvel événement avec un nom différent.
+
+Et tout ce que j'ai besoin de savoir sur cet événement "j'ai payé 30 € avec cette carte", ben c'est le 30 €
+
+
+et si je dépense les 60 € restants
+--
+
+
+[%notitle.moresmaller]
+=== example event sourcing
+
+[cols="4*", options="header"]
+|================================================================================================
+| barcode | eventName       | sequenceId | payload
+| 1234    | Created         | 0          | { shoppingStore: "la redoute", initialAmount: "90 €" }
+| 1234    | PaidAmount      | 1          | { amount: "30 €" }
+| 1234    | PaidAmount      | 2          | { amount: "60 €" }
+| 1234    | Exhausted       | 4          | { }
+|================================================================================================
+
+
+[.notes]
+--
+J'ai maintenant 2 nouveaux événements, le paidAmount & le exhausted.
+
+Et là vous allez me dire :
+
+C'est bien beau tout ça mais comment je les utilise ?
+--
+
+=== Prendre une décision
+
+
+
+
+
+
+

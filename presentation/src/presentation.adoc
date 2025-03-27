@@ -16,3 +16,5 @@ Hello
 --
 
 include::example.adoc[]
+
+include::event-sourcing/event-sourcing.adoc[]
