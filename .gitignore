@@ -128,3 +128,8 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
+
+######################
+# AsciiDoc Revealjs
+######################
+/presentation/presentation.html
