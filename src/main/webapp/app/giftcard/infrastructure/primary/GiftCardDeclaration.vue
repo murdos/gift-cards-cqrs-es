@@ -1,6 +1,5 @@
 <template>
   <div class="gift-card-creation">
-    <h2>Créer une Carte Cadeau</h2>
     <form @submit.prevent="createGiftCard">
       <div class="form-group">
         <label for="barcode">Code-barres:</label>
@@ -8,7 +7,7 @@
       </div>
       <div class="form-group">
         <label for="shoppingStore">Magasin:</label>
-        <select id="shoppingStore" v-model="shoppingStore">
+        <select id="shoppingStore" v-model="shoppingStore" class="styled-select">
           <option v-for="store in shoppingStores" :key="store.id" :value="store">
             {{ store.name }}
           </option>
@@ -98,10 +97,24 @@ label {
 
 input[type='text'],
 input[type='number'] {
+  width: calc(100% - 16px);
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.styled-select {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 3px;
+  background-color: #fff;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
 }
 
 button {
