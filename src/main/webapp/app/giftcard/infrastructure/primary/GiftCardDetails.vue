@@ -1,7 +1,7 @@
 <template>
   <div class="details-container">
     <ul class="details-list">
-      <li v-for="detail in details" :key="detail">{{ detail }}</li>
+      <li v-for="detail in details.value" :key="detail">{{ detail }}</li>
     </ul>
   </div>
 </template>

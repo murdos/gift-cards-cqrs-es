@@ -13,6 +13,6 @@ export class AxiosGiftCardQueryRepository implements GiftCardQueryRepository {
 
   async findDetailsBy(barcode: string): Promise<{ value: string[] }> {
     const response = await this.axiosHttp.get<GiftCardDetails>(`/api/gift-cards/${barcode}/details`);
-    return response.data.details;
+    return { value: response.data.details };
   }
 }
