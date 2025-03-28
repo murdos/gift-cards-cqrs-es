@@ -11,6 +11,7 @@ import io.craft.giftcard.giftcard.domain.ShoppingStore;
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
 import io.craft.giftcard.giftcard.domain.commands.Payment;
 import io.craft.giftcard.giftcard.infrastructure.secondary.InMemoryGiftCardCurrentStateRepository;
+import io.craft.giftcard.giftcard.infrastructure.secondary.InMemoryGiftCardDetailsRepository;
 import io.craft.giftcard.giftcard.infrastructure.secondary.InMemoryGiftCardEventStore;
 import io.craft.giftcard.giftcard.infrastructure.secondary.KafkaGiftCardMessageSender;
 import io.cucumber.java.Before;
@@ -28,6 +29,7 @@ public class GiftCardSteps {
     new GiftCardApplicationService(
       new InMemoryGiftCardEventStore(),
       new InMemoryGiftCardCurrentStateRepository(),
+      new InMemoryGiftCardDetailsRepository(),
       new KafkaGiftCardMessageSender(new ObjectMapper())
     );
 

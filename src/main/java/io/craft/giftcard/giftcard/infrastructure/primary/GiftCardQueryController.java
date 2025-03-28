@@ -12,6 +12,7 @@ import io.craft.giftcard.giftcard.application.GiftCardApplicationService;
 import io.craft.giftcard.giftcard.domain.Amount;
 import io.craft.giftcard.giftcard.domain.Barcode;
 import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentState;
+import io.craft.giftcard.giftcard.domain.projections.GiftCardDetails;
 import jakarta.annotation.Nullable;
 import java.time.DayOfWeek;
 import java.util.Collection;
@@ -54,6 +55,30 @@ class GiftCardQueryController {
       .orElse(ResponseEntity.notFound().build());
   }
 
+  @GetMapping("/{barcode}/details")
+  public ResponseEntity<GiftCardDetails> getDetails(@PathVariable String barcode) {
+    return giftCards
+      .getDetails(new Barcode(barcode))
+      .map(ResponseEntity::ok)
+      .orElse(ResponseEntity.notFound().build());
+  }
+
+  public record GiftCardCurrentStateDto(
+    Barcode barcode,
+    Amount remainingAmount,
+    ShoppingStoreDto shoppingStore
+  ) {
+    public static GiftCardCurrentStateDto fromDomain(GiftCardCurrentState giftCardCurrentState) {
+      return new GiftCardCurrentStateDto(
+        giftCardCurrentState.barcode(),
+        giftCardCurrentState.remainingAmount(),
+        new ShoppingStoreDto(
+          QueryShoppingStore.valueOf(giftCardCurrentState.shoppingStore().name())
+        )
+      );
+    }
+  }
+
   @Nullable
   @GetMapping("/statistics")
   public WeeklyStatistics getWeeklyStatistics() {
@@ -70,22 +95,6 @@ class GiftCardQueryController {
     // @formatter:on
 
     return null;
-  }
-}
-
-record GiftCardCurrentStateDto(
-  Barcode barcode,
-  Amount remainingAmount,
-  ShoppingStoreDto shoppingStore,
-  boolean exhausted
-) {
-  static GiftCardCurrentStateDto fromDomain(GiftCardCurrentState giftCardCurrentState) {
-    return new GiftCardCurrentStateDto(
-      giftCardCurrentState.barcode(),
-      giftCardCurrentState.remainingAmount(),
-      new ShoppingStoreDto(QueryShoppingStore.valueOf(giftCardCurrentState.shoppingStore().name())),
-      giftCardCurrentState.exhausted()
-    );
   }
 }
 

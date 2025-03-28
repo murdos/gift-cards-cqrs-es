@@ -21,11 +21,14 @@
       </div>
     </div>
     <div class="gift-card-footer">
-      <button class="gift-card-button">Voir les détails</button>
+      <button class="gift-card-button" @click="openDetailsModal">Voir les détails</button>
       <button class="gift-card-button" :disabled="giftCard.exhausted" @click="openModal">
         Payer
       </button>
     </div>
+    <GiftCardModal v-model:is-open="isDetailsModalOpen" title="Détails" @close="closeDetailsModal">
+      <GiftCardDetails :barcode="giftCard.barcode.value" />
+    </GiftCardModal>
     <GiftCardModal v-model:is-open="isModalOpen" title="Payer" @close="closeModal">
       <GiftCardPayment :default-amount="giftCard.remainingAmount.value" @submit="submitPayment" />
     </GiftCardModal>
@@ -34,6 +37,7 @@
 
 <script setup lang="ts">
 import type { GiftCard } from '@/giftcard/domain/GiftCard';
+import GiftCardDetails from '@/giftcard/infrastructure/primary/GiftCardDetails.vue';
 import GiftCardPayment from '@/giftcard/infrastructure/primary/GiftCardPayment.vue';
 import { AxiosGiftCardCommandRepository } from '@/giftcard/infrastructure/secondary/AxiosGiftCardCommandRepository';
 import VisualBarcode from '@/shared/barcode/infrastructure/primary/VisualBarcode.vue';
@@ -49,6 +53,7 @@ const props = defineProps<{
 const emit = defineEmits(['giftCardUpdated']);
 
 const isModalOpen = ref(false);
+const isDetailsModalOpen = ref(false);
 
 const openModal = () => {
   isModalOpen.value = true;
@@ -56,6 +61,14 @@ const openModal = () => {
 
 const closeModal = () => {
   isModalOpen.value = false;
+};
+
+const openDetailsModal = () => {
+  isDetailsModalOpen.value = true;
+};
+
+const closeDetailsModal = () => {
+  isDetailsModalOpen.value = false;
 };
 
 const submitPayment = async ({ amount, date }: { amount: number; date: string }) => {

@@ -8,11 +8,7 @@ import io.craft.giftcard.giftcard.domain.GiftCardEventStore;
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
 import io.craft.giftcard.giftcard.domain.commands.Payment;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
-import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentState;
-import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentStateRepository;
-import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentStateUpdater;
-import io.craft.giftcard.giftcard.domain.projections.GiftCardMessageSender;
-import io.craft.giftcard.giftcard.domain.projections.MessageSenderEventHandler;
+import io.craft.giftcard.giftcard.domain.projections.*;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
@@ -23,19 +19,23 @@ public class GiftCardApplicationService {
 
   private final GiftCardEventStore eventStore;
   private final GiftCardCurrentStateRepository currentStateRepository;
+  private final GiftCardDetailsRepository detailsRepository;
   private final EventPublisher<GiftCardEvent> eventPublisher;
 
   public GiftCardApplicationService(
     GiftCardEventStore eventStore,
     GiftCardCurrentStateRepository currentStateRepository,
+    GiftCardDetailsRepository detailsRepository,
     GiftCardMessageSender giftCardMessageSender
   ) {
     this.eventStore = eventStore;
     this.currentStateRepository = currentStateRepository;
+    this.detailsRepository = detailsRepository;
 
     this.eventPublisher = new EventPublisher<GiftCardEvent>()
       .register(new GiftCardCurrentStateUpdater(currentStateRepository))
-      .register(new MessageSenderEventHandler(giftCardMessageSender));
+      .register(new MessageSenderEventHandler(giftCardMessageSender))
+      .register(new GiftCardDetailsUpdater(eventStore, detailsRepository));
   }
 
   @Transactional
@@ -67,6 +67,11 @@ public class GiftCardApplicationService {
   @Transactional(readOnly = true)
   public List<GiftCardCurrentState> findAllCurrentStates() {
     return currentStateRepository.findAll();
+  }
+
+  @Transactional(readOnly = true)
+  public Optional<GiftCardDetails> getDetails(Barcode barcode) {
+    return detailsRepository.get(barcode);
   }
   // tag::closingBrace[]
 }
