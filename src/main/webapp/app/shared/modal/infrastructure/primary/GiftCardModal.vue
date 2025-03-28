@@ -14,32 +14,23 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'GiftCardModal',
-  props: {
-    isOpen: {
-      type: Boolean,
-      default: false,
-    },
-    title: {
-      type: String,
-      default: 'Modal',
-    },
+<script setup lang="ts">
+withDefaults(
+  defineProps<{
+    isOpen: boolean;
+    title: string;
+  }>(),
+  {
+    isOpen: false,
+    title: 'Modal',
   },
-  emits: ['close'],
-  setup(props, { emit }) {
-    const closeModal = () => {
-      emit('close');
-    };
+);
 
-    return {
-      closeModal,
-    };
-  },
-});
+const emits = defineEmits(['close']);
+
+const closeModal = () => {
+  emits('close');
+};
 </script>
 
 <style scoped>
