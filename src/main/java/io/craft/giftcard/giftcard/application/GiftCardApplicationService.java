@@ -9,11 +9,7 @@ import io.craft.giftcard.giftcard.domain.GiftCardNotFoundException;
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
 import io.craft.giftcard.giftcard.domain.commands.Payment;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
-import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentState;
-import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentStateRepository;
-import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentStateUpdater;
-import io.craft.giftcard.giftcard.domain.projections.GiftCardMessageSender;
-import io.craft.giftcard.giftcard.domain.projections.MessageSenderEventHandler;
+import io.craft.giftcard.giftcard.domain.projections.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +23,7 @@ public class GiftCardApplicationService {
   public GiftCardApplicationService(
     GiftCardEventStore eventStore,
     GiftCardCurrentStateRepository viewRepository,
+    GiftCardDetailsRepository detailsRepository,
     EventPublisher<GiftCardEvent> eventPublisher,
     GiftCardMessageSender giftCardMessageSender
   ) {
@@ -36,6 +33,7 @@ public class GiftCardApplicationService {
 
     this.eventPublisher.register(new GiftCardCurrentStateUpdater(eventStore, viewRepository));
     this.eventPublisher.register(new MessageSenderEventHandler(giftCardMessageSender));
+    this.eventPublisher.register(new GiftCardDetailsUpdater(eventStore, detailsRepository));
   }
 
   @Transactional
