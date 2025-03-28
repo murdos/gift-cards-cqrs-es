@@ -18,9 +18,12 @@
       </div>
     </div>
     <div class="gift-card-footer">
-      <button class="gift-card-button">Voir les détails</button>
+      <button class="gift-card-button" @click="openDetailsModal">Voir les détails</button>
       <button class="gift-card-button" @click="openModal">Payer</button>
     </div>
+    <GiftCardModal v-model:is-open="isDetailsModalOpen" title="Détails" @close="closeDetailsModal">
+      <GiftCardDetails :barcode="giftCard.barcode.value" />
+    </GiftCardModal>
     <GiftCardModal v-model:is-open="isModalOpen" title="Payer" @close="closeModal">
       <GiftCardPayment :default-amount="giftCard.remainingAmount.value" @submit="submitPayment" />
     </GiftCardModal>
@@ -29,6 +32,7 @@
 
 <script setup lang="ts">
 import type { GiftCard } from '@/giftcard/domain/GiftCard';
+import GiftCardDetails from '@/giftcard/infrastructure/primary/GiftCardDetails.vue';
 import GiftCardPayment from '@/giftcard/infrastructure/primary/GiftCardPayment.vue';
 import { AxiosGiftCardCommandRepository } from '@/giftcard/infrastructure/secondary/AxiosGiftCardCommandRepository';
 import VisualBarcode from '@/shared/barcode/infrastructure/primary/VisualBarcode.vue';
@@ -44,6 +48,7 @@ const props = defineProps<{
 const emit = defineEmits(['giftCardUpdated']);
 
 const isModalOpen = ref(false);
+const isDetailsModalOpen = ref(false);
 
 const openModal = () => {
   isModalOpen.value = true;
@@ -53,9 +58,17 @@ const closeModal = () => {
   isModalOpen.value = false;
 };
 
-const submitPayment = async (paymentAmount: number) => {
+const openDetailsModal = () => {
+  isDetailsModalOpen.value = true;
+};
+
+const closeDetailsModal = () => {
+  isDetailsModalOpen.value = false;
+};
+
+const submitPayment = async ({ amount, date }: { amount: number; date: string }) => {
   const giftCardCommandRepository = new AxiosGiftCardCommandRepository(new AxiosHttp(axios));
-  const payment = { amount: paymentAmount };
+  const payment = { amount, paymentDate: date };
   try {
     await giftCardCommandRepository.pay(props.giftCard.barcode.value, payment);
     console.log('Payment successful!');
@@ -69,7 +82,6 @@ const submitPayment = async (paymentAmount: number) => {
 </script>
 
 <style scoped>
-/* ... (Your existing styles) ... */
 .gift-card {
   background-color: #f8f8f8;
   border: 1px solid #ddd;
