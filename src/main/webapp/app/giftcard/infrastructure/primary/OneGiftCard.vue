@@ -58,9 +58,9 @@ const closeModal = () => {
   isModalOpen.value = false;
 };
 
-const submitPayment = async (paymentAmount: number) => {
+const submitPayment = async ({ amount, date }: { amount: number; date: string }) => {
   const giftCardCommandRepository = new AxiosGiftCardCommandRepository(new AxiosHttp(axios));
-  const payment = { amount: paymentAmount };
+  const payment = { amount, paymentDate: date };
   try {
     await giftCardCommandRepository.pay(props.giftCard.barcode.value, payment);
     console.log('Payment successful!');
@@ -74,7 +74,6 @@ const submitPayment = async (paymentAmount: number) => {
 </script>
 
 <style scoped>
-/* ... (Your existing styles) ... */
 .gift-card {
   background-color: #f8f8f8;
   border: 1px solid #ddd;
