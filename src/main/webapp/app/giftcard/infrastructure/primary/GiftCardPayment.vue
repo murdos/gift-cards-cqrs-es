@@ -1,16 +1,16 @@
 <template>
   <div class="gift-card-payment">
-  <form @submit.prevent="submitPayment">
-    <div class="form-group">
-      <label for="paymentAmount">Montant à payer:</label>
-      <input id="paymentAmount" v-model.number="paymentAmount" v-focus type="number" min="0" required />
-    </div>
-    <div class="form-group">
-      <label for="paymentDate">Date de paiement:</label>
-      <input id="paymentDate" v-model="paymentDate" type="date" required />
-    </div>
-    <button type="submit" class="payment-button">Confirmer le paiement</button>
-  </form>
+    <form @submit.prevent="submitPayment">
+      <div class="form-group">
+        <label for="paymentAmount">Montant à payer:</label>
+        <input id="paymentAmount" v-model.number="paymentAmount" v-focus type="number" min="0" required />
+      </div>
+      <div class="form-group">
+        <label for="paymentDate">Date de paiement:</label>
+        <input id="paymentDate" v-model="paymentDate" type="date" required />
+      </div>
+      <button type="submit" class="payment-button">Confirmer le paiement</button>
+    </form>
   </div>
 </template>
 
@@ -52,7 +52,7 @@ label {
 }
 
 input[type='number'],
-input[type='date']  {
+input[type='date'] {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
