@@ -8,36 +8,22 @@
   </form>
 </template>
 
-<script lang="ts">
-import { focus } from '@/shared/directive/focus';
-import { defineComponent, onMounted, ref } from 'vue';
+<script setup lang="ts">
+import { ref } from 'vue';
 
-export default defineComponent({
-  name: 'GiftCardPayment',
-  directives: {
-    focus,
-  },
-  props: {
-    defaultAmount: {
-      type: Number,
-      required: true,
-    },
-  },
-  emits: ['submit'],
-  setup(props, { emit }) {
-    const paymentAmount = ref(0);
+const paymentAmount = ref(0);
 
-    onMounted(() => {
-      paymentAmount.value = props.defaultAmount;
-    });
+const props = defineProps<{
+  defaultAmount: number;
+}>();
 
-    const submitPayment = () => {
-      emit('submit', paymentAmount.value);
-    };
+const emit = defineEmits(['submit']);
 
-    return { paymentAmount, submitPayment };
-  },
-});
+paymentAmount.value = props.defaultAmount;
+
+const submitPayment = () => {
+  emit('submit', paymentAmount.value);
+};
 </script>
 
 <style scoped>

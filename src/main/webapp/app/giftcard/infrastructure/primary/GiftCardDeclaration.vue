@@ -9,7 +9,7 @@
       <div class="form-group">
         <label for="shoppingStore">Magasin:</label>
         <select id="shoppingStore" v-model="shoppingStore">
-          <option v-for="store in shoppingStores()" :key="store.id" :value="store">{{ store.name }}</option>
+          <option v-for="store in shoppingStores" :key="store.id" :value="store">{{ store.name }}</option>
         </select>
       </div>
       <div class="form-group">
@@ -30,73 +30,50 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { GiftCardDeclaration } from '@/giftcard/domain/GiftCardDeclaration';
 import { shoppingStores } from '@/giftcard/domain/ShoppingStore.ts';
 import { AxiosGiftCardCommandRepository } from '@/giftcard/infrastructure/secondary/AxiosGiftCardCommandRepository.ts';
-import { focus } from '@/shared/directive/focus';
 import { AxiosHttp } from '@/shared/http/infrastructure/secondary/AxiosHttp.ts';
 import axios from 'axios';
-import { defineComponent, ref } from 'vue';
+import { ref } from 'vue';
 
-export default defineComponent({
-  name: 'GiftCardDeclaration',
-  directives: {
-    focus,
-  },
-  emits: ['giftCardDeclared'],
-  setup(props, { emit }) {
-    const barcode = ref('');
-    const amount = ref(0);
-    const shoppingStore = ref(shoppingStores[0]);
-    const successMessage = ref('');
-    const errorMessage = ref('');
-    const isSubmitting = ref(false);
-    const giftCardCommandRepository = new AxiosGiftCardCommandRepository(new AxiosHttp(axios));
+const emits = defineEmits(['giftCardDeclared']);
 
-    const createGiftCard = async () => {
-      successMessage.value = '';
-      errorMessage.value = '';
-      isSubmitting.value = true;
+const barcode = ref('');
+const amount = ref(0);
+const shoppingStore = ref(shoppingStores[0]);
+const successMessage = ref('');
+const errorMessage = ref('');
+const isSubmitting = ref(false);
+const giftCardCommandRepository = new AxiosGiftCardCommandRepository(new AxiosHttp(axios));
 
-      try {
-        const giftCardDeclaration: GiftCardDeclaration = {
-          barcode: { value: barcode.value },
-          amount: { value: amount.value },
-          shoppingStore: { value: shoppingStore.value.id },
-        };
-        await giftCardCommandRepository.declare(giftCardDeclaration);
-        successMessage.value = 'Carte cadeau déclarée avec succès!';
-        barcode.value = '';
-        amount.value = 0;
-        emit('giftCardDeclared');
-      } catch (error: any) {
-        if (error.response && error.response.status === 400) {
-          errorMessage.value = 'Données invalides. Veuillez vérifier les champs.';
-        } else {
-          errorMessage.value = 'Erreur lors de la déclaration de la carte cadeau.';
-        }
-      } finally {
-        isSubmitting.value = false;
-      }
+const createGiftCard = async () => {
+  successMessage.value = '';
+  errorMessage.value = '';
+  isSubmitting.value = true;
+
+  try {
+    const giftCardDeclaration: GiftCardDeclaration = {
+      barcode: { value: barcode.value },
+      amount: { value: amount.value },
+      shoppingStore: { value: shoppingStore.value.id },
     };
-
-    return {
-      barcode,
-      amount,
-      shoppingStore,
-      successMessage,
-      errorMessage,
-      createGiftCard,
-      isSubmitting,
-    };
-  },
-  methods: {
-    shoppingStores() {
-      return shoppingStores;
-    },
-  },
-});
+    await giftCardCommandRepository.declare(giftCardDeclaration);
+    successMessage.value = 'Carte cadeau déclarée avec succès!';
+    barcode.value = '';
+    amount.value = 0;
+    emits('giftCardDeclared');
+  } catch (error: any) {
+    if (error.response && error.response.status === 400) {
+      errorMessage.value = 'Données invalides. Veuillez vérifier les champs.';
+    } else {
+      errorMessage.value = 'Erreur lors de la déclaration de la carte cadeau.';
+    }
+  } finally {
+    isSubmitting.value = false;
+  }
+};
 </script>
 
 <style scoped>

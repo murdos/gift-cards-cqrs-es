@@ -11,50 +11,39 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import type { GiftCard } from '@/giftcard/domain/GiftCard';
 import { AxiosGiftCardQueryRepository } from '@/giftcard/infrastructure/secondary/AxiosGiftCardQueryRepository.ts';
 import { AxiosHttp } from '@/shared/http/infrastructure/secondary/AxiosHttp.ts';
 import axios from 'axios';
-import { defineComponent, onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import OneGiftCard from './OneGiftCard.vue';
 
-export default defineComponent({
-  name: 'GiftCardList',
-  components: { OneGiftCard },
-  setup() {
-    const giftCards = ref<GiftCard[]>([]);
-    const loading = ref(false);
-    const error = ref<string | null>(null);
+const giftCards = ref<GiftCard[]>([]);
+const loading = ref(false);
+const error = ref<string | null>(null);
 
-    const fetchGiftCards = async () => {
-      const giftCardRepository = new AxiosGiftCardQueryRepository(new AxiosHttp(axios));
-      console.log('Fetching gift cards...');
-      loading.value = true;
-      error.value = null;
-      try {
-        giftCards.value = await giftCardRepository.findAll();
-      } catch (err: any) {
-        error.value = err.message || 'An error occurred';
-      } finally {
-        loading.value = false;
-      }
-    };
+const fetchGiftCards = async () => {
+  const giftCardRepository = new AxiosGiftCardQueryRepository(new AxiosHttp(axios));
+  console.log('Fetching gift cards...');
+  loading.value = true;
+  error.value = null;
+  try {
+    giftCards.value = await giftCardRepository.findAll();
+  } catch (err: any) {
+    error.value = err.message || 'An error occurred';
+  } finally {
+    loading.value = false;
+  }
+};
 
-    const refresh = () => {
-      fetchGiftCards();
-    };
+const refresh = () => {
+  fetchGiftCards();
+};
 
-    onMounted(fetchGiftCards);
+fetchGiftCards();
 
-    return {
-      giftCards,
-      loading,
-      error,
-      refresh,
-    };
-  },
-});
+defineExpose({ refresh });
 </script>
 
 <style scoped>

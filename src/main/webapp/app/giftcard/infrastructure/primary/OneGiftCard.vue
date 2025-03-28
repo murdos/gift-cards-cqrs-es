@@ -27,7 +27,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import type { GiftCard } from '@/giftcard/domain/GiftCard';
 import GiftCardPayment from '@/giftcard/infrastructure/primary/GiftCardPayment.vue';
 import { AxiosGiftCardCommandRepository } from '@/giftcard/infrastructure/secondary/AxiosGiftCardCommandRepository';
@@ -35,46 +35,37 @@ import VisualBarcode from '@/shared/barcode/infrastructure/primary/VisualBarcode
 import { AxiosHttp } from '@/shared/http/infrastructure/secondary/AxiosHttp';
 import GiftCardModal from '@/shared/modal/infrastructure/primary/GiftCardModal.vue';
 import axios from 'axios';
-import { defineComponent, ref } from 'vue';
+import { ref } from 'vue';
 
-export default defineComponent({
-  name: 'OneGiftCard',
-  components: { GiftCardPayment, VisualBarcode, GiftCardModal },
-  props: {
-    giftCard: {
-      type: Object as () => GiftCard,
-      required: true,
-    },
-  },
-  emits: ['giftCardUpdated'],
-  setup(props, { emit }) {
-    const isModalOpen = ref(false);
+const props = defineProps<{
+  giftCard: GiftCard;
+}>();
 
-    const openModal = () => {
-      isModalOpen.value = true;
-    };
+const emit = defineEmits(['giftCardUpdated']);
 
-    const closeModal = () => {
-      isModalOpen.value = false;
-    };
+const isModalOpen = ref(false);
 
-    const submitPayment = async (paymentAmount: number) => {
-      const giftCardCommandRepository = new AxiosGiftCardCommandRepository(new AxiosHttp(axios));
-      const payment = { amount: paymentAmount };
-      try {
-        await giftCardCommandRepository.pay(props.giftCard.barcode.value, payment);
-        console.log('Payment successful!');
-        closeModal();
-        emit('giftCardUpdated');
-      } catch (error) {
-        console.error('Payment failed:', error);
-        // Add logic to show an error message
-      }
-    };
+const openModal = () => {
+  isModalOpen.value = true;
+};
 
-    return { isModalOpen, openModal, closeModal, submitPayment };
-  },
-});
+const closeModal = () => {
+  isModalOpen.value = false;
+};
+
+const submitPayment = async (paymentAmount: number) => {
+  const giftCardCommandRepository = new AxiosGiftCardCommandRepository(new AxiosHttp(axios));
+  const payment = { amount: paymentAmount };
+  try {
+    await giftCardCommandRepository.pay(props.giftCard.barcode.value, payment);
+    console.log('Payment successful!');
+    closeModal();
+    emit('giftCardUpdated');
+  } catch (error) {
+    console.error('Payment failed:', error);
+    // Add logic to show an error message
+  }
+};
 </script>
 
 <style scoped>

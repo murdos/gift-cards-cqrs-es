@@ -12,6 +12,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -51,8 +52,8 @@ record GiftCardDeclarationDTO(@NotBlank String barcode, @NotNull @Positive Integ
   }
 }
 
-record PaymentDTO(@NotNull @Positive Double amount, @NotNull LocalDate paymentDate) {
+record PaymentDTO(@NotNull @Positive Double amount, LocalDate paymentDate) {
   public Payment toDomain() {
-    return new Payment(Amount.of(amount), paymentDate);
+    return new Payment(Amount.of(amount), Optional.ofNullable(paymentDate).orElse(LocalDate.now()));
   }
 }

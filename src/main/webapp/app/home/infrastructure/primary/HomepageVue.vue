@@ -2,9 +2,6 @@
   <div class="homepage">
     <header class="homepage-header">
       <div class="container">
-        <div class="logo-container">
-          <img src="./../../../../content/images/JHipster-Lite-neon-green.png" alt="Gift Card Logo" class="logo" />
-        </div>
         <h1 class="title">Bienvenue sur Gift Cards !</h1>
         <p class="subtitle">Gérez vos cartes cadeaux facilement et en toute sécurité.</p>
       </div>
@@ -12,23 +9,6 @@
 
     <main class="homepage-main">
       <div class="container">
-        <section class="features">
-          <div class="feature">
-            <img src="./../../../../content/images/VueLogo.png" alt="Manage" class="feature-icon" />
-            <h3>Gérez vos cartes</h3>
-            <p>Consultez le solde et l'historique de vos cartes cadeaux.</p>
-          </div>
-          <div class="feature">
-            <img src="./../../../../content/images/VueLogo.png" alt="Secure" class="feature-icon" />
-            <h3>Sécurité</h3>
-            <p>Vos données sont protégées.</p>
-          </div>
-          <div class="feature">
-            <img src="./../../../../content/images/VueLogo.png" alt="Easy" class="feature-icon" />
-            <h3>Facile à utiliser</h3>
-            <p>Une interface simple et intuitive.</p>
-          </div>
-        </section>
         <section class="gift-card-creation-section">
           <button class="primary-button" @click="openGiftCardCreationModal">Déclarer une carte cadeau</button>
         </section>
@@ -50,51 +30,36 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import GiftCardList from '@/giftcard/infrastructure/primary/GiftCardList.vue';
 import GiftCardModal from '@/shared/modal/infrastructure/primary/GiftCardModal.vue';
-import { defineComponent, ref } from 'vue';
+import { ref } from 'vue';
 import GiftCardDeclaration from '../../../giftcard/infrastructure/primary/GiftCardDeclaration.vue';
 
-export default defineComponent({
-  name: 'HomepageVue',
-  components: { GiftCardList, GiftCardDeclaration: GiftCardDeclaration, GiftCardModal },
-  setup() {
-    const currentYear = ref(new Date().getFullYear());
-    const isGiftCardDeclarationModalOpen = ref(false);
+const currentYear = ref(new Date().getFullYear());
+const isGiftCardDeclarationModalOpen = ref(false);
 
-    // store the instance of gifcardList to be able to call `refresh` on it
-    const giftCardListRef = ref<InstanceType<typeof GiftCardList>>();
+// store the instance of gifcardList to be able to call `refresh` on it
+const giftCardListRef = ref<InstanceType<typeof GiftCardList>>();
 
-    const openGiftCardCreationModal = () => {
-      isGiftCardDeclarationModalOpen.value = true;
-    };
+const openGiftCardCreationModal = () => {
+  isGiftCardDeclarationModalOpen.value = true;
+};
 
-    const closeGiftCardDeclarationModal = () => {
-      isGiftCardDeclarationModalOpen.value = false;
-    };
+const closeGiftCardDeclarationModal = () => {
+  isGiftCardDeclarationModalOpen.value = false;
+};
 
-    const handleGiftCardDeclared = () => {
-      closeGiftCardDeclarationModal();
-      refreshGiftCardList();
-    };
+const handleGiftCardDeclared = () => {
+  closeGiftCardDeclarationModal();
+  refreshGiftCardList();
+};
 
-    const refreshGiftCardList = () => {
-      if (giftCardListRef.value) {
-        giftCardListRef.value.refresh();
-      }
-    };
-
-    return {
-      currentYear,
-      isGiftCardDeclarationModalOpen,
-      openGiftCardCreationModal,
-      closeGiftCardDeclarationModal,
-      handleGiftCardDeclared,
-      giftCardListRef,
-    };
-  },
-});
+const refreshGiftCardList = () => {
+  if (giftCardListRef.value) {
+    giftCardListRef.value.refresh();
+  }
+};
 </script>
 
 <style scoped>
