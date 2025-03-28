@@ -5,6 +5,8 @@ import io.craft.giftcard.giftcard.domain.GiftCardEventStore;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
 import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentStateRepository;
 import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentStateUpdater;
+import io.craft.giftcard.giftcard.domain.projections.GiftCardDetailsRepository;
+import io.craft.giftcard.giftcard.domain.projections.GiftCardDetailsUpdater;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -17,11 +19,13 @@ class InMemoryProjectionsInitializer {
 
   InMemoryProjectionsInitializer(
     GiftCardEventStore eventStore,
-    GiftCardCurrentStateRepository giftCardCurrentStateRepository
+    GiftCardCurrentStateRepository cardCurrentStateRepository,
+    GiftCardDetailsRepository detailsRepository
   ) {
     this.eventStore = eventStore;
-    this.eventPublisher = new EventPublisher<>();
-    this.eventPublisher.register(new GiftCardCurrentStateUpdater(giftCardCurrentStateRepository));
+    this.eventPublisher = new EventPublisher<GiftCardEvent>()
+      .register(new GiftCardCurrentStateUpdater(cardCurrentStateRepository))
+      .register(new GiftCardDetailsUpdater(eventStore, detailsRepository));
   }
 
   @EventListener(ApplicationReadyEvent.class)
