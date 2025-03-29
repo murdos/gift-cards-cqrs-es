@@ -1,0 +1,11 @@
+== Event modeling
+
+[.notes]
+--
+Montrer l'event modeling agrémenté des screenshots
+
+Le parcourir viteuf vu qu'on a déjà vu l'appli
+
+préciser que c'est toujours bien d'en faire pour comprendre les interractions,
+même si on ne part pas sur de l'event sourcing
+--

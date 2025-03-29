@@ -1,3 +1,5 @@
+== un fichier devrait toujours avoir un seul titre "=="
+
 [transition="slide-in fade-out"]
 === Listes à puce
 
@@ -36,7 +38,7 @@ moi moi moi moi moi moi moi moi moi
 * Love Event Sourcing
 --
 
-== List à puce qui apparait au clic
+=== List à puce qui apparait au clic
 
 [%steps]
 * step1

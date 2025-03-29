@@ -15,4 +15,50 @@ image::yercin.jpg[height=250px]
 Hello
 --
 
+include::intro/introduction.adoc[]
+
+include::demo.adoc[]
+[.notes]
+--
+Montrer l'application
+--
+
+include::intro/eventmodeling.adoc[]
+
+include::eventsourcing/choix-techniques.adoc[]
+
+include::demo.adoc[]
+[.notes]
+--
+Show code (focus retour des commandes et EventStore::save)
+--
+
+include::eventsourcing/projection.adoc[]
+
+include::demo.adoc[]
+[.notes]
+--
+- Montrer la projection GiftCardCurrentState
+- d'où elle vient ? (event handler)
+--
+
+include::eventsourcing/decision.adoc[]
+
+include::demo.adoc[]
+[.notes]
+--
+- Montrer le code de la décision projection
+- Montrer le code de la partie commande
+--
+
+include::cqrs/cqrs.adoc[]
+
+include::nouveau-besoin.adoc[]
+
+include::demo.adoc[]
+[.notes]
+--
+- Livecoding du nouveau besoin
+--
+
 include::example.adoc[]
