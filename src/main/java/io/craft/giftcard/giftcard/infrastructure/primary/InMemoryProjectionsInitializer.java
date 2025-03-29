@@ -13,7 +13,10 @@ class InMemoryProjectionsInitializer {
   private final GiftCardEventStore eventStore;
   private final EventPublisher<GiftCardEvent> eventPublisher;
 
-  InMemoryProjectionsInitializer(GiftCardEventStore eventStore, EventPublisher<GiftCardEvent> eventPublisher) {
+  InMemoryProjectionsInitializer(
+    GiftCardEventStore eventStore,
+    EventPublisher<GiftCardEvent> eventPublisher
+  ) {
     this.eventStore = eventStore;
     this.eventPublisher = eventPublisher;
   }

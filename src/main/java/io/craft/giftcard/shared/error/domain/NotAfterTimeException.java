@@ -22,7 +22,10 @@ public final class NotAfterTimeException extends AssertionException {
   }
 
   public static final class NotAfterTimeExceptionBuilder
-    implements NotAfterTimeExceptionValueBuilder, NotAfterTimeExceptionFieldBuilder, NotAfterTimeExceptionOtherBuilder {
+    implements
+      NotAfterTimeExceptionValueBuilder,
+      NotAfterTimeExceptionFieldBuilder,
+      NotAfterTimeExceptionOtherBuilder {
 
     private final String hint;
     private Instant value;

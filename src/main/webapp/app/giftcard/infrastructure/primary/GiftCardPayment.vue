@@ -2,7 +2,14 @@
   <form @submit.prevent="submitPayment">
     <div class="form-group">
       <label for="paymentAmount">Montant à payer:</label>
-      <input id="paymentAmount" v-model.number="paymentAmount" v-focus type="number" min="0" required />
+      <input
+        id="paymentAmount"
+        v-model.number="paymentAmount"
+        v-focus
+        type="number"
+        min="0"
+        required
+      />
     </div>
     <button type="submit" class="payment-button">Confirmer le paiement</button>
   </form>

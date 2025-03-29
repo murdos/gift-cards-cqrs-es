@@ -33,7 +33,9 @@ class GiftCardQueryController {
   }
 
   @GetMapping("/{barcode}")
-  public ResponseEntity<GiftCardCurrentStateDto> getGiftCardByBarcode(@PathVariable String barcode) {
+  public ResponseEntity<GiftCardCurrentStateDto> getGiftCardByBarcode(
+    @PathVariable String barcode
+  ) {
     return giftCardCurrentStateRepository
       .get(new Barcode(barcode))
       .map(GiftCardCurrentStateDto::fromDomain)
@@ -41,12 +43,18 @@ class GiftCardQueryController {
       .orElse(ResponseEntity.notFound().build());
   }
 
-  public record GiftCardCurrentStateDto(Barcode barcode, Amount remainingAmount, ShoppingStoreDto shoppingStore) {
+  public record GiftCardCurrentStateDto(
+    Barcode barcode,
+    Amount remainingAmount,
+    ShoppingStoreDto shoppingStore
+  ) {
     public static GiftCardCurrentStateDto fromDomain(GiftCardCurrentState giftCardCurrentState) {
       return new GiftCardCurrentStateDto(
         giftCardCurrentState.barcode(),
         giftCardCurrentState.remainingAmount(),
-        new ShoppingStoreDto(QueryShoppingStore.valueOf(giftCardCurrentState.shoppingStore().name()))
+        new ShoppingStoreDto(
+          QueryShoppingStore.valueOf(giftCardCurrentState.shoppingStore().name())
+        )
       );
     }
   }

@@ -9,7 +9,9 @@
       <div class="form-group">
         <label for="shoppingStore">Magasin:</label>
         <select id="shoppingStore" v-model="shoppingStore">
-          <option v-for="store in shoppingStores" :key="store.id" :value="store">{{ store.name }}</option>
+          <option v-for="store in shoppingStores" :key="store.id" :value="store">
+            {{ store.name }}
+          </option>
         </select>
       </div>
       <div class="form-group">

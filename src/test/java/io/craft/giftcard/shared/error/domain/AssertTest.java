@@ -33,7 +33,8 @@ class AssertTest {
 
     @Test
     void shouldValidateNonNull() {
-      assertThatCode(() -> Assert.notNull(FIELD_NAME, NOT_NULL_OR_EMPTY)).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.notNull(FIELD_NAME, NOT_NULL_OR_EMPTY)
+      ).doesNotThrowAnyException();
     }
   }
 
@@ -65,7 +66,8 @@ class AssertTest {
 
     @Test
     void shouldValidateActualString() {
-      assertThatCode(() -> Assert.notBlank(FIELD_NAME, NOT_NULL_OR_EMPTY)).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.notBlank(FIELD_NAME, NOT_NULL_OR_EMPTY)
+      ).doesNotThrowAnyException();
     }
 
     private void assertNotBlankString(String input) {
@@ -97,7 +99,8 @@ class AssertTest {
 
     @Test
     void shouldValidateNotEmptyCollection() {
-      assertThatCode(() -> Assert.notEmpty(FIELD_NAME, List.of("Hello"))).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.notEmpty(FIELD_NAME, List.of("Hello"))
+      ).doesNotThrowAnyException();
     }
   }
 
@@ -122,7 +125,8 @@ class AssertTest {
 
     @Test
     void shouldValidateNotEmptyMap() {
-      assertThatCode(() -> Assert.notEmpty(FIELD_NAME, Map.of("key", "value"))).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.notEmpty(FIELD_NAME, Map.of("key", "value"))
+      ).doesNotThrowAnyException();
     }
   }
 
@@ -183,19 +187,22 @@ class AssertTest {
     @ParameterizedTest
     @ValueSource(ints = { -1, 0 })
     void shouldValidateZeroOrNegativeMinLengthWithStringValue(int minLength) {
-      assertThatCode(() -> Assert.field(FIELD_NAME, "value").minLength(minLength)).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, "value").minLength(minLength)
+      ).doesNotThrowAnyException();
     }
 
     @ParameterizedTest
     @ValueSource(ints = { -1, 0 })
     void shouldValidateZeroOrNegativeMinLengthForNullInput(int minLength) {
-      assertThatCode(() -> Assert.field(FIELD_NAME, (String) null).minLength(minLength)).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, (String) null).minLength(minLength)
+      ).doesNotThrowAnyException();
     }
 
     @ParameterizedTest
     @ValueSource(ints = { 4, 5 })
     void shouldValidateLongEnoughString(int minLength) {
-      assertThatCode(() -> Assert.field(FIELD_NAME, "value").minLength(minLength)).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, "value").minLength(minLength)
+      ).doesNotThrowAnyException();
     }
 
     @Test
@@ -209,13 +216,15 @@ class AssertTest {
 
     @Test
     void shouldValidateNullInputUnderMaxLength() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, (String) null).maxLength(5)).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, (String) null).maxLength(5)
+      ).doesNotThrowAnyException();
     }
 
     @ParameterizedTest
     @ValueSource(ints = { 5, 6 })
     void shouldValidateShortEnoughString(int maxLength) {
-      assertThatCode(() -> Assert.field(FIELD_NAME, "value").maxLength(maxLength)).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, "value").maxLength(maxLength)
+      ).doesNotThrowAnyException();
     }
   }
 
@@ -400,7 +409,8 @@ class AssertTest {
     @ParameterizedTest
     @ValueSource(floats = { 0.1F, 1 })
     void shouldValidatePositiveValueAsStrictlyPositive(float value) {
-      assertThatCode(() -> Assert.field(FIELD_NAME, value).strictlyPositive()).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, value).strictlyPositive()
+      ).doesNotThrowAnyException();
     }
 
     @Test
@@ -533,7 +543,8 @@ class AssertTest {
     @ParameterizedTest
     @ValueSource(doubles = { 0.1F, 1 })
     void shouldValidatePositiveValueAsStrictlyPositive(double value) {
-      assertThatCode(() -> Assert.field(FIELD_NAME, value).strictlyPositive()).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, value).strictlyPositive()
+      ).doesNotThrowAnyException();
     }
 
     @Test
@@ -649,12 +660,14 @@ class AssertTest {
 
     @Test
     void shouldBePositiveForZero() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, BigDecimal.ZERO).positive()).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, BigDecimal.ZERO).positive()
+      ).doesNotThrowAnyException();
     }
 
     @Test
     void shouldBePositiveForOne() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, BigDecimal.ONE).positive()).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, BigDecimal.ONE).positive()
+      ).doesNotThrowAnyException();
     }
 
     @Test
@@ -683,7 +696,8 @@ class AssertTest {
 
     @Test
     void shouldBeStrictlyPositiveForOne() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, BigDecimal.ONE).strictlyPositive()).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, BigDecimal.ONE).strictlyPositive()
+      ).doesNotThrowAnyException();
     }
 
     @Test
@@ -711,12 +725,14 @@ class AssertTest {
 
     @Test
     void shouldValidateBigDecimalOverMinLongValue() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, new BigDecimal(42)).min(1)).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, new BigDecimal(42)).min(1)
+      ).doesNotThrowAnyException();
     }
 
     @Test
     void shouldValidateBigDecimalAtMinLongValue() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, new BigDecimal(42)).min(42)).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, new BigDecimal(42)).min(42)
+      ).doesNotThrowAnyException();
     }
 
     @Test
@@ -744,12 +760,14 @@ class AssertTest {
 
     @Test
     void shouldValidateBigDecimalOverMinBigDecimalValue() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, new BigDecimal(42)).min(new BigDecimal(1))).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, new BigDecimal(42)).min(new BigDecimal(1))
+      ).doesNotThrowAnyException();
     }
 
     @Test
     void shouldValidateBigDecimalAtMinBigDecimalValue() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, new BigDecimal(42)).min(new BigDecimal(42))).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, new BigDecimal(42)).min(new BigDecimal(42))
+      ).doesNotThrowAnyException();
     }
 
     @Test
@@ -778,7 +796,8 @@ class AssertTest {
 
     @Test
     void shouldValidateValueOverLongFloor() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, new BigDecimal(42)).over(1)).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, new BigDecimal(42)).over(1)
+      ).doesNotThrowAnyException();
     }
 
     @Test
@@ -806,7 +825,8 @@ class AssertTest {
 
     @Test
     void shouldNotValidateValueAtBigDecimalFloor() {
-      assertThatThrownBy(() -> Assert.field(FIELD_NAME, new BigDecimal(42)).over(new BigDecimal(42)))
+      assertThatThrownBy(() -> Assert.field(FIELD_NAME, new BigDecimal(42)).over(new BigDecimal(42))
+      )
         .isExactlyInstanceOf(NumberValueTooLowException.class)
         .hasMessageContaining(FIELD_NAME)
         .hasMessageContaining("42");
@@ -814,7 +834,8 @@ class AssertTest {
 
     @Test
     void shouldValidateValueOverBigDecimalFloor() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, new BigDecimal(42)).over(BigDecimal.ONE)).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, new BigDecimal(42)).over(BigDecimal.ONE)
+      ).doesNotThrowAnyException();
     }
 
     @Test
@@ -835,12 +856,14 @@ class AssertTest {
 
     @Test
     void shouldValidateBigDecimalUnderMaxLongValue() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, new BigDecimal(1)).max(42)).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, new BigDecimal(1)).max(42)
+      ).doesNotThrowAnyException();
     }
 
     @Test
     void shouldValidateBigDecimalAtMaxLongValue() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, new BigDecimal(42)).max(42)).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, new BigDecimal(42)).max(42)
+      ).doesNotThrowAnyException();
     }
 
     @Test
@@ -868,12 +891,14 @@ class AssertTest {
 
     @Test
     void shouldValidateBigDecimalUnderMaxBigDecimalValue() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, new BigDecimal(1)).max(new BigDecimal(1))).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, new BigDecimal(1)).max(new BigDecimal(1))
+      ).doesNotThrowAnyException();
     }
 
     @Test
     void shouldValidateBigDecimalAtMaxBigDecimalValue() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, new BigDecimal(42)).max(new BigDecimal(42))).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, new BigDecimal(42)).max(new BigDecimal(42))
+      ).doesNotThrowAnyException();
     }
 
     @Test
@@ -902,7 +927,8 @@ class AssertTest {
 
     @Test
     void shouldValidateValueUnderLongCeil() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, new BigDecimal(1)).under(42)).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, new BigDecimal(1)).under(42)
+      ).doesNotThrowAnyException();
     }
 
     @Test
@@ -921,7 +947,8 @@ class AssertTest {
 
     @Test
     void shouldNotValidateValueOverBigDecimalCeil() {
-      assertThatThrownBy(() -> Assert.field(FIELD_NAME, new BigDecimal(42)).under(new BigDecimal(1)))
+      assertThatThrownBy(() -> Assert.field(FIELD_NAME, new BigDecimal(42)).under(new BigDecimal(1))
+      )
         .isExactlyInstanceOf(NumberValueTooHighException.class)
         .hasMessageContaining(FIELD_NAME)
         .hasMessageContaining("42")
@@ -930,7 +957,9 @@ class AssertTest {
 
     @Test
     void shouldNotValidateValueAtBigDecimalCeil() {
-      assertThatThrownBy(() -> Assert.field(FIELD_NAME, new BigDecimal(42)).under(new BigDecimal(42)))
+      assertThatThrownBy(() ->
+        Assert.field(FIELD_NAME, new BigDecimal(42)).under(new BigDecimal(42))
+      )
         .isExactlyInstanceOf(NumberValueTooHighException.class)
         .hasMessageContaining(FIELD_NAME)
         .hasMessageContaining("42");
@@ -938,7 +967,8 @@ class AssertTest {
 
     @Test
     void shouldValidateValueOverBigDecimalCeil() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, BigDecimal.ONE).under(new BigDecimal(42))).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, BigDecimal.ONE).under(new BigDecimal(42))
+      ).doesNotThrowAnyException();
     }
   }
 
@@ -956,7 +986,8 @@ class AssertTest {
 
     @Test
     void shouldValidateActualCollectionAsNotNull() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, List.of()).notNull()).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, List.of()).notNull()
+      ).doesNotThrowAnyException();
     }
 
     @Test
@@ -977,7 +1008,8 @@ class AssertTest {
 
     @Test
     void shouldValidateCollectionWithElementAsNotEmpty() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, List.of("value")).notEmpty()).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, List.of("value")).notEmpty()
+      ).doesNotThrowAnyException();
     }
 
     @Test
@@ -990,7 +1022,9 @@ class AssertTest {
 
     @Test
     void shouldNotValidateNotNullCollectionAsNegativeMaxSize() {
-      assertThatThrownBy(() -> Assert.field(FIELD_NAME, List.of("value1", "value2", "value3")).maxSize(-1))
+      assertThatThrownBy(() ->
+        Assert.field(FIELD_NAME, List.of("value1", "value2", "value3")).maxSize(-1)
+      )
         .isExactlyInstanceOf(TooManyElementsException.class)
         .hasMessageContaining(FIELD_NAME)
         .hasMessageContaining("-1")
@@ -999,7 +1033,9 @@ class AssertTest {
 
     @Test
     void shouldNotValidateCollectionWithTooManyElements() {
-      assertThatThrownBy(() -> Assert.field(FIELD_NAME, List.of("value1", "value2", "value3")).maxSize(2))
+      assertThatThrownBy(() ->
+        Assert.field(FIELD_NAME, List.of("value1", "value2", "value3")).maxSize(2)
+      )
         .isExactlyInstanceOf(TooManyElementsException.class)
         .hasMessageContaining(FIELD_NAME)
         .hasMessageContaining("2")
@@ -1009,23 +1045,29 @@ class AssertTest {
     @ParameterizedTest
     @ValueSource(ints = { -1, 0 })
     void shouldValidateNullAsMaxSizeZeroOrNegative(int maxSize) {
-      assertThatCode(() -> Assert.field(FIELD_NAME, (Collection<Object>) null).maxSize(maxSize)).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, (Collection<Object>) null).maxSize(maxSize)
+      ).doesNotThrowAnyException();
     }
 
     @ParameterizedTest
     @ValueSource(ints = { 3, 4 })
     void shouldValidateCollectionWithSizeUnderMaxSize(int maxSize) {
-      assertThatCode(() -> Assert.field(FIELD_NAME, List.of("value1", "value2", "value3")).maxSize(maxSize)).doesNotThrowAnyException();
+      assertThatCode(() ->
+        Assert.field(FIELD_NAME, List.of("value1", "value2", "value3")).maxSize(maxSize)
+      ).doesNotThrowAnyException();
     }
 
     @Test
     void shouldValidateNullAsNegativeMaxSize() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, (Collection<Object>) null).maxSize(-1)).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, (Collection<Object>) null).maxSize(-1)
+      ).doesNotThrowAnyException();
     }
 
     @Test
     void shouldNotValidateCollectionWithNullElementAsNoNullElement() {
-      assertThatThrownBy(() -> Assert.field(FIELD_NAME, Arrays.asList("value1", null)).noNullElement())
+      assertThatThrownBy(() ->
+        Assert.field(FIELD_NAME, Arrays.asList("value1", null)).noNullElement()
+      )
         .isExactlyInstanceOf(NullElementInCollectionException.class)
         .hasMessageContaining(FIELD_NAME)
         .hasMessageContaining("null element");
@@ -1033,12 +1075,14 @@ class AssertTest {
 
     @Test
     void shouldValidateNullCollectionAsNoNullElement() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, (Collection<Object>) null).noNullElement()).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, (Collection<Object>) null).noNullElement()
+      ).doesNotThrowAnyException();
     }
 
     @Test
     void shouldValidateCollectionWithNoNullElementAsNoNullElement() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, List.of("value1", "value2")).noNullElement()).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, List.of("value1", "value2")).noNullElement()
+      ).doesNotThrowAnyException();
     }
   }
 
@@ -1056,7 +1100,8 @@ class AssertTest {
 
     @Test
     void shouldValidateActualCollectionAsNotNull() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, List.of()).notNull()).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, List.of()).notNull()
+      ).doesNotThrowAnyException();
     }
 
     @Test
@@ -1077,7 +1122,8 @@ class AssertTest {
 
     @Test
     void shouldValidateCollectionWithElementAsNotEmpty() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, new String[] { "value" }).notEmpty()).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, new String[] { "value" }).notEmpty()
+      ).doesNotThrowAnyException();
     }
 
     @Test
@@ -1090,7 +1136,9 @@ class AssertTest {
 
     @Test
     void shouldNotValidateNotNullCollectionAsNegativeMaxSize() {
-      assertThatThrownBy(() -> Assert.field(FIELD_NAME, new String[] { "value1", "value2", "value3" }).maxSize(-1))
+      assertThatThrownBy(() ->
+        Assert.field(FIELD_NAME, new String[] { "value1", "value2", "value3" }).maxSize(-1)
+      )
         .isExactlyInstanceOf(TooManyElementsException.class)
         .hasMessageContaining(FIELD_NAME)
         .hasMessageContaining("-1")
@@ -1099,7 +1147,9 @@ class AssertTest {
 
     @Test
     void shouldNotValidateCollectionWithTooManyElements() {
-      assertThatThrownBy(() -> Assert.field(FIELD_NAME, new String[] { "value1", "value2", "value3" }).maxSize(2))
+      assertThatThrownBy(() ->
+        Assert.field(FIELD_NAME, new String[] { "value1", "value2", "value3" }).maxSize(2)
+      )
         .isExactlyInstanceOf(TooManyElementsException.class)
         .hasMessageContaining(FIELD_NAME)
         .hasMessageContaining("2")
@@ -1109,24 +1159,29 @@ class AssertTest {
     @ParameterizedTest
     @ValueSource(ints = { -1, 0 })
     void shouldValidateNullAsMaxSizeZeroOrNegative(int maxSize) {
-      assertThatCode(() -> Assert.field(FIELD_NAME, (Object[]) null).maxSize(maxSize)).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, (Object[]) null).maxSize(maxSize)
+      ).doesNotThrowAnyException();
     }
 
     @ParameterizedTest
     @ValueSource(ints = { 3, 4 })
     void shouldValidateCollectionWithSizeUnderMaxSize(int maxSize) {
-      assertThatCode(() -> Assert.field(FIELD_NAME, new String[] { "value1", "value2", "value3" }).maxSize(maxSize)
+      assertThatCode(() ->
+        Assert.field(FIELD_NAME, new String[] { "value1", "value2", "value3" }).maxSize(maxSize)
       ).doesNotThrowAnyException();
     }
 
     @Test
     void shouldValidateNullAsNegativeMaxSize() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, (Object[]) null).maxSize(-1)).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, (Object[]) null).maxSize(-1)
+      ).doesNotThrowAnyException();
     }
 
     @Test
     void shouldNotValidateCollectionWithNullElementAsNoNullElement() {
-      assertThatThrownBy(() -> Assert.field(FIELD_NAME, new String[] { "value1", null }).noNullElement())
+      assertThatThrownBy(() ->
+        Assert.field(FIELD_NAME, new String[] { "value1", null }).noNullElement()
+      )
         .isExactlyInstanceOf(NullElementInCollectionException.class)
         .hasMessageContaining(FIELD_NAME)
         .hasMessageContaining("null element");
@@ -1134,12 +1189,15 @@ class AssertTest {
 
     @Test
     void shouldValidateNullCollectionAsNoNullElement() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, (Object[]) null).noNullElement()).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, (Object[]) null).noNullElement()
+      ).doesNotThrowAnyException();
     }
 
     @Test
     void shouldValidateCollectionWithNoNullElementAsNoNullElement() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, new String[] { "value1", "value2" }).noNullElement()).doesNotThrowAnyException();
+      assertThatCode(() ->
+        Assert.field(FIELD_NAME, new String[] { "value1", "value2" }).noNullElement()
+      ).doesNotThrowAnyException();
     }
   }
 
@@ -1156,7 +1214,8 @@ class AssertTest {
 
     @Test
     void shouldValidateActualInstantAsNotNull() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, Instant.now()).notNull()).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, Instant.now()).notNull()
+      ).doesNotThrowAnyException();
     }
 
     @Test
@@ -1194,7 +1253,8 @@ class AssertTest {
 
     @Test
     void shouldValidateFutureDateAsFuture() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, future()).inFuture()).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, future()).inFuture()
+      ).doesNotThrowAnyException();
     }
 
     @Test
@@ -1231,7 +1291,8 @@ class AssertTest {
 
     @Test
     void shouldValidateFutureInstantAsAfterPastInstant() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, future()).after(past())).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, future()).after(past())
+      ).doesNotThrowAnyException();
     }
 
     @Test
@@ -1258,14 +1319,16 @@ class AssertTest {
 
     @Test
     void shouldValidateFutureInstantAsAfterOrAtPastInstant() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, future()).afterOrAt(past())).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, future()).afterOrAt(past())
+      ).doesNotThrowAnyException();
     }
 
     @Test
     void shouldValidateSameInstantAsAfterOrAtInstant() {
       Instant date = past();
 
-      assertThatCode(() -> Assert.field(FIELD_NAME, date).afterOrAt(date)).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, date).afterOrAt(date)
+      ).doesNotThrowAnyException();
     }
 
     @Test
@@ -1302,7 +1365,8 @@ class AssertTest {
 
     @Test
     void shouldValidatePastInstantAsBeforeFutureInstant() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, past()).before(future())).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, past()).before(future())
+      ).doesNotThrowAnyException();
     }
 
     @Test
@@ -1329,14 +1393,16 @@ class AssertTest {
 
     @Test
     void shouldValidatePastInstantAsAfterOrAtFutureInstant() {
-      assertThatCode(() -> Assert.field(FIELD_NAME, past()).beforeOrAt(future())).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, past()).beforeOrAt(future())
+      ).doesNotThrowAnyException();
     }
 
     @Test
     void shouldValidateSameInstantAsBeforeOrAtInstant() {
       Instant date = past();
 
-      assertThatCode(() -> Assert.field(FIELD_NAME, date).beforeOrAt(date)).doesNotThrowAnyException();
+      assertThatCode(() -> Assert.field(FIELD_NAME, date).beforeOrAt(date)
+      ).doesNotThrowAnyException();
     }
 
     private Instant past() {

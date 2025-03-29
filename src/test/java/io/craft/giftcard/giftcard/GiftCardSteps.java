@@ -25,12 +25,13 @@ import java.util.Optional;
 
 public class GiftCardSteps {
 
-  private final GiftCardApplicationService giftCardApplicationService = new GiftCardApplicationService(
-    new InMemoryGiftCardEventStore(),
-    new InMemoryGiftCardCurrentStateRepository(),
-    new SimpleEventPublisher(),
-    new KafkaGiftCardMessageSender(new ObjectMapper())
-  );
+  private final GiftCardApplicationService giftCardApplicationService =
+    new GiftCardApplicationService(
+      new InMemoryGiftCardEventStore(),
+      new InMemoryGiftCardCurrentStateRepository(),
+      new SimpleEventPublisher(),
+      new KafkaGiftCardMessageSender(new ObjectMapper())
+    );
 
   private Optional<Exception> declarationException;
 
@@ -70,11 +71,20 @@ public class GiftCardSteps {
   public void giftCardShouldHaveARemainingAmountOf(String barcode, double expectedAmount) {
     var giftCardView = giftCardApplicationService.findBy(new Barcode(barcode));
 
-    assertThat(giftCardView.remainingAmount().value()).isEqualByComparingTo(new BigDecimal(expectedAmount));
+    assertThat(giftCardView.remainingAmount().value()).isEqualByComparingTo(
+      new BigDecimal(expectedAmount)
+    );
   }
 
   @When("I pay with the gift card {string} an amount of {double} on {localDate}")
-  public void iPayWithTheGiftCardAnAmountOf(String barcode, double paidAmount, LocalDate paymentDate) {
-    giftCardApplicationService.pay(new Barcode(barcode), new Payment(Amount.of(paidAmount), paymentDate));
+  public void iPayWithTheGiftCardAnAmountOf(
+    String barcode,
+    double paidAmount,
+    LocalDate paymentDate
+  ) {
+    giftCardApplicationService.pay(
+      new Barcode(barcode),
+      new Payment(Amount.of(paidAmount), paymentDate)
+    );
   }
 }

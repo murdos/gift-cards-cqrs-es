@@ -15,7 +15,12 @@ import org.junit.jupiter.api.extension.TestInstancePostProcessor;
 import org.junit.platform.commons.support.ModifierSupport;
 
 public final class LogsSpyExtension
-  implements BeforeAllCallback, BeforeEachCallback, AfterEachCallback, ParameterResolver, TestInstancePostProcessor {
+  implements
+    BeforeAllCallback,
+    BeforeEachCallback,
+    AfterEachCallback,
+    ParameterResolver,
+    TestInstancePostProcessor {
 
   private final LogsSpy logsSpy = new LogsSpy();
 
@@ -30,14 +35,18 @@ public final class LogsSpyExtension
   }
 
   @Override
-  public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext)
-    throws ParameterResolutionException {
+  public boolean supportsParameter(
+    ParameterContext parameterContext,
+    ExtensionContext extensionContext
+  ) throws ParameterResolutionException {
     return parameterContext.getParameter().getType().equals(LogsSpy.class);
   }
 
   @Override
-  public LogsSpy resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext)
-    throws ParameterResolutionException {
+  public LogsSpy resolveParameter(
+    ParameterContext parameterContext,
+    ExtensionContext extensionContext
+  ) throws ParameterResolutionException {
     return logsSpy;
   }
 

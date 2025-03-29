@@ -15,15 +15,23 @@ class NotAfterTimeExceptionTest {
 
   @Test
   void shouldGetNotAfterExceptionInformation() {
-    NotAfterTimeException exception = NotAfterTimeException.notAfter().value(VALUE).field(FIELD).other(OTHER);
+    NotAfterTimeException exception = NotAfterTimeException.notAfter()
+      .value(VALUE)
+      .field(FIELD)
+      .other(OTHER);
 
     assertDefaultInformation(exception);
-    assertThat(exception.getMessage()).isEqualTo("Time 1970-01-01T00:22:17Z in \"myField\" must be after 2024-02-21T21:00:00Z but wasn't");
+    assertThat(exception.getMessage()).isEqualTo(
+      "Time 1970-01-01T00:22:17Z in \"myField\" must be after 2024-02-21T21:00:00Z but wasn't"
+    );
   }
 
   @Test
   void shouldGetNotStrictlyAfterExceptionInformation() {
-    NotAfterTimeException exception = NotAfterTimeException.strictlyNotAfter().value(VALUE).field(FIELD).other(OTHER);
+    NotAfterTimeException exception = NotAfterTimeException.strictlyNotAfter()
+      .value(VALUE)
+      .field(FIELD)
+      .other(OTHER);
 
     assertDefaultInformation(exception);
     assertThat(exception.getMessage()).isEqualTo(

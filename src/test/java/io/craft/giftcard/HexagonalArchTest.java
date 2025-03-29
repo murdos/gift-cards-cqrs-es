@@ -30,21 +30,31 @@ class HexagonalArchTest {
     .withImportOption(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS)
     .importPackages(ROOT_PACKAGE);
 
-  private static final Collection<String> businessContexts = packagesWithAnnotation(BusinessContext.class);
+  private static final Collection<String> businessContexts = packagesWithAnnotation(
+    BusinessContext.class
+  );
   private static final String[] businessContextsPackages = buildPackagesPatterns(businessContexts);
 
-  private static final Collection<String> sharedKernels = packagesWithAnnotation(SharedKernel.class);
+  private static final Collection<String> sharedKernels = packagesWithAnnotation(
+    SharedKernel.class
+  );
   private static final String[] sharedKernelsPackages = buildPackagesPatterns(sharedKernels);
 
   // the empty package is related to: https://github.com/TNG/ArchUnit/issues/191#issuecomment-507964792
   private static final String[] vanillaPackages = new String[] { "java..", "" };
-  private static final String[] commonToolsAndUtilsPackages = new String[] { "org.apache.commons..", "org.jmolecules..", "org.slf4j.." };
+  private static final String[] commonToolsAndUtilsPackages = new String[] {
+    "org.apache.commons..",
+    "org.jmolecules..",
+    "org.slf4j..",
+  };
 
   private static String[] buildPackagesPatterns(Collection<String> packages) {
     return packages.stream().map(path -> path + "..").toArray(String[]::new);
   }
 
-  private static Collection<String> packagesWithAnnotation(Class<? extends Annotation> annotationClass) throws AssertionError {
+  private static Collection<String> packagesWithAnnotation(
+    Class<? extends Annotation> annotationClass
+  ) throws AssertionError {
     try {
       return Files.walk(rootPackagePath())
         .filter(path -> path.toString().endsWith("package-info.java"))
@@ -62,7 +72,9 @@ class HexagonalArchTest {
   }
 
   private static Path rootPackagePath() {
-    return Stream.of(ROOT_PACKAGE.split("\\.")).map(Path::of).reduce(Path.of("src", "main", "java"), Path::resolve);
+    return Stream.of(ROOT_PACKAGE.split("\\."))
+      .map(Path::of)
+      .reduce(Path.of("src", "main", "java"), Path::resolve);
   }
 
   private static Function<Path, String> toPackageName() {
@@ -145,7 +157,11 @@ class HexagonalArchTest {
     }
 
     private String[] otherBusinessContextsDomains(String context) {
-      return businessContexts.stream().filter(other -> !context.equals(other)).map(name -> name + ".domain..").toArray(String[]::new);
+      return businessContexts
+        .stream()
+        .filter(other -> !context.equals(other))
+        .map(name -> name + ".domain..")
+        .toArray(String[]::new);
     }
   }
 
@@ -160,15 +176,19 @@ class HexagonalArchTest {
         .should()
         .onlyDependOnClassesThat()
         .resideInAnyPackage(authorizedDomainPackages())
-        .because("Domain model should only depend on domains and a very limited set of external dependencies")
+        .because(
+          "Domain model should only depend on domains and a very limited set of external dependencies"
+        )
         .check(classes);
     }
 
     private String[] authorizedDomainPackages() {
-      return Stream.of(new String[] { "..domain.." }, vanillaPackages, commonToolsAndUtilsPackages, sharedKernelsPackages).reduce(
-        new String[] {},
-        ArrayUtils::addAll
-      );
+      return Stream.of(
+        new String[] { "..domain.." },
+        vanillaPackages,
+        commonToolsAndUtilsPackages,
+        sharedKernelsPackages
+      ).reduce(new String[] {}, ArrayUtils::addAll);
     }
   }
 

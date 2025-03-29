@@ -35,7 +35,13 @@ public class SimpleSteps {
 
   @Then("I get simple response with name {string} and age {int}")
   public void shouldGetResponse(String name, int age) {
-    assertThatLastResponse().hasOkStatus().hasElement("$.name").withValue(name).and().hasElement("$.age").withValue(age);
+    assertThatLastResponse()
+      .hasOkStatus()
+      .hasElement("$.name")
+      .withValue(name)
+      .and()
+      .hasElement("$.age")
+      .withValue(age);
   }
 }
 

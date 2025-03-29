@@ -7,7 +7,11 @@ public class NullElementInCollectionException extends AssertionException {
   }
 
   private static String message(String field) {
-    return new StringBuilder().append("The field \"").append(field).append("\" contains a null element").toString();
+    return new StringBuilder()
+      .append("The field \"")
+      .append(field)
+      .append("\" contains a null element")
+      .toString();
   }
 
   @Override

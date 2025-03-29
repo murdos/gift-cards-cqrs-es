@@ -23,11 +23,46 @@ class InMemoryEventStoreInitializer {
 
   @EventListener(ApplicationStartedEvent.class)
   public void onApplicationReady() {
-    eventStore.save(new GiftCardCreated(new Barcode("5678"), Amount.of(50), ShoppingStore.POISSONNERIE_ORDRALPHABETIX, SequenceId.INITIAL));
-    eventStore.save(new PaidAmount(new Barcode("5678"), SequenceId.INITIAL.next(), Amount.of(10), LocalDate.parse("2025-03-20")));
-    eventStore.save(new PaidAmount(new Barcode("5678"), SequenceId.INITIAL.next().next(), Amount.of(20), LocalDate.parse("2025-03-24")));
+    eventStore.save(
+      new GiftCardCreated(
+        new Barcode("5678"),
+        Amount.of(50),
+        ShoppingStore.POISSONNERIE_ORDRALPHABETIX,
+        SequenceId.INITIAL
+      )
+    );
+    eventStore.save(
+      new PaidAmount(
+        new Barcode("5678"),
+        SequenceId.INITIAL.next(),
+        Amount.of(10),
+        LocalDate.parse("2025-03-20")
+      )
+    );
+    eventStore.save(
+      new PaidAmount(
+        new Barcode("5678"),
+        SequenceId.INITIAL.next().next(),
+        Amount.of(20),
+        LocalDate.parse("2025-03-24")
+      )
+    );
 
-    eventStore.save(new GiftCardCreated(new Barcode("1234"), Amount.of(64), ShoppingStore.RESTAURANT_PANORAMIX, SequenceId.INITIAL));
-    eventStore.save(new PaidAmount(new Barcode("1234"), SequenceId.INITIAL.next(), Amount.of(20), LocalDate.parse("2025-03-21")));
+    eventStore.save(
+      new GiftCardCreated(
+        new Barcode("1234"),
+        Amount.of(64),
+        ShoppingStore.RESTAURANT_PANORAMIX,
+        SequenceId.INITIAL
+      )
+    );
+    eventStore.save(
+      new PaidAmount(
+        new Barcode("1234"),
+        SequenceId.INITIAL.next(),
+        Amount.of(20),
+        LocalDate.parse("2025-03-21")
+      )
+    );
   }
 }

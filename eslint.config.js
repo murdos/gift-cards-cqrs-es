@@ -16,7 +16,9 @@ export default typescript.config(
     ignores: ['target/', 'presentation/'],
   },
   js.configs.recommended,
-  ...typescript.configs.recommended.map(config => (config.name === 'typescript-eslint/base' ? config : { ...config, files: ['**/*.ts'] })),
+  ...typescript.configs.recommended.map(config =>
+    config.name === 'typescript-eslint/base' ? config : { ...config, files: ['**/*.ts'] },
+  ),
   ...vue.configs['flat/recommended'],
   {
     files: ['**/*.vue'],

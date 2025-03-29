@@ -34,21 +34,34 @@ class GiftCardCommandController {
   }
 
   @PostMapping
-  ResponseEntity<Void> declare(@Valid @NotNull @RequestBody GiftCardDeclarationDTO giftCardDeclarationDTO) {
+  ResponseEntity<Void> declare(
+    @Valid @NotNull @RequestBody GiftCardDeclarationDTO giftCardDeclarationDTO
+  ) {
     giftCardApplicationService.declare(giftCardDeclarationDTO.toDomain());
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
   @PostMapping("/{barcode}/pay")
-  public ResponseEntity<Void> pay(@PathVariable String barcode, @Valid @NotNull @RequestBody PaymentDTO paymentDTO) {
+  public ResponseEntity<Void> pay(
+    @PathVariable String barcode,
+    @Valid @NotNull @RequestBody PaymentDTO paymentDTO
+  ) {
     giftCardApplicationService.pay(new Barcode(barcode), paymentDTO.toDomain());
     return ResponseEntity.status(HttpStatus.OK).build();
   }
 }
 
-record GiftCardDeclarationDTO(@NotBlank String barcode, @NotNull @Positive Integer amount, @NotNull String shoppingStore) {
+record GiftCardDeclarationDTO(
+  @NotBlank String barcode,
+  @NotNull @Positive Integer amount,
+  @NotNull String shoppingStore
+) {
   public GiftCardDeclaration toDomain() {
-    return new GiftCardDeclaration(new Barcode(barcode), new Amount(BigDecimal.valueOf(amount)), ShoppingStore.valueOf(shoppingStore));
+    return new GiftCardDeclaration(
+      new Barcode(barcode),
+      new Amount(BigDecimal.valueOf(amount)),
+      ShoppingStore.valueOf(shoppingStore)
+    );
   }
 }
 

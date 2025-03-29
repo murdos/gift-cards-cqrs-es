@@ -2,7 +2,10 @@
   <div class="gift-card">
     <div class="gift-card-header">
       <div class="gift-card-logo">
-        <img :src="`../../../../content/images/${giftCard.shoppingStore.value}.png`" alt="Gift Card Logo" />
+        <img
+          :src="`../../../../content/images/${giftCard.shoppingStore.value}.png`"
+          alt="Gift Card Logo"
+        />
       </div>
       <div class="gift-card-header-content">
         <div class="gift-card-header-content-amount">

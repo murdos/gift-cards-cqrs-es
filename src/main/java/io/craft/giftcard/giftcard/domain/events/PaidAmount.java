@@ -7,4 +7,10 @@ import java.time.LocalDate;
 import org.jmolecules.event.annotation.DomainEvent;
 
 @DomainEvent
-public record PaidAmount(Barcode barcode, SequenceId sequenceId, Amount amount, LocalDate paymentDate) implements GiftCardEvent {}
+public record PaidAmount(
+  Barcode barcode,
+  SequenceId sequenceId,
+  Amount amount,
+  LocalDate paymentDate
+)
+  implements GiftCardEvent {}
