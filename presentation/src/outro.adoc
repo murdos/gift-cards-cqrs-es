@@ -1,0 +1,21 @@
+== Références
+[.notes]
+--
+Lien vers le repo git
+Bibliographie / Liens Youtube :
+- CQRS Documents by Greg Young
+- https://www.youtube.com/watch?v=JHGkaShoyNs
+- https://www.youtube.com/watch?v=gG6DGmYKk4I
+
+--
+
+== Questions ?
+[.notes]
+--
+--
+
+== Feedback
+[.notes]
+--
+QR Code
+--

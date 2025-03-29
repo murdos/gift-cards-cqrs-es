@@ -1,12 +1,18 @@
-== CQRS
+include::queries.adoc[]
 
 [.notes]
 --
-On a vu comment on pouvait ingérer des commandes, prendre la décision de fabriquer un événement
-
-On a vu que ces événements sont utilisés pour mettre à jour les projections.
-
-Ces projections sont utilisées pour afficher l'état de l'application.
-
-C'est ça le CQRS
+- Montrer la projection GiftCardCurrentState
+- d'où elle vient ? (event handler)
 --
+
+include::commands.adoc[]
+
+include::theory.adoc[]
+[.notes]
+--
+- Montrer le code de la décision projection
+- Montrer le code de la partie commande
+--
+
+
