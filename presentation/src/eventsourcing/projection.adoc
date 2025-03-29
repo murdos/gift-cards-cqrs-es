@@ -1,6 +1,14 @@
 == Afficher la liste des cartes cadeaux
+
 [.notes]
 --
 Les événements c'est joli mais pas pratique à lire. il nous faut les projeter.
-
 --
+
+[%notitle]
+=== dans la codebase
+
+[source, java, highlight]
+----
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentState.java[lines='16..20,47']
+----

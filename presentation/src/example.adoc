@@ -70,3 +70,10 @@ val random = Random(seed)
 random.nextInt(from = 0, upTo = 10) // output : 4
 random.nextInt(from = 0, upTo = 10) // output : 1
 ----
+
+
+=== Source depuis un fichier
+[source, java, highlight]
+----
+include::../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentState.java[lines='16..20,47']
+----
