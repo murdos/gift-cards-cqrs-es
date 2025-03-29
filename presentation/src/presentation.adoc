@@ -1,7 +1,6 @@
 :imagesdir: assets
 :customcss: assets/style.css
 :source-highlighter: highlight.js
-:highlightjsdir: highlight
 :revealjs_slideNumber: c
 :revealjs_theme: moon
 :revealjs_hash: true
