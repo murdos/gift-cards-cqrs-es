@@ -25,7 +25,9 @@ public class InMemoryGiftCardEventStore implements GiftCardEventStore, InMemoryS
   public void save(GiftCardEvent event) {
     histories.computeIfAbsent(event.barcode(), key -> new ArrayList<>()).add(event);
 
-    List<SequenceId> sequenceIds = existingSequenceIds.computeIfAbsent(event.barcode(), key -> new ArrayList<>());
+    List<SequenceId> sequenceIds = existingSequenceIds.computeIfAbsent(event.barcode(), key ->
+      new ArrayList<>()
+    );
     if (sequenceIds.contains(event.sequenceId())) {
       throw new IllegalArgumentException("SequenceId already exists");
     }

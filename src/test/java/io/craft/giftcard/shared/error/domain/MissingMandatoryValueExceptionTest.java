@@ -15,7 +15,9 @@ class MissingMandatoryValueExceptionTest {
     MissingMandatoryValueException exception = MissingMandatoryValueException.forBlankValue(FIELD);
 
     assertDefaultInformation(exception);
-    assertThat(exception.getMessage()).isEqualTo("The field \"field\" is mandatory and wasn't set (blank)");
+    assertThat(exception.getMessage()).isEqualTo(
+      "The field \"field\" is mandatory and wasn't set (blank)"
+    );
   }
 
   @Test
@@ -23,7 +25,9 @@ class MissingMandatoryValueExceptionTest {
     MissingMandatoryValueException exception = MissingMandatoryValueException.forNullValue(FIELD);
 
     assertDefaultInformation(exception);
-    assertThat(exception.getMessage()).isEqualTo("The field \"field\" is mandatory and wasn't set (null)");
+    assertThat(exception.getMessage()).isEqualTo(
+      "The field \"field\" is mandatory and wasn't set (null)"
+    );
   }
 
   @Test
@@ -31,7 +35,9 @@ class MissingMandatoryValueExceptionTest {
     MissingMandatoryValueException exception = MissingMandatoryValueException.forEmptyValue(FIELD);
 
     assertDefaultInformation(exception);
-    assertThat(exception.getMessage()).isEqualTo("The field \"field\" is mandatory and wasn't set (empty)");
+    assertThat(exception.getMessage()).isEqualTo(
+      "The field \"field\" is mandatory and wasn't set (empty)"
+    );
   }
 
   private void assertDefaultInformation(MissingMandatoryValueException exception) {

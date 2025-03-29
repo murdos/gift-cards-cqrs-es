@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx asciidoctor-revealjs -o presentation.html src/presentation.adoc",
+    "build": "npx asciidoctor-revealjs -r asciidoctor-kroki -o presentation.html src/presentation.adoc",
     "preview": "node preview.js"
   },
   "keywords": [],
@@ -14,6 +14,7 @@
   "dependencies": {
     "@asciidoctor/core": "^2.0.0-rc.1",
     "@asciidoctor/reveal.js": "5.0.1",
+    "asciidoctor-kroki": "0.18.1",
     "asciidoctor": "3.0.2",
     "highlight.js": "11.11.1"
   },

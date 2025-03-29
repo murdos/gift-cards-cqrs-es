@@ -44,7 +44,12 @@ public final class StringTooShortException extends AssertionException {
     }
 
     private String message() {
-      return "The value \"%s\" in field \"%s\" must be at least %d long but was only %d".formatted(value, field, minLength, value.length());
+      return "The value \"%s\" in field \"%s\" must be at least %d long but was only %d".formatted(
+          value,
+          field,
+          minLength,
+          value.length()
+        );
     }
 
     public StringTooShortException build() {

@@ -12,7 +12,8 @@ import org.springframework.stereotype.Component;
 
 @Adapter
 @Component
-public class InMemoryGiftCardCurrentStateRepository implements GiftCardCurrentStateRepository, InMemorySecondaryAdapter {
+public class InMemoryGiftCardCurrentStateRepository
+  implements GiftCardCurrentStateRepository, InMemorySecondaryAdapter {
 
   private final Map<Barcode, GiftCardCurrentState> views = new HashMap<>();
 

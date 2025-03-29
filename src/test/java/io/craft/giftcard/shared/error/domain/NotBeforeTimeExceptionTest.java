@@ -14,10 +14,15 @@ class NotBeforeTimeExceptionTest {
 
   @Test
   void shouldGetNotBeforeExceptionInformation() {
-    NotBeforeTimeException exception = NotBeforeTimeException.notBefore().value(VALUE).field(FIELD).other(Instant.ofEpochSecond(1337));
+    NotBeforeTimeException exception = NotBeforeTimeException.notBefore()
+      .value(VALUE)
+      .field(FIELD)
+      .other(Instant.ofEpochSecond(1337));
 
     assertDefaultInformation(exception);
-    assertThat(exception.getMessage()).isEqualTo("Time 2024-02-21T21:00:00Z in \"myField\" must be before 1970-01-01T00:22:17Z but wasn't");
+    assertThat(exception.getMessage()).isEqualTo(
+      "Time 2024-02-21T21:00:00Z in \"myField\" must be before 1970-01-01T00:22:17Z but wasn't"
+    );
   }
 
   @Test

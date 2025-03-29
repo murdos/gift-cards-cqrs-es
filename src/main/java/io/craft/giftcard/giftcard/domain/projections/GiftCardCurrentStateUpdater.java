@@ -11,7 +11,10 @@ public class GiftCardCurrentStateUpdater implements EventHandler<GiftCardEvent> 
   private final GiftCardEventStore eventStore;
   private final GiftCardCurrentStateRepository viewRepository;
 
-  public GiftCardCurrentStateUpdater(GiftCardEventStore eventStore, GiftCardCurrentStateRepository viewRepository) {
+  public GiftCardCurrentStateUpdater(
+    GiftCardEventStore eventStore,
+    GiftCardCurrentStateRepository viewRepository
+  ) {
     this.eventStore = eventStore;
     this.viewRepository = viewRepository;
   }

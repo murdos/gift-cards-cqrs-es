@@ -443,7 +443,11 @@ public final class Assert {
       notNull(field, value);
 
       if (value < minValue) {
-        throw NumberValueTooLowException.builder().field(field).minValue(String.valueOf(minValue)).value(String.valueOf(value)).build();
+        throw NumberValueTooLowException.builder()
+          .field(field)
+          .minValue(String.valueOf(minValue))
+          .value(String.valueOf(value))
+          .build();
       }
 
       return this;
@@ -464,7 +468,11 @@ public final class Assert {
       notNull(field, value);
 
       if (value > maxValue) {
-        throw NumberValueTooHighException.builder().field(field).maxValue(String.valueOf(maxValue)).value(String.valueOf(value)).build();
+        throw NumberValueTooHighException.builder()
+          .field(field)
+          .maxValue(String.valueOf(maxValue))
+          .value(String.valueOf(value))
+          .build();
       }
 
       return this;
@@ -512,7 +520,11 @@ public final class Assert {
       notNull(field, value);
 
       if (value < minValue) {
-        throw NumberValueTooLowException.builder().field(field).minValue(String.valueOf(minValue)).value(String.valueOf(value)).build();
+        throw NumberValueTooLowException.builder()
+          .field(field)
+          .minValue(String.valueOf(minValue))
+          .value(String.valueOf(value))
+          .build();
       }
 
       return this;
@@ -533,7 +545,11 @@ public final class Assert {
       notNull(field, value);
 
       if (value > maxValue) {
-        throw NumberValueTooHighException.builder().field(field).maxValue(String.valueOf(maxValue)).value(String.valueOf(value)).build();
+        throw NumberValueTooHighException.builder()
+          .field(field)
+          .maxValue(String.valueOf(maxValue))
+          .value(String.valueOf(value))
+          .build();
       }
 
       return this;
@@ -622,7 +638,11 @@ public final class Assert {
     }
 
     private NumberValueTooLowException tooLow(float floor) {
-      return NumberValueTooLowException.builder().field(field).minValue(String.valueOf(floor)).value(String.valueOf(value)).build();
+      return NumberValueTooLowException.builder()
+        .field(field)
+        .minValue(String.valueOf(floor))
+        .value(String.valueOf(value))
+        .build();
     }
 
     /**
@@ -668,7 +688,11 @@ public final class Assert {
     }
 
     private NumberValueTooHighException tooHigh(float ceil) {
-      return NumberValueTooHighException.builder().field(field).maxValue(String.valueOf(ceil)).value(String.valueOf(value)).build();
+      return NumberValueTooHighException.builder()
+        .field(field)
+        .maxValue(String.valueOf(ceil))
+        .value(String.valueOf(value))
+        .build();
     }
   }
 
@@ -754,7 +778,11 @@ public final class Assert {
     }
 
     private NumberValueTooLowException tooLow(double floor) {
-      return NumberValueTooLowException.builder().field(field).minValue(String.valueOf(floor)).value(String.valueOf(value)).build();
+      return NumberValueTooLowException.builder()
+        .field(field)
+        .minValue(String.valueOf(floor))
+        .value(String.valueOf(value))
+        .build();
     }
 
     /**
@@ -800,7 +828,11 @@ public final class Assert {
     }
 
     private NumberValueTooHighException tooHigh(double ceil) {
-      return NumberValueTooHighException.builder().field(field).maxValue(String.valueOf(ceil)).value(String.valueOf(value)).build();
+      return NumberValueTooHighException.builder()
+        .field(field)
+        .maxValue(String.valueOf(ceil))
+        .value(String.valueOf(value))
+        .build();
     }
   }
 
@@ -918,7 +950,11 @@ public final class Assert {
     }
 
     private NumberValueTooLowException tooLow(BigDecimal floor) {
-      return NumberValueTooLowException.builder().field(field).minValue(String.valueOf(floor)).value(value.toPlainString()).build();
+      return NumberValueTooLowException.builder()
+        .field(field)
+        .minValue(String.valueOf(floor))
+        .value(value.toPlainString())
+        .build();
     }
 
     /**
@@ -996,7 +1032,11 @@ public final class Assert {
     }
 
     private NumberValueTooHighException tooHigh(BigDecimal ceil) {
-      return NumberValueTooHighException.builder().field(field).maxValue(String.valueOf(ceil)).value(value.toPlainString()).build();
+      return NumberValueTooHighException.builder()
+        .field(field)
+        .maxValue(String.valueOf(ceil))
+        .value(value.toPlainString())
+        .build();
     }
 
     /**
@@ -1075,7 +1115,11 @@ public final class Assert {
       notNull();
 
       if (value.size() > maxSize) {
-        throw TooManyElementsException.builder().field(field).maxSize(maxSize).size(value.size()).build();
+        throw TooManyElementsException.builder()
+          .field(field)
+          .maxSize(maxSize)
+          .size(value.size())
+          .build();
       }
 
       return this;
@@ -1163,7 +1207,11 @@ public final class Assert {
       notNull();
 
       if (value.length > maxSize) {
-        throw TooManyElementsException.builder().field(field).maxSize(maxSize).size(value.length).build();
+        throw TooManyElementsException.builder()
+          .field(field)
+          .maxSize(maxSize)
+          .size(value.length)
+          .build();
       }
 
       return this;

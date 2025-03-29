@@ -10,7 +10,9 @@
     <main class="homepage-main">
       <div class="container">
         <section class="gift-card-creation-section">
-          <button class="primary-button" @click="openGiftCardCreationModal">Déclarer une carte cadeau</button>
+          <button class="primary-button" @click="openGiftCardCreationModal">
+            Déclarer une carte cadeau
+          </button>
         </section>
         <section class="gift-card-list-section">
           <GiftCardList ref="giftCardListRef" />
@@ -18,7 +20,11 @@
       </div>
     </main>
 
-    <GiftCardModal :is-open="isGiftCardDeclarationModalOpen" title="Déclarer une carte cadeau" @close="closeGiftCardDeclarationModal">
+    <GiftCardModal
+      :is-open="isGiftCardDeclarationModalOpen"
+      title="Déclarer une carte cadeau"
+      @close="closeGiftCardDeclarationModal"
+    >
       <GiftCardDeclaration @gift-card-declared="handleGiftCardDeclared" />
     </GiftCardModal>
 

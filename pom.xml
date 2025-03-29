@@ -195,11 +195,17 @@
           <configuration>
             <rules>
               <requireMavenVersion>
-                <message>You are running an older version of Maven: minimum required version is ${maven.version}</message>
+                <message>
+                  You are running an older version of Maven: minimum required
+                  version is ${maven.version}
+                </message>
                 <version>${maven.version}</version>
               </requireMavenVersion>
               <requireJavaVersion>
-                <message>You are running an incompatible version of Java: minimum required version is ${java.version}</message>
+                <message>
+                  You are running an incompatible version of Java: minimum
+                  required version is ${java.version}
+                </message>
                 <version>${java.version}</version>
               </requireJavaVersion>
             </rules>

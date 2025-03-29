@@ -27,7 +27,9 @@ class GiftcardCollectionsTest {
       Collection<Object> collection = GiftcardCollections.immutable(input);
 
       assertThat(collection).isEmpty();
-      assertThatThrownBy(collection::clear).isExactlyInstanceOf(UnsupportedOperationException.class);
+      assertThatThrownBy(collection::clear).isExactlyInstanceOf(
+        UnsupportedOperationException.class
+      );
     }
 
     @Test
@@ -37,7 +39,9 @@ class GiftcardCollectionsTest {
       Collection<String> collection = GiftcardCollections.immutable(input);
 
       assertThat(collection).containsExactly("value");
-      assertThatThrownBy(collection::clear).isExactlyInstanceOf(UnsupportedOperationException.class);
+      assertThatThrownBy(collection::clear).isExactlyInstanceOf(
+        UnsupportedOperationException.class
+      );
     }
   }
 

@@ -24,7 +24,11 @@ class GiftCardTest {
     Barcode barcode = GiftCardFixtures.barcode();
     Amount amount = GiftCardFixtures.amount();
     ShoppingStore shoppingStore = ShoppingStore.RESTAURANT_PANORAMIX;
-    GiftCardDeclaration giftCardDeclaration = new GiftCardDeclaration(barcode, amount, shoppingStore);
+    GiftCardDeclaration giftCardDeclaration = new GiftCardDeclaration(
+      barcode,
+      amount,
+      shoppingStore
+    );
 
     GiftCardEvent event = GiftCard.declare(giftCardDeclaration);
 
@@ -58,7 +62,8 @@ class GiftCardTest {
     var giftcard = new GiftCard(history);
 
     Amount amountToPay = Amount.of(150);
-    Throwable exception = catchThrowable(() -> giftcard.pay(new Payment(amountToPay, paymentDate())));
+    Throwable exception = catchThrowable(() -> giftcard.pay(new Payment(amountToPay, paymentDate()))
+    );
 
     assertThat(exception).isInstanceOf(InsufficientRemainingAmountException.class);
   }
@@ -71,8 +76,13 @@ class GiftCardTest {
     Amount amountToPay = Amount.of(100);
     List<GiftCardEvent> events = giftcard.pay(new Payment(amountToPay, paymentDate()));
 
-    assertThat(events).extracting(GiftCardEvent::getClass).containsExactly(PaidAmount.class, GifCardExhausted.class);
-    var setOfSequenceIds = events.stream().map(GiftCardEvent::sequenceId).collect(Collectors.toSet());
+    assertThat(events)
+      .extracting(GiftCardEvent::getClass)
+      .containsExactly(PaidAmount.class, GifCardExhausted.class);
+    var setOfSequenceIds = events
+      .stream()
+      .map(GiftCardEvent::sequenceId)
+      .collect(Collectors.toSet());
     assertThat(setOfSequenceIds).hasSize(2);
   }
 
@@ -80,7 +90,11 @@ class GiftCardTest {
     Barcode barcode = GiftCardFixtures.barcode();
     Amount amount = Amount.of(initialAmount);
     ShoppingStore shoppingStore = ShoppingStore.RESTAURANT_PANORAMIX;
-    GiftCardDeclaration giftCardDeclaration = new GiftCardDeclaration(barcode, amount, shoppingStore);
+    GiftCardDeclaration giftCardDeclaration = new GiftCardDeclaration(
+      barcode,
+      amount,
+      shoppingStore
+    );
     var giftCardCreated = GiftCard.declare(giftCardDeclaration);
 
     return new GiftCardHistory((GiftCardCreated) giftCardCreated);

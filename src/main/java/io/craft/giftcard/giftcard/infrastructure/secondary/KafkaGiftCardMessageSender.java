@@ -49,17 +49,24 @@ public class KafkaGiftCardMessageSender implements GiftCardMessageSender {
   }
 
   @JsonTypeInfo(use = JsonTypeInfo.Id.SIMPLE_NAME, include = JsonTypeInfo.As.WRAPPER_OBJECT)
-  sealed interface JSonGiftCardEvent permits JSonGiftCardCreated, JSonPaidAmount, JSonGifCardExhausted {}
+  sealed interface JSonGiftCardEvent
+    permits JSonGiftCardCreated, JSonPaidAmount, JSonGifCardExhausted {}
 
   record JSonGiftCardCreated(String barcode, double amount) implements JSonGiftCardEvent {
     public static JSonGiftCardEvent from(GiftCardCreated giftCardCreated) {
-      return new JSonGiftCardCreated(giftCardCreated.barcode().value(), giftCardCreated.amount().value().doubleValue());
+      return new JSonGiftCardCreated(
+        giftCardCreated.barcode().value(),
+        giftCardCreated.amount().value().doubleValue()
+      );
     }
   }
 
   record JSonPaidAmount(String barcode, double amount) implements JSonGiftCardEvent {
     public static JSonGiftCardEvent from(PaidAmount paidAmount) {
-      return new JSonPaidAmount(paidAmount.barcode().value(), paidAmount.amount().value().doubleValue());
+      return new JSonPaidAmount(
+        paidAmount.barcode().value(),
+        paidAmount.amount().value().doubleValue()
+      );
     }
   }
 

@@ -14,7 +14,8 @@ class CorsFilterConfigurationIT {
   @Nested
   @IntegrationTest(
     properties = {
-      "application.cors.allowed-origins=http://localhost:8100,http://localhost:9000", "application.cors.allowed-origin-patterns=",
+      "application.cors.allowed-origins=http://localhost:8100,http://localhost:9000",
+      "application.cors.allowed-origin-patterns=",
     }
   )
   class CorsFilterDefault {
@@ -29,7 +30,11 @@ class CorsFilterConfigurationIT {
   }
 
   @Nested
-  @IntegrationTest(properties = { "application.cors.allowed-origins=", "application.cors.allowed-origin-patterns=" })
+  @IntegrationTest(
+    properties = {
+      "application.cors.allowed-origins=", "application.cors.allowed-origin-patterns=",
+    }
+  )
   class CorsFilterEmpty {
 
     @Autowired
@@ -44,7 +49,8 @@ class CorsFilterConfigurationIT {
   @Nested
   @IntegrationTest(
     properties = {
-      "application.cors.allowed-origins=", "application.cors.allowed-origin-patterns=http://localhost:8100,http://localhost:9000",
+      "application.cors.allowed-origins=",
+      "application.cors.allowed-origin-patterns=http://localhost:8100,http://localhost:9000",
     }
   )
   class CorsFilterWithAllowedOriginPatterns {
