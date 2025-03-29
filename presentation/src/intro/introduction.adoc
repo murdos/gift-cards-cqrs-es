@@ -1,0 +1,23 @@
+== Disclaimer
+
+[.notes]
+--
+On n'a pas la science infuse
+on vous montre ce qui nous semble être une bonne approche
+
+(pas la peine de se flageller avec le design)
+--
+
+=== Aurélien
+
+[.notes]
+--
+sa vie son oeuvre dans le libre
+--
+
+=== Cédric
+
+[.notes]
+--
+sa vie son oeuvre sans acronymes
+--

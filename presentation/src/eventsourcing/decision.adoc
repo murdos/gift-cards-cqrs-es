@@ -1,0 +1,9 @@
+== Comment prendre des décisions ?
+
+[.notes]
+--
+On a vu que nos commandes génèrent des événements.
+Que ces événements sont utilisés pour mettre à jour les projections.
+
+Comment choisir si il faut retourner un événement ou non ?
+--

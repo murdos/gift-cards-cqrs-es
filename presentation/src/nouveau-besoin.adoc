@@ -1,0 +1,27 @@
+== Nouveau besoin
+
+Statistiques des dépenses par semaine
+
+[.notes]
+--
+Un pm un peu fou veut
+qu'il soit affiché sur la page d'accueil les statistiques de dépenses par rapport aux jours de la semaine
+--
+
+=== Faisable si on n'était pas en event sourcing ?
+
+[.notes]
+--
+Montrer que ce besoin qui sort de nulle part aurait été impossible à réaliser avec un stockage "classique"
+
+Et que ça, ça arrive souvent, on mitige le risque en disant "bah on a les stats à partir de ma mise en prod"
+
+> Imaginez que vous puissiez répondre à ce besoin avec tout l'historique des données.
+--
+
+=== Faisable avec event sourcing ?
+
+[.notes]
+--
+... bah on a les données \^_^
+--
