@@ -1,5 +1,5 @@
 <template>
-  <div class="gift-card">
+  <div class="gift-card" :class="{ exhausted: giftCard.state === 'EXHAUSTED' }">
     <div class="gift-card-header">
       <div class="gift-card-logo">
         <img
@@ -22,7 +22,13 @@
     </div>
     <div class="gift-card-footer">
       <button class="gift-card-button">Voir les détails</button>
-      <button class="gift-card-button" @click="openModal">Payer</button>
+      <button
+        class="gift-card-button"
+        :disabled="giftCard.state === 'EXHAUSTED'"
+        @click="openModal"
+      >
+        Payer
+      </button>
     </div>
     <GiftCardModal v-model:is-open="isModalOpen" title="Payer" @close="closeModal">
       <GiftCardPayment :default-amount="giftCard.remainingAmount.value" @submit="submitPayment" />
@@ -83,6 +89,11 @@ const submitPayment = async (paymentAmount: number) => {
   flex-direction: column;
   justify-content: space-between;
   height: 200px;
+}
+
+.gift-card.exhausted {
+  filter: grayscale(100%);
+  opacity: 0.6;
 }
 
 .gift-card-header {
@@ -157,5 +168,12 @@ const submitPayment = async (paymentAmount: number) => {
 
 .gift-card-button:hover {
   background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  border: 1px solid #999999;
+  cursor: not-allowed;
 }
 </style>

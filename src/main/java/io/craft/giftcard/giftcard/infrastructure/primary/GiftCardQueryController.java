@@ -46,7 +46,8 @@ class GiftCardQueryController {
   public record GiftCardCurrentStateDto(
     Barcode barcode,
     Amount remainingAmount,
-    ShoppingStoreDto shoppingStore
+    ShoppingStoreDto shoppingStore,
+    StateDto state
   ) {
     public static GiftCardCurrentStateDto fromDomain(GiftCardCurrentState giftCardCurrentState) {
       return new GiftCardCurrentStateDto(
@@ -54,12 +55,21 @@ class GiftCardQueryController {
         giftCardCurrentState.remainingAmount(),
         new ShoppingStoreDto(
           QueryShoppingStore.valueOf(giftCardCurrentState.shoppingStore().name())
-        )
+        ),
+        switch (giftCardCurrentState.state()) {
+          case ONGOING -> StateDto.ONGOING;
+          case EXHAUSTED -> StateDto.EXHAUSTED;
+        }
       );
     }
   }
 
   public record ShoppingStoreDto(QueryShoppingStore value) {}
+
+  public enum StateDto {
+    ONGOING,
+    EXHAUSTED,
+  }
 
   public enum QueryShoppingStore {
     POISSONNERIE_ORDRALPHABETIX,

@@ -16,7 +16,8 @@ import org.jmolecules.architecture.cqrs.QueryModel;
 public record GiftCardCurrentState(
   Barcode barcode,
   Amount remainingAmount,
-  ShoppingStore shoppingStore
+  ShoppingStore shoppingStore,
+  GiftCardState state
 ) {
   public static GiftCardCurrentState from(GiftCardHistory history) {
     GiftCardCreated firstEvent = history.start();
@@ -28,7 +29,8 @@ public record GiftCardCurrentState(
         new GiftCardCurrentState(
           firstEvent.barcode(),
           firstEvent.amount(),
-          firstEvent.shoppingStore()
+          firstEvent.shoppingStore(),
+          GiftCardState.ONGOING
         ),
         GiftCardCurrentState::reducer,
         new DummyCombiner<>()
@@ -36,7 +38,11 @@ public record GiftCardCurrentState(
   }
 
   private GiftCardCurrentState withRemainingAmount(Amount remainingAmount) {
-    return new GiftCardCurrentState(barcode(), remainingAmount, shoppingStore());
+    return new GiftCardCurrentState(barcode(), remainingAmount, shoppingStore(), state());
+  }
+
+  private GiftCardCurrentState withState(GiftCardState state) {
+    return new GiftCardCurrentState(barcode(), remainingAmount(), shoppingStore(), state);
   }
 
   private static GiftCardCurrentState reducer(
@@ -48,7 +54,12 @@ public record GiftCardCurrentState(
         giftCardCurrentState.remainingAmount().subtract(paidAmount.amount())
       );
       case GiftCardCreated __ -> giftCardCurrentState;
-      case GifCardExhausted __ -> giftCardCurrentState;
+      case GifCardExhausted __ -> giftCardCurrentState.withState(GiftCardState.EXHAUSTED);
     };
+  }
+
+  public enum GiftCardState {
+    ONGOING,
+    EXHAUSTED,
   }
 }
