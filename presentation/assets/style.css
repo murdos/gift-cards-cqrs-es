@@ -24,6 +24,10 @@
     height:380px;
 }
 
+pre.code-wrapper {
+  width: 100%;
+}
+
 .reveal h1,
 .reveal h2,
 .reveal h3,
