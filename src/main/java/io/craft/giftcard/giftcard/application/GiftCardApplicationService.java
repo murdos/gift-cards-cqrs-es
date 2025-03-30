@@ -21,25 +21,25 @@ import org.springframework.transaction.annotation.Transactional;
 public class GiftCardApplicationService {
 
   private final GiftCardEventStore eventStore;
-  private final GiftCardCurrentStateRepository viewRepository;
+  private final GiftCardCurrentStateRepository currentStateRepository;
   private final EventPublisher<GiftCardEvent> eventPublisher;
 
   public GiftCardApplicationService(
     GiftCardEventStore eventStore,
-    GiftCardCurrentStateRepository viewRepository,
+    GiftCardCurrentStateRepository currentStateRepository,
     GiftCardMessageSender giftCardMessageSender
   ) {
     this.eventStore = eventStore;
-    this.viewRepository = viewRepository;
+    this.currentStateRepository = currentStateRepository;
 
     this.eventPublisher = new EventPublisher<>();
-    this.eventPublisher.register(new GiftCardCurrentStateUpdater(eventStore, viewRepository));
+    this.eventPublisher.register(new GiftCardCurrentStateUpdater(currentStateRepository));
     this.eventPublisher.register(new MessageSenderEventHandler(giftCardMessageSender));
   }
 
   @Transactional
   public void declare(GiftCardDeclaration giftCardDeclaration) {
-    viewRepository
+    currentStateRepository
       .get(giftCardDeclaration.barcode())
       .ifPresent(event -> {
         throw new BarcodeAlreadyUsedException(giftCardDeclaration.barcode());
@@ -52,7 +52,9 @@ public class GiftCardApplicationService {
 
   @Transactional(readOnly = true)
   public GiftCardCurrentState findBy(Barcode barcode) {
-    return viewRepository.get(barcode).orElseThrow(() -> new GiftCardNotFoundException(barcode));
+    return currentStateRepository
+      .get(barcode)
+      .orElseThrow(() -> new GiftCardNotFoundException(barcode));
   }
 
   @Transactional
