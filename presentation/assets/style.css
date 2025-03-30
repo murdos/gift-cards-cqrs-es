@@ -28,6 +28,10 @@ pre.code-wrapper {
   width: 100%;
 }
 
+.hljs-ln-numbers {
+  display: none;
+}
+
 .reveal h1,
 .reveal h2,
 .reveal h3,
