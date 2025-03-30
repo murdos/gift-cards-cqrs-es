@@ -7,3 +7,9 @@ Que ces événements sont utilisés pour mettre à jour les projections.
 
 Comment choisir si il faut retourner un événement ou non ?
 --
+
+[.notes]
+--
+- Montrer le code de la partie commande
+- Montrer le code de la décision projection
+--

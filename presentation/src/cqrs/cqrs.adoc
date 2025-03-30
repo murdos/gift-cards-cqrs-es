@@ -1,18 +1,8 @@
 include::queries.adoc[]
 
-[.notes]
---
-- Montrer la projection GiftCardCurrentState
-- d'où elle vient ? (event handler)
---
-
 include::commands.adoc[]
 
 include::theory.adoc[]
-[.notes]
---
-- Montrer le code de la décision projection
-- Montrer le code de la partie commande
---
+
 
 

@@ -1,14 +1,103 @@
 == Afficher la liste des cartes cadeaux
 
+Triée, paginée, filtrée, ... 🤔
 [.notes]
 --
-Les événements c'est joli mais pas pratique à lire. il nous faut les projeter.
+Les événements c'est super pour avoir l'historique complet et savoir précisément ce qui s'est passé, mais comment je fais pour afficher une liste de toutes mes cartes cadeaux avec quelques infos, comme le montant restant et la boutique de la carte ?
+Relire tous les évènements de toutes les cartes cadeaux à chaque fois paraît compliqué...
+Et si en plus on doit pagine, filtrer sur des critères, comme par exemple le montant restant, trier selon d'autres critères, ...
+il nous faut les projeter.
+--
+
+=== Read/Query model!
+
+image::../../assets/jamy.jpg[]
+image::https://spatie.be/docs/laravel-event-sourcing/v7/images/transform-03.svg[]
+
+[.notes]
+--
+TODO: refaire le schéma
+On va utiliser un modèle de lecture, également appelé "read model ou ""query model", dédié à notre use case.
 --
 
 [%notitle]
-=== dans la codebase
+=== Illustration : 1st event
+image::https://codeopinion.com/wp-content/uploads/2021/02/s2-1024x466.png[]
+
+[.notes]
+--
+TODO: refaire le schéma
+GiftCardCreated
+-> GiftCardCurrentState
+--
+
+[%notitle]
+=== Illustration : 2nd event
+image::https://codeopinion.com/wp-content/uploads/2021/02/s2-1024x466.png[]
+
+[.notes]
+--
+TODO: refaire le schéma
+GiftCardCreated
++ PaidAmount
+-> GiftCardCurrentState
+--
+
+[%notitle]
+=== Illustration : 3rd event
+image::https://codeopinion.com/wp-content/uploads/2021/02/s2-1024x466.png[]
+
+[.notes]
+--
+TODO: refaire le schéma
+GiftCardCreated
++ PaidAmount
++ PaidAmount
+-> GiftCardCurrentState
+--
+
+[.notes]
+--
+On utilise un modèle de lecture dédié
+Egalement appelé "read model ou ""query model"
+--
+
+=== Code
+🔍
+
+=== Query Model
 
 [source, java, highlight]
 ----
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentState.java[lines='16..20,47']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentState.java[lines='15..20']
 ----
+
+[.notes]
+--
+- Côte code, le modèle de lecture s'appelle GiftCardCurrentState
+- Comment est-il calculer ? (event handler)
+--
+
+=== Event handler
+
+[source, java, highlight]
+----
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentStateUpdater.java[lines='9..10,22..28']
+----
+
+[.notes]
+--
+- L'event handler va être appelé à chaque fois qu'un événement est émis, et va pouvoir mettre à jour le modèle de lecture
+--
+
+=== GiftCardCurrentState
+
+[source, java, highlight]
+----
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentState.java[lines='22..38']
+----
+
+[.notes]
+--
+- L'event handler va être appelé à chaque fois qu'un événement est émis, et va pouvoir mettre à jour le modèle de lecture
+--
