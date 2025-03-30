@@ -26,9 +26,9 @@ class InMemoryEventStoreInitializer {
     eventStore.save(
       new GiftCardCreated(
         new Barcode("5678"),
+        SequenceId.INITIAL,
         Amount.of(50),
-        ShoppingStore.POISSONNERIE_ORDRALPHABETIX,
-        SequenceId.INITIAL
+        ShoppingStore.POISSONNERIE_ORDRALPHABETIX
       )
     );
     eventStore.save(
@@ -51,9 +51,9 @@ class InMemoryEventStoreInitializer {
     eventStore.save(
       new GiftCardCreated(
         new Barcode("1234"),
+        SequenceId.INITIAL,
         Amount.of(64),
-        ShoppingStore.RESTAURANT_PANORAMIX,
-        SequenceId.INITIAL
+        ShoppingStore.RESTAURANT_PANORAMIX
       )
     );
     eventStore.save(

@@ -29,11 +29,7 @@ include::intro/eventmodeling.adoc[]
 
 include::eventsourcing/choix-techniques.adoc[]
 
-include::demo.adoc[]
-[.notes]
---
-Show code (focus retour des commandes et EventStore::save)
---
+include::eventsourcing/demo.adoc[]
 
 include::cqrs/cqrs.adoc[]
 

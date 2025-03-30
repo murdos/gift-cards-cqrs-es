@@ -1,0 +1,182 @@
+== Côté code, les événements
+
+[.notes]
+--
+Voyons maintenant à quoi ça ressemble dans le code
+--
+
+[.moresmaller]
+=== Interface GiftCardEvent
+
+[source, java, highlight]
+----
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/events/GiftCardEvent.java[lines='7..']
+----
+
+[.notes]
+--
+Côté événements, pour les manipuler on va créer une interface scellée sobrement appeler GiftCardEvent.
+
+Elle contient des données qui pourraient être considérées comme "technique",
+bouh c'est pas beau ça n'a rien à faire dans le domaine.
+Mais hé, pas besoin d'être dogmatique si ça permet de simplifier le code.
+--
+
+[.moresmaller]
+=== GiftCardCreated
+
+[source, java, highlight="..|3,5..6"]
+----
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/events/GiftCardCreated.java[lines='9..']
+----
+
+[.notes]
+--
+Dans les implem, on a le début de notre histoire avec l'événement GiftCardCreated.
+
+*click*
+
+Ses données importantes sont le barcode
+
+(Ok, c'est la clé de l'agregat et il est dans l'interface, mais comme c'est le PREMIER événement,
+c'est en quelque sorte lui qui va porter cet identifiant pour les autres.)
+
+ensuite viennent les données "utiles" le magasin et le montant initial.
+--
+
+[.moresmaller]
+=== PaidAmount
+
+[source, java, highlight='..|5..6']
+----
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/events/PaidAmount.java[lines='9..']
+----
+
+[.notes]
+--
+Comme autre exemple, on a l' événement PaidAmount.
+
+*click*
+
+Sa charge utile à lui, c'est le montant payé et la date de paiement.
+--
+
+[.moresmaller]
+=== GifCardExhausted
+
+[source, java, highlight='..']
+----
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/events/GifCardExhausted.java[lines='7,8']
+----
+
+[.notes]
+--
+Notre dernier événement est GifCardExhausted qui ne contient pas de charge utile, son nom est auto suffisant.
+
+On pourrait lui inventer une charge, du style "exhaustion date" mais vu que l'épuisement
+de la carte vient après un paiement, on considère que ce n'est pas nécessaire.
+--
+
+=== Côté code, l'agregat
+
+[.notes]
+--
+Maintenant qu'on a vu les événements, voyons comment on les utilise dans notre agregat.
+--
+
+[%notitle.moresmaller]
+=== Commande declare
+
+[source, java, highlight]
+----
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='14..16, 27..35,107']
+----
+
+[.notes]
+--
+Tout d'abord, on a la commande declare qui va créer notre carte cadeau.
+
+Elle va retourner simplement notre événement GiftCardCreated.
+--
+
+[%notitle.moresmaller]
+=== Commande pay
+
+[source, java, highlight='..|6,9..11|5,7,8|12']
+----
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='14..16, 36, 40..46, 55..57, 107']
+----
+
+[.notes]
+--
+Un poil plus compliqué, on a la commande pay qui va nous retourner un événement PaidAmount
+
+*click*
+
+On fabrique l'evénement avec notre charge utile
+
+*click*
+
+Remarquez que les informations "techniques" viennent directement de l'agrégat lui même,
+on on ne fait pas que appeler des fonctions statiques, c'est pas un simple builder d'événements.
+
+*click*
+
+on le retourne sous forme de liste, mais ça on va y revenir
+--
+
+=== Côté code, l'application service
+
+[.notes]
+--
+On a vu les évents, on a vu leur génération.
+C'est joli, mais on a fait un agrégat sans aucun effet de bord.
+
+C'est un peu normal me direz-vous, maintenant comment on appelle tout ça ?
+--
+
+[%notitle.moresmaller]
+=== GiftCardApplicationService.declare()
+
+[source, java, highlight]
+----
+include::../../../src/main/java/io/craft/giftcard/giftcard/application/GiftCardApplicationService.java[lines='20..23,25,26,41,42,48..52,66']
+----
+
+[.notes]
+--
+voilà, c'est aussi simple que ça.
+
+On appelle l'agrégat pour nous fournir l'événement, on le sauvegarde et on le propage.
+--
+
+[%notitle.moresmaller]
+=== GiftCardApplicationService.pay()
+
+[source, java, highlight='..|9|10..12']
+----
+include::../../../src/main/java/io/craft/giftcard/giftcard/application/GiftCardApplicationService.java[lines='20..23,25,26,59..65,66']
+----
+
+[.notes]
+--
+Côté paiement, c'est tout aussi simple, à la différence près qu'on a besoin de fabriquer notre GiftCard depuis son historique.
+
+*click*
+
+Qu'on récupère depuis l'event store.
+
+*click*
+
+et rebelotte, on demande à l'agrégat de nous fournir des événements pour cette commande, on les sauvegarde et on les propage.
+
+Pourquoi les propager me direz-vous ?
+
+Pour répondre à ça, j'ai une question pour vous:
+
+Sachant que jusqu'ici, on a manipulé uniquement des événements,
+
+Comment est-ce qu'on affiche la liste des cartes  cadeaux ?
+
+ce dispatcher va nous y aider mais je laisse à Aurélien le soin de vous expliquer d'où ça vient.
+--

@@ -27,9 +27,9 @@ public class GiftCard {
   public static GiftCardEvent declare(GiftCardDeclaration giftCardDeclaration) {
     return new GiftCardCreated(
       giftCardDeclaration.barcode(),
+      SequenceId.INITIAL,
       giftCardDeclaration.amount(),
-      giftCardDeclaration.shoppingStore(),
-      SequenceId.INITIAL
+      giftCardDeclaration.shoppingStore()
     );
   }
 

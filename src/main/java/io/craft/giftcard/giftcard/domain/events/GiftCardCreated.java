@@ -9,8 +9,8 @@ import org.jmolecules.event.annotation.DomainEvent;
 @DomainEvent
 public record GiftCardCreated(
   Barcode barcode,
+  SequenceId sequenceId,
   Amount amount,
-  ShoppingStore shoppingStore,
-  SequenceId sequenceId
+  ShoppingStore shoppingStore
 )
   implements GiftCardEvent {}
