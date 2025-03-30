@@ -1,8 +1,7 @@
 {
-  "name": "jhipster-sample-application",
+  "name": "giftcard-cqrs-es",
   "version": "0.0.0",
   "private": true,
-  "description": "JHipster Sample Application",
   "license": "UNLICENSED",
   "type": "module",
   "scripts": {
