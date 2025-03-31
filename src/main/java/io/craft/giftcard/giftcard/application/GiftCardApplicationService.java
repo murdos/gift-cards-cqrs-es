@@ -27,13 +27,12 @@ public class GiftCardApplicationService {
   public GiftCardApplicationService(
     GiftCardEventStore eventStore,
     GiftCardCurrentStateRepository viewRepository,
-    EventPublisher<GiftCardEvent> eventPublisher,
     GiftCardMessageSender giftCardMessageSender
   ) {
     this.eventStore = eventStore;
     this.viewRepository = viewRepository;
-    this.eventPublisher = eventPublisher;
 
+    this.eventPublisher = new EventPublisher<>();
     this.eventPublisher.register(new GiftCardCurrentStateUpdater(eventStore, viewRepository));
     this.eventPublisher.register(new MessageSenderEventHandler(giftCardMessageSender));
   }

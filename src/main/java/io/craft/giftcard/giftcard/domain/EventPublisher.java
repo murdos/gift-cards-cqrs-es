@@ -1,12 +1,21 @@
 package io.craft.giftcard.giftcard.domain;
 
-import org.jmolecules.architecture.hexagonal.Port;
+import java.util.ArrayList;
+import java.util.List;
+import org.jmolecules.ddd.annotation.Service;
 import org.jmolecules.event.annotation.DomainEventPublisher;
 
-@Port
-public interface EventPublisher<T> {
-  @DomainEventPublisher
-  void publish(T event);
+@Service
+public class EventPublisher<T> {
 
-  void register(EventHandler<T> eventHandler);
+  private final List<EventHandler<T>> eventHandlers = new ArrayList<>();
+
+  public void register(EventHandler<T> eventHandler) {
+    eventHandlers.add(eventHandler);
+  }
+
+  @DomainEventPublisher
+  public void publish(T event) {
+    eventHandlers.forEach(handler -> handler.handle(event));
+  }
 }
