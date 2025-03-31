@@ -51,6 +51,7 @@ local.properties
 # IntelliJ
 ######################
 .idea/
+!.idea/watcherTasks.xml
 *.iml
 *.iws
 *.ipr
