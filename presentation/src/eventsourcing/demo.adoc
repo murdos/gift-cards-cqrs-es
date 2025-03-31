@@ -5,9 +5,9 @@
 Voyons maintenant à quoi ça ressemble dans le code
 --
 
-[.moresmaller]
 === Interface GiftCardEvent
 
+[.smaller]
 [source, java, highlight]
 ----
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/events/GiftCardEvent.java[lines='7..']

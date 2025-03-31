@@ -6,7 +6,9 @@
 :revealjs_slideNumber: c
 :revealjs_theme: moon
 :revealjs_hash: true
-//:revealjs_navigationMode: linear
+:revealjs_width: 1280
+:revealjs_height: 720
+:revealjs_navigationMode: linear
 
 == CQRS/Event Sourcing : Du concept au code
 

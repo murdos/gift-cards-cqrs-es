@@ -1,8 +1,7 @@
 include::queries.adoc[]
 
-include::commands.adoc[]
-
 include::theory.adoc[]
 
+include::commands.adoc[]
 
 

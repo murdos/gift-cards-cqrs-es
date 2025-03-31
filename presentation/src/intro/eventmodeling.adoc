@@ -2,6 +2,10 @@
 
 [.notes]
 --
+Expliquer ce qu'est l'event modeling
+
+Changer le type de bordures pour le rendre plus accessible
+
 Montrer l'event modeling agrémenté des screenshots
 
 Le parcourir viteuf vu qu'on a déjà vu l'appli
