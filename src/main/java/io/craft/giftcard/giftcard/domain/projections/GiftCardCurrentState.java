@@ -17,7 +17,7 @@ public record GiftCardCurrentState(
   Barcode barcode,
   Amount remainingAmount,
   ShoppingStore shoppingStore,
-  GiftCardState state
+  boolean exhausted
 ) {
   public static GiftCardCurrentState from(GiftCardHistory history) {
     GiftCardCreated firstEvent = history.start();
@@ -30,7 +30,7 @@ public record GiftCardCurrentState(
           firstEvent.barcode(),
           firstEvent.amount(),
           firstEvent.shoppingStore(),
-          GiftCardState.ONGOING
+          false
         ),
         GiftCardCurrentState::reducer,
         new DummyCombiner<>()
@@ -38,11 +38,11 @@ public record GiftCardCurrentState(
   }
 
   private GiftCardCurrentState withRemainingAmount(Amount remainingAmount) {
-    return new GiftCardCurrentState(barcode(), remainingAmount, shoppingStore(), state());
+    return new GiftCardCurrentState(barcode(), remainingAmount, shoppingStore(), exhausted());
   }
 
-  private GiftCardCurrentState withState(GiftCardState state) {
-    return new GiftCardCurrentState(barcode(), remainingAmount(), shoppingStore(), state);
+  private GiftCardCurrentState exhaust() {
+    return new GiftCardCurrentState(barcode(), remainingAmount(), shoppingStore(), true);
   }
 
   private static GiftCardCurrentState reducer(
@@ -54,12 +54,7 @@ public record GiftCardCurrentState(
         giftCardCurrentState.remainingAmount().subtract(paidAmount.amount())
       );
       case GiftCardCreated __ -> giftCardCurrentState;
-      case GifCardExhausted __ -> giftCardCurrentState.withState(GiftCardState.EXHAUSTED);
+      case GifCardExhausted __ -> giftCardCurrentState.exhaust();
     };
-  }
-
-  public enum GiftCardState {
-    ONGOING,
-    EXHAUSTED,
   }
 }

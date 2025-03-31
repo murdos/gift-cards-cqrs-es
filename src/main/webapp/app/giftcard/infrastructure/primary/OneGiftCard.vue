@@ -1,5 +1,5 @@
 <template>
-  <div class="gift-card" :class="{ exhausted: giftCard.state === 'EXHAUSTED' }">
+  <div class="gift-card" :class="{ exhausted: giftCard.exhausted }">
     <div class="gift-card-header">
       <div class="gift-card-logo">
         <img
@@ -22,11 +22,7 @@
     </div>
     <div class="gift-card-footer">
       <button class="gift-card-button">Voir les détails</button>
-      <button
-        class="gift-card-button"
-        :disabled="giftCard.state === 'EXHAUSTED'"
-        @click="openModal"
-      >
+      <button class="gift-card-button" :disabled="giftCard.exhausted" @click="openModal">
         Payer
       </button>
     </div>
