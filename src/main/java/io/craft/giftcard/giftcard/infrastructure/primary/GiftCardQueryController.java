@@ -4,7 +4,10 @@ import io.craft.giftcard.giftcard.domain.Amount;
 import io.craft.giftcard.giftcard.domain.Barcode;
 import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentState;
 import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentStateRepository;
+import jakarta.annotation.Nullable;
+import java.time.DayOfWeek;
 import java.util.Collection;
+import java.util.Map;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +46,23 @@ class GiftCardQueryController {
       .orElse(ResponseEntity.notFound().build());
   }
 
+  @Nullable
+  @GetMapping("/statistics")
+  public WeeklyStatistics getWeeklyStatistics() {
+    /*
+    Map<DayOfWeek, Double> defaultValues = new HashMap<>();
+    defaultValues.put(MONDAY, 1.5);
+    defaultValues.put(TUESDAY, 3.5);
+    defaultValues.put(WEDNESDAY, 5.5);
+    defaultValues.put(THURSDAY, 2.5);
+    defaultValues.put(FRIDAY, 7.5);
+    defaultValues.put(SATURDAY, 10.5);
+    defaultValues.put(SUNDAY, 4.5);
+    return new WeeklyStatistics(defaultValues);
+    */
+    return null;
+  }
+
   public record GiftCardCurrentStateDto(
     Barcode barcode,
     Amount remainingAmount,
@@ -68,4 +88,6 @@ class GiftCardQueryController {
     FORGE_CETAUTOMATIX,
     RESTAURANT_PANORAMIX,
   }
+
+  public record WeeklyStatistics(Map<DayOfWeek, Double> values) {}
 }

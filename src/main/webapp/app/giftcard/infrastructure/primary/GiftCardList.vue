@@ -23,6 +23,8 @@ const giftCards = ref<GiftCard[]>([]);
 const loading = ref(false);
 const error = ref<string | null>(null);
 
+const emit = defineEmits(['giftCardsUpdated']);
+
 const fetchGiftCards = async () => {
   const giftCardRepository = new AxiosGiftCardQueryRepository(new AxiosHttp(axios));
   console.log('Fetching gift cards...');
@@ -39,6 +41,7 @@ const fetchGiftCards = async () => {
 
 const refresh = () => {
   fetchGiftCards();
+  emit('giftCardsUpdated');
 };
 
 fetchGiftCards();

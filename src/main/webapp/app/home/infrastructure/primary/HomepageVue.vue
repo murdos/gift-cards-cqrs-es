@@ -15,7 +15,10 @@
           </button>
         </section>
         <section class="gift-card-list-section">
-          <GiftCardList ref="giftCardListRef" />
+          <GiftCardList ref="giftCardListRef" @gift-cards-updated="handleGiftCardsUpdated" />
+        </section>
+        <section class="chart-section">
+          <WeeklyStatistics ref="weeklyStatisticsRef" />
         </section>
       </div>
     </main>
@@ -38,6 +41,7 @@
 
 <script setup lang="ts">
 import GiftCardList from '@/giftcard/infrastructure/primary/GiftCardList.vue';
+import WeeklyStatistics from '@/giftcard/infrastructure/primary/WeeklyStatistics.vue';
 import GiftCardModal from '@/shared/modal/infrastructure/primary/GiftCardModal.vue';
 import { ref } from 'vue';
 import GiftCardDeclaration from '../../../giftcard/infrastructure/primary/GiftCardDeclaration.vue';
@@ -47,6 +51,9 @@ const isGiftCardDeclarationModalOpen = ref(false);
 
 // store the instance of gifcardList to be able to call `refresh` on it
 const giftCardListRef = ref<InstanceType<typeof GiftCardList>>();
+
+// store the instance of gifcardList to be able to call `refresh` on it
+const weeklyStatisticsRef = ref<InstanceType<typeof WeeklyStatistics>>();
 
 const openGiftCardCreationModal = () => {
   isGiftCardDeclarationModalOpen.value = true;
@@ -64,6 +71,12 @@ const handleGiftCardDeclared = () => {
 const refreshGiftCardList = () => {
   if (giftCardListRef.value) {
     giftCardListRef.value.refresh();
+  }
+};
+
+const handleGiftCardsUpdated = () => {
+  if (weeklyStatisticsRef.value) {
+    weeklyStatisticsRef.value.refresh();
   }
 };
 </script>
@@ -90,15 +103,6 @@ const refreshGiftCardList = () => {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.logo-container {
-  margin-bottom: 20px;
-}
-
-.logo {
-  width: 100px;
-  height: auto;
-}
-
 .title {
   font-size: 2.5em;
   color: #007bff; /* Blue */
@@ -113,27 +117,6 @@ const refreshGiftCardList = () => {
 .homepage-main {
   flex-grow: 1;
   padding: 40px 0;
-}
-
-.features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  margin-bottom: 40px;
-}
-
-.feature {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  text-align: center;
-}
-
-.feature-icon {
-  width: 80px;
-  height: 80px;
-  margin-bottom: 10px;
 }
 
 .feature h3 {
