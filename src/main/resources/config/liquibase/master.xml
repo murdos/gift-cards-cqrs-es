@@ -15,6 +15,6 @@
   <property name="datetimeType" value="datetime(6)" dbms="mysql, mariadb" />
   <property name="datetimeType" value="datetime" dbms="oracle, mssql, postgresql, h2" />
 
-  <!-- <include file="config/liquibase/changelog/0000000000_example.xml" relativeToChangelogFile="false" /> -->
+  <include file="changelog/0000000000_example.xml" relativeToChangelogFile="true" />
   <!-- jhipster-needle-liquibase-add-changelog -->
 </databaseChangeLog>

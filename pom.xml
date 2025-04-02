@@ -84,6 +84,7 @@
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
+      <version>${postgresql.version}</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -163,6 +164,10 @@
     <liquibase.version>4.31.1</liquibase.version>
     <spring.profiles.active />
     <jooq.version>3.20.2</jooq.version>
+    <postgresql.version>42.7.5</postgresql.version>
+    <testcontainers-jooq-codegen-maven-plugin.version>
+      0.0.4
+    </testcontainers-jooq-codegen-maven-plugin.version>
   </properties>
   <profiles>
     <profile>
@@ -319,36 +324,54 @@
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
       <plugin>
-        <groupId>org.jooq</groupId>
-        <artifactId>jooq-codegen-maven</artifactId>
-        <version>${jooq.version}</version>
+        <groupId>org.testcontainers</groupId>
+        <artifactId>testcontainers-jooq-codegen-maven-plugin</artifactId>
+        <version>${testcontainers-jooq-codegen-maven-plugin.version}</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${testcontainers.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
+          </dependency>
+        </dependencies>
         <executions>
           <execution>
-            <id>jooq-codegen</id>
-            <phase>generate-resources</phase>
+            <id>generate-jooq-sources</id>
             <goals>
               <goal>generate</goal>
             </goals>
+            <phase>generate-sources</phase>
+            <configuration>
+              <database>
+                <type>POSTGRES</type>
+              </database>
+              <liquibase>
+                <changeLogPath>src/main/resources/config/liquibase/master.xml</changeLogPath>
+                <liquibaseSchemaName>public</liquibaseSchemaName>
+                <defaultSchemaName>public</defaultSchemaName>
+              </liquibase>
+              <jooq>
+                <generator>
+                  <database>
+                    <name>org.jooq.meta.postgres.PostgresDatabase</name>
+                    <includes>.*</includes>
+                    <excludes>databasechangelog.*</excludes>
+                    <inputSchema>public</inputSchema>
+                  </database>
+                  <target>
+                    <packageName>io.craft.giftcard.giftcard.infrastructure.secondary</packageName>
+                    <directory>target/generated-sources/jooq</directory>
+                  </target>
+                </generator>
+              </jooq>
+            </configuration>
           </execution>
         </executions>
-        <configuration>
-          <jdbc>
-            <url>jdbc:postgresql://localhost:5432/giftcard</url>
-            <user>giftcard</user>
-            <password />
-          </jdbc>
-          <generator>
-            <database>
-              <name>org.jooq.meta.postgres.PostgresDatabase</name>
-              <includes>.*</includes>
-              <inputSchema>public</inputSchema>
-            </database>
-            <target>
-              <packageName>org.jooq.codegen</packageName>
-              <directory>target/generated-sources/jooq</directory>
-            </target>
-          </generator>
-        </configuration>
       </plugin>
     </plugins>
     <defaultGoal>spring-boot:run</defaultGoal>
