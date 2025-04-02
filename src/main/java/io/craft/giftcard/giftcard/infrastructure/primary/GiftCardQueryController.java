@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
 @Validated
+@RestController
 @RequestMapping("/api/gift-cards")
 class GiftCardQueryController {
 
