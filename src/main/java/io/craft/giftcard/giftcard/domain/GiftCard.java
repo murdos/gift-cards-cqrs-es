@@ -20,7 +20,7 @@ public class GiftCard {
     return decisionProjection.barcode;
   }
 
-  public GiftCard(GiftCardHistory history) {
+  public GiftCard(GiftCardHistory history) { // ...
     decisionProjection = DecisionProjection.from(history);
   }
 
@@ -37,22 +37,27 @@ public class GiftCard {
     if (decisionProjection.remainingAmount.isLessThan(payment.amount())) {
       throw new InsufficientRemainingAmountException(barcode());
     }
-    SequenceId sequenceId = decisionProjection.nextSequenceId();
+    //@formatter:off
     PaidAmount paidAmount = new PaidAmount(
-      decisionProjection.barcode,
-      sequenceId,
+      barcode(),
+      nextSequenceId(),
       payment.amount(),
       payment.date()
     );
+    //@formatter:on
 
     if (decisionProjection.remainingAmount.equals(payment.amount())) {
       return List.of(
         paidAmount,
-        new GifCardExhausted(decisionProjection.barcode, sequenceId.next())
+        new GifCardExhausted(decisionProjection.barcode, paidAmount.sequenceId().next())
       );
     }
 
     return List.of(paidAmount);
+  }
+
+  private SequenceId nextSequenceId() {
+    return decisionProjection.nextSequenceId();
   }
 
   private record DecisionProjection(
