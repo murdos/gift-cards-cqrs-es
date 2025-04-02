@@ -97,6 +97,10 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-jooq</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
@@ -158,6 +162,7 @@
     <testcontainers.version>1.20.6</testcontainers.version>
     <liquibase.version>4.31.1</liquibase.version>
     <spring.profiles.active />
+    <jooq.version>3.20.2</jooq.version>
   </properties>
   <profiles>
     <profile>
@@ -312,6 +317,38 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.jooq</groupId>
+        <artifactId>jooq-codegen-maven</artifactId>
+        <version>${jooq.version}</version>
+        <executions>
+          <execution>
+            <id>jooq-codegen</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <jdbc>
+            <url>jdbc:postgresql://localhost:5432/giftcard</url>
+            <user>giftcard</user>
+            <password />
+          </jdbc>
+          <generator>
+            <database>
+              <name>org.jooq.meta.postgres.PostgresDatabase</name>
+              <includes>.*</includes>
+              <inputSchema>public</inputSchema>
+            </database>
+            <target>
+              <packageName>org.jooq.codegen</packageName>
+              <directory>target/generated-sources/jooq</directory>
+            </target>
+          </generator>
+        </configuration>
       </plugin>
     </plugins>
     <defaultGoal>spring-boot:run</defaultGoal>
