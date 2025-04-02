@@ -27,17 +27,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/gift-cards")
 class GiftCardCommandController {
 
-  private final GiftCardApplicationService giftCardApplicationService;
+  private final GiftCardApplicationService giftCards;
 
-  public GiftCardCommandController(GiftCardApplicationService giftCardApplicationService) {
-    this.giftCardApplicationService = giftCardApplicationService;
+  public GiftCardCommandController(GiftCardApplicationService giftCards) {
+    this.giftCards = giftCards;
   }
 
   @PostMapping
   ResponseEntity<Void> declare(
     @Valid @NotNull @RequestBody GiftCardDeclarationDTO giftCardDeclarationDTO
   ) {
-    giftCardApplicationService.declare(giftCardDeclarationDTO.toDomain());
+    giftCards.declare(giftCardDeclarationDTO.toDomain());
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
@@ -46,7 +46,7 @@ class GiftCardCommandController {
     @PathVariable String barcode,
     @Valid @NotNull @RequestBody PaymentDTO paymentDTO
   ) {
-    giftCardApplicationService.pay(new Barcode(barcode), paymentDTO.toDomain());
+    giftCards.pay(new Barcode(barcode), paymentDTO.toDomain());
     return ResponseEntity.status(HttpStatus.OK).build();
   }
 }

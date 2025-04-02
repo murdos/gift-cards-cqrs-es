@@ -67,7 +67,9 @@ public class GiftCardSteps {
 
   @Then("the gift card {string} should have a remaining amount of {double}")
   public void giftCardShouldHaveARemainingAmountOf(String barcode, double expectedAmount) {
-    var giftCardView = giftCardApplicationService.findBy(new Barcode(barcode));
+    var giftCardView = giftCardApplicationService
+      .getCurrentState(new Barcode(barcode))
+      .orElseThrow();
 
     assertThat(giftCardView.remainingAmount().value()).isEqualByComparingTo(
       new BigDecimal(expectedAmount)

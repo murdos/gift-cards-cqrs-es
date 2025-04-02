@@ -5,7 +5,6 @@ import io.craft.giftcard.giftcard.domain.BarcodeAlreadyUsedException;
 import io.craft.giftcard.giftcard.domain.EventPublisher;
 import io.craft.giftcard.giftcard.domain.GiftCard;
 import io.craft.giftcard.giftcard.domain.GiftCardEventStore;
-import io.craft.giftcard.giftcard.domain.GiftCardNotFoundException;
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
 import io.craft.giftcard.giftcard.domain.commands.Payment;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
@@ -14,6 +13,8 @@ import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentStateReposit
 import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentStateUpdater;
 import io.craft.giftcard.giftcard.domain.projections.GiftCardMessageSender;
 import io.craft.giftcard.giftcard.domain.projections.MessageSenderEventHandler;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,18 +51,21 @@ public class GiftCardApplicationService {
     eventPublisher.publish(event);
   }
 
-  @Transactional(readOnly = true)
-  public GiftCardCurrentState findBy(Barcode barcode) {
-    return currentStateRepository
-      .get(barcode)
-      .orElseThrow(() -> new GiftCardNotFoundException(barcode));
-  }
-
   @Transactional
   public void pay(Barcode barcode, Payment payment) {
     GiftCard giftCard = eventStore.findByBarcode(barcode);
     var events = giftCard.pay(payment);
     eventStore.save(events);
     events.forEach(eventPublisher::publish);
+  }
+
+  @Transactional(readOnly = true)
+  public Optional<GiftCardCurrentState> getCurrentState(Barcode barcode) {
+    return currentStateRepository.get(barcode);
+  }
+
+  @Transactional(readOnly = true)
+  public List<GiftCardCurrentState> findAllCurrentStates() {
+    return currentStateRepository.findAll();
   }
 }
