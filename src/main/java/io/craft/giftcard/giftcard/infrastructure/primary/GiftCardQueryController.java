@@ -64,8 +64,10 @@ class GiftCardQueryController {
   public record ShoppingStoreDto(QueryShoppingStore value) {}
 
   public enum QueryShoppingStore {
-    POISSONNERIE_ORDRALPHABETIX,
-    FORGE_CETAUTOMATIX,
-    RESTAURANT_PANORAMIX,
+    POISSONNERIE,
+    FORGE,
+    RESTAURANT,
+    LIVREUR,
+    MUSIQUE,
   }
 }

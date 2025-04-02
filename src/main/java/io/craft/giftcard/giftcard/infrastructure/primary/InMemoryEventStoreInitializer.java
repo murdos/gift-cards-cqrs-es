@@ -28,7 +28,7 @@ class InMemoryEventStoreInitializer {
         new Barcode("5678"),
         SequenceId.INITIAL,
         Amount.of(50),
-        ShoppingStore.POISSONNERIE_ORDRALPHABETIX
+        ShoppingStore.POISSONNERIE
       )
     );
     eventStore.save(
@@ -53,7 +53,7 @@ class InMemoryEventStoreInitializer {
         new Barcode("1234"),
         SequenceId.INITIAL,
         Amount.of(64),
-        ShoppingStore.RESTAURANT_PANORAMIX
+        ShoppingStore.RESTAURANT
       )
     );
     eventStore.save(
@@ -62,6 +62,24 @@ class InMemoryEventStoreInitializer {
         SequenceId.INITIAL.next(),
         Amount.of(20),
         LocalDate.parse("2025-03-21")
+      )
+    );
+
+    eventStore.save(
+      new GiftCardCreated(
+        new Barcode("91011"),
+        SequenceId.INITIAL,
+        Amount.of(100),
+        ShoppingStore.RESTAURANT
+      )
+    );
+
+    eventStore.save(
+      new GiftCardCreated(
+        new Barcode("121314"),
+        SequenceId.INITIAL,
+        Amount.of(75),
+        ShoppingStore.FORGE
       )
     );
   }

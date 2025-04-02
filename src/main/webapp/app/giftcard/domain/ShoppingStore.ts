@@ -1,14 +1,22 @@
 export const shoppingStores = [
   {
-    id: 'POISSONNERIE_ORDRALPHABETIX',
-    name: "Poissonnerie d'Ordralphabetix",
+    id: 'POISSONNERIE',
+    name: 'Poissonnerie',
   },
   {
-    id: 'FORGE_CETAUTOMATIX',
-    name: 'Forge de Cetautomatix',
+    id: 'FORGE',
+    name: 'Forge',
   },
   {
-    id: 'RESTAURANT_PANORAMIX',
-    name: 'Restaurant de Panoramix',
+    id: 'RESTAURANT',
+    name: 'Restaurant',
+  },
+  {
+    id: 'Livreur',
+    name: 'LIVREUR',
+  },
+  {
+    id: 'Musique',
+    name: 'MUSIQUE',
   },
 ];

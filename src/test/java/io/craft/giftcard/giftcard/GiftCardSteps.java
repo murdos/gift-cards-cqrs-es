@@ -48,7 +48,7 @@ public class GiftCardSteps {
     var giftCardDeclaration = new GiftCardDeclaration(
       new Barcode(giftCardInfos.get("barcode")),
       new Amount(new BigDecimal(giftCardInfos.get("amount"))),
-      ShoppingStore.RESTAURANT_PANORAMIX
+      ShoppingStore.RESTAURANT
     );
 
     try {

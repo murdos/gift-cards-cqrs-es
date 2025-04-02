@@ -23,7 +23,7 @@ class GiftCardTest {
   void shouldDeclareGiftCard() {
     Barcode barcode = GiftCardFixtures.barcode();
     Amount amount = GiftCardFixtures.amount();
-    ShoppingStore shoppingStore = ShoppingStore.RESTAURANT_PANORAMIX;
+    ShoppingStore shoppingStore = ShoppingStore.RESTAURANT;
     GiftCardDeclaration giftCardDeclaration = new GiftCardDeclaration(
       barcode,
       amount,
@@ -89,7 +89,7 @@ class GiftCardTest {
   private static GiftCardHistory givenGiftCardHistory(double initialAmount) {
     Barcode barcode = GiftCardFixtures.barcode();
     Amount amount = Amount.of(initialAmount);
-    ShoppingStore shoppingStore = ShoppingStore.RESTAURANT_PANORAMIX;
+    ShoppingStore shoppingStore = ShoppingStore.RESTAURANT;
     GiftCardDeclaration giftCardDeclaration = new GiftCardDeclaration(
       barcode,
       amount,
