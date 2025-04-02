@@ -10,6 +10,15 @@ spring:
     default-property-inclusion: non_absent
   profiles:
     active: '@spring.profiles.active@'
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      auto-commit: false
+      poolName: Hikari
+    password: ''
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://localhost:5432/giftcard
+    username: giftcard
 server:
   port: 8080
 springdoc:

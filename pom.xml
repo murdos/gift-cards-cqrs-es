@@ -82,6 +82,15 @@
       <version>${springdoc-openapi.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
@@ -115,6 +124,12 @@
       <version>${archunit-junit5.version}</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>${testcontainers.version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <properties>
@@ -136,6 +151,7 @@
     <springdoc-openapi.version>2.8.5</springdoc-openapi.version>
     <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
     <spring.profiles.active />
+    <testcontainers.version>1.20.6</testcontainers.version>
   </properties>
   <profiles>
     <profile>

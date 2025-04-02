@@ -31,6 +31,10 @@ npm install
 
 ## Start up
 
+```bash
+docker compose -f src/main/docker/postgresql.yml up -d
+```
+
 <!-- jhipster-needle-startupCommand -->
 
 ## Documentation
@@ -42,5 +46,6 @@ npm install
 - [Cucumber](documentation/cucumber.md)
 - [Hexagonal architecture](documentation/hexagonal-architecture.md)
 - [Vue](documentation/vue.md)
+- [PostgreSQL](documentation/postgresql.md)
 
 <!-- jhipster-needle-documentation -->
