@@ -6,10 +6,7 @@ import io.craft.giftcard.giftcard.domain.ShoppingStore;
 import io.craft.giftcard.giftcard.domain.events.GifCardExhausted;
 import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
-import io.craft.giftcard.giftcard.domain.events.GiftCardHistory;
 import io.craft.giftcard.giftcard.domain.events.PaidAmount;
-import io.craft.giftcard.shared.collection.domain.DummyCombiner;
-import java.util.List;
 import org.jmolecules.architecture.cqrs.QueryModel;
 
 @QueryModel
@@ -19,42 +16,32 @@ public record GiftCardCurrentState(
   ShoppingStore shoppingStore,
   boolean exhausted
 ) {
-  public static GiftCardCurrentState from(GiftCardHistory history) {
-    GiftCardCreated firstEvent = history.start();
-    List<GiftCardEvent> followingEvents = history.followingEvents();
-
-    return followingEvents
-      .stream()
-      .reduce(
-        new GiftCardCurrentState(
-          firstEvent.barcode(),
-          firstEvent.amount(),
-          firstEvent.shoppingStore(),
-          false
-        ),
-        GiftCardCurrentState::reducer,
-        new DummyCombiner<>()
-      );
+  public static GiftCardCurrentState from(GiftCardCreated giftCardCreated) {
+    return new GiftCardCurrentState(
+      giftCardCreated.barcode(),
+      giftCardCreated.amount(),
+      giftCardCreated.shoppingStore(),
+      false
+    );
   }
 
   private GiftCardCurrentState withRemainingAmount(Amount remainingAmount) {
-    return new GiftCardCurrentState(barcode(), remainingAmount, shoppingStore(), exhausted());
+    return new GiftCardCurrentState(barcode, remainingAmount, shoppingStore, exhausted);
   }
 
   private GiftCardCurrentState exhaust() {
-    return new GiftCardCurrentState(barcode(), remainingAmount(), shoppingStore(), true);
+    return new GiftCardCurrentState(barcode, remainingAmount, shoppingStore, true);
   }
 
-  private static GiftCardCurrentState reducer(
-    GiftCardCurrentState giftCardCurrentState,
-    GiftCardEvent giftCardEvent
-  ) {
+  public GiftCardCurrentState apply(GiftCardEvent giftCardEvent) {
     return switch (giftCardEvent) {
-      case PaidAmount paidAmount -> giftCardCurrentState.withRemainingAmount(
-        giftCardCurrentState.remainingAmount().subtract(paidAmount.amount())
+      case PaidAmount paidAmount -> this.withRemainingAmount(
+          remainingAmount.subtract(paidAmount.amount())
+        );
+      case GifCardExhausted __ -> this.exhaust();
+      case GiftCardCreated __ -> throw new IllegalStateException(
+        "GiftCardCreated event is not expected as an update event"
       );
-      case GiftCardCreated __ -> giftCardCurrentState;
-      case GifCardExhausted __ -> giftCardCurrentState.exhaust();
     };
   }
 }

@@ -21,9 +21,7 @@ class InMemoryProjectionsInitializer {
   ) {
     this.eventStore = eventStore;
     this.eventPublisher = new EventPublisher<>();
-    this.eventPublisher.register(
-        new GiftCardCurrentStateUpdater(eventStore, giftCardCurrentStateRepository)
-      );
+    this.eventPublisher.register(new GiftCardCurrentStateUpdater(giftCardCurrentStateRepository));
   }
 
   @EventListener(ApplicationReadyEvent.class)

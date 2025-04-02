@@ -69,35 +69,60 @@ Egalement appelé "read model ou ""query model"
 
 [source, java, highlight]
 ----
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentState.java[lines='15..20']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentState.java[lines='12..18']
 ----
 
 [.notes]
 --
 - Côte code, le modèle de lecture s'appelle GiftCardCurrentState
-- Comment est-il calculer ? (event handler)
+- Comment est-il calculé ? (event handler)
 --
 
 === Event handler
 
-[source, java, highlight]
+[source, java, highlight='..|7..8']
 ----
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentStateUpdater.java[lines='9..10,22..28']
-----
-
-[.notes]
---
-- L'event handler va être appelé à chaque fois qu'un événement est émis, et va pouvoir mettre à jour le modèle de lecture
---
-
-=== GiftCardCurrentState
-
-[source, java, highlight]
-----
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentState.java[lines='22..38']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentStateUpdater.java[lines='8..9,17..26']
 ----
 
 [.notes]
 --
 - L'event handler va être appelé à chaque fois qu'un événement est émis, et va pouvoir mettre à jour le modèle de lecture
+--
+
+[%notitle]
+=== Event handler: init
+
+[source, java, highlight="4"]
+----
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentStateUpdater.java[lines='8..9,28..30']
+----
+
+[source, java, highlight="3.."]
+----
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentState.java[lines='12..13,19..25']
+----
+
+[.notes]
+--
+- A partir de l'event initial, GiftCardCreated, on initialise le modèle de lecture
+--
+
+[%notitle]
+=== Event handler: update
+
+[source, java, highlight="3..|4..6|7"]
+----
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentStateUpdater.java[lines='8..9,32..37']
+----
+
+[source, java, highlight="4,12|5..7|8"]
+----
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentState.java[lines='12..13,36..46']
+----
+
+[.notes]
+--
+- Et pour chacun des évènements suivants, on va, si besoin, mettre à jour le modèle de lecture.
+- Pour cela on charge l'état courant du modèle, auquel on applique le nouvel événement.
 --
