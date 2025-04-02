@@ -16,5 +16,8 @@
   <logger name="org.testcontainers" level="WARN" />
   <logger name="org.postgresql" level="WARN" />
   <logger name="org.jboss.logging" level="WARN" />
+  <logger name="liquibase" level="WARN" />
+  <logger name="LiquibaseSchemaResolver" level="INFO" />
+  <logger name="com.zaxxer.hikari" level="WARN" />
   <!-- jhipster-needle-logback-add-log -->
 </configuration>

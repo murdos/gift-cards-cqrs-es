@@ -10,5 +10,7 @@ spring:
     password: ''
     url: jdbc:tc:postgresql:17.4:///giftcard?TC_TMPFS=/testtmpfs:rw
     username: giftcard
+  liquibase:
+    contexts: test
 server:
   port: 0

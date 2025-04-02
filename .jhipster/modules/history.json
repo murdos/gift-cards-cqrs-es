@@ -236,6 +236,19 @@
         "serverPort": 8080,
         "springConfigurationFormat": "yaml"
       }
+    },
+    {
+      "module": "liquibase",
+      "date": "2025-04-02T21:26:43.956860041Z",
+      "properties": {
+        "packageName": "io.craft.giftcard",
+        "projectName": "Gift Card CQRS-ES",
+        "baseName": "giftcard",
+        "endOfLine": "lf",
+        "indentSize": 2,
+        "serverPort": 8080,
+        "springConfigurationFormat": "yaml"
+      }
     }
   ]
 }

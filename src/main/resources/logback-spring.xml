@@ -33,6 +33,9 @@
   <logger name="org.springframework.web" level="ERROR" />
   <logger name="io.swagger.v3.core.converter.ModelConverterContextImpl" level="WARN" />
   <logger name="org.postgresql" level="WARN" />
+  <logger name="liquibase" level="WARN" />
+  <logger name="LiquibaseSchemaResolver" level="INFO" />
+  <logger name="com.zaxxer.hikari" level="WARN" />
   <!-- jhipster-needle-logback-add-log -->
 
   <root level="${log.level}">
