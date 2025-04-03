@@ -20,7 +20,7 @@ public class GiftCard {
     return decisionProjection.barcode;
   }
 
-  public GiftCard(GiftCardHistory history) { // ...
+  public GiftCard(GiftCardHistory history) {
     decisionProjection = DecisionProjection.from(history);
   }
 

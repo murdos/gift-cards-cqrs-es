@@ -85,7 +85,9 @@ Maintenant qu'on a vu les événements, voyons comment on les utilise dans notre
 
 [source, java, highlight]
 ----
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='14..16, 23, 25, 26']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='14..16, 23']
+    // ...
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='25..26']
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='27..35']
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[tags='closingBrace']
 ----
@@ -105,7 +107,9 @@ Elle va retourner simplement notre événement GiftCardCreated.
 
 [source, java, highlight='..|11,12|9,10|15|..']
 ----
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='14..16, 23, 25, 26']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='14..16, 23']
+    // ...
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='25..26']
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='36, 41..46, 55..57']
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[tags='closingBrace']
 ----
@@ -139,7 +143,9 @@ ceci dit, je parle depuis le début de "prise de décision", voilà ce que ça p
 [source, java, highlight='8..10']
 ----
 
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='14..16, 23, 25, 26']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='14..16, 23']
+    // ...
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='25..26']
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='36..39, 41..46, 55..57']
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[tags='closingBrace']
 ----
@@ -157,7 +163,9 @@ Ici on lance une exception mais en on aurait pu encapsuler la réponse dans un t
 [source, java, highlight='14..19']
 ----
 
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='14..16, 23, 25, 26']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='14..16, 23']
+    // ...
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='25..26']
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='36..39, 41,46, 48..57']
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[tags='closingBrace']
 ----
