@@ -70,3 +70,4 @@ public class GiftCardApplicationService {
   }
   // tag::closingBrace[]
 }
+// end::closingBrace[]

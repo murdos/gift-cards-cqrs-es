@@ -119,3 +119,4 @@ public class GiftCard {
   }
   // tag::closingBrace[]
 }
+// end::closingBrace[]
