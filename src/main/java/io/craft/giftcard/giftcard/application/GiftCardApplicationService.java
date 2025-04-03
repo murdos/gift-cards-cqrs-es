@@ -68,4 +68,5 @@ public class GiftCardApplicationService {
   public List<GiftCardCurrentState> findAllCurrentStates() {
     return currentStateRepository.findAll();
   }
+  // tag::closingBrace[]
 }

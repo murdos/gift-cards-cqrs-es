@@ -1,18 +1,29 @@
 == Nouveau besoin
 
-Statistiques des dépenses par semaine
+[.notes]
+--
+Là on est tranquille à faire notre application en event sourcing et CQRS alors que ça marcherait très bien en
+Create, Read, Update, Delete standard, je veux dire, on avait toutes les cartes en mains dès le départ,
+ça aurait été pénible mais faisable.
+
+Et hop, un Product Manager débarque avec un nouveau besoin.
+--
+
+=== "Statistiques des dépenses par semaine"
 
 [.notes]
 --
-Un pm un peu fou veut
-qu'il soit affiché sur la page d'accueil les statistiques de dépenses par rapport aux jours de la semaine
+Le pm veut, pour une raison quelconque (c'est un pm), afficher un diagramme des dépenses par jour de la semaine.
+
+Afin de savoir quel est le jour où les utilisateurs dépensent le plus d'argent,
+sans doute pour savoir quel est le jour le plus optimisé pour envoyer un rappel.
 --
 
-=== Faisable si on n'était pas en event sourcing ?
+=== Si on n'était pas en event sourcing ?
 
 [.notes]
 --
-Montrer que ce besoin qui sort de nulle part aurait été impossible à réaliser avec un stockage "classique"
+Comme on l'a dit plus tôt, la gestion "standard" est basiquement une perte d'information.
 
 Et que ça, ça arrive souvent, on mitige le risque en disant "bah on a les stats à partir de ma mise en prod"
 

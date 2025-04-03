@@ -24,6 +24,10 @@
     height:380px;
 }
 
+.reveal pre code {
+  max-height: 600px;
+}
+
 pre.code-wrapper {
   width: 100%;
 }
@@ -40,4 +44,9 @@ pre.code-wrapper {
 .reveal h6 {
     text-transform: none;
     font-variant: small-caps;
+}
+
+.reveal h2 code {
+  font-size: 0.7em;
+  font-variant: none;
 }

@@ -34,19 +34,19 @@ public class GiftCard {
   }
 
   public List<GiftCardEvent> pay(Payment payment) {
-    if (decisionProjection.remainingAmount.isLessThan(payment.amount())) {
-      throw new InsufficientRemainingAmountException(barcode());
+    if (this.hasNotEnoughBalance(payment.amount())) {
+      throw new InsufficientRemainingAmountException(this.barcode());
     }
     //@formatter:off
     PaidAmount paidAmount = new PaidAmount(
-      barcode(),
-      nextSequenceId(),
+      this.barcode(),
+      this.nextSequenceId(),
       payment.amount(),
       payment.date()
     );
     //@formatter:on
 
-    if (decisionProjection.remainingAmount.equals(payment.amount())) {
+    if (this.hasExactBalance(payment.amount())) {
       return List.of(
         paidAmount,
         new GifCardExhausted(decisionProjection.barcode, paidAmount.sequenceId().next())
@@ -54,6 +54,14 @@ public class GiftCard {
     }
 
     return List.of(paidAmount);
+  }
+
+  private boolean hasExactBalance(Amount amount) {
+    return decisionProjection.remainingAmount.equals(amount);
+  }
+
+  private boolean hasNotEnoughBalance(Amount amount) {
+    return decisionProjection.remainingAmount.isLessThan(amount);
   }
 
   private SequenceId nextSequenceId() {
@@ -109,4 +117,5 @@ public class GiftCard {
       };
     }
   }
+  // tag::closingBrace[]
 }

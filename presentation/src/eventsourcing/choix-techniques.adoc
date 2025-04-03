@@ -2,22 +2,25 @@
 
 [.notes]
 --
-Qui dit nouveau projet dit choix de stockage des données.
+Qui dit nouveau projet dit choix d'architecture, et surtout concernant la gestion de l'agrégat.
 
-on a plusieurs possibilités.
+là on a plusieurs possibilités, je vais n'en citer que deux heeuu parce que.
 
 *click*
 --
 
-=== Sauvegarde d'état
+=== Gestion par état
 
 [.notes]
 --
-La sauvegarde d'état c'est comme d'hab
+La gestion par état c'est comme d'hab.
 
-On va stocker l'état de l'agregat, c'est-à-dire la dernière version.
+Sans parler d'objets dits "anémiques", on va quand même, pour une requête donnée,
+mettre à jour l'état de l'agrégat.
 
-Je vais prendre un exemple pour expliciter le truc
+C'est-à-dire qu'on se retrouve avec la dernière version dans les mains.
+
+Je vais prendre un exemple pour illustrer le truc
 
 Imaginons vous avez...au hasard... des cartes cadeaux à gérer
 --
@@ -25,66 +28,85 @@ Imaginons vous avez...au hasard... des cartes cadeaux à gérer
 [%notitle]
 === example statefull
 
-[cols="5*", options="header"]
+[cols="4*", options="header"]
 |===========================================
-| barcode | shoppingStore | amount  |  last payment  | state
-| 1234    | la redoute    | 90 €    |    _null_      | ONGOING
+| barcode | shoppingStore | amount  |  last payment
+| 1234    | Restaurant    | 90 €    |    _null_
 |===========================================
 
 [.notes]
 --
-J'ai ça en base, si je paye 30 avec, j'obtiens ça
+Alors ça ressemble vachement à une table sql mais on parle bien d'un agrégat ici.
+Même si ça arrive souvent tel quel en base de données.
+
+Bref quand je déclare ma carte cadeau, j'ai ça en mains,
+il y a un code-barre "1234", une boutique "restaurant", un montant "90 €" et une date de dernier paiement,
+ici elle est vide parce que ma carte est neuve.
+
+Si je paye 30 € avec, j'obtiens ça
 --
 
 [%notitle]
 === example statefull
 
-[cols="5*", options="header"]
+[cols="4*", options="header"]
 |===========================================
-| barcode | shoppingStore | amount   |  last payment | state
-| 1234    | la redoute    | 60 €     |  2025-03-01   | ONGOING
+| barcode | shoppingStore | amount   |  last payment
+| 1234    | Restaurant    | 60 €     |  2025-03-01
 |===========================================
 
 [.notes]
 --
+Ma carte cadeau n'a plus que 60 € et j'ai mis à jour la date de dernier paiement.
+
+Remarquez que je n'ai plus ici le montant initial.
+
 Et si je dépense les 60 € restants
 --
 
 [%notitle]
 === example statefull
 
-[cols="5*", options="header"]
+[cols="4*", options="header"]
 |===========================================
-| barcode | shoppingStore | amount |  last payment | state
-| 1234    | la redoute    | 0 €    |  2025-03-10   | EXHAUSTED
+| barcode | shoppingStore | amount |  last payment
+| 1234    | Restaurant    | 0 €    |  2025-03-10
 |===========================================
 
 [.notes]
 --
 ma carte cadeaux est vide et donc inutilisable.
 
-ça c'est le fonctionnement classique de nos app.
+Mais le point ici c'est que les champs "montant" et "dernier paiement" ont été écrasés.
 
-on change l'état de notre objet à chaque fois qu'on lui applique un changement
+Ce qui veut dire qu'après un changement,
+on a certes des valeurs à jour, mais plus aucune trace de ce qu'elles ont été.
+
+Comme je l'ai dit, ça, c'est le fonctionnement classique de nos app.
 --
 
 === Avantages
 
+[%step]
 - Facile à comprendre
 - Facile à lire
 - On fait tout le temps comme ça
 
 [.notes]
 --
-Les avantages de cette approche sont évidents.
+Regardons les avantages.
+
+*click*
 
 - C'est facile à comprendre, on a un état et on le modifie
-- C'est facile à lire, on veut savoir où on en est, on va voir l'état
+- C'est facile à lire, que ce soit en base ou en debug, on voit l'état au premier coup d'œil
 - On fait tout le temps comme ça, c'est la manière dont on a appris à faire
 --
 
 === Inconvénients
 
+
+[%step]
 - Perte d'information
 - Pas de traçabilité
 - Obligation d'anticiper les besoins futurs
@@ -99,20 +121,28 @@ pas de traçabilité, on sait où on en est mais on n'a aucune idée de comment 
 
 et on est obligé d'anticiper les besoins futurs,
 si demain on veut savoir combien de fois j'ai utilisé ma carte cadeau, c'est mort.
-Ou alors il faut le prévoir avant et incrémenter un compteur.
+Il faut soit le prévoir dès le début, soit s'asseoir sur les données.
 
-Parfois la perte d'information est acceptable, on peut clairement répondre au produit
-
-> Ben le compteur d'utilisation il ne sera dispo quand pour les cartes à venir.
 --
 
-=== Sauvegarde d'événements
+=== Event sourcing
 
 [.notes]
 --
-C'est un changement de paradigme.
+L'autre choix de gestion de l'agrégat, c'est l'event sourcing.
 
-On va stocker chaque événement qui a modifié l'état de notre agregat.
+Là c'est un changement de paradigme.
+
+Plutôt que de stocker l'état de l'agrégat, on va stocker les événements qui ont modifié cet état.
+
+Le premier événement est le début de l'histoire de l'agrégat,
+celui qui pose les bases, comme l'identifiant de l'agrégat.
+
+Et on va stacker dans une liste la suite des autres événements de l'histoire.
+
+J'appelle ça l'histoire, mais vous pouvez trouver d'autres noms comme "stream".
+
+Si je reprends mon exemple de carte cadeau,
 --
 
 
@@ -121,22 +151,23 @@ On va stocker chaque événement qui a modifié l'état de notre agregat.
 
 [cols="4*", options="header"]
 |================================================================================================
-| barcode | eventName     | sequenceId | payload
-| 1234    | Created       | 0          | shoppingStore: "la redoute", initialAmount: "90 €"
+| type          | barcode | sequenceId | payload
+| Created       | 1234    | 0          | shoppingStore: "Restaurant", +
+                                         initialAmount: "90 €"
 |================================================================================================
 
 
 [.notes]
 --
-on ne stocke plus l'état de notre objets, mais les changements qui lui ont été appliqués.
+Lors de ma déclaration de carte carte cadeau,
+je crée mon début d'histoire avec l'événement de type "Created".
 
-Ça se présente un peu différement avec le nom du changement qui a été appliqué. Ici Created.
+Cet événement porte l'identifiant, pour nous c'est le code-barre
 
-L'ordre est garanti par le sequenceId et ensuite en payload, au moins pour l'événement d'init,
-vous trouvez à peu près les mêmes informations que sur la version "standard",
-à savoir le magasin et le montant initial.
+Il porte aussi une charge utile, pour nous, c'est le magasin et le montant initial
+(les trucs qu'on a tapé dans le formulaire de declaration)
 
-Et si je paye 30 € avec
+Et si je dis à mon système "je paye 30 € avec"
 --
 
 [%notitle.moresmaller]
@@ -144,17 +175,33 @@ Et si je paye 30 € avec
 
 [cols="4*", options="header"]
 |================================================================================================
-| barcode | eventName       | sequenceId | payload
-| 1234    | Created         | 0          | shoppingStore: "la redoute", initialAmount: "90 €"
-| 1234    | PaidAmount      | 1          | amount: "30 €", at: "2025-03-01"
+| type            | barcode | sequenceId | payload
+| Created         | 1234    | 0          | shoppingStore: "Restaurant", +
+                                            initialAmount: "90 €"
+| PaidAmount      | 1234    | 1          | amount: "30 €", +
+                                            at: "2025-03-01"
 |================================================================================================
 
 
 [.notes]
 --
-boum, j'ai un nouvel événement avec un nom différent.
-Et tout ce que j'ai besoin de savoir sur cet événement "j'ai payé 30 € avec cette carte", ben c'est le 30 €
-et si je dépense les 60 € restants
+boum, j'ai un nouvel événement avec un type différent.
+
+Remarquez que les événements sont des choses qui se sont passées, c'est pour ça qu'on écrit leur type au passé
+
+- la carte a été créée
+- un montant a été payé
+
+Il porte lui aussi l'id de l'agrégat, le code-barre et il a pour charge utile le montant qui vient d'être payé
+et la date du paiement.
+
+Et je n'ai pas parlé de ce que j'ai appelé sequenceId, c'est une information purement technique
+mais qui a son importance, il permet de garantir l'ordre des événements,
+et donc d'être sûr qu'on raconte l'histoire dans le bon ordre.
+
+Le début de l'histoire étant zero.
+
+Avançons et payons les 90 - 30 .. 60 € qu'il reste sur la carte
 --
 
 [%notitle.moresmaller]
@@ -162,55 +209,108 @@ et si je dépense les 60 € restants
 
 [cols="4*", options="header"]
 |================================================================================================
-| barcode | eventName       | sequenceId | payload
-| 1234    | Created         | 0          | shoppingStore: "la redoute", initialAmount: "90 €"
-| 1234    | PaidAmount      | 1          | amount: "30 €", at: "2025-03-01"
-| 1234    | PaidAmount      | 2          | amount: "60 €", at: "2025-03-10"
-| 1234    | Exhausted       | 4          | _null_
+| type            | barcode | sequenceId | payload
+| Created         | 1234    | 0          | shoppingStore: "Restaurant", +
+                                            initialAmount: "90 €"
+| PaidAmount      | 1234    | 1          | amount: "30 €", +
+                                            at: "2025-03-01"
+| PaidAmount      | 1234    | 2          | amount: "60 €", +
+                                            at: "2025-03-10"
+| Exhausted       | 1234    | 3          | _null_
 |================================================================================================
 [.notes]
 --
-J'ai maintenant 2 nouveaux événements, le paidAmount & le exhausted.
+J'ai maintenant 2 nouveaux événements,
+un autre paidAmount avec son montant et sa date
+et un événement "exhausted" qui n'a pas besoin de charge utile.
+
+On pourrait se dire "il peut porter la date", mais dans notre cas un Exhausted ne vient pas tout seul
+il vient avec un événement PaidAmout.
+
+En vrai c'est un choix qu'on a fait, on aurait pu se passer de l'événement Exhausted
+ou bien se passer du PaidAmount et faire porter à l'Exhausted la date et le montant payé,
+voire même juste la date, vu que c'est exhausted, la carte se retrouverait a 0 de toute manière.
+
+'fin il n'y a pas de recette miracle, l'essentiel c'est de faire des événements qui nous parlent
+et qui ont un sens métier.
+
+Voilà, vous avez devant vous une histoire qui est racontée par les changements qui ont été appliqués.
+C'est un peu la définition première de l'event sourcing.
 --
 
 === Avantages
 
+[%step]
 - Pas de perte d'information
 - Support super simple
-- Resilient au nouvelles fonctionnalités
+- Resilient aux nouvelles fonctionnalités
 
 [.notes]
 --
-L'avantage numéro #1 de cette approche est le fait qu'on ne perd pas d'information.
+L'avantage numéro #1 *click* de cette approche est le fait qu'on ne perd pas d'information.
 
-Et quand je parle d'information, je parle des décisions qui ont été prises par le système.
+Tout changement est une nouvelle ligne dans l'histoire.
 
-Le reste en découle, vu qu'on a la liste des événements, ça facilite le support,
-qui n'a jamais rêvé de pouvoir dire après un rapide coup d'œil à la liste des événements
+Le reste en découle. *click* Vu qu'on a la liste des événements, ça facilite le support.
+"Qui n'a jamais rêvé de pouvoir dire après un rapide coup d'œil à la liste des événements
 
-> Si on est arrivés dans cet état là, c'est parce qu'il s'est passé ça, puis ça, puis ça et en fait on ne l'avait pas prévu.
+> Si on est arrivés dans cet état là, c'est parce qu'il s'est passé ça, puis ça, puis ça et
+en fait on ne l'avait pas prévu, on va fixer le problème.
 
-Et si le métier vient nous voir en demandant des stats sur l'existant,
-et bien vous pouvez leur fournir rapidement et sur tout l'historique.
+*click*
 
-(je précise sur l'existant, parce que c'est pas magique non plus,
-ça ne change rien si on vous demande des stats sur une action qui n'a pas été développée)
+Pour finir derrière "résilient aux nouvelles fonctionnalités", j'y mets plusieurs trucs :
+
+- 👍 Si le métier vient nous voir en demandant des stats sur l'existant,
+et bien vous pouvez leur fournir rapidement et ce, sur tout l'historique.
+Comme par exemple le nombre de dépense par cartes, il suffit de compter les PaidAmount.
+- ✌️ L'autre truc concerne le code, on ne l'a pas encore montré, ça arrive,
+mais l'ajout d'une fonctionnalité se fait de manière super simple :
+une requête arrive, on prend la décision ou non de générer un événement. point.
+Pas de reprise de données, pas de nouvelle colonne à mettre en base
 --
 
+[transition="slide-in fade-out"]
 === Inconvénients
 
-- Trop d'information
+[.same]
+[%step]
+- Beaucoup d'information
 - Pas comme d'habitude
 - Inutilisable en l'état
 
 [.notes]
 --
-côté inconvénient, il y a le fait qu'on explose le besoin de stockage.
+côté inconvénient,
+*click*
+il y a le fait qu'on explose le besoin de stockage.
 
-là où on n'avait qu'une ligne en base pour un état simple, on se retrouve avec une ligne pour chaque changement.
+là où on n'avait potentiellement qu'une ligne en base pour un état simple,
+on se retrouve avec une ligne pour chaque changement.
+
+*click*
 
 On n'a pas l'habitude de faire comme ça, et ça peut être déroutant au début.
-C'est un point sérieux à prendre en compte, ça demande un temps d'adaptation.
+C'est un point sérieux à prendre en compte, ça demande un temps d'adaptation aux équipes.
 
-Et le pire c'est que vous n'avez pas d'état exploitable (mais ya des solutions, on verra ça plus tard).
+*click*
+
+Et le pire c'est que vous n'avez pas d'état exploitable tel quel,
+vous avez des événements,
+c'est chouette mais on ne va pas montrer l'histoire complète à chaque utilisateur.
+
+*click*
+--
+
+[transition="fade-in slide-out"]
+=== Inconvénients
+
+[.same]
+- Beaucoup d'information
+- Pas comme d'habitude
+- Pas simple à utiliser en l'état
+
+[.notes]
+--
+Heureusement l'event sourcing ce n'est pas que ça et on en parle plus loin.
 --
