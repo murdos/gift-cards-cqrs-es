@@ -75,9 +75,9 @@ public class GiftCard {
   ) {
     public static DecisionProjection from(GiftCardHistory history) {
       GiftCardCreated firstEvent = history.start();
-      List<GiftCardEvent> followingEvents = history.followingEvents();
 
-      return followingEvents
+      return history
+        .followingEvents()
         .stream()
         .reduce(
           new DecisionProjection(
@@ -85,7 +85,7 @@ public class GiftCard {
             firstEvent.amount(),
             firstEvent.sequenceId()
           ),
-          DecisionProjection::reducer,
+          DecisionProjection::accumulator,
           new DummyCombiner<>()
         );
     }
@@ -101,22 +101,24 @@ public class GiftCard {
     public SequenceId nextSequenceId() {
       return currentSequenceId.next();
     }
-
-    private static DecisionProjection reducer(
-      DecisionProjection decisionProjection,
-      GiftCardEvent giftCardEvent
+    //@formatter:off
+    private static DecisionProjection accumulator(
+      DecisionProjection currentProjection,
+      GiftCardEvent event
     ) {
-      return switch (giftCardEvent) {
-        case GiftCardCreated __ -> decisionProjection;
-        case PaidAmount paidAmount -> decisionProjection
-          .withRemainingAmount(decisionProjection.remainingAmount().subtract(paidAmount.amount()))
+      return switch (event) {
+        case GiftCardCreated __ -> currentProjection;
+        case PaidAmount paidAmount -> currentProjection
+          .withRemainingAmount(
+            currentProjection.remainingAmount().subtract(paidAmount.amount())
+          )
           .withSequenceId(paidAmount.sequenceId());
-        case GifCardExhausted gifCardExhausted -> decisionProjection.withSequenceId(
+        case GifCardExhausted gifCardExhausted -> currentProjection.withSequenceId(
           gifCardExhausted.sequenceId()
         );
       };
     }
-  }
+  } //@formatter:on
   // tag::closingBrace[]
 }
 // end::closingBrace[]

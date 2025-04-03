@@ -2,14 +2,106 @@
 
 [.notes]
 --
-On a vu que nos commandes génèrent des événements.
-Que ces événements sont utilisés pour mettre à jour les projections.
+On a vu précédemment que les événements étaient générés lors du traitement des commandes.
 
-Comment choisir si il faut retourner un événement ou non ?
+Mais une commande n'est pas toujours applicable.
+Par exemple si le montant du paiement est supérieur au solde de la carte cadeau, le paiement ne peut pas être effectué.
+Comment peut-on prendre cette décision en Event Sourcing ?
 --
+
+=== Focus sur la commande de paiement
+
+[source, java, highlight]
+----
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='14..16,36']
+
+    // Et si le paiement est supérieur au montant restant ?
+
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='41..46,55..57']
+----
 
 [.notes]
 --
-- Montrer le code de la partie commande
-- Montrer le code de la décision projection
+Si on reprend la commande de paiement, il faudrait d'abord vérifier si le montant est supérieur au solde de la carte cadeau.
+--
+
+=== `new GiftCard()`
+
+[source, java, highlight]
+----
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='14..16,23']
+    // ...
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='25']
+----
+
+[.notes]
+--
+- Pour rappel, on instancie notre carte cadeau uniquement avec l'historique des évènements passés.
+- Comment peut-on savoir si le montant est supérieur au solde de la carte cadeau à partir de cette liste d'évènements ?
+--
+
+=== `new GiftCard()`
+
+[source, java, highlight='4|7']
+----
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='14..18,23..25']
+----
+
+[.notes]
+--
+- On va utiliser une projection particulière, dynamique, appelée "projection de décision".
+--
+
+=== `DecisionProjection`
+
+[source, java, highlight='4..8']
+----
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='14..16,71..75']
+----
+
+[.notes]
+--
+- Cette projection est privée à l'agrégat, et non visible depuis l'extérieur.
+C'est un détail d'implémentation de l'agrégat.
+--
+
+=== `DecisionProjection.from()`
+
+[source, java, highlight='1|2|4..5|7|8..12|13']
+----
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='76..91']
+----
+
+[.notes]
+--
+- On l'initialise à partir de l'historique des évènements passés.
+*click*
+- on distingue le premier évènement, qui est le début de l'histoire de la carte cadeau.
+*click*
+*click*
+- ensuite on va faire une réduction, ou *fold*, de l'historique des évènements.
+*click*
+- avec l'état initial de la projection, calculé à partir du premier évènement.
+*click*
+- et une fonction d'accumulation...
+*click*
+--
+
+=== `DecisionProjection.accumulator()`
+
+[source, java, highlight='2..3|5|7|8..10|11']
+----
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='105..120']
+----
+
+[.notes]
+--
+...qui va appliquer chaque évènement à l'état courant de la projection.
+*click*
+*click*
+- en cas de paiement,
+*click*
+- on va soustraire le montant du paiement au solde de la carte cadeau.
+*click*
+- et également mettre à jour le dernier numéro de séquence connu
 --
