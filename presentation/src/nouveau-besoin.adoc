@@ -11,6 +11,12 @@ Et hop, un Product Manager débarque avec un nouveau besoin.
 
 === "Statistiques des dépenses par semaine"
 
+[cols="3*", options="header"]
+|============================================
+| barcode | shoppingStore | remainingAmount
+| 1234    | la redoute    | 60 €
+|============================================
+
 [.notes]
 --
 Le pm veut, pour une raison quelconque (c'est un pm), afficher un diagramme des dépenses par jour de la semaine.
@@ -30,7 +36,7 @@ Et que ça, ça arrive souvent, on mitige le risque en disant "bah on a les stat
 > Imaginez que vous puissiez répondre à ce besoin avec tout l'historique des données.
 --
 
-=== Faisable avec event sourcing ?
+=== Faisable en event sourcing ?
 
 [.notes]
 --
