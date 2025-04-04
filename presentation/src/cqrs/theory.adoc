@@ -95,7 +95,7 @@ image::cqrs-query&handler.png[]
 
 image::cqrs.png[]
 
-
+[.notes]
 --
 L'air de rien on vient de parler de CQRS, Command Query Responsibility Segregation.
 
@@ -111,7 +111,7 @@ Bref avec tout ça on n'a pas répondu à une question cruciale,
 
 image::cqrs-aggregate.png[]
 
-
+[.notes]
 --
 > Comment mon agrégat sait s'il doit ou non générer un événement ?
 > Comment prend-il des décisions ?

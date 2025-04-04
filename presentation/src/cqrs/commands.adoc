@@ -1,12 +1,10 @@
-== Comment prendre des décisions ?
+== Prendre des décisions en Event Sourcing
 
 [.notes]
 --
-On a vu précédemment que les événements étaient générés lors du traitement des commandes.
-
-Mais une commande n'est pas toujours applicable.
-Par exemple si le montant du paiement est supérieur au solde de la carte cadeau, le paiement ne peut pas être effectué.
-Comment peut-on prendre cette décision en Event Sourcing ?
+- Effectivement, une commande n'est pas toujours applicable, n'as pas d'effet.
+- Par exemple si le montant du paiement est supérieur au solde de la carte cadeau, le paiement ne peut pas être effectué.
+- Comment peut-on prendre cette décision en Event Sourcing ?
 --
 
 === Focus sur la commande de paiement
@@ -40,7 +38,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 - Comment peut-on savoir si le montant est supérieur au solde de la carte cadeau à partir de cette liste d'évènements ?
 --
 
-=== `new GiftCard()`
+=== Encore une projection !
 
 [source, java, highlight='4|7']
 ----
@@ -49,7 +47,8 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 
 [.notes]
 --
-- On va utiliser une projection particulière, dynamique, appelée "projection de décision".
+- Merci Jamy !
+- On va effectivement utiliser une projection particulière, dynamique, appelée "projection de décision".
 --
 
 === `DecisionProjection`
@@ -96,11 +95,10 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 
 [.notes]
 --
-...qui va appliquer chaque évènement à l'état courant de la projection.
-*click*
-*click*
+- ...qui va appliquer chaque évènement à l'état courant de la projection.
+- *click* *click*
 - en cas de paiement,
-*click*
+- *click*
 - on va soustraire le montant du paiement au solde de la carte cadeau.
 *click*
 - et également mettre à jour le dernier numéro de séquence connu

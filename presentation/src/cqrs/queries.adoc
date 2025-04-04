@@ -12,7 +12,7 @@ Et si en plus la liste doit être paginée pour n'afficher que 10 cartes cadeaux
 --
 
 [transition="fade"]
-== Comment afficher la liste des cartes cadeaux ?
+=== Comment afficher la liste des cartes cadeaux ?
 
 [.same]
 - Paginée 🤔
@@ -25,7 +25,7 @@ ou triée selon un des attributs de la carte cadeau, par exemple le montant rest
 --
 
 [transition="fade"]
-== Comment afficher la liste des cartes cadeaux ?
+=== Comment afficher la liste des cartes cadeaux ?
 
 [.same]
 - Paginée 🤔
@@ -37,18 +37,19 @@ ou triée selon un des attributs de la carte cadeau, par exemple le montant rest
 Voir même filtrée selon un des attributs de la carte cadeau, par exemple la boutique
 --
 
-=== Read Model / Query model !
+=== Query model !
 
 image::jamy.jpg[height=350px]
 
-=== Read Model / Query model
+=== Query model
 
 image::https://spatie.be/docs/laravel-event-sourcing/v7/images/transform-03.svg[]
 
 [.notes]
 --
 TODO: refaire le schéma
-On va utiliser un modèle de lecture, également appelé "read model ou ""query model", dédié à notre use case.
+- On va utiliser un query model, également appelé "read model ou "modèle de lecture".
+- Ce modèle va être fabriqué sur mesure par rapport à notre besoin en lecture, à partir des évènements métier.
 --
 
 [%notitle]
@@ -106,7 +107,8 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/Gi
 [.notes]
 --
 - Côte code, le modèle de lecture s'appelle GiftCardCurrentState
-- Comment est-il calculé ? (event handler)
+- Il contient les informations utilisées pour afficher dans la liste des cartes cadeaux, ou sur lesquelles on souhaiterait filtrer.
+- Comment ce modèle est-il calculé ? Par un event handler.
 --
 
 === Event handler
@@ -119,12 +121,14 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/Gi
 [.notes]
 --
 - L'event handler va être appelé à chaque fois qu'un événement est émis, et va pouvoir mettre à jour le modèle de lecture
+- *click*
+- On va distinguer deux types d'events : le premier, et les suivants
 --
 
 [%notitle]
 === Event handler: init
 
-[source, java, highlight="4"]
+[source, java, highlight="3|4"]
 ----
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentStateUpdater.java[lines='8..9,28..30']
 ----
@@ -136,7 +140,9 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/Gi
 
 [.notes]
 --
-- A partir de l'event initial, GiftCardCreated, on initialise le modèle de lecture
+- C'est à partir du 1er évènement de l'histoire, `GiftCardCreated`, qu'on initialise le modèle de lecture
+- *click*
+- On va créer une nouvelle instance de `GiftCardCurrentState` avec les données de l'évènement
 --
 
 [%notitle]
@@ -154,6 +160,23 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/Gi
 
 [.notes]
 --
-- Et pour chacun des évènements suivants, on va, si besoin, mettre à jour le modèle de lecture.
-- Pour cela on charge l'état courant du modèle, auquel on applique le nouvel événement.
+- Et pour chacun des évènements suivants, on va, si nécessaire, mettre à jour le modèle de lecture.
+- *click*
+- Pour cela on charge l'état courant du modèle,
+- *click*
+- auquel on applique le nouvel événement.
+- *click*
+- on fait du pattern matching pour traiter de manière exhaustive tous les types d'événements
+--
+
+=== Enregistrement des event handlers
+
+[source, java, highlight="10..11"]
+----
+include::../../../src/main/java/io/craft/giftcard/giftcard/application/GiftCardApplicationService.java[lines='21..23,28..32,36..39']
+----
+
+[.notes]
+--
+- Les events handlers s'abonnent aux nouveaux évènements via l'EventPublisher, au niveau de l'application service
 --
