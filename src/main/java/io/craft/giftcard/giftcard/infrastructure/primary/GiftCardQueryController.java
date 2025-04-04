@@ -60,12 +60,12 @@ class GiftCardQueryController {
     // @formatter:off
     Map<DayOfWeek, Double> defaultValues = Map.of(
       MONDAY, 10.5,
-      TUESDAY, 30.0,
-      WEDNESDAY, 5.5,
-      THURSDAY, 2.5,
+      TUESDAY, 0.0,
+      WEDNESDAY, 55.5,
+      THURSDAY, 4.5,
       FRIDAY, 15.0,
-      SATURDAY, 50.0,
-      SUNDAY, 5.0
+      SATURDAY, 74.5,
+      SUNDAY, 0.0
     );
     // @formatter:on
 

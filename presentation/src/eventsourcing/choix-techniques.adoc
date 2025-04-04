@@ -1,4 +1,4 @@
-== Choix du stockage
+== Design de l'agrégat
 
 [.notes]
 --

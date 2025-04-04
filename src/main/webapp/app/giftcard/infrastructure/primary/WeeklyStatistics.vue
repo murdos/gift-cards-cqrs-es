@@ -32,12 +32,22 @@ const daysOrder: Days[] = [
   'SUNDAY',
 ];
 
+const daysLabels: Record<Days, string> = {
+  MONDAY: 'Lundi',
+  TUESDAY: 'Mardi',
+  WEDNESDAY: 'Mercredi',
+  THURSDAY: 'Jeudi',
+  FRIDAY: 'Vendredi',
+  SATURDAY: 'Samedi',
+  SUNDAY: 'Dimanche',
+};
+
 const createChart = () => {
   if (barChartRef.value && weeklyStatistics.value) {
     chartInstance = new Chart(barChartRef.value, {
       type: 'bar',
       data: {
-        labels: daysOrder,
+        labels: daysOrder.map(day => daysLabels[day]),
         datasets: [
           {
             label: 'Nombre de paiements',
@@ -120,7 +130,7 @@ watch(
   () => weeklyStatistics.value,
   newData => {
     if (chartInstance && newData) {
-      chartInstance.data.labels = daysOrder;
+      chartInstance.data.labels = daysOrder.map(day => daysLabels[day]);
       chartInstance.data.datasets[0].data = daysOrder.map(day => newData!!.values[day]);
       chartInstance.update();
     }

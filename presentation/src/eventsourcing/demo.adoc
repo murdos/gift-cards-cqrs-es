@@ -94,7 +94,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 
 [.notes]
 --
-Tout d'abord, on a la fonction statique declare qui va créer notre carte cadeau.
+Tout d'abord, on a la fonction statique `declare` qui va créer notre carte cadeau.
 
 Elle est statique car vu que GiftCardCreated est le début de l'histoire,
 on ne peut pas avoir une instance construite avant de décider de commencer l'histoire 🤷
@@ -105,7 +105,7 @@ Elle va retourner simplement notre événement GiftCardCreated.
 [transition="slide-in fade-out"]
 === `giftCard.pay()`
 
-[source, java, highlight='..|11,12|9,10|15|..']
+[source, java, highlight='..|12,13|10,11|16|..']
 ----
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='14..16, 23']
     // ...
@@ -130,50 +130,31 @@ on ne fait pas que appeler des fonctions statiques, c'est pas un simple builder 
 
 *click*
 
-on le retourne sous forme de liste, mais ça on va y revenir
+on le retourne sous forme de liste.
 
 *click*
 
-ceci dit, je parle depuis le début de "prise de décision", voilà ce que ça peut donner :
---
-
-[transition="fade-in fade-out"]
-=== `giftCard.pay()`
-
-[source, java, highlight='8..10']
-----
-
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='14..16, 23']
-    // ...
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='25..26']
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='36..39, 41..46, 55..57']
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[tags='closingBrace']
-----
-
-[.notes]
---
-Si par exemple, notre carte cadeau n'est pas assez fournie, on ne crée pas la commande.
-
-Ici on lance une exception mais en on aurait pu encapsuler la réponse dans un type Algébrique type `Either`
+et pourquoi une liste me direz-vous ?
 --
 
 [transition="fade-in slide-out"]
 === `giftCard.pay()`
 
-[source, java, highlight='14..19']
+[source, java, highlight='13..18']
 ----
 
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='14..16, 23']
     // ...
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='25..26']
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='36..39, 41,46, 48..57']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='36,41']
+      // ...
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='46, 48..57']
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[tags='closingBrace']
 ----
 
 [.notes]
 --
-Et mieux, si avec cette commande on sait qu'on va vider la carte (avec le `this.hasExactBalance(payment.amount())`)
-on rajoute un événément en sortie, le fameux GiftCardExhausted
+Parce que si la carte est vide, on a dit qu'on retournait aussi l'événement GifCardExhausted.
 --
 
 
@@ -186,6 +167,7 @@ L'application service
 --
 On a vu les évents, on a vu leur génération.
 C'est joli, mais on a fait un agrégat sans aucun effet de bord.
+(Pour info ça s'appelle du Functionnal core)
 
 Maintenant voyons comment on interface notre agrégat avec le reste du monde
 grace à notre application service

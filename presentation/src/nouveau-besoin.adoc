@@ -9,13 +9,9 @@ Create, Read, Update, Delete standard, je veux dire, on avait toutes les cartes 
 Et hop, un Product Manager débarque avec un nouveau besoin.
 --
 
-=== "Statistiques des dépenses par semaine"
+=== "Statistiques des dépenses par jour de la semaine"
 
-[cols="3*", options="header"]
-|============================================
-| barcode | shoppingStore | remainingAmount
-| 1234    | Restaurant    | 60 €
-|============================================
+image::weekly-statistics.png[width=1000px]
 
 [.notes]
 --
@@ -27,18 +23,64 @@ sans doute pour savoir quel est le jour le plus optimisé pour envoyer un rappel
 
 === Si on n'était pas en event sourcing ?
 
+[%step]
+- Informations nécessaires ?
+- Reprise de données ?
+- Table d'audit ?
+
+
 [.notes]
 --
 Comme on l'a dit plus tôt, la gestion "standard" est basiquement une perte d'information.
 
-Et que ça, ça arrive souvent, on mitige le risque en disant "bah on a les stats à partir de ma mise en prod"
+Alors pour savoir si on peut faire cette feature simplement, il nous faut se poser 3 questions.
 
-> Imaginez que vous puissiez répondre à ce besoin avec tout l'historique des données.
+*click*
+
+Est-ce qu'on a les informations nécessaires ?
+Est-ce qu'on a été assez malin et avoir assez over enginneeré
+l'application pour avoir les données dont on a besoin direct dans l'agrégat ?
+
+Si oui bravo, ça passe pour cette fois ci, gg à nous.
+
+Si non...
+
+*click*
+
+Est-ce qu'on peut faire une reprise de données ?
+Je sais pas, se brancher sur une autre table d'un autre domaine qui lui stockait les dates de paiement ?
+
+*click*
+
+Allez mieux, je suis sûr qu'on a mis en place une table d'audit pour pas perdre de traces,
+parce que les paiements c'est important et c'est pratique pour le débug.
+
+Pour cette question là j'ai envie de dire, quitte à avoir un historique,
+pourquoi ne pas travailler avec dans son domaine directement et le prendre comme source de données ?
+
+*pause*
+
+Si vous répondez non à ces questions, il y a de grandes chances que vous alliez voir le project manager en disant
+> on va commencer à compter à partir de maintenant, on n'a pas l'historique.
+
+Et souvent c'est acceptable. De toute manière les données sont perdues on ne peut rien y faire.
 --
 
 === Faisable en event sourcing ?
 
+- Informations nécessaires ?
+- Reprise de données ?
+- Table d'audit ?
+
 [.notes]
 --
-... bah on a les données \^_^
+Maintenant est-ce que c'est faisable en event sourcing ?
+
+Est-ce qu'on a ce qu'il faut ? Oui, on a nos événements de paiements.
+
+Est-ce qu'on a une reprise de données à faire ? Sûrement mais pas de spoil.
+
+Quel est l'intérêt d'une table d'audit quand on se base sur ce qu'il s'est passé sur le système pour prendre des décisions ?
+
+Bref, et si on voyait ensemble comment gérer le cas ?
 --
