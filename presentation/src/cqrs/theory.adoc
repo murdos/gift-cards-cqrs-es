@@ -1,6 +1,6 @@
 == Recap
 
-image::https://codeopinion.com/wp-content/uploads/2022/01/4.png[]
+Pause ✋
 
 [.notes]
 --
