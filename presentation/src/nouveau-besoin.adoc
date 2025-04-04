@@ -14,7 +14,7 @@ Et hop, un Product Manager débarque avec un nouveau besoin.
 [cols="3*", options="header"]
 |============================================
 | barcode | shoppingStore | remainingAmount
-| 1234    | la redoute    | 60 €
+| 1234    | Restaurant    | 60 €
 |============================================
 
 [.notes]

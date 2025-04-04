@@ -1,14 +1,118 @@
-== CQRS Theory
+== Recap
 
 image::https://codeopinion.com/wp-content/uploads/2022/01/4.png[]
 
 [.notes]
 --
-On a vu comment on pouvait ingérer des commandes, prendre la décision de fabriquer un événement
+Pause ✋
 
-On a vu que ces événements sont utilisés pour mettre à jour les projections.
+Je crois que c'est le moment pour faire un petit récapitulatif.
 
-Ces projections sont utilisées pour afficher l'état de l'application.
+Tu viens de nous montrer comment on peut requêter un Query model,
+si on essaye de revenir à de la théorie ça donne ça.
+--
 
-C'est ça le CQRS
+[transition="slide-in fade-out"]
+=== Query model
+
+image::cqrs-query.png[]
+
+[.notes]
+--
+Le query model c'est, grosso modo, le fait que le client requête une projection depuis le repo des projections.
+
+On a vu que pour notre projet là, le repo est en mémoire,
+mais il pourrait être stocké dans une base quelconque ça ne changerait rien.
+--
+
+[transition="fade"]
+=== Query model
+
+image::cqrs-query&handler.png[]
+
+[.notes]
+--
+Que ces projections sont poussées dans le repo par des event handlers.
+
+*pause*
+--
+
+[transition="fade"]
+=== Command model
+
+image::cqrs-command.png[]
+
+[.notes]
+--
+Plus tôt, on a parlé des requêtes de modification, les commandes.
+--
+
+[transition="fade"]
+=== Command model
+
+image::cqrs-command&event.png[]
+
+[.notes]
+--
+Ces commandes sont passées à l'agrégat qui va décider de fabriquer ou non un événement
+--
+
+[transition="fade"]
+=== Command model
+
+image::cqrs-command&events.png[]
+
+[.notes]
+--
+dans notre cas, c'est même plusieurs événements qu'il peut créer
+--
+
+[transition="fade"]
+=== Command model
+
+image::cqrs-command&eventstore.png[]
+
+[.notes]
+--
+Et nous on va les stocker dans un event store & les envoyer aux event handlers.
+
+ça c'est le code qui a la responsabilité de la "command"
+--
+
+[transition="fade"]
+=== Query model
+
+image::cqrs-query&handler.png[]
+
+[.notes]
+--
+ça c'est le code qui a la responsabilité de la "query"
+--
+
+
+[transition="fade"]
+=== Command Query Responsibility Segregation
+
+image::cqrs.png[]
+
+
+--
+L'air de rien on vient de parler de CQRS, Command Query Responsibility Segregation.
+
+Fin de la parenthèse.
+
+Mais avec tout ça, il est beau ce schéma... dites qu'il est beau !
+
+Bref avec tout ça on n'a pas répondu à une question cruciale,
+--
+
+[transition="fade-in, slide-out"]
+=== Command Query Responsibility Segregation
+
+image::cqrs-aggregate.png[]
+
+
+--
+> Comment mon agrégat sait s'il doit ou non générer un événement ?
+> Comment prend-il des décisions ?
 --

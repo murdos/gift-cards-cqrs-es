@@ -33,9 +33,9 @@ public class GiftCardApplicationService {
     this.eventStore = eventStore;
     this.currentStateRepository = currentStateRepository;
 
-    this.eventPublisher = new EventPublisher<>();
-    this.eventPublisher.register(new GiftCardCurrentStateUpdater(currentStateRepository));
-    this.eventPublisher.register(new MessageSenderEventHandler(giftCardMessageSender));
+    this.eventPublisher = new EventPublisher<GiftCardEvent>()
+      .register(new GiftCardCurrentStateUpdater(currentStateRepository))
+      .register(new MessageSenderEventHandler(giftCardMessageSender));
   }
 
   @Transactional

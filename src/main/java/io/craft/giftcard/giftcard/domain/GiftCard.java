@@ -49,7 +49,7 @@ public class GiftCard {
     if (this.hasExactBalance(payment.amount())) {
       return List.of(
         paidAmount,
-        new GifCardExhausted(decisionProjection.barcode, paidAmount.sequenceId().next())
+        new GifCardExhausted(this.barcode(), paidAmount.sequenceId().next())
       );
     }
 

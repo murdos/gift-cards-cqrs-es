@@ -10,8 +10,9 @@ public class EventPublisher<T> {
 
   private final List<EventHandler<T>> eventHandlers = new ArrayList<>();
 
-  public void register(EventHandler<T> eventHandler) {
+  public EventPublisher<T> register(EventHandler<T> eventHandler) {
     eventHandlers.add(eventHandler);
+    return this;
   }
 
   @DomainEventPublisher
