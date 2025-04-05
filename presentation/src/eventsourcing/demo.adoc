@@ -174,9 +174,9 @@ grace à notre application service
 
 === `GiftCardApplicationService.declare()`
 
-[source, java, highlight='..|10|11|12']
+[source, java, highlight='..|9|10|11']
 ----
-include::../../../src/main/java/io/craft/giftcard/giftcard/application/GiftCardApplicationService.java[lines='20..23,25,26,40..42,48..52']
+include::../../../src/main/java/io/craft/giftcard/giftcard/application/GiftCardApplicationService.java[lines='17..18,20,23,40..42,48..52']
 include::../../../src/main/java/io/craft/giftcard/giftcard/application/GiftCardApplicationService.java[tags='closingBrace']
 ----
 
@@ -186,7 +186,7 @@ voilà, pour la déclaration c'est aussi simple que ça.
 
 *click*
 
-On appelle l'agrégat pour nous fournir l'événement,
+On appelle l'agrégat pour nous fournir l'événement d'init,
 
 *click*
 
@@ -199,9 +199,9 @@ et on le propage.
 
 === `GiftCardApplicationService.pay()`
 
-[source, java, highlight='..|9|10..12|..']
+[source, java, highlight='..|8|9..11|..']
 ----
-include::../../../src/main/java/io/craft/giftcard/giftcard/application/GiftCardApplicationService.java[lines='20..23,25,26,53..60']
+include::../../../src/main/java/io/craft/giftcard/giftcard/application/GiftCardApplicationService.java[lines='17..18,20,23,53..60']
 include::../../../src/main/java/io/craft/giftcard/giftcard/application/GiftCardApplicationService.java[tags='closingBrace']
 ----
 

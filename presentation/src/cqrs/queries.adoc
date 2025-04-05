@@ -176,7 +176,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/Gi
 
 [source, java, highlight="10..11"]
 ----
-include::../../../src/main/java/io/craft/giftcard/giftcard/application/GiftCardApplicationService.java[lines='21..23,28..32,36..39']
+include::../../../src/main/java/io/craft/giftcard/giftcard/application/GiftCardApplicationService.java[lines='17..19,25..27,29..30,35..37,39']
 ----
 
 [.notes]
