@@ -1,12 +1,19 @@
 == Références
+
+* CQRS
+** https://github.com/keyvanakbary/cqrs-documents[CQRS Documents by Greg Young]
+** https://www.youtube.com/watch?v=JHGkaShoyNs[Greg Young - CQRS and Event Sourcing - Code on the Beach 2014]
+
+* Event Sourcing
+** https://www.youtube.com/watch?v=gG6DGmYKk4I[How to model event-sourced systems efficiently - Oskar Dudycz - DDD Europe 2022]
+
+* Event Modeling : https://eventmodeling.org/
+
+* Le code complet de notre appli : https://github.com/murdos/gift-cards-cqrs-es
+
 [.notes]
 --
-Lien vers le repo git
-Bibliographie / Liens Youtube :
-- CQRS Documents by Greg Young
-- https://www.youtube.com/watch?v=JHGkaShoyNs
-- https://www.youtube.com/watch?v=gG6DGmYKk4I
-
+TODO: pousser le code sur codeberg
 --
 
 === Questions ?
