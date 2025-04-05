@@ -13,10 +13,12 @@ import io.craft.giftcard.giftcard.domain.Amount;
 import io.craft.giftcard.giftcard.domain.Barcode;
 import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentState;
 import io.craft.giftcard.giftcard.domain.projections.GiftCardDetails;
+import io.craft.giftcard.giftcard.domain.projections.WeeklyStatistics;
 import jakarta.annotation.Nullable;
 import java.time.DayOfWeek;
 import java.util.Collection;
 import java.util.Map;
+import java.util.stream.Collectors;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -81,20 +83,36 @@ class GiftCardQueryController {
 
   @Nullable
   @GetMapping("/statistics")
-  public WeeklyStatistics getWeeklyStatistics() {
+  public WeeklyStatisticsDto getWeeklyStatistics() {
     // @formatter:off
-    Map<DayOfWeek, Double> defaultValues = Map.of(
-      MONDAY, 10.5,
-      TUESDAY, 0.0,
-      WEDNESDAY, 55.5,
-      THURSDAY, 4.5,
-      FRIDAY, 15.0,
-      SATURDAY, 74.5,
-      SUNDAY, 0.0
-    );
+    var defaultValues = new WeeklyStatistics(Map.of(
+      MONDAY, Amount.of(10.5),
+      TUESDAY, Amount.of(0.0),
+      WEDNESDAY, Amount.of(55.5),
+      THURSDAY, Amount.of(4.5),
+      FRIDAY, Amount.of(15.0),
+      SATURDAY, Amount.of(74.5),
+      SUNDAY, Amount.of(0.0)
+    ));
     // @formatter:on
 
     return null;
+  }
+}
+
+record WeeklyStatisticsDto(Map<DayOfWeek, Double> values) {
+  public static WeeklyStatisticsDto fromDomain(WeeklyStatistics weeklyStatistics) {
+    return new WeeklyStatisticsDto(
+      weeklyStatistics
+        .values()
+        .entrySet()
+        .stream()
+        .collect(
+          Collectors.toMap(Map.Entry::getKey, dayOfWeekAmountEntry ->
+            dayOfWeekAmountEntry.getValue().value().doubleValue()
+          )
+        )
+    );
   }
 }
 
@@ -107,5 +125,3 @@ enum QueryShoppingStore {
   LIVREUR,
   MUSIQUE,
 }
-
-record WeeklyStatistics(Map<DayOfWeek, Double> values) {}
