@@ -5,9 +5,9 @@
 
 [.notes]
 --
-Les événements c'est super pour avoir l'historique complet et savoir précisément ce qui s'est passé, mais comment je fais pour afficher une liste de toutes mes cartes cadeaux avec quelques infos, comme le montant restant et la boutique de la carte ?
-Relire tous les évènements de toutes les cartes cadeaux à chaque fois paraît compliqué...
-Et si en plus la liste doit être paginée pour n'afficher que 10 cartes cadeaux à la fois
+- Les événements c'est super pour avoir l'historique complet et savoir précisément ce qui s'est passé, mais comment je fais pour afficher une liste de toutes mes cartes cadeaux avec quelques infos, comme le montant restant et la boutique de la carte ?
+- Relire tous les évènements de toutes les cartes cadeaux à chaque fois paraît compliqué...
+- Et si en plus la liste doit être paginée pour n'afficher que 10 cartes cadeaux à la fois
  *click*
 --
 
@@ -108,7 +108,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/Gi
 --
 - Côte code, le modèle de lecture s'appelle GiftCardCurrentState
 - Il contient les informations utilisées pour afficher dans la liste des cartes cadeaux, ou sur lesquelles on souhaiterait filtrer.
-- Comment ce modèle est-il calculé ? Par un event handler.
+- Comment ce modèle est-il calculé ? Vous vous souvenez de ce que Cédric disait précédemment, que l'event était propagé ? Et bien il est propagé sur jusqu'aux events handlers.
 --
 
 === Event handler
@@ -128,14 +128,17 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/Gi
 [%notitle]
 === Event handler: init
 
-[source, java, highlight="3|4"]
+[source, java, highlight="3|4|2"]
 ----
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentStateUpdater.java[lines='8..9,28..30']
 ----
 
-[source, java, highlight="3.."]
+[source, java, highlight="3|4.."]
 ----
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentState.java[lines='12..13,19..25']
+@QueryModel
+public record GiftCardCurrentState(...) {
+
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentState.java[lines='19..27']
 ----
 
 [.notes]
@@ -148,14 +151,14 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/Gi
 [%notitle]
 === Event handler: update
 
-[source, java, highlight="3..|4..6|7"]
+[source, java, highlight="3..|4..6|7|2"]
 ----
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentStateUpdater.java[lines='8..9,32..37']
 ----
 
-[source, java, highlight="4,12|5..7|8"]
+[source, java, highlight="3|5,13|6..8|9"]
 ----
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentState.java[lines='12..13,36..46']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentState.java[lines='12..13,35..47']
 ----
 
 [.notes]
