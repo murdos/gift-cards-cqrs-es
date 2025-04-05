@@ -47,7 +47,7 @@ public record GiftCardDetails(Barcode barcode, List<String> details) {
   ) {
     return switch (giftCardEvent) {
       case PaidAmount paidAmount -> giftCardDetails.withDetail(
-        "Montant payé : " + paidAmount.amount().value() + " €, le " + paidAmount.paymentDate()
+        "Montant payé : " + paidAmount.amount().value() + " €, le " + paidAmount.on()
       );
       case GiftCardDeclared __ -> giftCardDetails;
       case GifCardExhausted __ -> giftCardDetails.withDetail("Carte cadeau épuisée");

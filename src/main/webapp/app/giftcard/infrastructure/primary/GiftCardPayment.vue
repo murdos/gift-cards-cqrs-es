@@ -22,6 +22,7 @@
 </template>
 
 <script setup lang="ts">
+import type { Payment } from '@/giftcard/domain/Payment.ts';
 import { ref } from 'vue';
 
 const paymentAmount = ref(0);
@@ -36,7 +37,8 @@ const emit = defineEmits(['submit']);
 paymentAmount.value = props.defaultAmount;
 
 const submitPayment = () => {
-  emit('submit', { amount: paymentAmount.value, date: paymentDate.value });
+  const payment: Payment = { amount: paymentAmount.value, on: paymentDate.value };
+  emit('submit', payment);
 };
 </script>
 

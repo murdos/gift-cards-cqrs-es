@@ -64,8 +64,8 @@ record GiftCardDeclarationDTO(
   }
 }
 
-record PaymentDTO(@NotNull @Positive Double amount, @NotNull LocalDate paymentDate) {
+record PaymentDTO(@NotNull @Positive Double amount, @NotNull LocalDate on) {
   public Payment toDomain() {
-    return new Payment(Amount.of(amount), paymentDate);
+    return new Payment(Amount.of(amount), on);
   }
 }

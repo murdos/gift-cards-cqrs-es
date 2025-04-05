@@ -37,6 +37,7 @@
 
 <script setup lang="ts">
 import type { GiftCard } from '@/giftcard/domain/GiftCard';
+import type { Payment } from '@/giftcard/domain/Payment.ts';
 import GiftCardDetails from '@/giftcard/infrastructure/primary/GiftCardDetails.vue';
 import GiftCardPayment from '@/giftcard/infrastructure/primary/GiftCardPayment.vue';
 import { AxiosGiftCardCommandRepository } from '@/giftcard/infrastructure/secondary/AxiosGiftCardCommandRepository';
@@ -71,9 +72,9 @@ const closeDetailsModal = () => {
   isDetailsModalOpen.value = false;
 };
 
-const submitPayment = async ({ amount, date }: { amount: number; date: string }) => {
+const submitPayment = async ({ amount, on }: Payment) => {
   const giftCardCommandRepository = new AxiosGiftCardCommandRepository(new AxiosHttp(axios));
-  const payment = { amount, paymentDate: date };
+  const payment: Payment = { amount, on };
   try {
     await giftCardCommandRepository.pay(props.giftCard.barcode.value, payment);
     console.log('Payment successful!');
