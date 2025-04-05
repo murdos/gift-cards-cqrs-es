@@ -6,6 +6,8 @@ import io.craft.giftcard.giftcard.domain.SequenceId;
 import java.time.LocalDate;
 import org.jmolecules.event.annotation.DomainEvent;
 
+// @formatter:on
 @DomainEvent
 public record PaidAmount(Barcode barcode, SequenceId sequenceId, Amount amount, LocalDate on)
   implements GiftCardEvent {}
+// @formatter:off

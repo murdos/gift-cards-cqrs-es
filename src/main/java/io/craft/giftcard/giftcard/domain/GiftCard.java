@@ -3,7 +3,6 @@ package io.craft.giftcard.giftcard.domain;
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
 import io.craft.giftcard.giftcard.domain.commands.Payment;
 import io.craft.giftcard.giftcard.domain.events.*;
-import io.craft.giftcard.giftcard.domain.events.GiftCardDeclared;
 import io.craft.giftcard.shared.collection.domain.DummyCombiner;
 import java.util.List;
 import org.jmolecules.ddd.annotation.AggregateRoot;

@@ -1,0 +1,80 @@
+=== Avantages
+
+[%step]
+- Pas de perte d'information
+- Support super simple
+- Resilient aux nouvelles fonctionnalités
+
+[.notes]
+--
+
+Maintenant qu'on a vu comment ça marchait, juste avant de vous laisser partir,
+on va faire la liste des avantages et des inconvénients, comme pour le State sourcing.
+
+L'avantage numéro #1 *click* de cette approche est le fait qu'on ne perd pas d'information.
+
+Tout changement est une nouvelle ligne dans l'histoire.
+
+Le reste en découle. *click* Vu qu'on a la liste des événements, ça facilite le support.
+"Qui n'a jamais rêvé de pouvoir dire après un rapide coup d'œil à la liste des événements
+
+> Si on est arrivés dans cet état là, c'est parce qu'il s'est passé ça, puis ça, puis ça et
+en fait on ne l'avait pas prévu, on va fixer le problème.
+
+*click*
+
+Pour finir derrière "résilient aux nouvelles fonctionnalités", j'y mets plusieurs trucs :
+
+- 👍 Si le métier vient nous voir en demandant des stats sur l'existant,
+et bien vous pouvez leur fournir rapidement et ce, sur tout l'historique.
+Comme par exemple le nombre de dépense par cartes, il suffit de compter les PaidAmount.
+- ✌️ L'autre truc concerne le code, on ne l'a pas encore montré, ça arrive,
+mais l'ajout d'une fonctionnalité se fait de manière super simple :
+une requête arrive, on prend la décision ou non de générer un événement. point.
+Pas de reprise de données, pas de nouvelle colonne à mettre en base
+--
+
+[transition="slide-in fade-out"]
+=== Inconvénients
+
+[.same]
+[%step]
+- Beaucoup d'information
+- Pas comme d'habitude
+- Inutilisable en l'état
+
+[.notes]
+--
+côté inconvénient,
+*click*
+il y a le fait qu'on explose le besoin de stockage.
+
+là où on n'avait potentiellement qu'une ligne en base pour un état simple,
+on se retrouve avec une ligne pour chaque changement.
+
+*click*
+
+On n'a pas l'habitude de faire comme ça, et ça peut être déroutant au début.
+C'est un point sérieux à prendre en compte, ça demande un temps d'adaptation aux équipes.
+
+*click*
+
+Et le pire c'est que vous n'avez pas d'état exploitable tel quel,
+vous avez des événements,
+c'est chouette mais on ne va pas montrer l'histoire complète à chaque utilisateur.
+
+*click*
+--
+
+[transition="fade-in slide-out"]
+=== Inconvénients
+
+[.same]
+- Beaucoup d'information
+- Pas comme d'habitude
+- Pas simple à utiliser en l'état
+
+[.notes]
+--
+Heureusement l'event sourcing ce n'est pas que ça et on en parle plus loin.
+--

@@ -4,10 +4,15 @@
 Les événements
 [.notes]
 --
-En attendant, regardons à quoi ça ressemble dans le code
+Pour ça, on va se promener dans le code
+
+En commençant par voir à quoi ressemble un événement,
+comment il est produit dans l'agrégat.
+
+Et comment ça s'articule dans un service classique.
 --
 
-=== Interface GiftCardEvent
+=== Interface `GiftCardEvent`
 
 [source, java, highlight]
 ----
@@ -18,12 +23,13 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/events/GiftCar
 --
 Côté événements, pour les manipuler on va créer une interface scellée sobrement appeler GiftCardEvent.
 
-Elle contient des données qui pourraient être considérées comme "technique",
-bouh c'est pas beau ça n'a rien à faire dans le domaine.
-Mais hé, pas besoin d'être dogmatique si ça permet de simplifier la comprehension du code.
+Elle force l'implémentation les données communes comme le codebarre, qui est l'identifiant de notre agrégat,
+et le séquence Id, le truc dont j'ai parlé tout à l'heure qui force l'histoire dans le bon sens.
+
+On pourrait y rajouter un auteur, une date de création…
 --
 
-=== GiftCardDeclared
+=== `GiftCardDeclared`
 
 [source, java, highlight="..|3,5..6"]
 ----
@@ -32,7 +38,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/events/GiftCar
 
 [.notes]
 --
-Dans les implem, on a le début de notre histoire avec l'événement GiftCardDeclared.
+Dans les implem, on a le début de notre histoire avec l'événement `GiftCardDeclared`.
 
 *click*
 
@@ -42,23 +48,23 @@ il porte l'id de l'agrégat et les données de bases.
 ici le montant & le magasin
 --
 
-=== PaidAmount
+=== `PaidAmount`
 
 [source, java, highlight='..|5..6']
 ----
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/events/PaidAmount.java[lines='9..']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/events/PaidAmount.java[lines='10..17']
 ----
 
 [.notes]
 --
-On en a 3 on va tous les faire, voici le PaidAmount
+On a 3 événements, on va tous les faire ça va être rapide, voici le `PaidAmount`
 
 *click*
 
 Vous vous en souvenez, il porte le montant payé et la date de paiement
 --
 
-=== GifCardExhausted
+=== `GifCardExhausted`
 
 [.smaller]
 [source, java, highlight='..']
@@ -68,7 +74,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/events/GifCard
 
 [.notes]
 --
-Notre dernier événement est GifCardExhausted qui se suffit à lui même.
+Pour finir, le dernier événement est `GifCardExhausted` qui se suffit à lui même.
 --
 
 === Code
@@ -78,17 +84,17 @@ L'agrégat
 
 [.notes]
 --
-Maintenant qu'on a vu les événements, voyons comment on les utilise dans notre agregat.
+Maintenant qu'on a vu les événements, voyons comment on les utilise dans notre agrégat.
 --
 
 === `GiftCard.declare()`
 
 [source, java, highlight]
 ----
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='14..16, 23']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='10..12,19']
     // ...
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='25..26']
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='27..35']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='21..22']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='23..30']
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[tags='closingBrace']
 ----
 
@@ -107,10 +113,10 @@ Elle va retourner simplement notre événement GiftCardDeclared.
 
 [source, java, highlight='..|12,13|10,11|16|..']
 ----
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='14..16, 23']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='10..12,19']
     // ...
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='25..26']
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='36, 41..46, 55..57']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='21..22']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='32, 37..42, 51..53']
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[tags='closingBrace']
 ----
 
@@ -142,12 +148,12 @@ et pourquoi une liste me direz-vous ?
 [source, java, highlight='13..18']
 ----
 
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='14..16, 23']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='10..12,19']
     // ...
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='25..26']
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='36,41']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='21..22']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='32,37']
       // ...
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='46, 48..57']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='42, 44..53']
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[tags='closingBrace']
 ----
 

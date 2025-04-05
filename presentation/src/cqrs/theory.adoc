@@ -99,9 +99,8 @@ image::cqrs.png[]
 --
 L'air de rien on vient de parler de CQRS, Command Query Responsibility Segregation.
 
-Fin de la parenthèse.
-
-Mais avec tout ça, il est beau ce schéma... dites qu'il est beau !
+Bon j'arrête avec la théorie, promis.
+Mais avouez qu'il est beau ce schéma... dites qu'il est beau !
 
 Bref avec tout ça on n'a pas répondu à une question cruciale,
 --
@@ -115,4 +114,9 @@ image::cqrs-aggregate.png[]
 --
 > Comment mon agrégat sait s'il doit ou non générer un événement ?
 > Comment prend-il des décisions ?
+--
+
+[.notes]
+--
+... ça fait deux questions. T'manière c'est Aurélien qui va y répondre.
 --

@@ -39,6 +39,8 @@ include::nouveau-besoin.adoc[]
 
 include::live-coding.adoc[]
 
+include::eventsourcing/avantages-inconvenients.adoc[]
+
 include::outro.adoc[]
 
 include::example.adoc[]
