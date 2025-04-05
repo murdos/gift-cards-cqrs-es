@@ -82,7 +82,7 @@ Et si je dépense les 60 € restants
 --
 ma carte cadeaux est vide et donc inutilisable.
 
-Mais le point ici c'est que le champ "montant" a été écrasé.
+Mais le point ici c'est que le champ "montant" a de nouveau été écrasé.
 
 Ce qui veut dire qu'après un changement,
 on a certes des valeurs à jour, mais plus aucune trace de ce qu'elles ont été.
