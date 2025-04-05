@@ -23,16 +23,16 @@ bouh c'est pas beau ça n'a rien à faire dans le domaine.
 Mais hé, pas besoin d'être dogmatique si ça permet de simplifier la comprehension du code.
 --
 
-=== GiftCardCreated
+=== GiftCardDeclared
 
 [source, java, highlight="..|3,5..6"]
 ----
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/events/GiftCardCreated.java[lines='9..']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/events/GiftCardDeclared.java[lines='9..']
 ----
 
 [.notes]
 --
-Dans les implem, on a le début de notre histoire avec l'événement GiftCardCreated.
+Dans les implem, on a le début de notre histoire avec l'événement GiftCardDeclared.
 
 *click*
 
@@ -96,10 +96,10 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 --
 Tout d'abord, on a la fonction statique `declare` qui va créer notre carte cadeau.
 
-Elle est statique car vu que GiftCardCreated est le début de l'histoire,
+Elle est statique car vu que GiftCardDeclared est le début de l'histoire,
 on ne peut pas avoir une instance construite avant de décider de commencer l'histoire 🤷
 
-Elle va retourner simplement notre événement GiftCardCreated.
+Elle va retourner simplement notre événement GiftCardDeclared.
 --
 
 [transition="slide-in fade-out"]

@@ -5,7 +5,7 @@ import io.craft.giftcard.giftcard.domain.Barcode;
 import io.craft.giftcard.giftcard.domain.GiftCardEventStore;
 import io.craft.giftcard.giftcard.domain.SequenceId;
 import io.craft.giftcard.giftcard.domain.ShoppingStore;
-import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
+import io.craft.giftcard.giftcard.domain.events.GiftCardDeclared;
 import io.craft.giftcard.giftcard.domain.events.PaidAmount;
 import java.time.LocalDate;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
@@ -24,7 +24,7 @@ class InMemoryEventStoreInitializer {
   @EventListener(ApplicationStartedEvent.class)
   public void onApplicationReady() {
     eventStore.save(
-      new GiftCardCreated(
+      new GiftCardDeclared(
         new Barcode("5678"),
         SequenceId.INITIAL,
         Amount.of(50),
@@ -49,7 +49,7 @@ class InMemoryEventStoreInitializer {
     );
 
     eventStore.save(
-      new GiftCardCreated(
+      new GiftCardDeclared(
         new Barcode("1234"),
         SequenceId.INITIAL,
         Amount.of(64),
@@ -66,7 +66,7 @@ class InMemoryEventStoreInitializer {
     );
 
     eventStore.save(
-      new GiftCardCreated(
+      new GiftCardDeclared(
         new Barcode("91011"),
         SequenceId.INITIAL,
         Amount.of(100),
@@ -75,7 +75,7 @@ class InMemoryEventStoreInitializer {
     );
 
     eventStore.save(
-      new GiftCardCreated(
+      new GiftCardDeclared(
         new Barcode("121314"),
         SequenceId.INITIAL,
         Amount.of(75),

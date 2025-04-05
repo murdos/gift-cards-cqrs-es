@@ -59,7 +59,7 @@ image::https://codeopinion.com/wp-content/uploads/2021/02/s2-1024x466.png[]
 [.notes]
 --
 TODO: refaire le schéma
-GiftCardCreated
+GiftCardDeclared
 -> GiftCardCurrentState
 --
 
@@ -70,7 +70,7 @@ image::https://codeopinion.com/wp-content/uploads/2021/02/s2-1024x466.png[]
 [.notes]
 --
 TODO: refaire le schéma
-GiftCardCreated
+GiftCardDeclared
 + PaidAmount
 -> GiftCardCurrentState
 --
@@ -82,7 +82,7 @@ image::https://codeopinion.com/wp-content/uploads/2021/02/s2-1024x466.png[]
 [.notes]
 --
 TODO: refaire le schéma
-GiftCardCreated
+GiftCardDeclared
 + PaidAmount
 + PaidAmount
 -> GiftCardCurrentState
@@ -143,7 +143,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/Gi
 
 [.notes]
 --
-- C'est à partir du 1er évènement de l'histoire, `GiftCardCreated`, qu'on initialise le modèle de lecture
+- C'est à partir du 1er évènement de l'histoire, `GiftCardDeclared`, qu'on initialise le modèle de lecture
 - *click*
 - On va créer une nouvelle instance de `GiftCardCurrentState` avec les données de l'évènement
 --

@@ -7,7 +7,7 @@ import io.craft.giftcard.giftcard.domain.ShoppingStore;
 import org.jmolecules.event.annotation.DomainEvent;
 
 @DomainEvent
-public record GiftCardCreated(
+public record GiftCardDeclared(
   Barcode barcode,
   SequenceId sequenceId,
   Amount amount,

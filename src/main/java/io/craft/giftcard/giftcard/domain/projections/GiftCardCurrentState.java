@@ -4,7 +4,7 @@ import io.craft.giftcard.giftcard.domain.Amount;
 import io.craft.giftcard.giftcard.domain.Barcode;
 import io.craft.giftcard.giftcard.domain.ShoppingStore;
 import io.craft.giftcard.giftcard.domain.events.GifCardExhausted;
-import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
+import io.craft.giftcard.giftcard.domain.events.GiftCardDeclared;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
 import io.craft.giftcard.giftcard.domain.events.PaidAmount;
 import org.jmolecules.architecture.cqrs.QueryModel;
@@ -16,11 +16,11 @@ public record GiftCardCurrentState(
   ShoppingStore shoppingStore,
   boolean exhausted
 ) {
-  public static GiftCardCurrentState from(GiftCardCreated giftCardCreated) {
+  public static GiftCardCurrentState from(GiftCardDeclared giftCardDeclared) {
     return new GiftCardCurrentState(
-      giftCardCreated.barcode(),
-      giftCardCreated.amount(),
-      giftCardCreated.shoppingStore(),
+      giftCardDeclared.barcode(),
+      giftCardDeclared.amount(),
+      giftCardDeclared.shoppingStore(),
       false
     );
   }
@@ -39,8 +39,8 @@ public record GiftCardCurrentState(
           remainingAmount.subtract(paidAmount.amount())
         );
       case GifCardExhausted __ -> this.exhaust();
-      case GiftCardCreated __ -> throw new IllegalStateException(
-        "GiftCardCreated event is not expected as an update event"
+      case GiftCardDeclared __ -> throw new IllegalStateException(
+        "GiftCardDeclared event is not expected as an update event"
       );
     };
   }

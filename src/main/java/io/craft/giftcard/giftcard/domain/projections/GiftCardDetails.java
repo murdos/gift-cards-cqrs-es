@@ -2,7 +2,7 @@ package io.craft.giftcard.giftcard.domain.projections;
 
 import io.craft.giftcard.giftcard.domain.Barcode;
 import io.craft.giftcard.giftcard.domain.events.GifCardExhausted;
-import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
+import io.craft.giftcard.giftcard.domain.events.GiftCardDeclared;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
 import io.craft.giftcard.giftcard.domain.events.GiftCardHistory;
 import io.craft.giftcard.giftcard.domain.events.PaidAmount;
@@ -14,7 +14,7 @@ import org.jmolecules.architecture.cqrs.QueryModel;
 @QueryModel
 public record GiftCardDetails(Barcode barcode, List<String> details) {
   public static GiftCardDetails from(GiftCardHistory history) {
-    GiftCardCreated firstEvent = history.start();
+    GiftCardDeclared firstEvent = history.start();
     List<GiftCardEvent> followingEvents = history.followingEvents();
 
     return followingEvents
@@ -49,7 +49,7 @@ public record GiftCardDetails(Barcode barcode, List<String> details) {
       case PaidAmount paidAmount -> giftCardDetails.withDetail(
         "Montant payé : " + paidAmount.amount().value() + " €, le " + paidAmount.paymentDate()
       );
-      case GiftCardCreated __ -> giftCardDetails;
+      case GiftCardDeclared __ -> giftCardDetails;
       case GifCardExhausted __ -> giftCardDetails.withDetail("Carte cadeau épuisée");
     };
   }

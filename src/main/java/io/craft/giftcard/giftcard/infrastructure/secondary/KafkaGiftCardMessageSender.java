@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.craft.giftcard.giftcard.domain.events.GifCardExhausted;
-import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
+import io.craft.giftcard.giftcard.domain.events.GiftCardDeclared;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
 import io.craft.giftcard.giftcard.domain.events.PaidAmount;
 import io.craft.giftcard.giftcard.domain.projections.GiftCardMessageSender;
@@ -34,7 +34,7 @@ public class KafkaGiftCardMessageSender implements GiftCardMessageSender {
   public void send(GiftCardEvent event) {
     JSonGiftCardEvent jsonEvent =
       switch (event) {
-        case GiftCardCreated giftCardCreated -> JSonGiftCardCreated.from(giftCardCreated);
+        case GiftCardDeclared GiftCardDeclared -> JSonGiftCardDeclared.from(GiftCardDeclared);
         case GifCardExhausted gifCardExhausted -> JSonGifCardExhausted.from(gifCardExhausted);
         case PaidAmount paidAmount -> JSonPaidAmount.from(paidAmount);
       };
@@ -50,13 +50,13 @@ public class KafkaGiftCardMessageSender implements GiftCardMessageSender {
 
   @JsonTypeInfo(use = JsonTypeInfo.Id.SIMPLE_NAME, include = JsonTypeInfo.As.WRAPPER_OBJECT)
   sealed interface JSonGiftCardEvent
-    permits JSonGiftCardCreated, JSonPaidAmount, JSonGifCardExhausted {}
+    permits JSonGiftCardDeclared, JSonPaidAmount, JSonGifCardExhausted {}
 
-  record JSonGiftCardCreated(String barcode, double amount) implements JSonGiftCardEvent {
-    public static JSonGiftCardEvent from(GiftCardCreated giftCardCreated) {
-      return new JSonGiftCardCreated(
-        giftCardCreated.barcode().value(),
-        giftCardCreated.amount().value().doubleValue()
+  record JSonGiftCardDeclared(String barcode, double amount) implements JSonGiftCardEvent {
+    public static JSonGiftCardEvent from(GiftCardDeclared giftCardDeclared) {
+      return new JSonGiftCardDeclared(
+        giftCardDeclared.barcode().value(),
+        giftCardDeclared.amount().value().doubleValue()
       );
     }
   }

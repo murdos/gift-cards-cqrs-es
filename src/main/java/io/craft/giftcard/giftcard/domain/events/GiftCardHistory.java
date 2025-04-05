@@ -6,8 +6,8 @@ import java.util.stream.Stream;
 import org.jmolecules.ddd.annotation.ValueObject;
 
 @ValueObject
-public record GiftCardHistory(GiftCardCreated start, List<GiftCardEvent> followingEvents) {
-  public GiftCardHistory(GiftCardCreated start, GiftCardEvent... followingEvents) {
+public record GiftCardHistory(GiftCardDeclared start, List<GiftCardEvent> followingEvents) {
+  public GiftCardHistory(GiftCardDeclared start, GiftCardEvent... followingEvents) {
     this(start, List.of(followingEvents));
   }
 

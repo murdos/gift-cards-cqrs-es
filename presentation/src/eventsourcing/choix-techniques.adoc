@@ -156,8 +156,8 @@ Si je reprends mon exemple de carte cadeau,
 
 [cols="4*", options="header"]
 |================================================================================================
-| type          | barcode | sequenceId | payload
-| Created       | 1234    | 0          | shoppingStore: "Restaurant", +
+| type                   | barcode | sequenceId | payload
+| GiftCardDeclared       | 1234    | 0          | shoppingStore: "Restaurant", +
                                          initialAmount: "90 €"
 |================================================================================================
 
@@ -165,7 +165,7 @@ Si je reprends mon exemple de carte cadeau,
 [.notes]
 --
 Lors de ma déclaration de carte carte cadeau,
-je crée mon début d'histoire avec l'événement de type "Created".
+je crée mon début d'histoire avec l'événement de type "GiftCardDeclared".
 
 Cet événement porte l'identifiant, pour nous c'est le code-barre
 
@@ -180,10 +180,10 @@ Et si je dis à mon système "je paye 30 € avec"
 
 [cols="4*", options="header"]
 |================================================================================================
-| type            | barcode | sequenceId | payload
-| Created         | 1234    | 0          | shoppingStore: "Restaurant", +
-                                            initialAmount: "90 €"
-| PaidAmount      | 1234    | 1          | amount: "30 €", +
+| type                     | barcode | sequenceId | payload
+| GiftCardDeclared         | 1234    | 0          | shoppingStore: "Restaurant", +
+                                                     initialAmount: "90 €"
+| PaidAmount               | 1234    | 1          | amount: "30 €", +
                                             at: "2025-03-01"
 |================================================================================================
 
@@ -214,27 +214,27 @@ Avançons et payons les 90 - 30 .. 60 € qu'il reste sur la carte
 
 [cols="4*", options="header"]
 |================================================================================================
-| type            | barcode | sequenceId | payload
-| Created         | 1234    | 0          | shoppingStore: "Restaurant", +
-                                            initialAmount: "90 €"
-| PaidAmount      | 1234    | 1          | amount: "30 €", +
-                                            at: "2025-03-01"
-| PaidAmount      | 1234    | 2          | amount: "60 €", +
-                                            at: "2025-03-10"
-| Exhausted       | 1234    | 3          | _null_
+| type                    | barcode | sequenceId | payload
+| GiftCardDeclared        | 1234    | 0          | shoppingStore: "Restaurant", +
+                                                    initialAmount: "90 €"
+| PaidAmount              | 1234    | 1          | amount: "30 €", +
+                                                    at: "2025-03-01"
+| PaidAmount              | 1234    | 2          | amount: "60 €", +
+                                                    at: "2025-03-10"
+| GiftCardExhausted       | 1234    | 3          | _null_
 |================================================================================================
 [.notes]
 --
 J'ai maintenant 2 nouveaux événements,
 un autre paidAmount avec son montant et sa date
-et un événement "exhausted" qui n'a pas besoin de charge utile.
+et un événement "GiftCardExhausted" qui n'a pas besoin de charge utile.
 
-On pourrait se dire "il peut porter la date", mais dans notre cas un Exhausted ne vient pas tout seul
+On pourrait se dire "il peut porter la date", mais dans notre cas un GiftCardExhausted ne vient pas tout seul
 il vient avec un événement PaidAmout.
 
-En vrai c'est un choix qu'on a fait, on aurait pu se passer de l'événement Exhausted
-ou bien se passer du PaidAmount et faire porter à l'Exhausted la date et le montant payé,
-voire même juste la date, vu que c'est exhausted, la carte se retrouverait a 0 de toute manière.
+En vrai c'est un choix qu'on a fait, on aurait pu se passer de l'événement GiftCardExhausted
+ou bien se passer du PaidAmount et faire porter à l'GiftCardExhausted la date et le montant payé,
+voire même juste la date, vu que ça représente la carte vide, elle se retrouverait a 0 de toute manière.
 
 'fin il n'y a pas de recette miracle, l'essentiel c'est de faire des événements qui nous parlent
 et qui ont un sens métier.

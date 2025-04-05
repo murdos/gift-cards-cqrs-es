@@ -2,11 +2,8 @@ package io.craft.giftcard.giftcard.domain;
 
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
 import io.craft.giftcard.giftcard.domain.commands.Payment;
-import io.craft.giftcard.giftcard.domain.events.GifCardExhausted;
-import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
-import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
-import io.craft.giftcard.giftcard.domain.events.GiftCardHistory;
-import io.craft.giftcard.giftcard.domain.events.PaidAmount;
+import io.craft.giftcard.giftcard.domain.events.*;
+import io.craft.giftcard.giftcard.domain.events.GiftCardDeclared;
 import io.craft.giftcard.shared.collection.domain.DummyCombiner;
 import java.util.List;
 import org.jmolecules.ddd.annotation.AggregateRoot;
@@ -25,7 +22,7 @@ public class GiftCard {
   }
 
   public static GiftCardEvent declare(GiftCardDeclaration giftCardDeclaration) {
-    return new GiftCardCreated(
+    return new GiftCardDeclared(
       giftCardDeclaration.barcode(),
       SequenceId.INITIAL,
       giftCardDeclaration.amount(),
@@ -74,7 +71,7 @@ public class GiftCard {
     SequenceId currentSequenceId
   ) {
     public static DecisionProjection from(GiftCardHistory history) {
-      GiftCardCreated firstEvent = history.start();
+      GiftCardDeclared firstEvent = history.start();
 
       return history
         .followingEvents()
@@ -107,7 +104,7 @@ public class GiftCard {
       GiftCardEvent event
     ) {
       return switch (event) {
-        case GiftCardCreated __ -> currentProjection;
+        case GiftCardDeclared __ -> currentProjection;
         case PaidAmount paidAmount -> currentProjection
           .withRemainingAmount(
             currentProjection.remainingAmount().subtract(paidAmount.amount())

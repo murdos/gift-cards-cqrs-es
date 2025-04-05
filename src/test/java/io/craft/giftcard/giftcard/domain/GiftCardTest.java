@@ -7,11 +7,8 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 import io.craft.giftcard.UnitTest;
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
 import io.craft.giftcard.giftcard.domain.commands.Payment;
-import io.craft.giftcard.giftcard.domain.events.GifCardExhausted;
-import io.craft.giftcard.giftcard.domain.events.GiftCardCreated;
-import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
-import io.craft.giftcard.giftcard.domain.events.GiftCardHistory;
-import io.craft.giftcard.giftcard.domain.events.PaidAmount;
+import io.craft.giftcard.giftcard.domain.events.*;
+import io.craft.giftcard.giftcard.domain.events.GiftCardDeclared;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
@@ -32,10 +29,10 @@ class GiftCardTest {
 
     GiftCardEvent event = GiftCard.declare(giftCardDeclaration);
 
-    assertThat(event).isInstanceOfSatisfying(GiftCardCreated.class, giftCardCreated -> {
-      assertThat(giftCardCreated.sequenceId()).isEqualTo(new SequenceId(0));
-      assertThat(giftCardCreated.barcode()).isEqualTo(barcode);
-      assertThat(giftCardCreated.amount()).isEqualTo(amount);
+    assertThat(event).isInstanceOfSatisfying(GiftCardDeclared.class, GiftCardDeclared -> {
+      assertThat(GiftCardDeclared.sequenceId()).isEqualTo(new SequenceId(0));
+      assertThat(GiftCardDeclared.barcode()).isEqualTo(barcode);
+      assertThat(GiftCardDeclared.amount()).isEqualTo(amount);
     });
   }
 
@@ -95,8 +92,8 @@ class GiftCardTest {
       amount,
       shoppingStore
     );
-    var giftCardCreated = GiftCard.declare(giftCardDeclaration);
+    var GiftCardDeclared = GiftCard.declare(giftCardDeclaration);
 
-    return new GiftCardHistory((GiftCardCreated) giftCardCreated);
+    return new GiftCardHistory((GiftCardDeclared) GiftCardDeclared);
   }
 }
