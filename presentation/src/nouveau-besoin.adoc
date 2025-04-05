@@ -21,7 +21,7 @@ Afin de savoir quel est le jour où les utilisateurs dépensent le plus d'argent
 sans doute pour savoir quel est le jour le plus optimisé pour envoyer un rappel.
 --
 
-=== Si on n'était pas en event sourcing ?
+=== En state sourcing ?
 
 [%step]
 - Informations nécessaires ?
@@ -31,7 +31,7 @@ sans doute pour savoir quel est le jour le plus optimisé pour envoyer un rappel
 
 [.notes]
 --
-Comme on l'a dit plus tôt, la gestion "standard" est basiquement une perte d'information.
+Comme on l'a dit plus tôt, le state sourcing est basiquement une perte d'information.
 
 Alors pour savoir si on peut faire cette feature simplement, il nous faut se poser 3 questions.
 

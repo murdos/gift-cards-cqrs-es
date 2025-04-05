@@ -9,16 +9,16 @@ là on a plusieurs possibilités, je vais n'en citer que deux heeuu parce que.
 *click*
 --
 
-=== Gestion par état
+=== State sourcing
 
 [.notes]
 --
-La gestion par état c'est comme d'hab.
+Le State sourcing, c'est la manière de gérer nos agrégats comme on fait d'habitude.
 
 Sans parler d'objets dits "anémiques", on va quand même, pour une requête donnée,
-mettre à jour l'état de l'agrégat.
+mettre à jour l'état de l'agrégat, soit le muter, soit en faire une copie.
 
-C'est-à-dire qu'on se retrouve avec la dernière version dans les mains.
+C'est-à-dire qu'après un changement, on se retrouve avec la dernière version dans les mains.
 
 Je vais prendre un exemple pour illustrer le truc
 
@@ -28,11 +28,13 @@ Imaginons vous avez...au hasard... des cartes cadeaux à gérer
 [%notitle]
 === example statefull
 
-[cols="4*", options="header"]
-|===========================================
-| barcode | shoppingStore | amount  |  last payment
-| 1234    | Restaurant    | 90 €    |    _null_
-|===========================================
+[cols="4*",options="header"]
+|=============================================================
+| barcode | shopping +
+                      store | remaning +
+                                        amount  |  exhausted()
+| 1234    | Restaurant      | 90 €              |    false
+|=============================================================
 
 [.notes]
 --
@@ -40,8 +42,7 @@ Alors ça ressemble vachement à une table sql mais on parle bien d'un agrégat 
 Même si ça arrive souvent tel quel en base de données.
 
 Bref quand je déclare ma carte cadeau, j'ai ça en mains,
-il y a un code-barre "1234", une boutique "restaurant", un montant "90 €" et une date de dernier paiement,
-ici elle est vide parce que ma carte est neuve.
+il y a un code-barre "1234", une boutique "restaurant", un montant "90 €" et une méthode qui nous dit si oui ou non la carte est vie.
 
 Si je paye 30 € avec, j'obtiens ça
 --
@@ -50,14 +51,16 @@ Si je paye 30 € avec, j'obtiens ça
 === example statefull
 
 [cols="4*", options="header"]
-|===========================================
-| barcode | shoppingStore | amount   |  last payment
-| 1234    | Restaurant    | 60 €     |  2025-03-01
-|===========================================
+|=============================================================
+| barcode | shopping +
+                      store | remaning +
+                                        amount  |  exhausted()
+| 1234    | Restaurant    | 60 €                |    false
+|=============================================================
 
 [.notes]
 --
-Ma carte cadeau n'a plus que 60 € et j'ai mis à jour la date de dernier paiement.
+Ma carte cadeau n'a plus que 60 €.
 
 Remarquez que je n'ai plus ici le montant initial.
 
@@ -68,16 +71,18 @@ Et si je dépense les 60 € restants
 === example statefull
 
 [cols="4*", options="header"]
-|===========================================
-| barcode | shoppingStore | amount |  last payment
-| 1234    | Restaurant    | 0 €    |  2025-03-10
-|===========================================
+|=============================================================
+| barcode | shopping +
+                      store | remaning +
+                                        amount  |  exhausted()
+| 1234    | Restaurant    | 0 €                 |    true
+|=============================================================
 
 [.notes]
 --
 ma carte cadeaux est vide et donc inutilisable.
 
-Mais le point ici c'est que les champs "montant" et "dernier paiement" ont été écrasés.
+Mais le point ici c'est que le champ "montant" a été écrasé.
 
 Ce qui veut dire qu'après un changement,
 on a certes des valeurs à jour, mais plus aucune trace de ce qu'elles ont été.
