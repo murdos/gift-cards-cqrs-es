@@ -20,22 +20,26 @@ public class GiftCardApplicationService {
   private final GiftCardEventStore eventStore;
   private final GiftCardCurrentStateRepository currentStateRepository;
   private final GiftCardDetailsRepository detailsRepository;
+  private final WeeklyStatisticsRepository weeklyStatisticsRepository;
   private final EventPublisher<GiftCardEvent> eventPublisher;
 
   public GiftCardApplicationService(
     GiftCardEventStore eventStore,
     GiftCardCurrentStateRepository currentStateRepository,
     GiftCardDetailsRepository detailsRepository,
+    WeeklyStatisticsRepository weeklyStatisticsRepository,
     GiftCardMessageSender giftCardMessageSender
   ) {
     this.eventStore = eventStore;
     this.currentStateRepository = currentStateRepository;
     this.detailsRepository = detailsRepository;
+    this.weeklyStatisticsRepository = weeklyStatisticsRepository;
 
     this.eventPublisher = new EventPublisher<GiftCardEvent>()
       .register(new GiftCardCurrentStateUpdater(currentStateRepository))
       .register(new MessageSenderEventHandler(giftCardMessageSender))
-      .register(new GiftCardDetailsUpdater(eventStore, detailsRepository));
+      .register(new GiftCardDetailsUpdater(eventStore, detailsRepository))
+      .register(new WeeklyStatisticsUpdater(weeklyStatisticsRepository));
   }
 
   @Transactional
@@ -72,6 +76,10 @@ public class GiftCardApplicationService {
   @Transactional(readOnly = true)
   public Optional<GiftCardDetails> getDetails(Barcode barcode) {
     return detailsRepository.get(barcode);
+  }
+
+  public WeeklyStatistics getWeeklyStatistics() {
+    return weeklyStatisticsRepository.get();
   }
   // tag::closingBrace[]
 }

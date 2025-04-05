@@ -96,7 +96,7 @@ class GiftCardQueryController {
     ));
     // @formatter:on
 
-    return null;
+    return WeeklyStatisticsDto.fromDomain(giftCards.getWeeklyStatistics());
   }
 }
 
