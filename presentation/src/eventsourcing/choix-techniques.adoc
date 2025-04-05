@@ -158,7 +158,7 @@ Si je reprends mon exemple de carte cadeau,
 |================================================================================================
 | type                   | barcode | sequenceId | payload
 | GiftCardDeclared       | 1234    | 0          | shoppingStore: "Restaurant", +
-                                         initialAmount: "90 €"
+                                                   initialAmount: "90 €"
 |================================================================================================
 
 
@@ -184,7 +184,7 @@ Et si je dis à mon système "je paye 30 € avec"
 | GiftCardDeclared         | 1234    | 0          | shoppingStore: "Restaurant", +
                                                      initialAmount: "90 €"
 | PaidAmount               | 1234    | 1          | amount: "30 €", +
-                                            at: "2025-03-01"
+                                                     on: "2025-03-01"
 |================================================================================================
 
 
@@ -218,9 +218,9 @@ Avançons et payons les 90 - 30 .. 60 € qu'il reste sur la carte
 | GiftCardDeclared        | 1234    | 0          | shoppingStore: "Restaurant", +
                                                     initialAmount: "90 €"
 | PaidAmount              | 1234    | 1          | amount: "30 €", +
-                                                    at: "2025-03-01"
+                                                    on: "2025-03-01"
 | PaidAmount              | 1234    | 2          | amount: "60 €", +
-                                                    at: "2025-03-10"
+                                                    on: "2025-03-10"
 | GiftCardExhausted       | 1234    | 3          | _null_
 |================================================================================================
 [.notes]
