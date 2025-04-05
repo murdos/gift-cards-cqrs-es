@@ -89,4 +89,9 @@ public class GiftCardSteps {
       new Payment(Amount.of(paidAmount), paymentDate)
     );
   }
+
+  @Then("the weekly statistics should be")
+  public void weeklyStatisticsShouldBe(Map<String, String> expectedStatistics) {
+    throw new UnsupportedOperationException();
+  }
 }

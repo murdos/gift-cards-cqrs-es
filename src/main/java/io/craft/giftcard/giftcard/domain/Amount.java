@@ -20,6 +20,10 @@ public record Amount(BigDecimal value) implements Comparable<Amount> {
     return new Amount(this.value.subtract(otherAmount.value));
   }
 
+  public Amount plus(Amount otherAmount) {
+    return new Amount(this.value.add(otherAmount.value));
+  }
+
   @Override
   public int compareTo(Amount o) {
     return value.compareTo(o.value);
