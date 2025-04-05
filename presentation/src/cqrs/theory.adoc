@@ -21,7 +21,7 @@ image::cqrs-query.png[]
 --
 Le query model c'est, grosso modo, le fait que le client requête une projection depuis le repo des projections.
 
-On a vu que pour notre projet là, le repo est en mémoire,
+Pour notre projet là, le repo est en mémoire,
 mais il pourrait être stocké dans une base quelconque ça ne changerait rien.
 --
 

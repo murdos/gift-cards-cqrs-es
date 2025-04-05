@@ -125,8 +125,7 @@ On fabrique l'evénement avec notre charge utile venant du command object, le pa
 
 *click*
 
-Remarquez que les informations "techniques" viennent directement de l'agrégat lui même,
-on ne fait pas que appeler des fonctions statiques, c'est pas un simple builder d'événements.
+Remarquez que les informations "techniques" viennent directement de l'instance de l'agrégat lui même.
 
 *click*
 
