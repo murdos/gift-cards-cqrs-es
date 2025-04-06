@@ -53,8 +53,14 @@ TODO: refaire le schéma
 --
 
 [%notitle]
+=== Illustration : 0st event
+
+image::fold00.png[]
+
+[%notitle]
 === Illustration : 1st event
-image::https://codeopinion.com/wp-content/uploads/2021/02/s2-1024x466.png[]
+
+image::fold01.png[]
 
 [.notes]
 --
@@ -65,7 +71,8 @@ GiftCardDeclared
 
 [%notitle]
 === Illustration : 2nd event
-image::https://codeopinion.com/wp-content/uploads/2021/02/s2-1024x466.png[]
+
+image::fold02.png[]
 
 [.notes]
 --
@@ -77,7 +84,8 @@ GiftCardDeclared
 
 [%notitle]
 === Illustration : 3rd event
-image::https://codeopinion.com/wp-content/uploads/2021/02/s2-1024x466.png[]
+
+image::fold03.png[]
 
 [.notes]
 --
@@ -87,6 +95,11 @@ GiftCardDeclared
 + PaidAmount
 -> GiftCardCurrentState
 --
+
+[%notitle]
+=== Illustration : 4rd event
+
+image::fold04.png[]
 
 [.notes]
 --
