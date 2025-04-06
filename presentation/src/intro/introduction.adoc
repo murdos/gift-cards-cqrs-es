@@ -27,6 +27,12 @@ Event Sourcing
 
 === Aurélien
 
+Lead Tech @ Sully Group
+
+Actuellement sur le projet LinkySup @ Enedis
+
+❤️ Open-source
+
 [.notes]
 --
 Oué bon, je déteste les acronymes non expliqués.
