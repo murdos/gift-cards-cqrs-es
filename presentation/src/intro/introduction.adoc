@@ -25,6 +25,13 @@ Event Sourcing
 
 💔 (Unexplained) Acronyms
 
+[.notes]
+--
+Oué bon, je déteste les acronymes non expliqués.
+
+Mais pour la définition de CQRS et Event sourcing, on est là pour en parler
+--
+
 === Aurélien
 
 Lead Tech @ Sully Group
@@ -35,9 +42,9 @@ Actuellement sur le projet LinkySup @ Enedis
 
 [.notes]
 --
-Oué bon, je déteste les acronymes non expliqués.
-
-Mais pour la définition de CQRS et Event souring, on est là pour en parler
+- Lead Tech @ Sully Group
+- Actuellement sur le projet LinkySup @ Enedis => il y d'ailleurs une
+table ronde cet après-midi sur l'adoption d'une culture craft
 --
 
 === Pourquoi ce sujet ?
@@ -48,5 +55,5 @@ Mais pour la définition de CQRS et Event souring, on est là pour en parler
 - Nous même ne sommes pas des experts. Cédric a eu l'occasion de suivre une formation sur le sujet il y a quelques années, et de le mettre en place chez Malt sur un projet il y a 3 ans.
 - Pour ma part j'ai étudié le sujet il y a 1 an et demi dans l'éventualité de le mettre en oeuvre sur mon projet, mais cela ne s'est pas fait, essentiellement car l'équipe, déjà en plein changement de culture craft, ne se sentait pas prête à le faire.
 - Donc l'idée aujourd'hui c'est de partager sans prétention ce que nous avons appris, et vous donner envie de creuser le sujet.
-- Pour cela nous avons une petite application de gestion de cartes cadeaux, réalisée avec ces patterns, que nous allons décortiquer ensemble.
+- Pour cela nous avons une petite application de gestion de cartes cadeaux, en JAVA, réalisée avec ces patterns, que nous allons décortiquer ensemble.
 --
