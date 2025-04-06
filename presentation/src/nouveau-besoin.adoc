@@ -68,10 +68,6 @@ Et souvent c'est acceptable. De toute manière les données sont perdues on ne p
 
 === Faisable en event sourcing ?
 
-- Informations nécessaires ?
-- Reprise de données ?
-- Table d'audit ?
-
 [.notes]
 --
 Maintenant est-ce que c'est faisable en event sourcing ?
