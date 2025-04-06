@@ -1,6 +1,7 @@
 package io.craft.giftcard.cucumber;
 
 import static io.cucumber.junit.platform.engine.Constants.FEATURES_PROPERTY_NAME;
+import static io.cucumber.junit.platform.engine.Constants.FILTER_TAGS_PROPERTY_NAME;
 import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
 
@@ -19,4 +20,5 @@ import org.junit.platform.suite.api.Suite;
   value = "pretty, json:target/cucumber/cucumber.json, html:target/cucumber/cucumber.htm, junit:target/cucumber/TEST-cucumber.xml"
 )
 @ConfigurationParameter(key = FEATURES_PROPERTY_NAME, value = "src/test/features")
+@ConfigurationParameter(key = FILTER_TAGS_PROPERTY_NAME, value = "not @disabled")
 public class CucumberTest {}
