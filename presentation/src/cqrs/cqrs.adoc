@@ -1,7 +1,0 @@
-include::queries.adoc[]
-
-include::theory.adoc[]
-
-include::commands.adoc[]
-
-

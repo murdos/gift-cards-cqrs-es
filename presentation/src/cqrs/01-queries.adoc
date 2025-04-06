@@ -22,7 +22,7 @@
 
 [.notes]
 --
-ou triée selon un des attributs de la carte cadeau, par exemple le montant restant
+ou triée, par exemple le montant restant
 *click*
 --
 
@@ -36,12 +36,8 @@ ou triée selon un des attributs de la carte cadeau, par exemple le montant rest
 
 [.notes]
 --
-Voir même filtrée selon un des attributs de la carte cadeau, par exemple la boutique
+Voir même filtrée, par exemple sur la boutique
 --
-
-=== Une projection !
-
-image::panoramix.jpg[height=350px]
 
 [transition="fade-in slide-out"]
 === Une projection !
@@ -54,6 +50,7 @@ image::projection.png[]
 - Ce modèle va être fabriqué sur mesure par rapport à notre besoin en lecture, à partir des évènements métier.
 - Dans notre cas, il va être très similaire au modèle qu'on aurait eu en state-sourcing.
 - Mais la grosse différence, c'est que c'est une information dérivée, qui peut être recalculée en fonction de l'évolution des besoins.
+- D'ailleurs dans notre implémentation, les projections sont persistées avec des repositories in memory et recaculées à chaque redémarrage de l'application. C'est très pratique au début de l'application, cela offre une grande souplesse.
 --
 
 [%notitle]

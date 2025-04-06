@@ -31,7 +31,7 @@ include::eventsourcing/choix-techniques.adoc[]
 
 include::eventsourcing/demo.adoc[]
 
-include::cqrs/cqrs.adoc[]
+include::cqrs/00-cqrs.adoc[]
 
 include::nouveau-besoin.adoc[]
 

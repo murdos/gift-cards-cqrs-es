@@ -35,10 +35,11 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 [.notes]
 --
 - Pour rappel, on instancie notre carte cadeau uniquement avec l'historique des évènements passés.
+- C'est ce qu'on appelle *l'hydratation de l'agrégat*.
 - Comment peut-on savoir si le montant est supérieur au solde de la carte cadeau à partir de cette liste d'évènements ?
 --
 
-=== Encore une projection !
+=== Encore une projection
 
 [source, java, highlight='4|7']
 ----
@@ -47,7 +48,6 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 
 [.notes]
 --
-- Merci Jamy !
 - On va effectivement utiliser une projection particulière, dynamique, appelée "projection de décision".
 --
 
@@ -103,3 +103,5 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 *click*
 - et également mettre à jour le dernier numéro de séquence connu
 --
+
+=== Utilisation de la projection
