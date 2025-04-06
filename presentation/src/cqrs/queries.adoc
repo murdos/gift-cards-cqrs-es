@@ -1,3 +1,4 @@
+[transition="slide-in fade-out"]
 == Comment afficher la liste des cartes cadeaux ?
 
 [.same]
@@ -5,8 +6,9 @@
 
 [.notes]
 --
-- Les événements c'est super pour avoir l'historique complet et savoir précisément ce qui s'est passé, mais comment je fais pour afficher une liste de toutes mes cartes cadeaux avec quelques infos, comme le montant restant et la boutique de la carte ?
-- Relire tous les évènements de toutes les cartes cadeaux à chaque fois paraît compliqué...
+- Effectivement comment on fait pour afficher une liste de toutes mes cartes cadeaux avec quelques infos, comme le montant restant et la boutique de la carte ?
+- Alors que ce qu'on a stocké ce sont des évènements unitaires, dont les informations clés sont dans un payload.
+- Relire tous les évènements pour reconstituer toutes les cartes cadeaux à chaque fois paraît compliqué...
 - Et si en plus la liste doit être paginée pour n'afficher que 10 cartes cadeaux à la fois
  *click*
 --
@@ -24,7 +26,7 @@ ou triée selon un des attributs de la carte cadeau, par exemple le montant rest
 *click*
 --
 
-[transition="fade"]
+[transition="fade-in slide-out"]
 === Comment afficher la liste des cartes cadeaux ?
 
 [.same]
@@ -37,74 +39,77 @@ ou triée selon un des attributs de la carte cadeau, par exemple le montant rest
 Voir même filtrée selon un des attributs de la carte cadeau, par exemple la boutique
 --
 
-=== Query model !
+=== Une projection !
 
-image::jamy.jpg[height=350px]
+image::panoramix.jpg[height=350px]
 
-=== Query model
+[transition="fade-in slide-out"]
+=== Une projection !
 
 image::projection.png[]
 
 [.notes]
 --
-TODO: refaire le schéma
-- On va utiliser un query model, également appelé "read model ou "modèle de lecture".
+- On va utiliser une projection, également appelée "query model", ou "read model ou "modèle de lecture".
 - Ce modèle va être fabriqué sur mesure par rapport à notre besoin en lecture, à partir des évènements métier.
+- Dans notre cas, il va être très similaire au modèle qu'on aurait eu en state-sourcing.
+- Mais la grosse différence, c'est que c'est une information dérivée, qui peut être recalculée en fonction de l'évolution des besoins.
 --
 
 [%notitle]
+[transition="slide-in fade-out"]
 === Illustration : 0st event
 
 image::fold00.png[]
 
+[.notes]
+--
+Si on déroule notre histoire au fur et à mesure, cela donne ça.
+--
+
 [%notitle]
+[transition="fade"]
 === Illustration : 1st event
 
 image::fold01.png[]
 
 [.notes]
 --
-TODO: refaire le schéma
-GiftCardDeclared
--> GiftCardCurrentState
+A partir de notre premier évènement, la déclaration d'une carte, on va pouvoir initialiser la projection avec le code-barre, et la boutique. Le montant restant est égal au montant initial. Et la carte n'est pas épuisée.
 --
 
 [%notitle]
+[transition="fade"]
 === Illustration : 2nd event
 
 image::fold02.png[]
 
 [.notes]
 --
-TODO: refaire le schéma
-GiftCardDeclared
-+ PaidAmount
--> GiftCardCurrentState
+Ensuite lors d'un paiement, on va mettre à jour le montant restant de la carte cadeau, en retranchant au montant restant le montant du nouveau paiement.
 --
 
 [%notitle]
+[transition="fade"]
 === Illustration : 3rd event
 
 image::fold03.png[]
 
 [.notes]
 --
-TODO: refaire le schéma
-GiftCardDeclared
-+ PaidAmount
-+ PaidAmount
--> GiftCardCurrentState
+Ici, même principe pour le second évènement de paiement.
 --
 
 [%notitle]
+[transition="fade-in slide-out"]
 === Illustration : 4rd event
 
 image::fold04.png[]
 
 [.notes]
 --
-On utilise un modèle de lecture dédié
-Egalement appelé "read model ou ""query model"
+Enfin lorsque la carte est épuisée, on va mettre à jour le champ "exhausted" de la projection.
+Ce qui permettra de l'afficher de manière distincte et d'empêcher de l'utiliser pour un nouveau paiement.
 --
 
 === Code
