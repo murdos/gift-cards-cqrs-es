@@ -1,15 +1,37 @@
-== Cédric
+[transition="slide-in fade-out"]
+=== Cédric
+
+Senior Dev @ malt
+
+❤️ CQRS / ES
+
+💔 Acronyms
 
 [.notes]
 --
-sa vie son oeuvre sans acronymes
+Moi c'est Cédric, je bosse chez malt depuis bientôt 6 ans
+où j'ai pu participer à la mise place de plusieurs projets en CQRS / ES.
+
+Par contre j'suis relou, je déteste les acronymes.
 --
+
+[transition="fade-in slide-out"]
+=== Cédric
+
+Senior Dev @ malt
+
+❤️ Command Query Responsibility Segregation +
+Event Sourcing
+
+💔 (Unexplained) Acronyms
 
 === Aurélien
 
 [.notes]
 --
-sa vie son oeuvre dans le libre
+Oué bon, je déteste les acronymes non expliqués.
+
+Mais pour la définition de CQRS et Event souring, on est là pour en parler
 --
 
 === Pourquoi ce sujet ?
