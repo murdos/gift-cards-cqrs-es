@@ -2,6 +2,7 @@ package io.craft.giftcard.giftcard.domain.projections.weeklystatistics;
 
 import io.craft.giftcard.giftcard.domain.Amount;
 import java.time.DayOfWeek;
+import java.util.HashMap;
 import java.util.Map;
 import org.jmolecules.architecture.cqrs.QueryModel;
 
@@ -23,5 +24,12 @@ public record WeeklyStatistics(Map<DayOfWeek, Amount> values) {
 
   public Amount get(DayOfWeek dayOfWeek) {
     return values.get(dayOfWeek);
+  }
+
+  private WeeklyStatistics withAdditionalAmountToDayOfWeek(Amount amount, DayOfWeek dayOfWeek) {
+    var newValues = new HashMap<>(this.values);
+    newValues.computeIfPresent(dayOfWeek, (__, currentAmount) -> currentAmount.plus(amount));
+
+    return new WeeklyStatistics(newValues);
   }
 }
