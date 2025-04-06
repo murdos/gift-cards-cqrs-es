@@ -10,7 +10,9 @@
 :revealjs_height: 720
 :revealjs_navigationMode: linear
 
-== CQRS/Event Sourcing : Du concept au code
+== CQRS / Event Sourcing
+
+Du concept au code
 
 image::yercin.jpg[height=250px]
 
@@ -21,11 +23,7 @@ Hello
 
 include::intro/introduction.adoc[]
 
-include::demo.adoc[]
-[.notes]
---
-Montrer l'application
---
+include::intro/demo-application.adoc[]
 
 include::intro/eventmodeling.adoc[]
 

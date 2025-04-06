@@ -2,6 +2,7 @@
 
 [.notes]
 --
+Montrer l'application :
 - Créer une carte cadeau
 - Faire un premier paiement
 - Faire un second paiement qui épuisera la carte

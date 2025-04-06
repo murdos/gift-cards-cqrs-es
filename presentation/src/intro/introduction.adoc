@@ -21,3 +21,14 @@ sa vie son oeuvre dans le libre
 --
 sa vie son oeuvre sans acronymes
 --
+
+=== Pourquoi ce sujet ?
+
+[.notes]
+--
+- Ces 2 patterns ne sont, il nous semble, pas très connus dans notre industrie, et peu utilisés, mais néanmoins très intéressants et puissants. Nous nous avons eu la chance d'avoir une présentation et un atelier sur le sujet il y a presque 10 ans par Florent Pellet et Clément Bouillier.
+- Nous même ne sommes pas des experts. Cédric a eu l'occasion de suivre une formation sur le sujet il y a quelques années, et de le mettre en place chez Malt sur un projet il y a 3 ans.
+- Pour ma part j'ai étudié le sujet il y a 1 an et demi dans l'éventualité de le mettre en oeuvre sur mon projet, mais cela ne s'est pas fait, essentiellement car l'équipe, déjà en plein changement de culture craft, ne se sentait pas prête à le faire.
+- Donc l'idée aujourd'hui c'est de partager ce que nous avons appris, et vous donner envie de creuser le sujet.
+- Pour cela nous avons une petite application de gestion de cartes cadeaux, réalisée avec ces patterns, que nous allons décortiquer ensemble.
+--

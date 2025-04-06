@@ -1,5 +1,7 @@
 == Event modeling
 
+image::event-modeling.png[width=100%]
+
 [.notes]
 --
 Expliquer ce qu'est l'event modeling
