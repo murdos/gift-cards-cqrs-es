@@ -1,5 +1,6 @@
 == Références
-
+[.moresmaller]
+--
 * CQRS
 ** https://github.com/keyvanakbary/cqrs-documents[CQRS Documents by Greg Young]
 ** https://www.youtube.com/watch?v=JHGkaShoyNs[Greg Young - CQRS and Event Sourcing - Code on the Beach 2014]
@@ -10,19 +11,18 @@
 * Event Modeling : https://eventmodeling.org/
 
 * Le code complet de notre appli : https://github.com/murdos/gift-cards-cqrs-es
+--
 
 [.notes]
 --
 TODO: pousser le code sur codeberg
 --
 
-=== Questions ?
-[.notes]
---
---
+=== Questions ? / Feedback
 
-=== Feedback
+image::qrcode-feedback.png[width=400px]
+
 [.notes]
 --
-QR Code
+TODO: ajouter un QR code vers le repo
 --
