@@ -1,4 +1,4 @@
-== Event modeling
+=== Event modeling
 
 image::event-modeling.png[width=100%]
 
