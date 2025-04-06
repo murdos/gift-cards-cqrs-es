@@ -1,9 +1,11 @@
-package io.craft.giftcard.giftcard.domain.projections;
+package io.craft.giftcard.giftcard.domain.projections.weeklystatistics;
 
 import io.craft.giftcard.giftcard.domain.Amount;
 import java.time.DayOfWeek;
 import java.util.Map;
+import org.jmolecules.architecture.cqrs.QueryModel;
 
+@QueryModel
 public record WeeklyStatistics(Map<DayOfWeek, Amount> values) {
   // @formatter:off
   public static final WeeklyStatistics EMPTY = new WeeklyStatistics(

@@ -1,4 +1,4 @@
-package io.craft.giftcard.giftcard.domain.projections;
+package io.craft.giftcard.giftcard.domain.projections.currentstate;
 
 import io.craft.giftcard.giftcard.domain.EventHandler;
 import io.craft.giftcard.giftcard.domain.events.GiftCardDeclared;

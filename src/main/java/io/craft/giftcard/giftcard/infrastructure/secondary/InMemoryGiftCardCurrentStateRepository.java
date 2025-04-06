@@ -1,8 +1,8 @@
 package io.craft.giftcard.giftcard.infrastructure.secondary;
 
 import io.craft.giftcard.giftcard.domain.Barcode;
-import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentState;
-import io.craft.giftcard.giftcard.domain.projections.GiftCardCurrentStateRepository;
+import io.craft.giftcard.giftcard.domain.projections.currentstate.GiftCardCurrentState;
+import io.craft.giftcard.giftcard.domain.projections.currentstate.GiftCardCurrentStateRepository;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

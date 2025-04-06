@@ -10,6 +10,7 @@ import io.craft.giftcard.giftcard.domain.BarcodeAlreadyUsedException;
 import io.craft.giftcard.giftcard.domain.ShoppingStore;
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
 import io.craft.giftcard.giftcard.domain.commands.Payment;
+import io.craft.giftcard.giftcard.domain.projections.weeklystatistics.WeeklyStatistics;
 import io.craft.giftcard.giftcard.infrastructure.secondary.InMemoryGiftCardCurrentStateRepository;
 import io.craft.giftcard.giftcard.infrastructure.secondary.InMemoryGiftCardDetailsRepository;
 import io.craft.giftcard.giftcard.infrastructure.secondary.InMemoryGiftCardEventStore;
@@ -19,6 +20,7 @@ import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import java.math.BigDecimal;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.Optional;
@@ -92,6 +94,14 @@ public class GiftCardSteps {
 
   @Then("the weekly statistics should be")
   public void weeklyStatisticsShouldBe(Map<String, String> expectedStatistics) {
-    throw new UnsupportedOperationException();
+    // TODO: load the real statistics
+    var statistics = WeeklyStatistics.EMPTY;
+
+    expectedStatistics.forEach((dayOfweek, amount) -> {
+      assertThat(statistics.values()).containsEntry(
+        DayOfWeek.valueOf(dayOfweek.toUpperCase()),
+        Amount.of(Double.valueOf(amount))
+      );
+    });
   }
 }

@@ -119,7 +119,7 @@ Ce qui permettra de l'afficher de manière distincte et d'empêcher de l'utilise
 
 [source, java, highlight]
 ----
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentState.java[lines='12..18']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/currentstate/GiftCardCurrentState.java[lines='12..18']
 ----
 
 [.notes]
@@ -133,7 +133,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/Gi
 
 [source, java, highlight='..|7..8']
 ----
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentStateUpdater.java[lines='8..9,17..26']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/currentstate/GiftCardCurrentStateUpdater.java[lines='8..9,17..26']
 ----
 
 [.notes]
@@ -148,7 +148,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/Gi
 
 [source, java, highlight="3|4|2"]
 ----
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentStateUpdater.java[lines='8..9,28..30']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/currentstate/GiftCardCurrentStateUpdater.java[lines='8..9,28..30']
 ----
 
 [source, java, highlight="3|4.."]
@@ -156,7 +156,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/Gi
 @QueryModel
 public record GiftCardCurrentState(...) {
 
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentState.java[lines='19..27']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/currentstate/GiftCardCurrentState.java[lines='19..27']
 ----
 
 [.notes]
@@ -171,12 +171,12 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/Gi
 
 [source, java, highlight="3..|4..6|7|2"]
 ----
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentStateUpdater.java[lines='8..9,32..37']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/currentstate/GiftCardCurrentStateUpdater.java[lines='8..9,32..37']
 ----
 
 [source, java, highlight="3|5,13|6..8|9"]
 ----
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/GiftCardCurrentState.java[lines='12..13,35..47']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/currentstate/GiftCardCurrentState.java[lines='12..13,35..47']
 ----
 
 [.notes]
@@ -192,9 +192,9 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/Gi
 
 === Enregistrement des event handlers
 
-[source, java, highlight="10..11"]
+[source, java, highlight="..|10..11"]
 ----
-include::../../../src/main/java/io/craft/giftcard/giftcard/application/GiftCardApplicationService.java[lines='17..19,25..27,29..30,35..37,39']
+include::../../../src/main/java/io/craft/giftcard/giftcard/application/GiftCardApplicationService.java[lines='24..26,32..34,36..37,42..44,46']
 ----
 
 [.notes]

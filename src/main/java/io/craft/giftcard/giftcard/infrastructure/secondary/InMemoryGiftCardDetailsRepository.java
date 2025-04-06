@@ -1,8 +1,8 @@
 package io.craft.giftcard.giftcard.infrastructure.secondary;
 
 import io.craft.giftcard.giftcard.domain.Barcode;
-import io.craft.giftcard.giftcard.domain.projections.GiftCardDetails;
-import io.craft.giftcard.giftcard.domain.projections.GiftCardDetailsRepository;
+import io.craft.giftcard.giftcard.domain.projections.details.GiftCardDetails;
+import io.craft.giftcard.giftcard.domain.projections.details.GiftCardDetailsRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
