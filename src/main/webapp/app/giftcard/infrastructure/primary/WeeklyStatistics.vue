@@ -50,7 +50,7 @@ const createChart = () => {
         labels: daysOrder.map(day => daysLabels[day]),
         datasets: [
           {
-            label: 'Nombre de paiements',
+            label: 'Total des dépenses',
             data: daysOrder.map(day => weeklyStatistics.value!!.values[day]),
             backgroundColor: 'rgba(0, 123, 255, 0.7)',
             borderColor: 'rgba(0, 123, 255, 1)',

@@ -26,13 +26,13 @@
         Payer
       </button>
     </div>
-    <GiftCardModal v-model:is-open="isDetailsModalOpen" title="Détails" @close="closeDetailsModal">
-      <GiftCardDetails :barcode="giftCard.barcode.value" />
-    </GiftCardModal>
-    <GiftCardModal v-model:is-open="isModalOpen" title="Payer" @close="closeModal">
-      <GiftCardPayment :default-amount="giftCard.remainingAmount.value" @submit="submitPayment" />
-    </GiftCardModal>
   </div>
+  <GiftCardModal v-model:is-open="isDetailsModalOpen" title="Détails" @close="closeDetailsModal">
+    <GiftCardDetails :barcode="giftCard.barcode.value" />
+  </GiftCardModal>
+  <GiftCardModal v-model:is-open="isModalOpen" title="Payer" @close="closeModal">
+    <GiftCardPayment :default-amount="giftCard.remainingAmount.value" @submit="submitPayment" />
+  </GiftCardModal>
 </template>
 
 <script setup lang="ts">

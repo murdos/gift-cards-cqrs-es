@@ -96,6 +96,13 @@ const handleGiftCardsUpdated = () => {
   padding: 0 20px;
 }
 
+.gift-card-creation-section {
+  /** l'aligner au centre de la page */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .homepage-header {
   background-color: #f0f8ff; /* Light blue */
   padding: 40px 0;
