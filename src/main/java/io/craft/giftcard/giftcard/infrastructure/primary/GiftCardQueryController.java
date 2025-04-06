@@ -66,7 +66,8 @@ class GiftCardQueryController {
   public record GiftCardCurrentStateDto(
     Barcode barcode,
     Amount remainingAmount,
-    ShoppingStoreDto shoppingStore
+    ShoppingStoreDto shoppingStore,
+    boolean exhausted
   ) {
     public static GiftCardCurrentStateDto fromDomain(GiftCardCurrentState giftCardCurrentState) {
       return new GiftCardCurrentStateDto(
@@ -74,7 +75,8 @@ class GiftCardQueryController {
         giftCardCurrentState.remainingAmount(),
         new ShoppingStoreDto(
           QueryShoppingStore.valueOf(giftCardCurrentState.shoppingStore().name())
-        )
+        ),
+        giftCardCurrentState.exhausted()
       );
     }
   }

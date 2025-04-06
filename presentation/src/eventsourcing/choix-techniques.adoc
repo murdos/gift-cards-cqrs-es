@@ -28,13 +28,7 @@ Imaginons vous avez...au hasard... des cartes cadeaux à gérer
 [%notitle]
 === example statefull
 
-[cols="4*",options="header"]
-|=============================================================
-| barcode | shopping +
-                      store | remaning +
-                                        amount  |  exhausted()
-| 1234    | Restaurant      | 90 €              |    false
-|=============================================================
+image::state1.png[]
 
 [.notes]
 --
@@ -50,13 +44,7 @@ Si je paye 30 € avec, j'obtiens ça
 [%notitle]
 === example statefull
 
-[cols="4*", options="header"]
-|=============================================================
-| barcode | shopping +
-                      store | remaning +
-                                        amount  |  exhausted()
-| 1234    | Restaurant    | 60 €                |    false
-|=============================================================
+image::state2.png[]
 
 [.notes]
 --
@@ -70,13 +58,7 @@ Et si je dépense les 60 € restants
 [%notitle]
 === example statefull
 
-[cols="4*", options="header"]
-|=============================================================
-| barcode | shopping +
-                      store | remaning +
-                                        amount  |  exhausted()
-| 1234    | Restaurant    | 0 €                 |    true
-|=============================================================
+image::state3.png[]
 
 [.notes]
 --
@@ -151,15 +133,14 @@ Si je reprends mon exemple de carte cadeau,
 --
 
 
-[%notitle.moresmaller]
+[%notitle.moresmaller.oneline]
+[transition="slide-in fade-out"]
 === example event sourcing
 
-[cols="4*", options="header"]
-|================================================================================================
-| type                   | barcode | sequenceId | payload
-| GiftCardDeclared       | 1234    | 0          | shoppingStore: "Restaurant", +
-                                                   initialAmount: "90 €"
-|================================================================================================
+image::event0.png[]
+image::event-placeholder.png[]
+image::event-placeholder.png[]
+image::event-placeholder.png[]
 
 
 [.notes]
@@ -175,18 +156,14 @@ Il porte aussi une charge utile, pour nous, c'est le magasin et le montant initi
 Et si je dis à mon système "je paye 30 € avec"
 --
 
-[%notitle.moresmaller]
+[%notitle.moresmaller.oneline]
+[transition="fade"]
 === example event sourcing
 
-[cols="4*", options="header"]
-|================================================================================================
-| type                     | barcode | sequenceId | payload
-| GiftCardDeclared         | 1234    | 0          | shoppingStore: "Restaurant", +
-                                                     initialAmount: "90 €"
-| PaidAmount               | 1234    | 1          | amount: "30 €", +
-                                                     on: "2025-03-01"
-|================================================================================================
-
+image::event0.png[]
+image::event1.png[]
+image::event-placeholder.png[]
+image::event-placeholder.png[]
 
 [.notes]
 --
@@ -209,20 +186,15 @@ Le début de l'histoire étant zero.
 Avançons et payons les 90 - 30 .. 60 € qu'il reste sur la carte
 --
 
-[%notitle.moresmaller]
+[%notitle.moresmaller.oneline]
+[transition="fade-in slide-out"]
 === example event sourcing
 
-[cols="4*", options="header"]
-|================================================================================================
-| type                    | barcode | sequenceId | payload
-| GiftCardDeclared        | 1234    | 0          | shoppingStore: "Restaurant", +
-                                                    initialAmount: "90 €"
-| PaidAmount              | 1234    | 1          | amount: "30 €", +
-                                                    on: "2025-03-01"
-| PaidAmount              | 1234    | 2          | amount: "60 €", +
-                                                    on: "2025-03-10"
-| GiftCardExhausted       | 1234    | 3          | _null_
-|================================================================================================
+image::event0.png[]
+image::event1.png[]
+image::event2.png[]
+image::event3.png[]
+
 [.notes]
 --
 J'ai maintenant 2 nouveaux événements,

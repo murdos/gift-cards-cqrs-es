@@ -28,6 +28,11 @@
   max-height: 600px;
 }
 
+.reveal .oneline .slide-content {
+  display: flex;
+  justify-content: center;
+}
+
 pre.code-wrapper {
   width: 100%;
 }

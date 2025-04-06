@@ -12,11 +12,11 @@ export const shoppingStores = [
     name: 'Restaurant',
   },
   {
-    id: 'Livreur',
-    name: 'LIVREUR',
+    id: 'LIVREUR',
+    name: 'Livreur',
   },
   {
-    id: 'Musique',
-    name: 'MUSIQUE',
+    id: 'MUSIQUE',
+    name: 'Musique',
   },
 ];
