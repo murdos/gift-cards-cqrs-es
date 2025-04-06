@@ -43,7 +43,7 @@ image::jamy.jpg[height=350px]
 
 === Query model
 
-image::https://spatie.be/docs/laravel-event-sourcing/v7/images/transform-03.svg[]
+image::projection.png[]
 
 [.notes]
 --
