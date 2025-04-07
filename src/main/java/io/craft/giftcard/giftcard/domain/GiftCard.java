@@ -66,8 +66,8 @@ public class GiftCard {
 
   private record DecisionProjection(
     Barcode barcode,
-    Amount remainingAmount,
-    SequenceId currentSequenceId
+    SequenceId currentSequenceId,
+    Amount remainingAmount
   ) {
     public static DecisionProjection from(GiftCardHistory history) {
       GiftCardDeclared firstEvent = history.start();
@@ -78,8 +78,8 @@ public class GiftCard {
         .reduce(
           new DecisionProjection(
             firstEvent.barcode(),
-            firstEvent.amount(),
-            firstEvent.sequenceId()
+            firstEvent.sequenceId(),
+            firstEvent.amount()
           ),
           DecisionProjection::accumulator,
           new DummyCombiner<>()
@@ -87,11 +87,11 @@ public class GiftCard {
     }
 
     public DecisionProjection withRemainingAmount(Amount remainingAmount) {
-      return new DecisionProjection(barcode, remainingAmount, currentSequenceId);
+      return new DecisionProjection(barcode, currentSequenceId, remainingAmount);
     }
 
     public DecisionProjection withSequenceId(SequenceId sequenceId) {
-      return new DecisionProjection(barcode, remainingAmount, sequenceId);
+      return new DecisionProjection(barcode, sequenceId, remainingAmount);
     }
 
     public SequenceId nextSequenceId() {

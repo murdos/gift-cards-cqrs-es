@@ -2,9 +2,8 @@
 
 [.notes]
 --
-- Effectivement, une commande n'est pas toujours applicable, n'as pas d'effet.
-- Par exemple si le montant du paiement est supérieur au solde de la carte cadeau, le paiement ne peut pas être effectué.
-- Comment peut-on prendre cette décision en Event Sourcing ?
+- Effectivement, une commande n'est pas toujours applicable.
+- Comment peut-on prendre la décision d'appliquer ou non la commande en Event Sourcing ?
 --
 
 === Focus sur la commande de paiement
@@ -20,7 +19,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 
 [.notes]
 --
-Si on reprend la commande de paiement, il faudrait d'abord vérifier si le montant est supérieur au solde de la carte cadeau.
+Si on reprend la commande de paiement, il faudrait, avant d'accepter la paiement, vérifier si le solde de la carte est suffisant.
 --
 
 === `new GiftCard()`
@@ -34,9 +33,9 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 
 [.notes]
 --
-- Pour rappel, on instancie notre carte cadeau uniquement avec l'historique des évènements passés.
+- Pour rappel, on instancie notre agrégat uniquement avec l'historique des évènements passés.
 - C'est ce qu'on appelle *l'hydratation de l'agrégat*.
-- Comment peut-on savoir si le montant est supérieur au solde de la carte cadeau à partir de cette liste d'évènements ?
+- Comment peut-on prendre une décision à partir des évènements ? En les parcourant un à un à chaque fois ?
 --
 
 === Encore une projection
@@ -48,25 +47,29 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 
 [.notes]
 --
-- On va effectivement utiliser une projection particulière, dynamique, appelée "projection de décision".
+- On va plutôt à nouveau utiliser une projection.
+- Mais une projection particulière, dynamique, et en mémoire uniquement, appelée "projection de décision".
 --
 
 === `DecisionProjection`
 
-[source, java, highlight='4..8']
+[source, java, highlight='4..8|7|5..6']
 ----
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='10..12,67..71']
 ----
 
 [.notes]
 --
-- Cette projection est privée à l'agrégat, et non visible depuis l'extérieur.
-C'est un détail d'implémentation de l'agrégat.
+- Cette projection est interne à l'agrégat, et non visible depuis l'extérieur. C'est un détail d'implémentation de l'agrégat
+- *click*
+- Elle ne contient strictement que les données nécessaires à la prise de décision,
+- *click*
+- ou à l'émission de nouveaux évènements.
 --
 
 === `DecisionProjection.from()`
 
-[source, java, highlight='1|2|4..5|7|8..12|13']
+[source, java, highlight='1|4..7,15|2,8..12|13']
 ----
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='72..87']
 ----
@@ -75,15 +78,11 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 --
 - On l'initialise à partir de l'historique des évènements passés.
 *click*
-- on distingue le premier évènement, qui est le début de l'histoire de la carte cadeau.
+- Pour cela on va faire une réduction, ou *fold*, de l'historique des évènements.
 *click*
-*click*
-- ensuite on va faire une réduction, ou *fold*, de l'historique des évènements.
-*click*
-- avec l'état initial de la projection, calculé à partir du premier évènement.
+- avec comme point de départ le début de l'histoire de la carte cadeau.
 *click*
 - et une fonction d'accumulation...
-*click*
 --
 
 === `DecisionProjection.accumulator()`
@@ -96,12 +95,27 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 [.notes]
 --
 - ...qui va appliquer chaque évènement à l'état courant de la projection.
-- *click* *click*
-- en cas de paiement,
 - *click*
-- on va soustraire le montant du paiement au solde de la carte cadeau.
+- toujours avec du pattern matching, pour être sûr de traiter tout futur type d'évènement,
+- *click*
+- et de manière similaire au calcul de la projection de lecture
 *click*
-- et également mettre à jour le dernier numéro de séquence connu
+- avec une subtilité sur la mise à jour le dernier numéro de séquence utilisé
 --
 
-=== Utilisation de la projection
+=== Utilisation de la projection de décision
+
+[source, java, highlight='..|5..7|15..17|16']
+----
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='10..12']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='32..35, 37']
+      // ...
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='42, 51..53']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='58..61']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[tags='closingBrace']
+----
+
+[.notes]
+--
+On peut alors se servir de cette projection pour prendre la décision d'appliquer ou non la commande.
+--
