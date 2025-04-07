@@ -86,18 +86,7 @@ class GiftCardQueryController {
   @Nullable
   @GetMapping("/statistics")
   public WeeklyStatisticsDto getWeeklyStatistics() {
-    // @formatter:off
-    var defaultValues = new WeeklyStatistics(Map.of(
-      MONDAY, Amount.of(10.5),
-      TUESDAY, Amount.of(0.0),
-      WEDNESDAY, Amount.of(55.5),
-      THURSDAY, Amount.of(4.5),
-      FRIDAY, Amount.of(15.0),
-      SATURDAY, Amount.of(74.5),
-      SUNDAY, Amount.of(0.0)
-    ));
-    // @formatter:on
-
+    // WeeklyStatisticsDto.fromDomain()
     return null;
   }
 }
