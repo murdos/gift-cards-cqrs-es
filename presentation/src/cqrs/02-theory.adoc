@@ -7,9 +7,6 @@ Pause ✋
 Pause ✋
 
 Je crois que c'est le moment pour faire un petit récapitulatif.
-
-Tu viens de nous montrer comment on peut requêter un Query model,
-si on essaye de revenir à de la théorie ça donne ça.
 --
 
 [transition="slide-in fade-out"]
@@ -19,7 +16,7 @@ image::cqrs-query.png[]
 
 [.notes]
 --
-Le query model c'est, grosso modo, le fait que le client requête une projection depuis le repo des projections.
+Tu viens de nous parle du query model et de comment tu fabriques des projections depuis un event handler pour les stocker dans un repository.
 
 Pour notre projet là, le repo est en mémoire,
 mais il pourrait être stocké dans une base quelconque ça ne changerait rien.
@@ -32,7 +29,9 @@ image::cqrs-query&handler.png[]
 
 [.notes]
 --
-Que ces projections sont poussées dans le repo par des event handlers.
+Pour les utilisateurs, tous les accès en lecture tapent dans cette base de projections.
+
+ça c'est la responsabilité de la "query"
 
 *pause*
 --
@@ -44,7 +43,7 @@ image::cqrs-command.png[]
 
 [.notes]
 --
-Plus tôt, on a parlé des requêtes de modification, les commandes.
+D'un autre côté, on a parlé des requêtes de modification, les commandes.
 --
 
 [transition="fade"]
@@ -74,7 +73,7 @@ image::cqrs-command&eventstore.png[]
 
 [.notes]
 --
-Et nous on va les stocker dans un event store & les envoyer aux event handlers.
+Et nous on va les stocker dans un event store.
 
 ça c'est le code qui a la responsabilité de la "command"
 --
@@ -86,7 +85,9 @@ image::cqrs-query&handler.png[]
 
 [.notes]
 --
-ça c'est le code qui a la responsabilité de la "query"
+Je vous ai montré la responsabilité de la query
+
+remarquez qu'ils sont séparés l'un de l'autre, comme si il y avait une ségrégation
 --
 
 
@@ -97,7 +98,7 @@ image::cqrs.png[]
 
 [.notes]
 --
-L'air de rien on vient de parler de CQRS, Command Query Responsibility Segregation.
+C'est simplement ça qu'on appelle le Command Query Responsibility Segregation ou CQRS.
 
 Bon j'arrête avec la théorie, promis.
 Mais avouez qu'il est beau ce schéma... dites qu'il est beau !
