@@ -1,4 +1,13 @@
-== Références
+== Merci
+
+🙇🙇‍♂️
+
+[.notes]
+--
+Merci pour votre attention,
+--
+
+=== Références
 [.moresmaller]
 --
 * CQRS
@@ -7,6 +16,7 @@
 
 * Event Sourcing
 ** https://www.youtube.com/watch?v=gG6DGmYKk4I[How to model event-sourced systems efficiently - Oskar Dudycz - DDD Europe 2022]
+** https://lescastcodeurs.com/2014/03/22/lcc-98-interview-sur-cqrs-et-event-sourcing-avec-jeremie-chassaing/[Les Cast Codeurs Podcast 98 : Interview sur CQRS et Event Sourcing avec Jérémie Chassaing]
 
 * Event Modeling : https://eventmodeling.org/
 

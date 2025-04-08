@@ -1,4 +1,7 @@
 == Codons-le ensemble !
+
+🧑‍💻
+
 [.notes]
 --
 - Live coding du nouveau besoin

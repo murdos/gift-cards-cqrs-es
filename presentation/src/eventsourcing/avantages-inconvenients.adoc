@@ -28,7 +28,7 @@ Pour finir derrière "résilient aux nouvelles fonctionnalités", j'y mets plusi
 - 👍 Si le métier vient nous voir en demandant des stats sur l'existant,
 et bien vous pouvez leur fournir rapidement et ce, sur tout l'historique.
 Comme par exemple le nombre de dépense par cartes, il suffit de compter les PaidAmount.
-- ✌️ L'autre truc concerne le code, on ne l'a pas encore montré, ça arrive,
+- ✌️ L'autre truc concerne le code, on ne l'a montré,
 mais l'ajout d'une fonctionnalité se fait de manière super simple :
 une requête arrive, on prend la décision ou non de générer un événement. point.
 Pas de reprise de données, pas de nouvelle colonne à mettre en base
@@ -51,6 +51,7 @@ il y a le fait qu'on explose le besoin de stockage.
 
 là où on n'avait potentiellement qu'une ligne en base pour un état simple,
 on se retrouve avec une ligne pour chaque changement.
+Plus une ligne par projection si vous les stockez en base
 
 *click*
 
@@ -72,9 +73,10 @@ c'est chouette mais on ne va pas montrer l'histoire complète à chaque utilisat
 [.same]
 - Beaucoup d'information
 - Pas comme d'habitude
-- Pas simple à utiliser en l'état
+- Besoin de projections
 
 [.notes]
 --
-Heureusement l'event sourcing ce n'est pas que ça et on en parle plus loin.
+On est obligé de passer par une ou plusieurs projections pour prendre des décisions
+et afficher des données aux utilisateurs.
 --

@@ -172,10 +172,10 @@ L'application service
 --
 On a vu les évents, on a vu leur génération.
 C'est joli, mais on a fait un agrégat sans aucun effet de bord.
-(Pour info ça s'appelle du Functionnal core)
+(Pour info ça s'appelle du Functional core)
 
 Maintenant voyons comment on interface notre agrégat avec le reste du monde
-grace à notre application service
+grace à notre application service qui est notre point d’entrée qui sera appelé par les contrôleurs
 --
 
 === `GiftCardApplicationService.declare()`

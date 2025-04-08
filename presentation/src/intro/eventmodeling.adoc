@@ -1,17 +1,42 @@
-=== Event modeling
+=== Event storming / Event modeling
+
+[.notes]
+--
+Pour designer notre projet, on a fait un exercice qui s'appelle l'event modeling.
+
+L'event modeling c'est un peu le cousin de l'event storming.
+
+Qui parmi vous connait event storming ?
+Ok, qui a réussi à embarquer quelqu'un du métier pour en faire un ?
+
+Qui a réussi à embarquer la même personne plusieurs fois ? En mode ça lui a plu et elle a trouvé ça utile ?
+
+Ceux qui ont les bras levés, vous êtes des génies.
+
+Pour les autres, sachez qu'il y a un event storming cet aprem
+
+Bref pour moi l'output de l'event storming n'est pas clair pour le métier, c'est pour ça que je préfère l'event modeling.
+--
+
+== Event modeling Gift Cards
 
 image::event-modeling.png[height=600]
 
 [.notes]
 --
-Expliquer ce qu'est l'event modeling
+Je vous passe les étapes mais en sortie on obtient un truc comme ça.
 
-Changer le type de bordures pour le rendre plus accessible
+on raconte l'histoire de l'application sur une ligne de temps.
 
-Montrer l'event modeling agrémenté des screenshots
+Vous venez de voir comment marche notre appli, du coup je vais vite mais ça se lit comme ça :
 
-Le parcourir viteuf vu qu'on a déjà vu l'appli
+Pour faire simple, en haut y a les interfaces, genre les interfaces utilisateurs
 
-préciser que c'est toujours bien d'en faire pour comprendre les interractions,
-même si on ne part pas sur de l'event sourcing
+et en bas il y a le métier.
+
+Quand un utilisateur déclare une carte via le formulaire, ça provoque une commande (en bleu)
+qui va appliquer un changement au système. Qu'on appelle événement (en orange).
+
+Ce changement va être lu par une ou plusieurs vues
+depuis lesquelles l'utilisateur va pouvoir interagir avec le système, provoquant d'autres commandes et ainsi de suite.
 --

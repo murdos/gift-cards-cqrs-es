@@ -72,11 +72,5 @@ Et souvent c'est acceptable. De toute manière les données sont perdues on ne p
 --
 Maintenant est-ce que c'est faisable en event sourcing ?
 
-Est-ce qu'on a ce qu'il faut ? Oui, on a nos événements de paiements.
-
-Est-ce qu'on a une reprise de données à faire ? Sûrement mais pas de spoil.
-
-Quel est l'intérêt d'une table d'audit quand on se base sur ce qu'il s'est passé sur le système pour prendre des décisions ?
-
-Bref, et si on voyait ensemble comment gérer le cas ?
+Ben je vous propose qu'on voit ça ensemble.
 --
