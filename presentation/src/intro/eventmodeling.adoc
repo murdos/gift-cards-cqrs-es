@@ -1,6 +1,6 @@
 === Event modeling
 
-image::event-modeling.png[width=100%]
+image::event-modeling.png[height=600]
 
 [.notes]
 --
