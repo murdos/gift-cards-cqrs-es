@@ -95,7 +95,7 @@ public class GiftCardSteps {
   @Then("the weekly statistics should be")
   public void weeklyStatisticsShouldBe(Map<String, String> expectedStatistics) {
     // TODO: load the real statistics
-    var statistics = WeeklyStatistics.EMPTY;
+    WeeklyStatistics statistics = WeeklyStatistics.EMPTY;
 
     expectedStatistics.forEach((dayOfweek, amount) -> {
       assertThat(statistics.values()).containsEntry(
