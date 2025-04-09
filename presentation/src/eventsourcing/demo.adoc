@@ -84,7 +84,10 @@ L'agrégat
 
 [.notes]
 --
-Maintenant qu'on a vu les événements, voyons comment on les utilise dans notre agrégat.
+Maintenant qu'on a vu les événements, voyons comment on les génère depuis notre agrégat,
+le coeur de notre métier.
+
+Il s'appelle d'ailleurs GiftCard
 --
 
 === `GiftCard.declare()`

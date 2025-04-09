@@ -1,4 +1,4 @@
-=== Avantages
+=== Event sourcing - Avantages
 
 [%step]
 - Pas de perte d'information
@@ -68,7 +68,7 @@ c'est chouette mais on ne va pas montrer l'histoire complète à chaque utilisat
 --
 
 [transition="fade-in slide-out"]
-=== Inconvénients
+=== Event sourcing - Inconvénients
 
 [.same]
 - Beaucoup d'information

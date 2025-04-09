@@ -5,7 +5,7 @@ Senior Dev @ malt
 
 ❤️ CQRS / ES
 
-💔 Acronyms
+💔 Acronymes
 
 [.notes]
 --
@@ -21,7 +21,7 @@ Senior Dev @ malt
 
 ❤️ CQRS / Event Sourcing
 
-💔 (Unexplained) Acronyms
+💔 Acronymes (non expliqués)
 
 [.notes]
 --

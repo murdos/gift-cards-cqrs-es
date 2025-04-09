@@ -32,10 +32,9 @@ image::state1.png[]
 
 [.notes]
 --
-Alors ça ressemble vachement à une table sql mais on parle bien d'un agrégat ici.
-Même si ça arrive souvent tel quel en base de données.
+Je vais vous faire le même workflow qu'Aurélien à montré tout à l'heure.
 
-Bref quand je déclare ma carte cadeau, j'ai ça en mains,
+Quand je déclare ma carte cadeau, j'ai ça en mains,
 il y a un code-barre "1234", une boutique "restaurant", un montant "90 €" et une méthode qui nous dit si oui ou non la carte est vie.
 
 Si je paye 30 € avec, j'obtiens ça
@@ -50,7 +49,7 @@ image::state2.png[]
 --
 Ma carte cadeau n'a plus que 60 €.
 
-Remarquez que je n'ai plus ici le montant initial.
+Remarquez que je n'ai déjà plus le montant initial.
 
 Et si je dépense les 60 € restants
 --
@@ -64,7 +63,9 @@ image::state3.png[]
 --
 ma carte cadeaux est vide et donc inutilisable.
 
-Mais le point ici c'est que le champ "montant" a de nouveau été écrasé.
+Jusque là rien de neuf.
+
+Mais le point ici c'est que le champ "montant restant" a de nouveau été écrasé.
 
 Ce qui veut dire qu'après un changement,
 on a certes des valeurs à jour, mais plus aucune trace de ce qu'elles ont été.
@@ -72,7 +73,7 @@ on a certes des valeurs à jour, mais plus aucune trace de ce qu'elles ont été
 Comme je l'ai dit, ça, c'est le fonctionnement classique de nos app.
 --
 
-=== Avantages
+=== State sourcing - Avantages
 
 [%step]
 - Facile à comprendre
@@ -90,7 +91,7 @@ Regardons les avantages.
 - On fait tout le temps comme ça, c'est la manière dont on a appris à faire
 --
 
-=== Inconvénients
+=== State sourcing - Inconvénients
 
 
 [%step]
