@@ -9,10 +9,9 @@ Senior Dev @ malt
 
 [.notes]
 --
-Moi c'est Cédric, je bosse chez malt depuis bientôt 6 ans
-où j'ai pu participer à la mise place de plusieurs projets en CQRS / ES.
+Moi c'est Cédric, je suis dev java / kotlin chez malt depuis bientôt 6 ans
 
-Par contre j'suis relou, je déteste les acronymes.
+J'adore le CQRS / ES et je déteste les acronymes.
 --
 
 [transition="fade-in slide-out"]
