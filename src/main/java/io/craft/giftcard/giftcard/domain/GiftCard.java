@@ -3,7 +3,7 @@ package io.craft.giftcard.giftcard.domain;
 import io.craft.giftcard.giftcard.domain.commands.GiftCardDeclaration;
 import io.craft.giftcard.giftcard.domain.commands.Payment;
 import io.craft.giftcard.giftcard.domain.events.*;
-import io.craft.giftcard.shared.collection.domain.DummyCombiner;
+import io.craft.giftcard.shared.collection.domain.SequentialCombiner;
 import java.util.List;
 import org.jmolecules.ddd.annotation.AggregateRoot;
 
@@ -82,7 +82,7 @@ public class GiftCard {
             firstEvent.amount()
           ),
           DecisionProjection::accumulator,
-          new DummyCombiner<>()
+          new SequentialCombiner<>()
         );
     }
 

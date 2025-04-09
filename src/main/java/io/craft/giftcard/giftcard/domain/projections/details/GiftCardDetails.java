@@ -6,7 +6,7 @@ import io.craft.giftcard.giftcard.domain.events.GiftCardDeclared;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
 import io.craft.giftcard.giftcard.domain.events.GiftCardHistory;
 import io.craft.giftcard.giftcard.domain.events.PaidAmount;
-import io.craft.giftcard.shared.collection.domain.DummyCombiner;
+import io.craft.giftcard.shared.collection.domain.SequentialCombiner;
 import java.util.ArrayList;
 import java.util.List;
 import org.jmolecules.architecture.cqrs.QueryModel;
@@ -31,7 +31,7 @@ public record GiftCardDetails(Barcode barcode, List<String> details) {
           )
         ),
         GiftCardDetails::reducer,
-        new DummyCombiner<>()
+        new SequentialCombiner<>()
       );
   }
 

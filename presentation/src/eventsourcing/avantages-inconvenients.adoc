@@ -31,7 +31,9 @@ Comme par exemple le nombre de dépense par cartes, il suffit de compter les Pai
 - ✌️ L'autre truc concerne le code, on ne l'a montré,
 mais l'ajout d'une fonctionnalité se fait de manière super simple :
 une requête arrive, on prend la décision ou non de générer un événement. point.
-Pas de reprise de données, pas de nouvelle colonne à mettre en base
+Pas de reprise de données, pas de nouvelle colonne à mettre en base.
+
+Il suffit de gérer les projections
 --
 
 [transition="slide-in fade-out"]
