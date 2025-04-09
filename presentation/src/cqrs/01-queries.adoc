@@ -6,8 +6,8 @@
 
 [.notes]
 --
-- Effectivement comment on fait pour afficher une liste des cartes cadeaux avec quelques attributs, comme la boutique ou le code barre, et des infos dérivées comme le montant restant ?
-- Alors que ce qu'on a stocké ce sont des évènements unitaires, dont les informations clés sont dans un payload.
+- Effectivement comment on fait pour afficher une liste des cartes cadeaux avec quelques attributs, comme la boutique, et des infos dérivées comme le solde ?
+- Alors que ce qu'on a stocké ce sont des évènements, dont les informations clés sont dans un payload.
 - Relire tous les évènements pour reconstituer toutes les cartes cadeaux à chaque fois paraît compliqué...
 - Et si en plus la liste doit être paginée pour n'afficher que 10 cartes cadeaux à la fois
  *click*
@@ -22,7 +22,7 @@
 
 [.notes]
 --
-ou triée, par exemple par montant restant
+ou triée, par exemple par le solde de la carte
 *click*
 --
 
@@ -46,11 +46,11 @@ image::projection.png[]
 
 [.notes]
 --
-- Pour résoudre ce problème, on va utiliser une projection, également appelée "query model", ou "read model" ou "modèle de lecture".
-- Ce modèle va être fabriqué sur mesure par rapport à notre besoin en lecture, à partir des évènements métier.
-- Dans ce cas précis, il va être très similaire au modèle qu'on aurait eu en state-sourcing.
+- Pour résoudre ce problème, on va utiliser une projection, également appelée "query model", ou "read model" ou "modèle de lecture". Par la suite, il est fort probable que j'utilise indifféremment ces termes.
+- Ce modèle va être fabriqué sur mesure par rapport à notre besoin d'affichage, à partir des évènements métier.
+- Dans ce cas précis, ce modèle va être très similaire au modèle qu'on aurait eu en state-sourcing.
 - Mais la grosse différence, c'est que c'est une information dérivée, qui peut être amendée et recalculée en fonction de l'évolution des besoins.
-- D'ailleurs dans notre implémentation, les projections sont persistées avec des repositories in memory et recalculées à chaque redémarrage de l'application. C'est très pratique au début de l'application, cela offre une grande souplesse.
+- D'ailleurs dans notre application, les projections sont persistées avec des repositories in memory et recalculées à chaque redémarrage de l'application. C'est très pratique en début de projet, cela offre une grande souplesse.
 --
 
 [%notitle]
@@ -62,7 +62,7 @@ image::fold00.png[]
 [.notes]
 --
 - Voyons ce que cela donne si on déroule notre histoire pas à pas.
-- Tant qu'aucun évènement n'a été appliqué, on n'a pas de projection.
+- Tant qu'aucun évènement n'a été appliqué, évidemment on n'a pas de projection.
 --
 
 [%notitle]
@@ -76,7 +76,7 @@ image::fold01.png[]
 - A partir de notre premier évènement, la déclaration d'une carte, on va initialiser la projection avec :
 - le code-barre,
 - la boutique.
-- Le montant restant qui sera égal au montant initial.
+- Le solde qui sera égal au montant initial.
 - Et le booléen qui indique que la carte n'est pas épuisée.
 --
 
@@ -99,7 +99,7 @@ image::fold03.png[]
 
 [.notes]
 --
-Nouveau paiement, on applique la même logique
+Sur le paiement suivant, on applique la même logique
 --
 
 [%notitle]
@@ -117,6 +117,11 @@ image::fold04.png[]
 === Code
 🔍
 
+[.notes]
+--
+- Regardons concrètement ce que cela donne côté code
+--
+
 === Query Model
 
 [source, java, highlight]
@@ -126,9 +131,9 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/cu
 
 [.notes]
 --
-- Côte code, le modèle de lecture s'appelle GiftCardCurrentState
-- Il contient les informations utiles pour l'affichage, le tri ou le filtrage
-- Comment ce modèle est-il calculé ? Vous vous souvenez de ce que Cédric disait précédemment, que les events étaient propagé ?
+- la projection s'appelle GiftCardCurrentState
+- Il contient les informations strictement utiles pour l'affichage
+- Comment ce modèle est-il calculé ? Vous vous souvenez de ce que Cédric disait précédemment, que les events étaient propagés ?
 --
 
 === Event publisher
@@ -154,7 +159,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/cu
 --
 - L'event handler associé à notre projection va être appelé à chaque fois qu'un événement est émis,
 - *click*
-- et va pouvoir alors déterminer la nouvelle projection
+- et va pouvoir alors déterminer la projection mise à jour
 - *click*
 - et la sauvegarder.
 - *click*

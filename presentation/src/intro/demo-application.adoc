@@ -2,7 +2,8 @@
 
 [.notes]
 --
-Montrer l'application :
+Montrer l'application (Ctrl + Tab pour switcher entre onglets du browser) :
+
 - Créer une carte cadeau
 - Faire un premier paiement
 - Faire un second paiement qui épuisera la carte

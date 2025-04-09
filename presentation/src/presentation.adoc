@@ -18,7 +18,20 @@ image::yercin.jpg[height=250px]
 
 [.notes]
 --
-Hello
+Hello !
+
+Pré-requis :
+
+- Appli démarrée (front + back) + appli ouverte dans un onglet
+- Code clean pour live coding
+- Zoom IntelliJ(125%)
+- Copilot : completions désactivées
+- Onglets IntelliJ fermés
+- IntelliJ : Fenêtres du bas fermées
+
+- Inlay Hints : désactiver l'auteur du code
+
+-
 --
 
 include::intro/introduction.adoc[]

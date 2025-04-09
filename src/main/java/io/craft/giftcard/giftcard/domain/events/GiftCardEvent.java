@@ -4,9 +4,13 @@ import io.craft.giftcard.giftcard.domain.Barcode;
 import io.craft.giftcard.giftcard.domain.SequenceId;
 import org.jmolecules.event.annotation.DomainEvent;
 
+// @formatter:off
 @DomainEvent
-public sealed interface GiftCardEvent permits GiftCardDeclared, PaidAmount, GifCardExhausted {
+public sealed interface GiftCardEvent
+  permits GiftCardDeclared, PaidAmount, GifCardExhausted {
+
   SequenceId sequenceId();
 
   Barcode barcode();
 }
+// @formatter:on

@@ -33,14 +33,14 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 
 [.notes]
 --
-- Pour rappel, on instancie notre agrégat uniquement avec l'historique des évènements passés.
-- C'est ce qu'on appelle *l'hydratation de l'agrégat*.
+- Regardons à nouveau comme notre agrégat est construit : uniquement avec l'historique des évènements passés.
+- C'est ce qu'on appelle *la réhydratation de l'agrégat*.
 - Comment peut-on prendre une décision à partir des évènements ? En les parcourant un à un à chaque fois ?
 --
 
 === Encore une projection
 
-[source, java, highlight='4|7']
+[source, java, highlight='4,7']
 ----
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='10..14,19..21']
 ----
@@ -60,11 +60,11 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 
 [.notes]
 --
-- Cette projection est interne à l'agrégat, et non visible depuis l'extérieur. C'est un détail d'implémentation de l'agrégat
+- Cette projection est interne à l'agrégat, et non visible depuis l'extérieur. C'est un détail d'implémentation.
 - *click*
 - Elle ne contient strictement que les données nécessaires à la prise de décision,
 - *click*
-- ou à l'émission de nouveaux évènements.
+- ou à l'émission de nouveaux évènements (le code-barre = identifiant de l'agrégat, et le dernier numéro de séquence).
 --
 
 === `DecisionProjection.from()`
@@ -76,7 +76,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 
 [.notes]
 --
-- On l'initialise à partir de l'historique des évènements passés.
+- On initialise cette projection à partir de l'historique des évènements passés.
 *click*
 - Pour cela on va faire une réduction, ou *fold*, de l'historique des évènements.
 *click*
@@ -96,7 +96,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 --
 - ...qui va appliquer chaque évènement à l'état courant de la projection.
 - *click*
-- toujours avec du pattern matching, pour être sûr de traiter tout futur type d'évènement,
+- toujours avec du pattern matching, pour être sûr de traiter tout type d'évènement (actuel et futur),
 - *click*
 - et de manière similaire au calcul de la projection de lecture
 *click*
@@ -118,4 +118,9 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 [.notes]
 --
 On peut alors se servir de cette projection pour prendre la décision d'appliquer ou non la commande.
+
+*pause*
+
+- Voilà, je pense que nous avons fait le tour des fonctionnalités que nous avons implémenté, et des commandes, prises de décision, génération des évents, calcul d'une projection, et query.
+- Comme je l'évoquais tout à l'heure, un modèle de lecture est réalisé sur mesure par rapport à un besoin. Il serait donc intéressant d'étudier une nouvelle fonctionnalité pour aller plus loin.
 --

@@ -16,7 +16,7 @@ Et comment ça s'articule dans un service classique.
 
 [source, java, highlight]
 ----
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/events/GiftCardEvent.java[lines='7..']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/events/GiftCardEvent.java[lines='8..15']
 ----
 
 [.notes]
@@ -237,5 +237,5 @@ Sachant que jusqu'ici, on a manipulé uniquement des événements,
 
 Comment est-ce qu'on affiche la liste des cartes  cadeaux ?
 
-ce dispatcher va nous y aider mais je laisse à Aurélien le soin de vous expliquer d'où ça vient.
+ce dispatcher va nous y aider mais je laisse à Aurélien le soin de vous expliquer comment.
 --
