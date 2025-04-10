@@ -10,6 +10,17 @@ spring:
     default-property-inclusion: non_absent
   profiles:
     active: '@spring.profiles.active@'
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      auto-commit: false
+      poolName: Hikari
+    password: ''
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://localhost:5432/giftcard
+    username: giftcard
+  liquibase:
+    change-log: classpath:config/liquibase/master.xml
 server:
   port: 8080
 springdoc:
