@@ -4,12 +4,17 @@
 --
 Qui dit nouveau projet dit choix d'architecture, et surtout concernant la gestion de l'agrégat.
 
+Pour ceux qui savent pas, l'agrégat c'est un peu le coeur de notre métier, si je gère des cartes cadeaux,
+il y a de grandes chances que je me retrouve avec un agrégat "Carte cadeau".
+
+Ça permet de mettre notre métier au même endroit, de prendre la décision d'appliquer tel ou tel changement
+
 là on a plusieurs possibilités, je vais n'en citer que deux heeuu parce que.
 
 *click*
 --
 
-=== State sourcing
+=== State sourcing / CRUD
 
 [.notes]
 --
@@ -181,6 +186,8 @@ et la date du paiement.
 Et je n'ai pas parlé de ce que j'ai appelé sequenceId, c'est une information purement technique
 mais qui a son importance, il permet de garantir l'ordre des événements,
 et donc d'être sûr qu'on raconte l'histoire dans le bon ordre.
+
+Vu qu'il est déterministe, il est aussi utilisé pour faire de l'optimistic locking
 
 Le début de l'histoire étant zero.
 

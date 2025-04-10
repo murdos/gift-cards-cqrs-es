@@ -67,3 +67,8 @@ pre.code-wrapper {
 #speaker-controls .speaker-controls-notes {
   font-size: 0.8em;
 }
+
+.text-with-image span.image img {
+  vertical-align: middle;
+  margin-left: 5px;
+}

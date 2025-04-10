@@ -1,7 +1,8 @@
 [transition="slide-in fade-out"]
+[.text-with-image]
 == Cédric
 
-Senior Dev @ malt
+Senior Dev @ image:malt-logo.png[height=40]
 
 ❤️ CQRS / ES
 
@@ -15,9 +16,11 @@ J'adore le CQRS / ES et je déteste les acronymes.
 --
 
 [transition="fade-in slide-out"]
+[.text-with-image]
+
 === Cédric
 
-Senior Dev @ malt
+Senior Dev @ image:malt-logo.png[height=40]
 
 ❤️ CQRS / Event Sourcing
 
@@ -30,9 +33,10 @@ Oué bon, je déteste les acronymes non expliqués.
 Mais pour la définition de CQRS et Event sourcing, on est là pour en parler
 --
 
+[.text-with-image]
 === Aurélien
 
-Lead Tech @ Sully Group
+Lead Tech @ image:sully-logo.svg[height=40]
 
 Actuellement sur le projet LinkySup @ Enedis
 
