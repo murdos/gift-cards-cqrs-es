@@ -1,8 +1,9 @@
-[transition="slide-in fade-out"]
 == Comment afficher la liste des cartes cadeaux ?
 
-[.same]
+[%step]
 - Paginée 🤔
+- Triée 😮
+- Filtrée 😱
 
 [.notes]
 --
@@ -11,35 +12,11 @@
 - Relire tous les évènements pour reconstituer toutes les cartes cadeaux à chaque fois paraît compliqué...
 - Et si en plus la liste doit être paginée pour n'afficher que 10 cartes cadeaux à la fois
  *click*
---
-
-[transition="fade"]
-=== Comment afficher la liste des cartes cadeaux ?
-
-[.same]
-- Paginée 🤔
-- Triée 😮
-
-[.notes]
---
-ou triée, par exemple par le solde de la carte
+- ou triée, par exemple par le solde de la carte
 *click*
+- ou encore filtrée, par exemple sur la boutique...
 --
 
-[transition="fade-in slide-out"]
-=== Comment afficher la liste des cartes cadeaux ?
-
-[.same]
-- Paginée 🤔
-- Triée 😮
-- Filtrée 😱
-
-[.notes]
---
-ou encore filtrée, par exemple sur la boutique...
---
-
-[transition="fade-in slide-out"]
 === Une projection !
 
 image::projection.png[]

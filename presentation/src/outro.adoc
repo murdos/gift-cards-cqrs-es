@@ -28,7 +28,7 @@ Merci pour votre attention, on espère vous avoir donné envie d'essayer, mais f
 TODO: pousser le code sur codeberg
 --
 
-=== Questions ? / Feedback
+=== Feedback
 
 image::qrcode-feedback.png[width=400px]
 

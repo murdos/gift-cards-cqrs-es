@@ -46,12 +46,15 @@ Actuellement sur le projet LinkySup @ Enedis
 --
 - Et moi c'est Aurélien
 - Je suis Lead Tech et travaille chez Sully Group
-- Actuellement sur le projet LinkySup @ Enedis (il y d'ailleurs une
-table ronde cet après-midi sur l'adoption d'une culture craft sur ce projet, si ça vous intéresse)
 - Et par ailleurs, j'aime bien contribuer à différents projets open-source
 --
 
 === Pourquoi ce sujet ?
+
+[%step]
+- Patterns méconnus / peu utilisés
+- Cédric adore CQRS/ES 😄
+- Partager à travers un exemple concret
 
 [.notes]
 --
