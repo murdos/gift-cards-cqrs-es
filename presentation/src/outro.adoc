@@ -28,7 +28,7 @@ Merci pour votre attention, on espère vous avoir donné envie d'essayer, mais f
 Voici quelques références.
 - un document et une conférence de Greg Young, qui est le créateur de CQRS/ES
 - ...
-- Et une interview dans les Cast Codeurs de Jeremy Chassaing, qui anime d'ailleurs un atelier cet aprem sur l'Event Sourcing
+- Et une interview dans les Cast Codeurs de Jérémie Chassaing, qui anime d'ailleurs un atelier cet aprem sur l'Event Sourcing
 
 Du coup, est-ce que vous les questions ?
 TODO: pousser le code sur codeberg
