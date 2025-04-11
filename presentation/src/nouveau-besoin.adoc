@@ -1,12 +1,20 @@
-== Nouveau besoin
+== 🍹🌴💅
 
 [.notes]
 --
 Là on est tranquille à faire notre application en event sourcing et CQRS alors que ça marcherait très bien en
 Create, Read, Update, Delete standard, je veux dire, on avait toutes les cartes en mains dès le départ,
 ça aurait été pénible mais faisable.
+--
 
-Et hop, un Product Manager débarque avec un nouveau besoin.
+[%notitle]
+== Objection
+
+image::objection.png[width=1000px]
+
+[.notes]
+--
+Et là un project manager débarque.
 --
 
 === "Statistiques des dépenses par jour de la semaine"
