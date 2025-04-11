@@ -16,10 +16,16 @@ Du concept au code
 
 [.smaller]
 --
-image::yercin.jpg[height=250px]
-
-Aurélien Mino & Cédric Chateau @ Lyon Craft 2025
+Lyon Craft 2025
 --
+
+[.moresmaller]
+--
+Aurélien Mino +
+Cédric Chateau +
+--
+
+
 
 [.notes]
 --
