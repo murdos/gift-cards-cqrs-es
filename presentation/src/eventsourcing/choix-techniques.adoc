@@ -18,10 +18,10 @@ Pour ce dev là on a plusieurs possibilités, je vais n'en citer que deux heeuu 
 
 [.notes]
 --
-La première possibilité de design c'est le State sourcing ou CRUD (yay un acronyme),
+La première possibilité de design c'est le State sourcing ou CRUD (yay un acronyme, ça veut dire ☝️ Créer, Lire, Mettre à jour, Supprimer),
 c'est la manière de gérer nos agrégats comme on fait d'habitude.
 
-Sans parler d'objets dits "anémiques", on va quand même, pour une requête donnée,
+Sans parler d'objets dits "anémiques" non plus, on va quand même, pour une requête donnée,
 mettre à jour l'état de l'agrégat, soit le muter, soit en faire une copie.
 
 C'est-à-dire qu'après un changement, on se retrouve avec la dernière version dans les mains.
@@ -39,9 +39,10 @@ image::state1.png[]
 [.notes]
 --
 Je vais vous faire le même workflow qu'Aurélien à montré tout à l'heure.
+Comme ça on peut se concentrer que sur les changements.
 
 Quand je déclare ma carte cadeau, j'ai ça en mains,
-il y a un code-barre "1234", une boutique "restaurant", un montant "90 €" et une méthode qui nous dit si oui ou non la carte est vie.
+il y a un code-barre, une boutique, un montant et une méthode qui nous dit si oui ou non la carte est vie.
 
 Si je paye 30 € avec, j'obtiens ça
 --
@@ -132,7 +133,11 @@ Il faut soit le prévoir dès le début, soit s'asseoir sur les données.
 
 --
 
+[.same]
+[transition="fade"]
 === Event sourcing
+
+&nbsp;
 
 [.notes]
 --
@@ -141,15 +146,33 @@ L'autre possibilité de design de l'agrégat, c'est l'event sourcing.
 Là c'est un changement de paradigme.
 
 Plutôt que de stocker l'état de l'agrégat, on va stocker les événements qui ont modifié cet état.
+--
 
+[.same]
+[transition="slide-in,fade-out"]
+=== Event sourcing
+
+Début
+
+[.notes]
+--
 Le premier événement est le début de l'histoire de l'agrégat,
 celui qui pose les bases, comme l'identifiant de l'agrégat.
+--
 
-Et on va stacker dans une liste la suite des autres événements de l'histoire.
+[.same]
+[transition="fade-in,slide-out"]
+=== Event sourcing
 
-J'appelle ça l'histoire, mais vous pouvez trouver d'autres noms comme "stream".
+Début ... événement ... événement
 
-Si je reprends mon exemple de carte cadeau,
+[.notes]
+--
+Et on va stacker derrière la suite des autres événements de l'histoire.
+
+J'appelle ça l'histoire, d'autre l'appellent le "stream d'événements".
+
+Et si je reprends mon exemple de carte cadeau,
 --
 
 
