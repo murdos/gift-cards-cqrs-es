@@ -72,3 +72,16 @@ pre.code-wrapper {
   vertical-align: middle;
   margin-left: 5px;
 }
+
+.event, .speakers {
+  position: absolute;
+  margin-top: 50px;
+}
+
+.event {
+  right: 350px;
+}
+
+.speakers {
+  left: 350px;
+}

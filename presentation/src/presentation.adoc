@@ -10,16 +10,17 @@
 :revealjs_height: 720
 :revealjs_navigationMode: linear
 
+[height=600]
 == CQRS / Event Sourcing
 
 Du concept au code
 
-[.smaller]
+[.smaller.event]
 --
 Lyon Craft 2025
 --
 
-[.moresmaller]
+[.moresmaller.speakers]
 --
 Aurélien Mino +
 Cédric Chateau +
