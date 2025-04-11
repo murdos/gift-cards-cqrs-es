@@ -100,6 +100,8 @@ image::cqrs.png[]
 --
 C'est simplement ça qu'on appelle le Command Query Responsibility Segregation ou CQRS.
 
+*pause*
+
 Bon j'arrête avec la théorie, promis.
 Mais avouez qu'il est beau ce schéma... dites qu'il est beau !
 

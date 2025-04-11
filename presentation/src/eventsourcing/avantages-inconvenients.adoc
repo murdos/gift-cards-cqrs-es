@@ -37,7 +37,7 @@ Il suffit de gérer les projections
 --
 
 [transition="slide-in fade-out"]
-=== Inconvénients
+=== Event sourcing - Inconvénients
 
 [.same]
 [%step]

@@ -1,7 +1,11 @@
 == Code
 🔍
 
-Les événements
+-> Les événements
+
+L'agrégat
+
+L'application service
 [.notes]
 --
 Pour ça, on va se promener dans le code
@@ -80,7 +84,11 @@ Pour finir, le dernier événement est `GifCardExhausted` qui se suffit à lui m
 === Code
 🔍
 
-L'agrégat
+Les événements
+
+-> L'agrégat
+
+L'application service
 
 [.notes]
 --
@@ -92,7 +100,7 @@ Il s'appelle d'ailleurs GiftCard
 
 === `GiftCard.declare()`
 
-[source, java, highlight]
+[source, java, highlight='..|8|9..14']
 ----
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='10..12,19']
     // ...
@@ -103,10 +111,16 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 
 [.notes]
 --
-Tout d'abord, on a la fonction statique `declare` qui va créer notre carte cadeau.
+Tout d'abord, on a la static factory `declare` qui va créer notre carte cadeau.
 
-Elle est statique car vu que GiftCardDeclared est le début de l'histoire,
-on ne peut pas avoir une instance construite avant de décider de commencer l'histoire 🤷
+Elle est statique car on a vu que l'événement GiftCardDeclared était le début de l'histoire.
+Si on n'a pas le début de l'histoire, comment est-ce qu'on aurait une instance de quoi que ce soit ? 🤷
+
+*click*
+
+Elle prend en paramètre un GiftCardDeclaration qui est le command object, c'est le détail de ma commande
+
+*click*
 
 Elle va retourner simplement notre événement GiftCardDeclared.
 --
@@ -142,7 +156,7 @@ on le retourne sous forme de liste.
 
 *click*
 
-et pourquoi une liste me direz-vous ?
+*Aurélien >* Psourquoi une liste ?
 --
 
 [transition="fade-in slide-out"]
@@ -169,7 +183,11 @@ Parce que si la carte est vide, on a dit qu'on retournait aussi l'événement Gi
 === Code
 🔍
 
-L'application service
+Les événements
+
+L'agrégat
+
+-> L'application service
 
 [.notes]
 --
@@ -220,7 +238,7 @@ Côté paiement, c'est tout aussi simple,
 
 *click*
 
-à la différence près qu'on a besoin de fabriquer notre GiftCard depuis son historique.
+à la différence près qu'on va agir sur une instance de GiftCard qu'on fabrique depuis son historique.
 Qu'on récupère directement depuis l'event store.
 
 *click*
@@ -229,13 +247,11 @@ et rebelotte, on demande à l'agrégat de nous fournir des événements pour cet
 
 *click*
 
-Pourquoi les propager me direz-vous ?
+*Aurélien >* Pourquoi les propager ?
 
 Pour répondre à ça, j'ai une question pour vous:
 
 Sachant que jusqu'ici, on a manipulé uniquement des événements,
 
-Comment est-ce qu'on affiche la liste des cartes  cadeaux ?
-
-ce dispatcher va nous y aider mais je laisse à Aurélien le soin de vous expliquer comment.
+Comment est-ce qu'on affiche la liste des cartes *click* cadeaux ?
 --

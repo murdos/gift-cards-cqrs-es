@@ -2,14 +2,14 @@
 
 [.notes]
 --
-Qui dit nouveau projet dit choix d'architecture, et surtout concernant la gestion de l'agrégat.
+En parlant de design d'agrégat, c'est l'heure de faire le choix.
 
 Pour ceux qui savent pas, l'agrégat c'est un peu le coeur de notre métier, si je gère des cartes cadeaux,
 il y a de grandes chances que je me retrouve avec un agrégat "Carte cadeau".
 
 Ça permet de mettre notre métier au même endroit, de prendre la décision d'appliquer tel ou tel changement
 
-là on a plusieurs possibilités, je vais n'en citer que deux heeuu parce que.
+Pour ce dev là on a plusieurs possibilités, je vais n'en citer que deux heeuu parce que.
 
 *click*
 --
@@ -18,7 +18,8 @@ là on a plusieurs possibilités, je vais n'en citer que deux heeuu parce que.
 
 [.notes]
 --
-Le State sourcing, c'est la manière de gérer nos agrégats comme on fait d'habitude.
+La première possibilité de design c'est le State sourcing ou CRUD (yay un acronyme),
+c'est la manière de gérer nos agrégats comme on fait d'habitude.
 
 Sans parler d'objets dits "anémiques", on va quand même, pour une requête donnée,
 mettre à jour l'état de l'agrégat, soit le muter, soit en faire une copie.
@@ -76,6 +77,8 @@ Ce qui veut dire qu'après un changement,
 on a certes des valeurs à jour, mais plus aucune trace de ce qu'elles ont été.
 
 Comme je l'ai dit, ça, c'est le fonctionnement classique de nos app.
+
+Regardons ses avantages.
 --
 
 === State sourcing - Avantages
@@ -87,12 +90,19 @@ Comme je l'ai dit, ça, c'est le fonctionnement classique de nos app.
 
 [.notes]
 --
-Regardons les avantages.
+
+Le premier
 
 *click*
 
 - C'est facile à comprendre, on a un état et on le modifie
+
+*click*
+
 - C'est facile à lire, que ce soit en base ou en debug, on voit l'état au premier coup d'œil
+
+*click*
+
 - On fait tout le temps comme ça, c'est la manière dont on a appris à faire
 --
 
@@ -106,11 +116,15 @@ Regardons les avantages.
 
 [.notes]
 --
-Par contre côté inconvénients, on a en top #1 la perte d'information.
+Par contre côté inconvénients, on a en top #1 *click* la perte d'information.
 
 et les autres qui en découlent, comme par exemple
 
+*click*
+
 pas de traçabilité, on sait où on en est mais on n'a aucune idée de comment on y est arrivé.
+
+*click*
 
 et on est obligé d'anticiper les besoins futurs,
 si demain on veut savoir combien de fois j'ai utilisé ma carte cadeau, c'est mort.
@@ -122,7 +136,7 @@ Il faut soit le prévoir dès le début, soit s'asseoir sur les données.
 
 [.notes]
 --
-L'autre choix de gestion de l'agrégat, c'est l'event sourcing.
+L'autre possibilité de design de l'agrégat, c'est l'event sourcing.
 
 Là c'est un changement de paradigme.
 
@@ -195,7 +209,7 @@ Avançons et payons les 90 - 30 .. 60 € qu'il reste sur la carte
 --
 
 [%notitle.moresmaller.oneline]
-[transition="fade-in slide-out"]
+[transition="fade"]
 === example event sourcing
 
 image::event0.png[]
@@ -218,12 +232,28 @@ voire même juste la date, vu que ça représente la carte vide, elle se retrouv
 
 'fin il n'y a pas de recette miracle, l'essentiel c'est de faire des événements qui nous parlent
 et qui ont un sens métier.
-
-Voilà, vous avez devant vous une histoire qui est racontée par les changements qui ont été appliqués.
-C'est un peu la définition première de l'event sourcing.
 --
 
-=== Partons là dessus
+[.oneline.smaller]
+[transition="fade-in slide-out"]
+=== Event Sourcing
+
+image::event0.png[]
+image::event1.png[]
+image::event2.png[]
+image::event3.png[]
+
+[.notes]
+--
+Voilà, vous avez devant vous une histoire qui est racontée par les changements qui ont été appliqués.
+C'est un peu la définition première de l'event sourcing.
+Et comme son nom l'indique, ça sera la source de nos données, prenez en soin <3
+--
+
+=== C'est parti !
+
+- [.line-through]#State souring#
+- Event sourcing
 
 [.notes]
 --

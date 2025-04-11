@@ -2,7 +2,7 @@
 :customcss: assets/style.css
 :source-highlighter: highlight.js
 :highlightjsdir: assets/highlightjs
-:highlightjs-theme: assets/highlightjs/styles/atom-one-dark.css
+:highlightjs-theme: assets/highlightjs/styles/atom-one-light.css
 :revealjs_slideNumber: c
 :revealjs_theme: moon
 :revealjs_hash: true

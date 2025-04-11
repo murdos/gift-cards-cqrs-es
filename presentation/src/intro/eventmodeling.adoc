@@ -20,7 +20,7 @@ Bref pour moi l'output de l'event storming n'est pas clair pour le métier, c'es
 
 == Event modeling Gift Cards
 
-image::event-modeling.png[height=600]
+image::event-modeling.png[height=650]
 
 [.notes]
 --
@@ -39,4 +39,7 @@ qui va appliquer un changement au système. Qu'on appelle événement (en orange
 
 Ce changement va être lu par une ou plusieurs vues
 depuis lesquelles l'utilisateur va pouvoir interagir avec le système, provoquant d'autres commandes et ainsi de suite.
+
+Je précise que cet exercice est complètement indépendant du design de l'agrégat.
+Comme l'event storming, ça sert à comprendre ce qu'il se passe
 --
