@@ -117,10 +117,9 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 
 [.notes]
 --
-On peut alors se servir de cette projection pour prendre la décision d'appliquer ou non la commande.
+On peut alors se servir de cette projection pour prendre *click* la décision d'appliquer ou non la commande. *click*
 
 *pause*
 
-- Voilà, je pense que nous avons fait le tour des fonctionnalités que nous avons implémenté, et des commandes, prises de décision, génération des évents, calcul d'une projection, et query.
-- Comme je l'évoquais tout à l'heure, un modèle de lecture est réalisé sur mesure par rapport à un besoin. Il serait donc intéressant d'étudier une nouvelle fonctionnalité pour aller plus loin.
+- Voilà, je pense que nous avons fait le tour des fonctionnalités que nous avons implémenté, et que Cédric vous a montré dans son TRES BEAU schéma : les commandes, les prises de décision, la génération des évents, le calcul d'une projection, et les query.
 --

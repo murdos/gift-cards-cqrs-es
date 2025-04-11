@@ -38,8 +38,6 @@ Mais pour la définition de CQRS et Event sourcing, on est là pour en parler
 
 Lead Tech @ image:sully-logo.svg[height=40]
 
-Actuellement sur le projet LinkySup @ Enedis
-
 ❤️ Open-source
 
 [.notes]
