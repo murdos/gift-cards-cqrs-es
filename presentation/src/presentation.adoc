@@ -15,17 +15,20 @@
 
 Du concept au code
 
-[.smaller.event]
+[.moresmaller]
 --
 Lyon Craft 2025
 --
 
-[.moresmaller.speakers]
+[.smaller.speakers]
 --
-Aurélien Mino +
-Cédric Chateau +
+Aurélien Mino
 --
 
+[.smaller.event]
+--
+Cédric Chateau
+--
 
 
 [.notes]

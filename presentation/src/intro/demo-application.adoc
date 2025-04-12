@@ -6,7 +6,7 @@
 
 Montrer l'application (Ctrl + Tab pour switcher entre onglets du browser) :
 
-- Créer une carte cadeau
+- Créer une carte cadeau, avec codebarre = 9898..., boutique = musique,  et montant 99.
 - Faire un premier paiement
 - Faire un second paiement qui épuisera la carte
 --
