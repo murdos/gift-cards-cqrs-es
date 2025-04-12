@@ -108,7 +108,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 
 === Utilisation de la projection de décision
 
-[source, java, highlight='..|5..7|15..17|16']
+[source, java, highlight='..|5..7|15..17|16|..']
 ----
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='10..12']
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[lines='32..35, 37']
@@ -120,7 +120,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 
 [.notes]
 --
-On peut alors se servir de cette projection pour prendre *click* la décision d'appliquer ou non la commande. *click*
+On peut alors se servir de cette projection pour prendre *click* la décision d'appliquer ou non la commande. *click* *click*
 
 *pause*
 

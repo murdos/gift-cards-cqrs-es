@@ -29,8 +29,8 @@ public record GiftCardCurrentState(
     return new GiftCardCurrentState(barcode, remainingAmount, shoppingStore, exhausted);
   }
 
-  private GiftCardCurrentState exhaust() {
-    return new GiftCardCurrentState(barcode, remainingAmount, shoppingStore, true);
+  private GiftCardCurrentState withExhausted(boolean exhausted) {
+    return new GiftCardCurrentState(barcode, remainingAmount, shoppingStore, exhausted);
   }
 
   public GiftCardCurrentState apply(GiftCardEvent giftCardEvent) {
@@ -38,7 +38,7 @@ public record GiftCardCurrentState(
       case PaidAmount paidAmount -> this.withRemainingAmount(
           remainingAmount.subtract(paidAmount.amount())
         );
-      case GiftCardExhausted __ -> this.exhaust();
+      case GiftCardExhausted __ -> this.withExhausted(true);
       case GiftCardDeclared __ -> throw new IllegalStateException(
         "GiftCardDeclared event is not expected as an update event"
       );

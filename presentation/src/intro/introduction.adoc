@@ -51,7 +51,7 @@ Lead Tech @ image:sully-logo.svg[height=40]
 
 [%step]
 - Patterns méconnus / peu utilisés
-- Cédric adore CQRS/ES 😄
+- Cédric adore CQRS / ES 😄
 - Partager à travers un exemple concret
 
 [.notes]

@@ -111,7 +111,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 
 [.notes]
 --
-Tout d'abord, on a la static factory `declare` qui va créer notre carte cadeau.
+Tout d'abord, on a la fonction `declare` qui va créer notre premier évènement.
 
 Elle est statique car on a vu que l'événement GiftCardDeclared était le début de l'histoire.
 Si on n'a pas le début de l'histoire, comment est-ce qu'on aurait une instance de quoi que ce soit ? 🤷

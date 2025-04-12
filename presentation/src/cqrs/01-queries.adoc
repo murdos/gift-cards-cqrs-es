@@ -114,14 +114,14 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/cu
 
 === Event publisher
 
-[source, java, highlight="..|10..11"]
+[source, java, highlight="..|9..10"]
 ----
 include::../../../src/main/java/io/craft/giftcard/giftcard/application/GiftCardApplicationService.java[lines='24..26,32..34,36..37,42..44,46']
 ----
 
 [.notes]
 --
-- Et bien au niveau de l'EventPublisher, *click* des events handlers vont venir s'abonner aux évènements.
+- Et bien au niveau de l'EventPublisher, *click* des events handlers vont venir s'enregistrer pour être abonnés aux évènements.
 --
 
 [transition="slide-in zoom-out"]
@@ -146,7 +146,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/cu
 [transition="zoom-in slide-out", transition-speed="slow"]
 === `GiftCardCurrentState.from()`
 
-[source, java, highlight="4..|5,10|6..9"]
+[source, java, highlight="4..|5..10"]
 ----
 @QueryModel
 public record GiftCardCurrentState(...) {
@@ -158,7 +158,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/cu
 --
 - C'est à partir du 1er évènement de l'histoire, `GiftCardDeclared`, qu'on initialise la projection
 - *click*
-- En créant une nouvelle instance de `GiftCardCurrentState` à partir des données de l'évènement
+- En utilisant une static factory
 - *click* *click* *click*
 --
 
@@ -176,11 +176,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/cu
 - *click*
 - Pour cela on charge l'état courant du modèle,
 - *click*
-- on fait du pattern matching pour traiter de manière exhaustive tous les types d'événements
-- *click*
-- paiement
-- *click*
-- ou carte épuisée
+- Et on lui applique chaque event
 --
 
 [transition="zoom-in slide-out", transition-speed="slow"]
@@ -193,11 +189,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/cu
 
 [.notes]
 --
-- Et pour chacun des évènements suivants, on va mettre à jour le modèle de lecture.
-- *click*
-- Pour cela on charge l'état courant du modèle,
-- *click*
-- on fait du pattern matching pour traiter de manière exhaustive tous les types d'événements
+- on va faire du pattern matching pour traiter de manière exhaustive tous les types d'événements
 - *click*
 - paiement
 - *click*
