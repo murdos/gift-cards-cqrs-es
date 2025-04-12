@@ -75,7 +75,7 @@ class GiftCardTest {
 
     assertThat(events)
       .extracting(GiftCardEvent::getClass)
-      .containsExactly(PaidAmount.class, GifCardExhausted.class);
+      .containsExactly(PaidAmount.class, GiftCardExhausted.class);
     var setOfSequenceIds = events
       .stream()
       .map(GiftCardEvent::sequenceId)

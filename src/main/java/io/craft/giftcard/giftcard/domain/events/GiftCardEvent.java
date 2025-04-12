@@ -7,7 +7,7 @@ import org.jmolecules.event.annotation.DomainEvent;
 // @formatter:off
 @DomainEvent
 public sealed interface GiftCardEvent
-  permits GiftCardDeclared, PaidAmount, GifCardExhausted {
+  permits GiftCardDeclared, PaidAmount, GiftCardExhausted {
 
   SequenceId sequenceId();
 

@@ -45,7 +45,7 @@ public class GiftCard {
     if (this.hasExactBalance(payment.amount())) {
       return List.of(
         paidAmount,
-        new GifCardExhausted(this.barcode(), paidAmount.sequenceId().next())
+        new GiftCardExhausted(this.barcode(), paidAmount.sequenceId().next())
       );
     }
 
@@ -109,8 +109,8 @@ public class GiftCard {
             currentProjection.remainingAmount().subtract(paidAmount.amount())
           )
           .withSequenceId(paidAmount.sequenceId());
-        case GifCardExhausted gifCardExhausted -> currentProjection.withSequenceId(
-          gifCardExhausted.sequenceId()
+        case GiftCardExhausted giftCardExhausted -> currentProjection.withSequenceId(
+          giftCardExhausted.sequenceId()
         );
       };
     }

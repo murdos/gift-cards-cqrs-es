@@ -1,9 +1,9 @@
 package io.craft.giftcard.giftcard.domain.projections.details;
 
 import io.craft.giftcard.giftcard.domain.Barcode;
-import io.craft.giftcard.giftcard.domain.events.GifCardExhausted;
 import io.craft.giftcard.giftcard.domain.events.GiftCardDeclared;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
+import io.craft.giftcard.giftcard.domain.events.GiftCardExhausted;
 import io.craft.giftcard.giftcard.domain.events.GiftCardHistory;
 import io.craft.giftcard.giftcard.domain.events.PaidAmount;
 import io.craft.giftcard.shared.collection.domain.SequentialCombiner;
@@ -50,7 +50,7 @@ public record GiftCardDetails(Barcode barcode, List<String> details) {
         "Montant payé : " + paidAmount.amount().value() + " €, le " + paidAmount.on()
       );
       case GiftCardDeclared __ -> giftCardDetails;
-      case GifCardExhausted __ -> giftCardDetails.withDetail("Carte cadeau épuisée");
+      case GiftCardExhausted __ -> giftCardDetails.withDetail("Carte cadeau épuisée");
     };
   }
 }

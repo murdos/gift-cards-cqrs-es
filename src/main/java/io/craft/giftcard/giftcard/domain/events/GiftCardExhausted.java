@@ -5,4 +5,4 @@ import io.craft.giftcard.giftcard.domain.SequenceId;
 import org.jmolecules.event.annotation.DomainEvent;
 
 @DomainEvent
-public record GifCardExhausted(Barcode barcode, SequenceId sequenceId) implements GiftCardEvent {}
+public record GiftCardExhausted(Barcode barcode, SequenceId sequenceId) implements GiftCardEvent {}

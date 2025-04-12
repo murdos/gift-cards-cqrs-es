@@ -3,9 +3,9 @@ package io.craft.giftcard.giftcard.infrastructure.secondary;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.craft.giftcard.giftcard.domain.events.GifCardExhausted;
 import io.craft.giftcard.giftcard.domain.events.GiftCardDeclared;
 import io.craft.giftcard.giftcard.domain.events.GiftCardEvent;
+import io.craft.giftcard.giftcard.domain.events.GiftCardExhausted;
 import io.craft.giftcard.giftcard.domain.events.PaidAmount;
 import io.craft.giftcard.giftcard.domain.projections.GiftCardMessageSender;
 import java.io.UncheckedIOException;
@@ -35,7 +35,7 @@ public class KafkaGiftCardMessageSender implements GiftCardMessageSender {
     JSonGiftCardEvent jsonEvent =
       switch (event) {
         case GiftCardDeclared GiftCardDeclared -> JSonGiftCardDeclared.from(GiftCardDeclared);
-        case GifCardExhausted gifCardExhausted -> JSonGifCardExhausted.from(gifCardExhausted);
+        case GiftCardExhausted gifCardExhausted -> JSonGifCardExhausted.from(gifCardExhausted);
         case PaidAmount paidAmount -> JSonPaidAmount.from(paidAmount);
       };
 
@@ -71,8 +71,8 @@ public class KafkaGiftCardMessageSender implements GiftCardMessageSender {
   }
 
   record JSonGifCardExhausted(String barcode) implements JSonGiftCardEvent {
-    public static JSonGiftCardEvent from(GifCardExhausted gifCardExhausted) {
-      return new JSonGifCardExhausted(gifCardExhausted.barcode().value());
+    public static JSonGiftCardEvent from(GiftCardExhausted giftCardExhausted) {
+      return new JSonGifCardExhausted(giftCardExhausted.barcode().value());
     }
   }
 }

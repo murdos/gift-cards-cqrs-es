@@ -78,7 +78,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/events/GifCard
 
 [.notes]
 --
-Pour finir, le dernier événement est `GifCardExhausted` qui se suffit à lui même.
+Pour finir, le dernier événement est `GiftCardExhausted` qui se suffit à lui même.
 --
 
 === Code
