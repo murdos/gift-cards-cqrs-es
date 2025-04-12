@@ -73,15 +73,15 @@ pre.code-wrapper {
   margin-left: 5px;
 }
 
-.event, .speakers {
+.speaker2, .speaker1 {
   position: absolute;
   margin-top: 50px;
 }
 
-.event {
+.speaker2 {
   right: 350px;
 }
 
-.speakers {
+.speaker1 {
   left: 350px;
 }
