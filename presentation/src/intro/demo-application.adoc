@@ -6,7 +6,7 @@
 
 Montrer l'application (Ctrl + Tab pour switcher entre onglets du browser) :
 
-- Créer une carte cadeau, avec codebarre = 9898..., boutique = musique,  et montant 99.
-- Faire un premier paiement
-- Faire un second paiement qui épuisera la carte
+- Créer une carte cadeau, avec codebarre = 08.36.65.65.65, boutique = livreur,  et montant 90.
+- Faire un premier paiement de 30€
+- Faire un second paiement (60€) qui épuisera la carte
 --
