@@ -68,12 +68,12 @@ On a 3 événements, on va tous les faire ça va être rapide, voici le `PaidAmo
 Vous vous en souvenez, il porte le montant payé et la date de paiement
 --
 
-=== `GifCardExhausted`
+=== `GiftCardExhausted`
 
 [.smaller]
 [source, java, highlight='..']
 ----
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/events/GifCardExhausted.java[lines='7,8']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/events/GiftCardExhausted.java[lines='7,8']
 ----
 
 [.notes]
@@ -176,7 +176,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 
 [.notes]
 --
-Parce que si la carte est vide, on a dit qu'on retournait aussi l'événement GifCardExhausted.
+Parce que si la carte est vide, on a dit qu'on retournait aussi l'événement GiftCardExhausted.
 --
 
 

@@ -20,12 +20,12 @@ Du concept au code
 Lyon Craft 2025
 --
 
-[.smaller.speakers]
+[.smaller.speaker1]
 --
 Aurélien Mino
 --
 
-[.smaller.event]
+[.smaller.speaker2]
 --
 Cédric Chateau
 --

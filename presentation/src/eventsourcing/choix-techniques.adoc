@@ -275,7 +275,7 @@ Et comme son nom l'indique, ça sera la source de nos données, prenez en soin <
 
 === C'est parti !
 
-- [.line-through]#State souring#
+- [.line-through]#State sourcing#
 - Event sourcing
 
 [.notes]

@@ -3,7 +3,7 @@
 [%step]
 - Pas de perte d'information
 - Support super simple
-- Resilient aux nouvelles fonctionnalités
+- Résilient aux nouvelles fonctionnalités
 
 [.notes]
 --

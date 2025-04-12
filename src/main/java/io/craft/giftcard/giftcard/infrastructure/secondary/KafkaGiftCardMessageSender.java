@@ -35,7 +35,7 @@ public class KafkaGiftCardMessageSender implements GiftCardMessageSender {
     JSonGiftCardEvent jsonEvent =
       switch (event) {
         case GiftCardDeclared GiftCardDeclared -> JSonGiftCardDeclared.from(GiftCardDeclared);
-        case GiftCardExhausted gifCardExhausted -> JSonGifCardExhausted.from(gifCardExhausted);
+        case GiftCardExhausted giftCardExhausted -> JSonGiftCardExhausted.from(giftCardExhausted);
         case PaidAmount paidAmount -> JSonPaidAmount.from(paidAmount);
       };
 
@@ -50,7 +50,7 @@ public class KafkaGiftCardMessageSender implements GiftCardMessageSender {
 
   @JsonTypeInfo(use = JsonTypeInfo.Id.SIMPLE_NAME, include = JsonTypeInfo.As.WRAPPER_OBJECT)
   sealed interface JSonGiftCardEvent
-    permits JSonGiftCardDeclared, JSonPaidAmount, JSonGifCardExhausted {}
+    permits JSonGiftCardDeclared, JSonPaidAmount, JSonGiftCardExhausted {}
 
   record JSonGiftCardDeclared(String barcode, double amount) implements JSonGiftCardEvent {
     public static JSonGiftCardEvent from(GiftCardDeclared giftCardDeclared) {
@@ -70,9 +70,9 @@ public class KafkaGiftCardMessageSender implements GiftCardMessageSender {
     }
   }
 
-  record JSonGifCardExhausted(String barcode) implements JSonGiftCardEvent {
+  record JSonGiftCardExhausted(String barcode) implements JSonGiftCardEvent {
     public static JSonGiftCardEvent from(GiftCardExhausted giftCardExhausted) {
-      return new JSonGifCardExhausted(giftCardExhausted.barcode().value());
+      return new JSonGiftCardExhausted(giftCardExhausted.barcode().value());
     }
   }
 }
