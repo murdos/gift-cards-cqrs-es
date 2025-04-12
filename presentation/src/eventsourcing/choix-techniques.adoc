@@ -32,6 +32,7 @@ Imaginons vous avez...au hasard... des cartes cadeaux à gérer
 --
 
 [%notitle]
+[transition="slide-in,fade-out"]
 === example statefull
 
 image::state1.png[]
@@ -48,6 +49,7 @@ Si je paye 30 € avec, j'obtiens ça
 --
 
 [%notitle]
+[transition="fade"]
 === example statefull
 
 image::state2.png[]
@@ -62,6 +64,7 @@ Et si je dépense les 60 € restants
 --
 
 [%notitle]
+[transition="fade-in,slide-out"]
 === example statefull
 
 image::state3.png[]
