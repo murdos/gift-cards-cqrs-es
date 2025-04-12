@@ -18,15 +18,11 @@ public class GiftCardCurrentStateUpdater implements EventHandler<GiftCardEvent> 
   public void handle(GiftCardEvent event) {
     GiftCardCurrentState newState =
       switch (event) {
-        case GiftCardDeclared firstEvent -> initializeState(firstEvent);
+        case GiftCardDeclared firstEvent -> GiftCardCurrentState.from(firstEvent);
         case GiftCardEvent followingEvent -> updateState(followingEvent);
       };
 
     currentStateRepository.save(newState);
-  }
-
-  private GiftCardCurrentState initializeState(GiftCardDeclared giftCardDeclared) {
-    return GiftCardCurrentState.from(giftCardDeclared);
   }
 
   private GiftCardCurrentState updateState(GiftCardEvent giftCardEvent) {

@@ -46,6 +46,7 @@ Pré-requis :
 - Onglets IntelliJ fermés
 - IntelliJ : Fenêtres du bas fermées
 - Screens : mode étendu
+- Désactiver le plugin IntelliJ Key Promoters
 --
 
 include::intro/introduction.adoc[]

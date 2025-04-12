@@ -127,7 +127,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/application/GiftCardA
 [transition="slide-in zoom-out"]
 === Event handler
 
-[source, java, highlight='..|5..9|11|7..8']
+[source, java, highlight='..|5..9|11|7..8|7']
 ----
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/currentstate/GiftCardCurrentStateUpdater.java[lines='8..9,17..26']
 ----
@@ -143,20 +143,6 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/cu
 - Pour déterminer la nouvelle projection, on va distinguer deux types d'events : le premier, et les suivants
 --
 
-[transition="zoom", transition-speed="slow"]
-=== `GiftCardCurrentStateUpdater.initializeState()`
-
-[source, java, highlight="3|4"]
-----
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/currentstate/GiftCardCurrentStateUpdater.java[lines='8..9,28..30']
-----
-
-[.notes]
---
-- C'est à partir du 1er évènement de l'histoire, `GiftCardDeclared`, qu'on initialise la projection
-- *click*
---
-
 [transition="zoom-in slide-out", transition-speed="slow"]
 === `GiftCardCurrentState.from()`
 
@@ -170,6 +156,8 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/cu
 
 [.notes]
 --
+- C'est à partir du 1er évènement de l'histoire, `GiftCardDeclared`, qu'on initialise la projection
+- *click*
 - En créant une nouvelle instance de `GiftCardCurrentState` à partir des données de l'évènement
 - *click* *click* *click*
 --
@@ -179,7 +167,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/cu
 
 [source, java, highlight="3..|4..6|7"]
 ----
-include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/currentstate/GiftCardCurrentStateUpdater.java[lines='8..9,32..37']
+include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/currentstate/GiftCardCurrentStateUpdater.java[lines='8..9,28..33']
 ----
 
 [.notes]
