@@ -20,6 +20,8 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 [.notes]
 --
 Si on reprend la commande de paiement, il faudrait, avant d'accepter la paiement, vérifier si le solde de la carte est suffisant.
+
+*pause*
 --
 
 === `new GiftCard()`
@@ -33,9 +35,9 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 
 [.notes]
 --
-- Regardons à nouveau comme notre agrégat est construit : uniquement avec l'historique des évènements passés.
+- Regardons à nouveau comme notre agrégat est construit : il est instancié uniquement avec l'historique des évènements passés.
 - C'est ce qu'on appelle *la réhydratation de l'agrégat*.
-- Comment peut-on prendre une décision à partir des évènements ? En les parcourant un à un à chaque fois ?
+- Comment peut-on prendre une décision à partir des évènements ? En les parcourant un à un à chaque fois à chaque prise de décision ?
 --
 
 === Encore une projection
@@ -48,7 +50,8 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 [.notes]
 --
 - On va plutôt à nouveau utiliser une projection.
-- Mais une projection particulière, dynamique, et en mémoire uniquement, appelée "projection de décision".
+- Mais une projection particulière : la "projection de décision".
+- Ce n'est pas une projection qui est persistée dans une base de données : elle est juste construite à la volée lors de chaque instanciation d'un agrégat.
 --
 
 === `DecisionProjection`
@@ -60,7 +63,7 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/GiftCard.java[
 
 [.notes]
 --
-- Cette projection est interne à l'agrégat, et non visible depuis l'extérieur. C'est un détail d'implémentation.
+- Cette projection est interne à l'agrégat, et non visible de l'extérieur.
 - *click*
 - Elle ne contient strictement que les données nécessaires à la prise de décision,
 - *click*

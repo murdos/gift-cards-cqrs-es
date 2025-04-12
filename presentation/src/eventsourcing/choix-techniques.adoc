@@ -170,7 +170,7 @@ Début ... événement ... événement
 --
 Et on va stacker derrière la suite des autres événements de l'histoire.
 
-J'appelle ça l'histoire, d'autre l'appellent le "stream d'événements".
+*Aurélien >* Cédric appelle ça l'histoire, vous trouverez aussi souvent le terme "Stream" dans la littérature.
 
 Et si je reprends mon exemple de carte cadeau,
 --

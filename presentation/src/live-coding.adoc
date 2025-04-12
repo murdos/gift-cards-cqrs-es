@@ -5,4 +5,5 @@
 [.notes]
 --
 - Live coding du nouveau besoin
+- *Passer en mode screen mirroring*
 --

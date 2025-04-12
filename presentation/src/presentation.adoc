@@ -35,14 +35,14 @@ Hello !
 Pré-requis :
 
 - Appli démarrée (front + back) + appli ouverte dans un onglet
+- Navigateur ouvert en plein écran (F11) avec uniquement 2 onglets
+- Zoom confortable sur la vue présentateur, en mode TALL
 - Code clean pour live coding
 - Zoom IntelliJ(125%)
 - Copilot : completions désactivées
 - Onglets IntelliJ fermés
 - IntelliJ : Fenêtres du bas fermées
-- IntelliJ : Thème blanc
-
-- Inlay Hints : désactiver l'auteur du code
+- Screens : mode étendu
 --
 
 include::intro/introduction.adoc[]

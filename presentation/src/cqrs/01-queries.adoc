@@ -7,14 +7,13 @@
 
 [.notes]
 --
-- Effectivement comment on fait pour afficher une liste des cartes cadeaux avec quelques attributs, comme la boutique, et des infos dérivées comme le solde ?
-- Alors que ce qu'on a stocké ce sont des évènements, dont les informations clés sont dans un payload.
+- Effectivement comment on fait pour afficher la liste avec quelques infos comme la boutique, le solde, ... ?
+- Alors que ce qu'on a stocké ce sont des évènements, dont on a vu que les informations utiles sont dans un payload.
 - Relire tous les évènements pour reconstituer toutes les cartes cadeaux à chaque fois paraît compliqué...
-- Et si en plus la liste doit être paginée pour n'afficher que 10 cartes cadeaux à la fois
- *click*
-- ou triée, par exemple par le solde de la carte
-*click*
-- ou encore filtrée, par exemple sur la boutique...
+- *click* Et si en plus la liste doit être paginée pour n'afficher que 10 cartes cadeaux à la fois
+- *click* ou triée, par exemple par le solde de la carte
+- *click* ou encore filtrée par boutique...
+- On pourrait se dire que c'est impossible, et que l'Event Sourcing n'est finalement pas tant que ça une Silver Bullet. Et bien c'est là que CQRS va nous être très utile.
 --
 
 === Une projection !
@@ -23,11 +22,11 @@ image::projection.png[]
 
 [.notes]
 --
-- Pour résoudre ce problème, on va utiliser une projection, également appelée "query model", ou "read model" ou "modèle de lecture". Par la suite, il est fort probable que j'utilise indifféremment ces termes.
-- Ce modèle va être fabriqué sur mesure par rapport à notre besoin d'affichage, à partir des évènements métier.
-- Dans ce cas précis, ce modèle va être très similaire au modèle qu'on aurait eu en state-sourcing.
-- Mais la grosse différence, c'est que c'est une information dérivée, qui peut être amendée et recalculée en fonction de l'évolution des besoins.
-- D'ailleurs dans notre application, les projections sont persistées avec des repositories in memory et recalculées à chaque redémarrage de l'application. C'est très pratique en début de projet, cela offre une grande souplesse.
+- En effet, pour résoudre ce problème, on va utiliser une projection, également appelée "query model", "read model" ou "modèle de lecture". Par la suite, il est fort probable que j'utilise indifféremment ces termes.
+- Cette projection va être fabriquée sur mesure par rapport à notre besoin d'affichage, à partir des évènements métier.
+- Alors, dans ce cas précis, ce modèle va être très similaire au modèle qu'on aurait eu en state-sourcing, et c'est normal car on a finalement le même besoin d'affichage.
+- Mais la grosse différence, c'est que la projection n'est qu'une information dérivée, qui peut être recalculée à tout moment à partir de nos évènements. Et qui évoluera et sera recalculée lorsqu'on voudra afficher plus d'informations.
+- D'ailleurs dans notre application, les projections ne sont pas persistées dans une base de données : elles sont juste en mémoire, et recalculées à chaque redémarrage de l'application. C'est très pratique en début de projet, cela offre une grande souplesse.
 --
 
 [%notitle]
@@ -122,9 +121,10 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/application/GiftCardA
 
 [.notes]
 --
-- Et bien au niveau de l'EventPublisher, des events handlers vont venir s'abonner aux évènements.
+- Et bien au niveau de l'EventPublisher, *click* des events handlers vont venir s'abonner aux évènements.
 --
 
+[transition="slide-in zoom-out"]
 === Event handler
 
 [source, java, highlight='..|5..9|11|7..8']
@@ -134,24 +134,33 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/cu
 
 [.notes]
 --
-- L'event handler associé à notre projection va être appelé à chaque fois qu'un événement est émis,
+- L'event handler va être appelé à chaque fois qu'un événement est émis,
 - *click*
-- et va pouvoir alors déterminer la projection mise à jour
+- et va pouvoir alors recalculer la projection
 - *click*
-- et la sauvegarder.
+- puis la sauvegarder.
 - *click*
 - Pour déterminer la nouvelle projection, on va distinguer deux types d'events : le premier, et les suivants
 --
 
-[%notitle]
-=== Event handler: init
+[transition="zoom", transition-speed="slow"]
+=== `GiftCardCurrentStateUpdater.initializeState()`
 
-[source, java, highlight="3|4|2"]
+[source, java, highlight="3|4"]
 ----
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/currentstate/GiftCardCurrentStateUpdater.java[lines='8..9,28..30']
 ----
 
-[source, java, highlight="3|4.."]
+[.notes]
+--
+- C'est à partir du 1er évènement de l'histoire, `GiftCardDeclared`, qu'on initialise la projection
+- *click*
+--
+
+[transition="zoom-in slide-out", transition-speed="slow"]
+=== `GiftCardCurrentState.from()`
+
+[source, java, highlight="4..|5,10|6..9"]
 ----
 @QueryModel
 public record GiftCardCurrentState(...) {
@@ -161,20 +170,35 @@ include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/cu
 
 [.notes]
 --
-- C'est à partir du 1er évènement de l'histoire, `GiftCardDeclared`, qu'on initialise la projection
-- *click*
 - En créant une nouvelle instance de `GiftCardCurrentState` à partir des données de l'évènement
+- *click* *click* *click*
 --
 
-[%notitle]
-=== Event handler: update
+[transition="slide-in zoom-out", transition-speed="slow"]
+=== `GiftCardCurrentStateUpdater.updateState()`
 
-[source, java, highlight="3..|4..6|7|2"]
+[source, java, highlight="3..|4..6|7"]
 ----
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/currentstate/GiftCardCurrentStateUpdater.java[lines='8..9,32..37']
 ----
 
-[source, java, highlight="3|5,13|6..8|9"]
+[.notes]
+--
+- Et pour chacun des évènements suivants, on va mettre à jour le modèle de lecture.
+- *click*
+- Pour cela on charge l'état courant du modèle,
+- *click*
+- on fait du pattern matching pour traiter de manière exhaustive tous les types d'événements
+- *click*
+- paiement
+- *click*
+- ou carte épuisée
+--
+
+[transition="zoom-in slide-out", transition-speed="slow"]
+=== `GiftCardCurrentState.apply()`
+
+[source, java, highlight="4..|5,13|6..8|9"]
 ----
 include::../../../src/main/java/io/craft/giftcard/giftcard/domain/projections/currentstate/GiftCardCurrentState.java[lines='12..13,35..47']
 ----

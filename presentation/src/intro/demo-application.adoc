@@ -2,6 +2,8 @@
 
 [.notes]
 --
+*Mais commençons par vous montrer ce qu'elle fait.*
+
 Montrer l'application (Ctrl + Tab pour switcher entre onglets du browser) :
 
 - Créer une carte cadeau

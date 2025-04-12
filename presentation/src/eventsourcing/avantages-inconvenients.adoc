@@ -8,6 +8,8 @@
 [.notes]
 --
 
+- *Sortir du mode screen mirroring*
+
 Maintenant qu'on a vu comment ça marchait, juste avant de vous laisser partir,
 on va faire la liste des avantages et des inconvénients, comme pour le State sourcing.
 
