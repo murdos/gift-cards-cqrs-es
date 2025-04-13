@@ -47,20 +47,43 @@ Lead Tech @ image:sully-logo.svg[height=40]
 - Et sinon, sur mon temps libre, il m'arrive de contribuer et/ou maintenir quelques projets open-source 😅
 --
 
+[transition="fade-out slide-in"]
 === Pourquoi ce sujet ?
 
+[.same]
 [%step]
+- Patterns méconnus / peu utilisés
+
+[.notes]
+--
+Pourquoi est-ce qu'on voulait vous parler ce sujet ?
+
+- En premier lieu, car ces 2 patterns nous semblent pas assez connus et pratiqués, alors qu'ils sont très intéressants. Nous avons eu la chance d'avoir été initiés il y a une dizaine d'années, par Florent, Clément et Emilien, lors de meetups des Crafter lyonnais.
+--
+
+[transition="fade"]
+=== Pourquoi ce sujet ?
+
+[.same]
+- Patterns méconnus / peu utilisés
+- Cédric adore CQRS / ES 😄
+
+[.notes]
+--
+- Bon la raison principale, il faut l'avouer, c'est que Cédric adore CQRS/ES. Il vous l'a dit ? Il a eu l'occasion de suivre une formation sur le sujet il y a plusieurs années, et aussi de le mettre en place sur une application chez Malt. Depuis on pourrait dire qu'il est tombé dans le chaudron, c'est déjà son 3ème talk sur le sujet, et chaque nouvelle équipe qu'il l'accueille sait qu'il va proposer d'en faire.
+- Moi j'ai pas mal étudié le sujet il y a 1 an et demi pour le mettre en oeuvre sur mon projet. Cela ne s'est finalement pas fait, car mon équipe, qui était déjà en plein changement de culture craft, ne se sentait pas encore prête à le faire.
+--
+
+[transition="fade-in slide-out"]
+=== Pourquoi ce sujet ?
+
+[.same]
 - Patterns méconnus / peu utilisés
 - Cédric adore CQRS / ES 😄
 - Partager à travers un exemple concret
 
 [.notes]
 --
-Pourquoi est-ce qu'on voulait vous parler ce sujet ?
-
-- *click* En premier lieu, car ces 2 patterns nous semblent très intéressants, mais pas assez connus et pratiqués. Nous avons eu la chance d'avoir été initiés il y a une dizaine d'années, par Florent, Clément et Emilien, lors de meetups des Crafter lyonnais.
-- *click* Bon la raison principale, il faut l'avouer, c'est que Cédric adore CQRS/ES. Il vous l'a dit ? Il a eu l'occasion de suivre une formation sur le sujet il y a plusieurs années, et aussi de le mettre en place sur une application chez Malt. Depuis on pourrait dire qu'il est tombé dans le chaudron, c'est déjà son 3ème talk sur le sujet, et chaque nouvelle équipe qu'il l'accueille sait qu'il va proposer d'en faire.
-- Moi j'ai pas mal étudié le sujet il y a 1 an et demi pour le mettre en oeuvre sur mon projet. Cela ne s'est finalement pas fait, car mon équipe, qui était déjà en plein changement de culture craft, ne se sentait pas encore prête à le faire.
-- *click* Et donc l'idée aujourd'hui c'est de partager, sans prétention, ce que nous avons appris, et vous donner envie de creuser le sujet.
+- Et donc l'idée aujourd'hui c'est de partager, sans prétention, ce que nous avons appris, et vous donner envie de creuser le sujet.
 - Pour cela nous avons réalisé en JAVA une petite application dont le but est de gérer des cartes cadeaux. Et nous allons la décortiquer ensemble.
 --
