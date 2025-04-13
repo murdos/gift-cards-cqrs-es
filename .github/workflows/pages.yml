@@ -32,7 +32,7 @@ jobs:
         run: |
           pnpm install
           pnpm build
-          mvn presentation.html index.html
+          mv presentation.html index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
