@@ -10,6 +10,7 @@
   "dependencies": {
     "@asciidoctor/core": "3.0.4",
     "@asciidoctor/reveal.js": "5.2.0",
+    "reveal.js": "5.2.1",
     "asciidoctor": "3.0.4"
   },
   "devDependencies": {

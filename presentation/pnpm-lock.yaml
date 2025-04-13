@@ -17,6 +17,9 @@ importers:
       asciidoctor:
         specifier: 3.0.4
         version: 3.0.4(chokidar@3.6.0)
+      reveal.js:
+        specifier: 5.2.1
+        version: 5.2.1
     devDependencies:
       browser-sync:
         specifier: 3.0.3
@@ -675,6 +678,10 @@ packages:
   reveal.js@4.5.0:
     resolution: {integrity: sha512-Lx1hUWhJR7Y7ScQNyGt7TFzxeviDAswK2B0cn9RwbPZogTMRgS8+FTr+/12KNHOegjvWKH0H0EGwBARNDPTgWQ==}
     engines: {node: '>=10.0.0'}
+
+  reveal.js@5.2.1:
+    resolution: {integrity: sha512-r7//6mIM5p34hFiDMvYfXgyjXqGRta+/psd9YtytsgRlrpRzFv4RbH76TXd2qD+7ZPZEbpBDhdRhJaFgfQ7zNQ==}
+    engines: {node: '>=18.0.0'}
 
   rx@4.1.0:
     resolution: {integrity: sha512-CiaiuN6gapkdl+cZUr67W6I8jquN4lkak3vtIsIWCl4XIPP8ffsoyN6/+PuGXnQy8Cu8W2y9Xxh31Rq4M6wUug==}
@@ -1565,6 +1572,8 @@ snapshots:
       - supports-color
 
   reveal.js@4.5.0: {}
+
+  reveal.js@5.2.1: {}
 
   rx@4.1.0: {}
 
