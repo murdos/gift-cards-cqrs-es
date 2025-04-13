@@ -1,46 +1,23 @@
-# JHipster Sample Application
+# A sample application written using CQRS and Event Sourcing patterns
 
-## Prerequisites
+This application is for demonstration purpose, and is aimed to show how CQRS and Event Sourcing can be implemented.
 
-### Java
+It has been written for the talk [CQRS/ES : Du concept au code](https://lyon-craft.fr/sessions/cqrs-es-du-concept-au-code.html).
 
-You need to have Java 21:
+## Application
 
-- [JDK 21](https://openjdk.java.net/projects/jdk/21/)
+The business of the application is to managed gift cards.
+It's written using Java 21, SpringBoot and build as a hexagonal architecture.
 
-### Node.js and NPM
+## Slides of the talk
 
-Before you can build this project, you must install and configure the following dependencies on your machine:
+Slides are in the `presentation` directory.
+You can build them by running the following command:
 
-[Node.js](https://nodejs.org/): We use Node to run a development web server and build the project.
-Depending on your system, you can install Node either from source or as a pre-packaged bundle.
-
-After installing Node, you should be able to run the following command to install development tools.
-You will only need to run this command when dependencies change in [package.json](package.json).
-
-```
-npm install
+```bash
+pnpm run build
 ```
 
-## Local environment
+## References cited at the end of the talk
 
-- [Local server](http://localhost:8080)
-- [Local API doc](http://localhost:8080/swagger-ui.html)
-
-<!-- jhipster-needle-localEnvironment -->
-
-## Start up
-
-<!-- jhipster-needle-startupCommand -->
-
-## Documentation
-
-- [Package types](documentation/package-types.md)
-- [Assertions](documentation/assertions.md)
-- [Logs Spy](documentation/logs-spy.md)
-- [CORS configuration](documentation/cors-configuration.md)
-- [Cucumber](documentation/cucumber.md)
-- [Hexagonal architecture](documentation/hexagonal-architecture.md)
-- [Vue](documentation/vue.md)
-
-<!-- jhipster-needle-documentation -->
+[References](presentation/src/references.adoc)

@@ -1,0 +1,26 @@
+=== Références
+[.moresmaller]
+--
+* CQRS
+** https://github.com/keyvanakbary/cqrs-documents[CQRS Documents by Greg Young]
+** https://www.youtube.com/watch?v=JHGkaShoyNs[Greg Young - CQRS and Event Sourcing - Code on the Beach 2014]
+
+* Event Sourcing
+** https://www.youtube.com/watch?v=gG6DGmYKk4I[How to model event-sourced systems efficiently - Oskar Dudycz - DDD Europe 2022]
+** https://lescastcodeurs.com/2014/03/22/lcc-98-interview-sur-cqrs-et-event-sourcing-avec-jeremie-chassaing/[Les Cast Codeurs Podcast 98 : Interview sur CQRS et Event Sourcing avec Jérémie Chassaing]
+
+* Event Modeling : https://eventmodeling.org/
+
+* Le code complet de notre appli : https://github.com/murdos/gift-cards-cqrs-es
+--
+
+[.notes]
+--
+Voici quelques références.
+- un document et une conférence de Greg Young, qui est le créateur de CQRS/ES
+- ...
+- Et une interview dans les Cast Codeurs de Jérémie Chassaing, qui anime d'ailleurs un atelier cet aprem sur l'Event Sourcing
+
+Du coup, est-ce que vous les questions ?
+TODO: pousser le code sur codeberg
+--
