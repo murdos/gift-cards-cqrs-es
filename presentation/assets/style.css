@@ -85,3 +85,10 @@ pre.code-wrapper {
 .speaker1 {
   left: 350px;
 }
+
+.repo-link {
+  position: absolute;
+  top: 0;
+  height: 70%;
+  right: 0;
+}
