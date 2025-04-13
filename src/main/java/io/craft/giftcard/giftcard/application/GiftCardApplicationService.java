@@ -60,7 +60,7 @@ public class GiftCardApplicationService {
 
   @Transactional
   public void pay(Barcode barcode, Payment payment) {
-    GiftCard giftCard = eventStore.findByBarcode(barcode);
+    GiftCard giftCard = new GiftCard(eventStore.getHistory(barcode));
     var events = giftCard.pay(payment);
     eventStore.save(events);
     events.forEach(eventPublisher::publish);
