@@ -9,7 +9,6 @@
 :revealjs_width: 1280
 :revealjs_height: 720
 :revealjs_navigationMode: linear
-:revealjs_showNotes: true
 
 [height=600]
 == CQRS / Event Sourcing
