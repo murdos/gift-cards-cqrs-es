@@ -11,12 +11,7 @@ It's written using Java 21, SpringBoot and build as a hexagonal architecture.
 
 ## Slides of the talk
 
-Slides are in the `presentation` directory.
-You can build them by running the following command:
-
-```bash
-pnpm run build
-```
+Slides are available here: https://murdos.github.io/gift-cards-cqrs-es/
 
 ## References cited at the end of the talk
 
