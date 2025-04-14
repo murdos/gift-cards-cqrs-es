@@ -44,7 +44,7 @@ Lead Tech @ image:sully-logo.svg[height=40]
 --
 - Et moi c'est Aurélien
 - Je suis Lead Tech chez Sully Group
-- Et sinon, sur mon temps libre, il m'arrive de contribuer et/ou maintenir quelques projets open-source 😅
+- Et sinon, sur mon temps libre, il m'arrive de contribuer et/ou maintenir quelques projets open-source, comme jhipster-lite ou liquibase-linter 😅
 --
 
 [transition="fade-out slide-in"]
@@ -71,7 +71,7 @@ Pourquoi est-ce qu'on voulait vous parler ce sujet ?
 [.notes]
 --
 - Bon la raison principale, il faut l'avouer, c'est que Cédric adore CQRS/ES. Il vous l'a dit ? Il a eu l'occasion de suivre une formation sur le sujet il y a plusieurs années, et aussi de le mettre en place sur une application chez Malt. Depuis on pourrait dire qu'il est tombé dans le chaudron, c'est déjà son 3ème talk sur le sujet, et chaque nouvelle équipe qu'il l'accueille sait qu'il va proposer d'en faire.
-- Moi j'ai pas mal étudié le sujet il y a 1 an et demi pour le mettre en oeuvre sur mon projet. Cela ne s'est finalement pas fait, car mon équipe, qui était déjà en plein changement de culture craft, ne se sentait pas encore prête à le faire.
+- Moi j'ai pas mal étudié le sujet il y a 1 an et demi pour le mettre en oeuvre sur mon projet car j'avais un cas d'usage qui s'y prêtait bien. Au final cela ne s'est finalement pas fait, car mon équipe, qui était déjà en plein changement de culture craft, ne se sentait pas encore prête à le faire.
 --
 
 [transition="fade-in slide-out"]
